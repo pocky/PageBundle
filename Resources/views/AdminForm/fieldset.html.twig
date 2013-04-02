@@ -1,0 +1,84 @@
+{% form_theme form 'BlackroomAdminBundle:AdminForm:fields.html.twig' %}
+{% set title = title is defined ? title : "Create a new thing" %}
+
+<fieldset class="grid9">
+    <div class="widget">
+        <div class="whead"><h6>{% trans %}page.admin.form.general{% endtrans %}</h6><div class="clear"></div></div>
+        {{ form_row(form.name) }}
+        <div class="formRow">
+            <div class="grid2">{{ form_label(form.slug) }}</div>
+            <div class="grid10">
+                {{ form_widget(form.slug) }}
+                {{ form_errors(form.slug) }}
+                {% if document.slug %}
+                    <p>
+                        <b>{% trans %}page.admin.slug{% endtrans %}</b>
+                        {{ black.site_url is defined ? black.site_url }}/<span id="slug">{{ document.slug }}</span>.html
+                    </p>
+                {% else %}
+                    <p>
+                        <b>{% trans %}page.admin.slug{% endtrans %}</b>
+                        {{ black.site_url is defined ? black.site_url }}/<span id="slug">_______</span>.html
+                    </p>
+                {% endif %}
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div class="widget">
+        <div class="whead"><h6>{% trans %}page.admin.form.content{% endtrans %}</h6><div class="clear"></div></div>
+        {{ form_row(form.description) }}
+        {{ form_row(form.text) }}
+    </div>
+
+    <div class="widget">
+        <div class="whead"><h6>{% trans %}page.admin.form.options{% endtrans %}</h6><div class="clear"></div></div>
+        {{ form_row(form.image) }}
+        {% if document.primaryImageOfPage %}
+            <div class="grid2">&nbsp;</div>
+            <img style="border: 1px solid #cecece; padding: 5px; margin-top: 10px" src="/uploads/page/{{ document.primaryImageOfPage }}" height="200" />
+        {% endif %}
+    </div>
+</fieldset>
+
+<fieldset class="grid3">
+    <div class="widget">
+        <div class="whead"><h6>{% trans %}page.admin.form.settings{% endtrans %}</h6><div class="clear"></div></div>
+
+        <div class="formRow">
+            <div class="grid4">{{ form_label(form.author) }}</div>
+            <div class="grid8">
+                {{ form_widget(form.author) }}
+                {{ form_errors(form.author) }}
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="formRow">
+            <div class="grid4">{{ form_label(form.status) }}</div>
+            <div class="grid8">
+                {{ form_widget(form.status) }}
+                {{ form_errors(form.status) }}
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="formRow">
+            <div class="grid4">{{ form_label(form.datePublished) }}</div>
+            <div class="grid8">
+                {{ form_widget(form.datePublished) }}
+                {{ form_errors(form.datePublished) }}
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        {{ form_rest(form) }}
+    </div>
+</fieldset>
+
+<script>
+    jQuery('document').ready(function() {
+        $('#slug').slugify('#blackroom_page_page_form_name')
+    })
+</script>

@@ -1,0 +1,34 @@
+{% extends 'BlackroomAdminBundle::base.html.twig' %}
+{% block body %}
+
+    {% include 'BlackroomAdminBundle:Admin:header.html.twig' %}
+    {% include 'BlackroomAdminBundle:Admin:sidebar.html.twig' %}
+    {% include 'BlackroomPageBundle:AdminPage:sidebar.html.twig' %}
+
+    {% set admin_index = 'admin_page_index' %}
+    {% set admin_delete = 'admin_page_delete' %}
+
+    <div id="content">
+        {% include 'BlackroomAdminBundle:Admin:contentTop.html.twig' with {'title': "page.admin.edit.title"} %}
+        {% include 'BlackroomPageBundle:AdminPage:breadLine.html.twig' with {'route': 'admin_page_new', 'text': "page.admin.new"} %}
+
+        <!-- Main content -->
+        <div class="wrapper">
+
+            {% include 'BlackroomAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
+            {% include 'BlackroomAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.getFlashes()} %}
+
+            <div class="fluid">
+
+                <form id="validate" class="main" action="{{ path('admin_page_edit', { 'id': document.id }) }}" method="post" {{ form_enctype(form) }}>
+                    {% include 'BlackroomPageBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "Edit a page"} %}
+                </form>
+
+                {% include 'BlackroomAdminBundle:AdminForm:actions.html.twig' with {'document': document} %}
+
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

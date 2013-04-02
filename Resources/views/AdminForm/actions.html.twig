@@ -1,0 +1,21 @@
+{% set action = document.id ? 'edit' : 'new' %}
+
+<div class="grid3">
+    <div class="widget">
+        <div class="whead"><h6>{% trans %}admin.actions{% endtrans %}</h6><div class="clear"></div></div>
+        <div class="body">
+            <input type="submit" value="{% if action == "edit" %}{% trans %}admin.action.edit{% endtrans %}{% else %}{% trans %}admin.action.create{% endtrans %}{% endif %}" form="validate" class="buttonM bGreen floatL" />
+
+            {% if action == 'edit' %}
+            <form action="{{ path(admin_delete, { 'id': document.id }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                <button type="submit" class="buttonM bRed floatR">{% trans %}admin.action.delete{% endtrans %}</button><div class="clear"></div>
+            </form>
+            {% endif %}
+
+            {% if action == 'new' %}
+            <a class="buttonM bBlue floatR" href="{{ path(admin_index) }}">{% trans %}admin.action.back{% endtrans %}</a><div class="clear"></div>
+            {% endif %}
+        </div>
+    </div>
+</div>

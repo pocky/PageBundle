@@ -1,0 +1,242 @@
+<?php
+
+/*
+ * This file is part of the Blackengine package.
+ *
+ * (c) Alexandre Balmes <albalmes@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Blackroom\Bundle\PageBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Exception;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
+/**
+ * Controller managing the person profile`
+ *
+ * @Route("/admin/page")
+ */
+class AdminPageController extends Controller
+{
+    /**
+     * Show lists of Persons
+     *
+     * @Method("GET")
+     * @Route("/index.html", name="admin_page")
+     * @Secure(roles="ROLE_ADMIN")
+     * @Template()
+     */
+    public function indexAction()
+    {
+        $documentManager    = $this->getDocumentManager();
+        $repository         = $documentManager->getDocumentRepository();
+
+        $rawDocuments       = $repository->findAll();
+        $csrf               = $this->container->get('form.csrf_provider');
+
+        $documents = array();
+
+        foreach ($rawDocuments as $document) {
+
+            $documents[] = array(
+                'id'                         => $document->getId(),
+                'page.admin.form.name'       => $document->getName()
+            );
+        }
+
+        return array(
+            'documents' => $documents,
+            'csrf'      => $csrf
+        );
+    }
+
+    /**
+     * Displays a form to create a new Person document.
+     *
+     * @Method({"GET", "POST"})
+     * @Route("/new", name="admin_page_new")
+     * @Secure(roles="ROLE_ADMIN")
+     * @Template()
+     */
+    public function newAction()
+    {
+        $documentManager    = $this->getDocumentManager();
+        $document           = $documentManager->createPage();
+        $document->setStatus('draft');
+
+        $formHandler    = $this->get('blackroom_page.page.form.handler');
+        $process        = $formHandler->process($document);
+
+        if ($process) {
+            $documentManager->persist($document);
+            $documentManager->flush();
+
+            return $this->redirect($this->generateUrl('admin_page_edit', array('id' => $document->getId())));
+        }
+
+        return array(
+            'document'  => $document,
+            'form'      => $formHandler->getForm()->createView()
+        );
+    }
+
+    /**
+     * Displays a form to edit an existing Person document.
+     *
+     * @Method({"GET", "POST"})
+     * @Route("/{id}/edit", name="admin_page_edit")
+     * @Secure(roles="ROLE_ADMIN")
+     * @Template()
+     *
+     * @param string $id The document ID
+     *
+     * @return array
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
+     */
+    public function editAction($id)
+    {
+        $documentManager    = $this->getDocumentManager();
+        $repository         = $documentManager->getDocumentRepository();
+
+        $document = $repository->findOneById($id);
+
+        if (!$document) {
+            throw $this->createNotFoundException('Unable to find Person document.');
+        }
+
+        $deleteForm = $this->createDeleteForm($id);
+
+        $formHandler    = $this->get('blackroom_page.page.form.handler');
+        $process        = $formHandler->process($document);
+
+        if ($process) {
+            $documentManager->flush();
+
+            return $this->redirect($this->generateUrl('admin_page_edit', array('id' => $id)));
+        }
+
+        return array(
+            'document'      => $document,
+            'form'          => $formHandler->getForm()->createView(),
+            'delete_form'   => $deleteForm->createView()
+        );
+    }
+
+    /**
+     * Deletes a Page document.
+     *
+     * @Method({"POST", "GET"})
+     * @Route("/{id}/delete", name="admin_page_delete")
+     * @Secure(roles="ROLE_ADMIN")
+     * @param string $id The document ID
+     *
+     * @return array
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
+     */
+    public function deleteAction($id, $token = null)
+    {
+        $form       = $this->createDeleteForm($id);
+        $request    = $this->getRequest();
+
+        $form->bind($request);
+
+        if (null === $token) {
+            $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $request->query->get('token'));
+        }
+
+        if ($form->isValid() || true === $token) {
+
+            $dm         = $this->getDocumentManager();
+            $repository = $dm->getDocumentRepository();
+            $document   = $repository->findOneById($id);
+
+            if (!$document) {
+                throw $this->createNotFoundException('Unable to find Person document.');
+            }
+
+            $dm->remove($document);
+            $dm->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'This person was successfully deleted!');
+
+        } else {
+            $this->getFlashBag->add('failure', 'The form is not valid');
+        }
+
+        return $this->redirect($this->generateUrl('admin_persons'));
+    }
+
+    /**
+     * Batch action for 1/n document.
+     *
+     * @Method({"POST"})
+     * @Route("/batch", name="admin_page_batch")
+     *
+     * @return array
+     *
+     * @throws \Symfony\Component\Serializer\Exception\InvalidArgumentException If method does not exist
+     */
+    public function batchAction()
+    {
+        $request    = $this->getRequest();
+        $token      = $this->get('form.csrf_provider')->isCsrfTokenValid('batch', $request->get('token'));
+
+        if (!$ids = $request->get('ids')) {
+            $this->get('session')->getFlashBag()->add('failure', 'You must select at least one item');
+            return $this->redirect($this->generateUrl('admin_persons'));
+        }
+
+        if (!$action = $request->get('batchAction')) {
+            $this->get('session')->getFlashBag()->add('failure', 'You must select an action to execute on the selected items');
+            return $this->redirect($this->generateUrl('admin_persons'));
+        }
+
+        if (!method_exists($this, $method = $action . 'Action')) {
+            throw new Exception\InvalidArgumentException(
+                sprintf('You must create a "%s" method for action "%s"', $method, $action)
+            );
+        }
+
+        if (false === $token) {
+            $this->get('session')->getFlashBag()->add('failure', 'CSRF Attack detected! This is bad. Very Bad hombre!');
+
+            return $this->redirect($this->generateUrl('admin_persons'));
+        }
+
+        foreach ($ids as $id) {
+            $this->$method($id, $token);
+        }
+
+        return $this->redirect($this->generateUrl('admin_persons'));
+
+    }
+
+    private function createDeleteForm($id)
+    {
+        $form = $this->createFormBuilder(array('id' => $id))
+            ->add('id', 'hidden')
+            ->getForm();
+
+        return $form;
+    }
+
+    /**
+     * Returns the DocumentManager
+     *
+     * @return DocumentManager
+     */
+    protected function getDocumentManager()
+    {
+        return $this->get('blackroom_page.manager.page');
+    }
+}
