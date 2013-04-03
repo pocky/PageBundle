@@ -8,13 +8,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\PageBundle\Form\Handler;
+namespace Black\Bundle\PageBundle\Form\Handler;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
-use Blackroom\Bundle\PageBundle\Model\PageInterface;
+use Black\Bundle\PageBundle\Model\PageInterface;
 
 class PageFormHandler
 {

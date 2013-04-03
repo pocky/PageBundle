@@ -1,6 +1,6 @@
 <?php
 
-namespace Blackroom\Bundle\PageBundle\DependencyInjection;
+namespace Black\Bundle\PageBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class BlackroomPageExtension extends Extension
+class BlackPageExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -27,7 +27,7 @@ class BlackroomPageExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         if (!isset($config['db_driver'])) {
-            throw new \InvalidArgumentException('You must provide the blackroom_page.db_driver configuration');
+            throw new \InvalidArgumentException('You must provide the black_page.db_driver configuration');
         }
 
         try {
@@ -38,7 +38,7 @@ class BlackroomPageExtension extends Extension
 
         $this->remapParametersNamespaces($config, $container, array(
                 ''      => array(
-                    'page_class'          => 'blackroom_page.page.model.class',
+                    'page_class'          => 'black_page.page.model.class',
                 )
             ));
 
@@ -54,7 +54,7 @@ class BlackroomPageExtension extends Extension
         }
 
         $this->remapParametersNamespaces($config, $container, array(
-                'form'  => 'blackroom_page.page.form.%s',
+                'form'  => 'black_page.page.form.%s',
             ));
     }
 
@@ -91,6 +91,6 @@ class BlackroomPageExtension extends Extension
 
     public function getAlias()
     {
-        return 'blackroom_page';
+        return 'black_page';
     }
 }

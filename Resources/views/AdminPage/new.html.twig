@@ -1,31 +1,31 @@
-{% extends 'BlackroomAdminBundle::base.html.twig' %}
+{% extends 'BlackAdminBundle::base.html.twig' %}
 {% block body %}
 
-    {% include 'BlackroomAdminBundle:Admin:header.html.twig' %}
-    {% include 'BlackroomAdminBundle:Admin:sidebar.html.twig' %}
-    {% include 'BlackroomPageBundle:AdminPage:sidebar.html.twig' %}
+    {% include 'BlackAdminBundle:Admin:header.html.twig' %}
+    {% include 'BlackAdminBundle:Admin:sidebar.html.twig' %}
+    {% include 'BlackPageBundle:AdminPage:sidebar.html.twig' %}
 
     {% set title = "Create a new page" %}
     {% set admin_index = 'admin_page' %}
     {% set admin_delete = 'admin_page_delete' %}
 
     <div id="content">
-        {% include 'BlackroomAdminBundle:Admin:contentTop.html.twig' with {'title': "New page"} %}
-        {% include 'BlackroomPageBundle:AdminPage:breadLine.html.twig' with {'route': 'admin_page_new', 'text': "New page"} %}
+        {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "New page"} %}
+        {% include 'BlackPageBundle:AdminPage:breadLine.html.twig' with {'route': 'admin_page_new', 'text': "New page"} %}
 
         <!-- Main content -->
         <div class="wrapper">
 
-            {% include 'BlackroomAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
-            {% include 'BlackroomAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.getFlashes()} %}
+            {% include 'BlackAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
+            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.getFlashes()} %}
 
             <div class="fluid">
 
                 <form id="validate" class="main" action="{{ path('admin_page_new') }}"  method="post" {{ form_enctype(form) }}>
 
-                    {% include 'BlackroomPageBundle:AdminForm:fieldset.html.twig' with {'form': form} %}
+                    {% include 'BlackPageBundle:AdminForm:fieldset.html.twig' with {'form': form} %}
 
-                    {% include 'BlackroomAdminBundle:AdminForm:actions.html.twig' %}
+                    {% include 'BlackAdminBundle:AdminForm:actions.html.twig' %}
                 </form>
 
             </div>

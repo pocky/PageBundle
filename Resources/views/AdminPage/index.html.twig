@@ -1,21 +1,21 @@
-{% extends 'BlackroomAdminBundle::base.html.twig' %}
+{% extends 'BlackAdminBundle::base.html.twig' %}
 {% block body %}
 
-    {% include 'BlackroomAdminBundle:Admin:header.html.twig' %}
-    {% include 'BlackroomAdminBundle:Admin:sidebar.html.twig' %}
-    {% include 'BlackroomPageBundle:AdminPage:sidebar.html.twig' %}
+    {% include 'BlackAdminBundle:Admin:header.html.twig' %}
+    {% include 'BlackAdminBundle:Admin:sidebar.html.twig' %}
+    {% include 'BlackPageBundle:AdminPage:sidebar.html.twig' %}
 
     {% set admin_edit = 'admin_page_edit' %}
     {% set admin_delete = 'admin_page_delete' %}
 
     <div id="content">
 
-        {% include 'BlackroomAdminBundle:Admin:contentTop.html.twig' with {'title': "page.admin.title"} %}
-        {% include 'BlackroomPageBundle:AdminPage:breadLine.html.twig' with {'route': 'admin_page_new', 'text': "page.admin.new"} %}
+        {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "page.admin.title"} %}
+        {% include 'BlackPageBundle:AdminPage:breadLine.html.twig' with {'route': 'admin_page_new', 'text': "page.admin.new"} %}
 
         <div class="wrapper">
 
-            {% include 'BlackroomAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.getFlashes()} %}
+            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.getFlashes()} %}
 
             <form id="validate" class="main grid9" action="{{ path('admin_page_batch') }}" method="post">
                 <div class="fluid">
@@ -26,7 +26,7 @@
                             <div class="clear"></div>
                         </div>
 
-                        {% include 'BlackroomAdminBundle:AdminTable:table.html.twig' with {'documents': documents, 'csrf': csrf} %}
+                        {% include 'BlackAdminBundle:AdminTable:table.html.twig' with {'documents': documents, 'csrf': csrf} %}
                     </div>
                 </div>
             </form>

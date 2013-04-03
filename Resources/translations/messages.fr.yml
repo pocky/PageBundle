@@ -33,3 +33,10 @@ page:
                 choices:
                     draft: Brouillon
                     publish: Publié
+            enabled:
+                label: Visibilité de la page
+                empty: Choisir une valeur
+                choices:
+                    public: Publique
+                    private: Privée
+                    protected: Protégée

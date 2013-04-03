@@ -1,6 +1,6 @@
 <?php
 
-namespace Blackroom\Bundle\PageBundle\DependencyInjection;
+namespace Black\Bundle\PageBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -20,7 +20,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('blackroom_page');
+        $rootNode = $treeBuilder->root('black_page');
 
         $supportedDrivers = array('mongodb');
 
@@ -56,9 +56,9 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('form')
                         ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('name')->defaultValue('blackroom_page_page_form')->end()
-                                ->scalarNode('type')->defaultValue('Blackroom\\Bundle\\PageBundle\\Form\\Type\\PageType')->end()
-                                ->scalarNode('handler')->defaultValue('Blackroom\\Bundle\\PageBundle\\Form\\Handler\\PageFormHandler')->end()
+                                ->scalarNode('name')->defaultValue('black_page_page_form')->end()
+                                ->scalarNode('type')->defaultValue('Black\\Bundle\\PageBundle\\Form\\Type\\PageType')->end()
+                                ->scalarNode('handler')->defaultValue('Black\\Bundle\\PageBundle\\Form\\Handler\\PageFormHandler')->end()
                             ->end()
                         ->end()
                     ->end()

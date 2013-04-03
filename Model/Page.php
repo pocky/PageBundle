@@ -7,104 +7,202 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Blackroom\Bundle\PageBundle\Model;
+namespace Black\Bundle\PageBundle\Model;
 
-use Blackroom\Bundle\EngineBundle\Model\Person\PersonInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Page implements PageInterface
+abstract class Page implements PageInterface
 {
+    /**
+     * @var
+     */
     protected $about;
+
+    /**
+     * @var
+     */
     protected $author;
+
+    /**
+     * @var
+     */
     protected $datePublished;
+
+    /**
+     * @var
+     */
     protected $image;
+
     /**
      * @Assert\Choice(callback = "getStatusPublication")
      */
     protected $status;
+
+    /**
+     * @var
+     */
     protected $text;
+
+    /**
+     * @var
+     */
     protected $primaryImageOfPage;
 
+    /**
+     * @return array
+     */
     public static function getStatusPublication()
     {
         return array('draft', 'publish');
     }
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAbout()
     {
         return $this->about;
     }
 
+    /**
+     * @param $about
+     *
+     * @return $this
+     */
     public function setAbout($about)
     {
         $this->about = $about;
+
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAuthor()
     {
         return $this->author;
     }
 
-    public function setAuthor(PersonInterface $author)
+    /**
+     * @param $author
+     *
+     * @return $this
+     */
+    public function setAuthor($author)
     {
         $this->author = $author;
+
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getDatePublished()
     {
         return $this->datePublished;
     }
 
+    /**
+     * @param $datePublished
+     *
+     * @return $this
+     */
     public function setDatePublished($datePublished)
     {
         $this->datePublished = $datePublished;
+
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getImage()
     {
         return $this->image;
     }
 
+    /**
+     * @param $image
+     *
+     * @return $this
+     */
     public function setImage($image)
     {
         $this->image = $image;
+
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getStatus()
     {
         return $this->status;
     }
 
+    /**
+     * @param $status
+     *
+     * @return $this
+     */
     public function setStatus($status)
     {
         $this->status = $status;
+
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getText()
     {
         return $this->text;
     }
 
+    /**
+     * @param $text
+     *
+     * @return $this
+     */
     public function setText($text)
     {
         $this->text = $text;
+
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getPrimaryImageOfPage()
     {
         return $this->primaryImageOfPage;
     }
 
+    /**
+     * @param $primaryImageOfPage
+     */
     public function setPrimaryImageOfPage($primaryImageOfPage)
     {
         $this->primaryImageOfPage = $primaryImageOfPage;
     }
 
+    /**
+     *
+     */
     public function upload()
     {
         if (null == $this->image) {
@@ -116,24 +214,36 @@ class Page implements PageInterface
         $this->image = null;
     }
 
+    /**
+     * @return string
+     */
     protected function getUploadRootDir()
     {
         return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
     }
 
-    protected function getUploadDir()
-    {
-        return 'uploads/page';
-    }
-
+    /**
+     * @return null|string
+     */
     public function getAbsolutePath()
     {
         return null === $this->primaryImageOfPage ? null : $this->getUploadRootDir().'/'.$this->primaryImageOfPage;
     }
 
+    /**
+     * @return null|string
+     */
     public function getWebPath()
     {
         return null === $this->primaryImageOfPage ? null : $this->getUploadDir().'/'.$this->primaryImageOfPage;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUploadDir()
+    {
+        return 'uploads/page';
     }
 }
 

@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Blackroom\Bundle\PageBundle\Document;
+namespace Black\Bundle\PageBundle\Document;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
 
@@ -89,7 +89,6 @@ class PageManager extends DocumentManager
     {
         return $this->repository->getPages('draft', $limit);
     }
-
 
     /**
      * Create a new Page Object

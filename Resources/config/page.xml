@@ -5,19 +5,19 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="blackroom_page.page.form" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
-            <argument>%blackroom_page.page.form.name%</argument>
-            <argument type="service" id="blackroom_page.page.form.type" />
+        <service id="black_page.page.form" factory-method="createNamed" factory-service="form.factory" class="Symfony\Component\Form\Form">
+            <argument>%black_page.page.form.name%</argument>
+            <argument type="service" id="black_page.page.form.type" />
             <argument>null</argument>
         </service>
 
-        <service id="blackroom_page.page.form.type" class="%blackroom_page.page.form.type%">
-            <argument>%blackroom_page.page.model.class%</argument>
-            <tag name="form.type" alias="blackroom_page_page" />
+        <service id="black_page.page.form.type" class="%black_page.page.form.type%">
+            <argument>%black_page.page.model.class%</argument>
+            <tag name="form.type" alias="black_page_page" />
         </service>
 
-        <service id="blackroom_page.page.form.handler" class="%blackroom_page.page.form.handler%" scope="request" public="true">
-            <argument type="service" id="blackroom_page.page.form" />
+        <service id="black_page.page.form.handler" class="%black_page.page.form.handler%" scope="request" public="true">
+            <argument type="service" id="black_page.page.form" />
             <argument type="service" id="request" />
             <argument type="service" id="session" />
             <argument type="service" id="doctrine_mongodb" />

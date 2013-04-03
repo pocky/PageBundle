@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Blackroom\Bundle\PageBundle\Controller;
+namespace Black\Bundle\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,7 +66,7 @@ class PageController extends Controller
 
         if ($document->getSeo()) {
 
-            $seo = $this->get('blackroom_seo.seo');
+            $seo = $this->get('black_seo.seo');
             $seo
                 ->setTitle($document->getSeo()->getTitle())
                 ->setDescription($document->getSeo()->getDescription())
@@ -120,6 +120,6 @@ class PageController extends Controller
      */
     protected function getDocumentManager()
     {
-        return $this->get('blackroom_page.manager.page');
+        return $this->get('black_page.manager.page');
     }
 }

@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Blackroom\Bundle\PageBundle\Document;
+namespace Black\Bundle\PageBundle\Document;
 
-use Blackroom\Bundle\PageBundle\Model\Page as AbstractPage;
-use Blackroom\Bundle\EngineBundle\Traits\ThingDocument;
+use Black\Bundle\PageBundle\Model\Page as AbstractPage;
+use Black\Bundle\EngineBundle\Traits\ThingDocument;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
