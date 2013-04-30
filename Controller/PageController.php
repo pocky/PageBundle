@@ -13,6 +13,7 @@ namespace Black\Bundle\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Serializer\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use JMS\SecurityExtraBundle\Annotation\Secure;
@@ -22,7 +23,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 /**
  * Controller managing the person profile`
  *
- * @Route("/pages")
+ * @Route("/page")
  */
 class PageController extends Controller
 {
@@ -65,13 +66,15 @@ class PageController extends Controller
         }
 
         if ($document->getSeo()) {
-
             $seo = $this->get('black_seo.seo');
             $seo
                 ->setTitle($document->getSeo()->getTitle())
                 ->setDescription($document->getSeo()->getDescription())
-                ->setKeywords($document->getSeo()->getKeywords())
             ;
+
+            if ($document->getSeo()->getKeywords()) {
+                $seo->setKeywords($document->getSeo()->getKeywords());
+            }
         }
 
         return array(

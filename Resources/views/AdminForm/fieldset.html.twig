@@ -13,12 +13,12 @@
                 {% if document.slug %}
                     <p>
                         <b>{% trans %}page.admin.slug{% endtrans %}</b>
-                        {{ black.site_url is defined ? black.site_url }}/<span id="slug">{{ document.slug }}</span>.html
+                        {{ black.site_url is defined ? black.site_url }}/page/<span id="slug">{{ document.slug }}</span>.html
                     </p>
                 {% else %}
                     <p>
                         <b>{% trans %}page.admin.slug{% endtrans %}</b>
-                        {{ black.site_url is defined ? black.site_url }}/<span id="slug">_______</span>.html
+                        {{ black.site_url is defined ? black.site_url }}/page/<span id="slug">_______</span>.html
                     </p>
                 {% endif %}
             </div>

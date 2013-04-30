@@ -59,6 +59,11 @@ class Page extends AbstractPage
     protected $primaryImageOfPage;
 
     /**
+     * @ODM\String
+     */
+    protected $enabled;
+
+    /**
      * @ODM\PostRemove()
      */
     public function removeUpload()

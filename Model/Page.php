@@ -49,6 +49,12 @@ abstract class Page implements PageInterface
     protected $primaryImageOfPage;
 
     /**
+     * @var
+     * @Assert\Choice(callback = "getStatusEnabled")
+     */
+    protected $enabled;
+
+    /**
      * @return array
      */
     public static function getStatusPublication()
@@ -198,6 +204,34 @@ abstract class Page implements PageInterface
     public function setPrimaryImageOfPage($primaryImageOfPage)
     {
         $this->primaryImageOfPage = $primaryImageOfPage;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatusEnabled()
+    {
+        return array('public', 'private', 'protected');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param $enabled
+     *
+     * @return $this
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
     }
 
     /**

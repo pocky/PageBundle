@@ -63,6 +63,15 @@ class PageType extends AbstractType
                         'publish'   => 'page.admin.form.status.choices.publish'
                     )
                 ))
+            ->add('enabled', 'choice', array(
+                    'label'         => 'page.admin.form.enabled.label',
+                    'empty_value'   => 'page.admin.form.enabled.empty',
+                    'choices'       => array(
+                        'public'    => 'page.admin.form.enabled.choices.public',
+                        'private'   => 'page.admin.form.enabled.choices.private',
+                        'protected' => 'page.admin.form.enabled.choices.protected'
+                    )
+                ))
             ->add('datePublished', 'date', array(
                     'label'         => 'page.admin.form.datePublished',
                     'years'         => array_reverse(
