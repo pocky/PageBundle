@@ -235,6 +235,42 @@ abstract class Page implements PageInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isPublic()
+    {
+        if ('public' === $this->getEnabled()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isProtected()
+    {
+        if ('protected' === $this->getEnabled()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPrivate()
+    {
+        if ('private' === $this->getEnabled()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      *
      */
     public function upload()
