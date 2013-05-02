@@ -45,6 +45,10 @@ class BlackPageExtension extends Extension
         if (!empty($config['page'])) {
             $this->loadPage($config['page'], $container, $loader);
         }
+
+        if (!empty($config['config'])) {
+            $this->loadConfig($config['config'], $container, $loader);
+        }
     }
 
     private function loadPage(array $config, ContainerBuilder $container, XmlFileLoader $loader)
@@ -55,6 +59,15 @@ class BlackPageExtension extends Extension
 
         $this->remapParametersNamespaces($config, $container, array(
                 'form'  => 'black_page.page.form.%s',
+            ));
+    }
+
+    private function loadConfig(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        $loader->load('config.xml');
+
+        $this->remapParametersNamespaces($config, $container, array(
+                'form' => 'black_page.config.form.%s',
             ));
     }
 

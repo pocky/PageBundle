@@ -14,6 +14,7 @@ namespace Black\Bundle\PageBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Serializer\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use JMS\SecurityExtraBundle\Annotation\Secure;
@@ -59,14 +60,24 @@ class PageController extends Controller
     public function showAction($slug)
     {
         $documentManager    = $this->getDocumentManager();
-        $document = $documentManager->findPageBySlug($slug);
+        $document           = $documentManager->findPageBySlug($slug);
+        $authenticated      = $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY');
 
         if (!$document) {
             throw $this->createNotFoundException('page.not.found');
         }
 
-        if ($document->getSeo()) {
-            $seo = $this->get('black_seo.seo');
+        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            if (true === $document->isPrivate() && $document->getAuthor() != $this->getUser()) {
+                throw new AccessDeniedException();
+            }
+
+            if (true === $document->isProtected() && false === $authenticated) {
+                throw new AccessDeniedException();
+            }
+        }
+
+        if ($seo = $this->getSeo()) {
             $seo
                 ->setTitle($document->getSeo()->getTitle())
                 ->setDescription($document->getSeo()->getDescription())
@@ -124,5 +135,17 @@ class PageController extends Controller
     protected function getDocumentManager()
     {
         return $this->get('black_page.manager.page');
+    }
+
+    /**
+     * @return null|object
+     */
+    protected function getSeo()
+    {
+        if ($this->has('black_seo.seo')) {
+            return $this->get('black_seo.seo');
+        }
+
+        return null;
     }
 }

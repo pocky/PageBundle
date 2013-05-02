@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addPageSection($rootNode);
+        $this->addConfigSection($rootNode);
 
         return $treeBuilder;
     }
@@ -59,6 +60,30 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('name')->defaultValue('black_page_page_form')->end()
                                 ->scalarNode('type')->defaultValue('Black\\Bundle\\PageBundle\\Form\\Type\\PageType')->end()
                                 ->scalarNode('handler')->defaultValue('Black\\Bundle\\PageBundle\\Form\\Handler\\PageFormHandler')->end()
+                                ->scalarNode('enabled_list')->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\EnabledList')->end()
+                                ->scalarNode('status_list')->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\StatusList')->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    private function addConfigSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('config')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                        ->children()
+                        ->arrayNode('form')
+                        ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('page_config_name')->defaultValue('black_page_config')->end()
+                                ->scalarNode('page_config_type')->defaultValue('Black\\Bundle\\PageBundle\\Form\\Type\\PageConfigType')->end()
+                                ->scalarNode('page_config_handler')->defaultValue('Black\\Bundle\\EngineBundle\\Form\\Handler\\ConfigFormHandler')->end()
                             ->end()
                         ->end()
                     ->end()
