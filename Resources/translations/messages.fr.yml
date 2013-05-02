@@ -40,3 +40,13 @@ page:
                     public: Publique
                     private: Privée
                     protected: Protégée
+
+        config:
+            form:
+                page:
+                    title: Paramètres des pages
+                    protected:
+                        label: Activer la protection des pages
+                        empty: Choisir une valeur
+                        yes: Oui
+                        no: Non (conseillé)

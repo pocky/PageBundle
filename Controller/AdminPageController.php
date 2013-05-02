@@ -98,9 +98,10 @@ class AdminPageController extends Controller
      *
      * @param string $id The document ID
      *
-     * @return array
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
+     * @throws AccessDeniedException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function editAction($id)
     {
@@ -111,6 +112,12 @@ class AdminPageController extends Controller
 
         if (!$document) {
             throw $this->createNotFoundException('Unable to find Person document.');
+        }
+
+        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            if (true === $document->isPrivate() && $document->getAuthor() != $this->getUser()) {
+                throw new AccessDeniedException();
+            }
         }
 
         $deleteForm = $this->createDeleteForm($id);

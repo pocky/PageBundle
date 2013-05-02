@@ -13,6 +13,8 @@
 
         <service id="black_page.page.form.type" class="%black_page.page.form.type%">
             <argument>%black_page.page.model.class%</argument>
+            <argument type="service" id="black_page.page.form.enabled_list" />
+            <argument type="service" id="black_page.page.form.status_list" />
             <tag name="form.type" alias="black_page_page" />
         </service>
 
@@ -22,5 +24,12 @@
             <argument type="service" id="session" />
             <argument type="service" id="doctrine_mongodb" />
         </service>
+
+        <service id="black_page.page.form.enabled_list" class="%black_page.page.form.enabled_list%" public="false">
+            <argument type="service" id="black_engine.manager.config" />
+        </service>
+
+        <service id="black_page.page.form.status_list" class="%black_page.page.form.status_list%" public="false" />
+
     </services>
 </container>
