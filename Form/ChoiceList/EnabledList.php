@@ -1,0 +1,65 @@
+<?php
+/*
+ * This file is part of the Blackengine package.
+ *
+ * (c) Alexandre Balmes <albalmes@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Black\Bundle\PageBundle\Form\ChoiceList;
+
+use Black\Bundle\EngineBundle\Model\Config\ConfigManagerInterface;
+use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
+use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
+
+class EnabledList extends LazyChoiceList
+{
+    private $manager;
+
+    public function __construct(ConfigManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
+    public function createList()
+    {
+        $class  = $this->getClass();
+        $page   = new $class($this->manager);
+
+        return $page;
+    }
+
+    protected function loadChoiceList()
+    {
+        $property   = $this->getPageProperty();
+
+        $array = array(
+            'public'    => 'page.admin.form.enabled.choices.public',
+            'private'   => 'page.admin.form.enabled.choices.private'
+        );
+
+        if ('true' === $property['page_protected']) {
+            $array += array(
+                'protected' => 'page.admin.form.enabled.choices.protected'
+            );
+        }
+
+        $choices = new SimpleChoiceList($array);
+
+        return $choices;
+    }
+
+    protected function getPageProperty()
+    {
+        $property = $this->manager->findPropertyByName('Page');
+
+        return $property->getValue();
+    }
+
+    protected function getClass()
+    {
+        return $this;
+    }
+}

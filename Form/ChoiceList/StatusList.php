@@ -1,0 +1,42 @@
+<?php
+/*
+ * This file is part of the Blackengine package.
+ *
+ * (c) Alexandre Balmes <albalmes@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Black\Bundle\PageBundle\Form\ChoiceList;
+
+use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
+use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
+
+class StatusList extends LazyChoiceList
+{
+    public function createList()
+    {
+        $class  = $this->getClass();
+        $page   = new $class();
+
+        return $page;
+    }
+
+    protected function loadChoiceList()
+    {
+        $array = array(
+            'draft'     => 'page.admin.form.status.choices.draft',
+            'publish'   => 'page.admin.form.status.choices.publish'
+        );
+
+        $choices = new SimpleChoiceList($array);
+
+        return $choices;
+    }
+
+    protected function getClass()
+    {
+        return $this;
+    }
+}
