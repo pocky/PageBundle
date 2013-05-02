@@ -25,11 +25,11 @@
             <argument type="service" id="doctrine_mongodb" />
         </service>
 
-        <service id="black_page.page.form.enabled_list" class="Black\Bundle\PageBundle\Form\ChoiceList\EnabledList" public="false">
+        <service id="black_page.page.form.enabled_list" class="%black_page.page.form.enabled_list%" public="false">
             <argument type="service" id="black_engine.manager.config" />
         </service>
 
-        <service id="black_page.page.form.status_list" class="Black\Bundle\PageBundle\Form\ChoiceList\StatusList" public="false" />
+        <service id="black_page.page.form.status_list" class="%black_page.page.form.status_list%" public="false" />
 
     </services>
 </container>

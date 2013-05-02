@@ -60,6 +60,8 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('name')->defaultValue('black_page_page_form')->end()
                                 ->scalarNode('type')->defaultValue('Black\\Bundle\\PageBundle\\Form\\Type\\PageType')->end()
                                 ->scalarNode('handler')->defaultValue('Black\\Bundle\\PageBundle\\Form\\Handler\\PageFormHandler')->end()
+                                ->scalarNode('enabled_list')->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\EnabledList')->end()
+                                ->scalarNode('status_list')->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\StatusList')->end()
                             ->end()
                         ->end()
                     ->end()
