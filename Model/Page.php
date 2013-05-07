@@ -55,6 +55,14 @@ abstract class Page implements PageInterface
     protected $enabled;
 
     /**
+     * @return string
+     */
+    public function computeEtag()
+    {
+        return md5($this->getText());
+    }
+
+    /**
      * @return array
      */
     public static function getStatusPublication()

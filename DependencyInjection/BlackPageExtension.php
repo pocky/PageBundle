@@ -46,6 +46,10 @@ class BlackPageExtension extends Extension
             $this->loadPage($config['page'], $container, $loader);
         }
 
+        if (!empty($config['proxy'])) {
+            $this->loadProxy($config['proxy'], $container, $loader);
+        }
+
         if (!empty($config['config'])) {
             $this->loadConfig($config['config'], $container, $loader);
         }
@@ -62,13 +66,25 @@ class BlackPageExtension extends Extension
             ));
     }
 
+    private function loadProxy(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        foreach (array('proxy') as $basename) {
+            $loader->load(sprintf('%s.xml', $basename));
+        }
+
+        $this->remapParametersNamespaces($config, $container, array(
+                'proxy'  => 'black_page.proxy.%s',
+            ));
+    }
+
     private function loadConfig(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         $loader->load('config.xml');
 
         $this->remapParametersNamespaces($config, $container, array(
                 'form' => 'black_page.config.form.%s',
-            ));
+            )
+        );
     }
 
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)

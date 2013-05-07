@@ -1,0 +1,230 @@
+<?php
+/*
+ * This file is part of the Blackengine package.
+ *
+ * (c) Alexandre Balmes <albalmes@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Black\Bundle\PageBundle\Proxy;
+
+use Black\Bundle\SeoBundle\Model\SeoInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\SecurityContextInterface;
+
+/**
+ * Class PageProxy
+ *
+ * @package Black\Bundle\PageBundle\Proxy
+ */
+class PageProxy implements ProxyInterface
+{
+    /**
+     * @var
+     */
+    protected $manager;
+
+    /**
+     * @var \Black\Bundle\SeoBundle\Model\SeoInterface
+     */
+    protected $seo;
+
+    /**
+     * @var \Symfony\Component\Security\Core\SecurityContext
+     */
+    protected $context;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Request
+     */
+    protected $request;
+
+    /**
+     * @var \Symfony\Component\HttpFoundation\Response
+     */
+    protected $response;
+
+    /**
+     * @param ObjectManager   $manager
+     * @param SeoInterface    $seo
+     * @param SecurityContext $context
+     * @param Request         $request
+     */
+    public function __construct(ObjectManager $manager, SeoInterface $seo, SecurityContext $context, Request $request)
+    {
+        $this->manager = $manager;
+        $this->seo      = $seo;
+        $this->context  = $context;
+        $this->request  = $request;
+    }
+
+    /**
+     * @param $property
+     *
+     * @return array|NotFoundHttpException
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     */
+    public function createResponse($property)
+    {
+        $object         = $this->createQuery($property);
+        $authenticated  = $this->checkRole('IS_AUTHENTICATED_FULLY');
+
+        if (!$object) {
+            return new NotFoundHttpException('page.not.found');
+        }
+
+        $response = $this->prepareResponse($object);
+
+        if ($response->isNotModified($this->getRequest())) {
+            return array(
+                'object'   => $object,
+                'response' => $response
+            );
+        }
+
+        if (false === $this->checkRole('ROLE_SUPER_ADMIN')) {
+            if (true === $object->isPrivate() && $object->getAuthor() != $this->getUser()) {
+                throw new AccessDeniedException();
+            }
+
+            if (true === $object->isProtected() && false === $authenticated) {
+                throw new AccessDeniedException();
+            }
+        }
+
+        $this->formatSeo($object);
+
+        return array(
+            'object'    => $object,
+            'response'  => $response
+        );
+    }
+
+    /**
+     * @param $object
+     */
+    protected function formatSeo($object)
+    {
+        if ($seo = $this->getSeo()) {
+            $seo
+                ->setTitle($object->getSeo()->getTitle())
+                ->setDescription($object->getSeo()->getDescription())
+            ;
+
+            if ($object->getSeo()->getKeywords()) {
+                $seo->setKeywords($object->getSeo()->getKeywords());
+            }
+        }
+    }
+
+    /**
+     * @param $object
+     *
+     * @return Response
+     */
+    protected function prepareResponse($object)
+    {
+        $response = $this->getResponse();
+        $response->setEtag($object->computeEtag());
+        $response->setLastModified($object->getUpdatedAt());
+        $response->setPublic();
+
+        return $response;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    protected function getRequestParam()
+    {
+        $request = $this->getRequest();
+
+        return $request->get('slug');
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function createQuery()
+    {
+        $param  = $this->getRequestParam();
+        $object = $this->getManager()->findPageBySlug($param);
+
+        return $object;
+    }
+
+    /**
+     * @param $role
+     *
+     * @return bool
+     */
+    protected function checkRole($role)
+    {
+        $context   = $this->getContext();
+
+        return $context->isGranted($role);
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getUser()
+    {
+        return $this->getToken()->getUser();
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
+     * @return SeoInterface
+     */
+    private function getSeo()
+    {
+        return $this->seo;
+    }
+
+    /**
+     * @return SecurityContext
+     */
+    private function getContext()
+    {
+        return $this->context;
+    }
+
+    /**
+     * @return null|\Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+     */
+    private function getToken()
+    {
+        return $this->getContext()->getToken();
+    }
+
+    /**
+     * @return Request
+     */
+    private function getRequest()
+    {
+        return $this->request;
+    }
+
+    /**
+     * @return Response
+     */
+    private function getResponse()
+    {
+        return new Response();
+    }
+}

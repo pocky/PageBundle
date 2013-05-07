@@ -11,7 +11,7 @@
 namespace Black\Bundle\PageBundle\Document;
 
 use Black\Bundle\PageBundle\Model\Page as AbstractPage;
-use Black\Bundle\EngineBundle\Traits\ThingDocument;
+use Black\Bundle\EngineBundle\Traits\ThingDocumentTrait;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -23,7 +23,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Page extends AbstractPage
 {
-    use ThingDocument;
+    use ThingDocumentTrait;
 
     /**
      * @ODM\String

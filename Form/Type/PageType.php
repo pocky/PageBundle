@@ -27,8 +27,8 @@ class PageType extends AbstractType
     public function __construct($class, ChoiceListInterface $enabled, ChoiceListInterface $status)
     {
         $this->class    = $class;
-        $this->enabled  = $enabled->createList();
-        $this->status   = $status->createList();
+        $this->enabled  = $enabled;
+        $this->status   = $status;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

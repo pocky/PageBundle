@@ -15,14 +15,6 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
 class StatusList extends LazyChoiceList
 {
-    public function createList()
-    {
-        $class  = $this->getClass();
-        $page   = new $class();
-
-        return $page;
-    }
-
     protected function loadChoiceList()
     {
         $array = array(
