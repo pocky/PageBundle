@@ -10,9 +10,10 @@
 
 namespace Black\Bundle\PageBundle\Document;
 
+use Black\Bundle\PageBundle\Model\PageManagerInterface;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
-class PageManager extends DocumentManager
+class PageManager extends DocumentManager implements PageManagerInterface
 {
     protected $dm;
     protected $repository;

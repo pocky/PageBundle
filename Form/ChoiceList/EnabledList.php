@@ -49,9 +49,4 @@ class EnabledList extends LazyChoiceList
 
         return $property->getValue();
     }
-
-    protected function getClass()
-    {
-        return $this;
-    }
 }

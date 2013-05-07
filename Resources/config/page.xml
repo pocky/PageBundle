@@ -29,6 +29,10 @@
             <argument type="service" id="black_engine.manager.config" />
         </service>
 
+        <service id="black_page.page.form.page_list" class="%black_page.page.form.page_list%" public="false">
+            <argument type="service" id="black_page.manager.page" />
+        </service>
+
         <service id="black_page.page.form.status_list" class="%black_page.page.form.status_list%" public="false" />
 
     </services>
