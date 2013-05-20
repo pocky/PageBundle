@@ -44,6 +44,10 @@ page:
                 other: Autre
 
         config:
+            nav:
+                page:
+                    title: Accéder à vos paramètres des pages
+                    a: Paramètres des pages
             form:
                 page:
                     title: Paramètres des pages
