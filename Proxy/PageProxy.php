@@ -12,6 +12,7 @@ namespace Black\Bundle\PageBundle\Proxy;
 
 use Black\Bundle\SeoBundle\Model\SeoInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,17 +53,24 @@ class PageProxy implements ProxyInterface
     protected $response;
 
     /**
-     * @param ObjectManager   $manager
-     * @param SeoInterface    $seo
-     * @param SecurityContext $context
-     * @param Request         $request
+     * @var \Symfony\Component\HttpKernel\Kernel
      */
-    public function __construct(ObjectManager $manager, SeoInterface $seo, SecurityContext $context, Request $request)
+    protected $kernel;
+
+    /**
+     * @param ObjectManager $manager
+     * @param SeoInterface $seo
+     * @param SecurityContext $context
+     * @param Request $request
+     * @param Kernel $kernel
+     */
+    public function __construct(ObjectManager $manager, SeoInterface $seo, SecurityContext $context, Request $request, Kernel $kernel)
     {
         $this->manager = $manager;
         $this->seo      = $seo;
         $this->context  = $context;
         $this->request  = $request;
+        $this->kernel   = $kernel;
     }
 
     /**
@@ -132,9 +140,12 @@ class PageProxy implements ProxyInterface
     protected function prepareResponse($object)
     {
         $response = $this->getResponse();
-        $response->setEtag($object->computeEtag());
-        $response->setLastModified($object->getUpdatedAt());
-        $response->setPublic();
+
+        if ('prod' === $this->getKernel()->getEnvironment()) {
+            $response->setEtag($object->computeEtag());
+            $response->setLastModified($object->getUpdatedAt());
+            $response->setPublic();
+        }
 
         return $response;
     }
@@ -226,5 +237,13 @@ class PageProxy implements ProxyInterface
     private function getResponse()
     {
         return new Response();
+    }
+
+    /**
+     * @return Kernel
+     */
+    private function getKernel()
+    {
+        return $this->kernel;
     }
 }

@@ -15,6 +15,7 @@
             <argument type="service" id="black_seo.seo" />
             <argument type="service" id="security.context" />
             <argument type="service" id="request" />
+            <argument type="service" id="kernel" />
         </service>
 
     </services>

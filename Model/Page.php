@@ -55,6 +55,11 @@ abstract class Page implements PageInterface
     protected $enabled;
 
     /**
+     * @var string
+     */
+    protected $routeName = 'page_show';
+
+    /**
      * @return string
      */
     public function computeEtag()
@@ -276,6 +281,14 @@ abstract class Page implements PageInterface
         }
 
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRouteName()
+    {
+        return $this->routeName;
     }
 
     /**
