@@ -38,11 +38,10 @@ class PageController extends Controller
     public function indexAction()
     {
         $documentManager    = $this->getDocumentManager();
-        $documents = $documentManager->findPublishedPages();
+        $documents          = $documentManager->findPublishedPages();
 
         if (!$documents) {
-            $t = $this->get('translator')->trans('page.not.found');
-            throw $this->createNotFoundException($t);
+            throw $this->createNotFoundException('page.not.found');
         }
 
         return array(
@@ -59,37 +58,13 @@ class PageController extends Controller
      */
     public function showAction($slug)
     {
-        $documentManager    = $this->getDocumentManager();
-        $document           = $documentManager->findPageBySlug($slug);
-        $authenticated      = $this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY');
+        $proxy      = $this->getProxy();
+        $response   = $proxy->createResponse($slug);
 
-        if (!$document) {
-            throw $this->createNotFoundException('page.not.found');
-        }
-
-        if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
-            if (true === $document->isPrivate() && $document->getAuthor() != $this->getUser()) {
-                throw new AccessDeniedException();
-            }
-
-            if (true === $document->isProtected() && false === $authenticated) {
-                throw new AccessDeniedException();
-            }
-        }
-
-        if ($seo = $this->getSeo()) {
-            $seo
-                ->setTitle($document->getSeo()->getTitle())
-                ->setDescription($document->getSeo()->getDescription())
-            ;
-
-            if ($document->getSeo()->getKeywords()) {
-                $seo->setKeywords($document->getSeo()->getKeywords());
-            }
-        }
-
-        return array(
-            'document' => $document,
+        return $this->render(
+            'BlackPageBundle:Page:show.html.twig',
+            array('document' => $response['object']),
+            $response['response']
         );
     }
 
@@ -137,15 +112,8 @@ class PageController extends Controller
         return $this->get('black_page.manager.page');
     }
 
-    /**
-     * @return null|object
-     */
-    protected function getSeo()
+    protected function getProxy()
     {
-        if ($this->has('black_seo.seo')) {
-            return $this->get('black_seo.seo');
-        }
-
-        return null;
+        return $this->get('black_page.proxy');
     }
 }

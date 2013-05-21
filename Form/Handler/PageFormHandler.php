@@ -22,14 +22,12 @@ class PageFormHandler
     protected $form;
     protected $factory;
     protected $session;
-    protected $manager;
 
-    public function __construct(FormInterface $form, Request $request, SessionInterface $session, ManagerRegistry $manager)
+    public function __construct(FormInterface $form, Request $request, SessionInterface $session)
     {
         $this->form     = $form;
         $this->request  = $request;
         $this->session  = $session;
-        $this->manager  = $manager->getManager();
     }
 
     public function process(PageInterface $page)

@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addPageSection($rootNode);
+        $this->addProxySection($rootNode);
         $this->addConfigSection($rootNode);
 
         return $treeBuilder;
@@ -62,7 +63,25 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('handler')->defaultValue('Black\\Bundle\\PageBundle\\Form\\Handler\\PageFormHandler')->end()
                                 ->scalarNode('enabled_list')->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\EnabledList')->end()
                                 ->scalarNode('status_list')->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\StatusList')->end()
+                                ->scalarNode('page_list')->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\PageList')->end()
                             ->end()
+                        ->end()
+
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    private function addProxySection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('proxy')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                        ->children()
+                            ->scalarNode('class')->defaultValue('Black\\Bundle\\PageBundle\\Proxy\\PageProxy')->end()
                         ->end()
                     ->end()
                 ->end()

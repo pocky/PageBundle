@@ -10,7 +10,7 @@
 
 namespace Black\Bundle\PageBundle\Form\ChoiceList;
 
-use Black\Bundle\EngineBundle\Model\Config\ConfigManagerInterface;
+use Black\Bundle\EngineBundle\Model\ConfigManagerInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
@@ -21,14 +21,6 @@ class EnabledList extends LazyChoiceList
     public function __construct(ConfigManagerInterface $manager)
     {
         $this->manager = $manager;
-    }
-
-    public function createList()
-    {
-        $class  = $this->getClass();
-        $page   = new $class($this->manager);
-
-        return $page;
     }
 
     protected function loadChoiceList()
@@ -56,10 +48,5 @@ class EnabledList extends LazyChoiceList
         $property = $this->manager->findPropertyByName('Page');
 
         return $property->getValue();
-    }
-
-    protected function getClass()
-    {
-        return $this;
     }
 }

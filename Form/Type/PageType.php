@@ -22,15 +22,21 @@ class PageType extends AbstractType
     private $status;
 
     /**
-     * @param string $class The Person class name
+     * @param $class
+     * @param ChoiceListInterface $enabled
+     * @param ChoiceListInterface $status
      */
     public function __construct($class, ChoiceListInterface $enabled, ChoiceListInterface $status)
     {
         $this->class    = $class;
-        $this->enabled  = $enabled->createList();
-        $this->status   = $status->createList();
+        $this->enabled  = $enabled;
+        $this->status   = $status;
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -89,6 +95,9 @@ class PageType extends AbstractType
         ;
     }
 
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
@@ -97,6 +106,9 @@ class PageType extends AbstractType
             ));
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'black_page_page';

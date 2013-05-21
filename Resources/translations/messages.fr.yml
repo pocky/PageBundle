@@ -40,6 +40,8 @@ page:
                     public: Publique
                     private: Privée
                     protected: Protégée
+            item:
+                other: Autre
 
         config:
             nav:
