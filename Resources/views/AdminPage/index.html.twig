@@ -15,7 +15,7 @@
 
         <div class="wrapper">
 
-            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.getFlashes()} %}
+            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.FlashBag()} %}
 
             <form id="validate" class="main grid9" action="{{ path('admin_page_batch') }}" method="post">
                 <div class="fluid">
