@@ -46,7 +46,7 @@ class InstallConfigCommand extends ContainerAwareCommand
             return '<error>The property page already exist!</error>';
         }
 
-        $object = $manager->createConfig();
+        $object = $manager->createInstance();
         $value  = array();
 
         $dialog = $this->getHelperSet()->get('dialog');

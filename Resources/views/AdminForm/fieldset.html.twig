@@ -12,12 +12,12 @@
                 {{ form_errors(form.slug) }}
                 {% if document.slug %}
                     <p>
-                        <b>{% trans %}page.admin.slug{% endtrans %}</b>
+                        <b>{% form.slug.vars.label|trans({}, "form") %}</b>
                         {{ black.site_url is defined ? black.site_url }}/page/<span id="slug">{{ document.slug }}</span>.html
                     </p>
                 {% else %}
                     <p>
-                        <b>{% trans %}page.admin.slug{% endtrans %}</b>
+                        <b>{% form.slug.vars.label|trans({}, "form") %}</b>
                         {{ black.site_url is defined ? black.site_url }}/page/<span id="slug">_______</span>.html
                     </p>
                 {% endif %}
@@ -27,13 +27,13 @@
     </div>
 
     <div class="widget">
-        <div class="whead"><h6>{% trans %}page.admin.form.content{% endtrans %}</h6><div class="clear"></div></div>
+        <div class="whead"><h6>{% trans from "form" %}page.admin.page.content.text{% endtrans %}</h6><div class="clear"></div></div>
         {{ form_row(form.description) }}
         {{ form_row(form.text) }}
     </div>
 
     <div class="widget">
-        <div class="whead"><h6>{% trans %}page.admin.form.options{% endtrans %}</h6><div class="clear"></div></div>
+        <div class="whead"><h6>{% trans from "form" %}page.admin.page.options.text{% endtrans %}</h6><div class="clear"></div></div>
         {{ form_row(form.image) }}
         {% if document.primaryImageOfPage %}
             <div class="grid2">&nbsp;</div>
@@ -44,7 +44,7 @@
 
 <fieldset class="grid3">
     <div class="widget">
-        <div class="whead"><h6>{% trans %}page.admin.form.settings{% endtrans %}</h6><div class="clear"></div></div>
+        <div class="whead"><h6>{% trans from "form" %}page.admin.page.settings.text{% endtrans %}</h6><div class="clear"></div></div>
 
         <div class="formRow">
             <div class="grid4">{{ form_label(form.author) }}</div>
