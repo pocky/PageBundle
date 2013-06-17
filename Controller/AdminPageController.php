@@ -69,7 +69,7 @@ class AdminPageController extends Controller
     public function newAction()
     {
         $documentManager    = $this->getDocumentManager();
-        $document           = $documentManager->createPage();
+        $document           = $documentManager->createInstance();
         $document->setStatus('draft');
 
         $formHandler    = $this->get('black_page.page.form.handler');
@@ -142,7 +142,7 @@ class AdminPageController extends Controller
      * Deletes a Page document.
      *
      * @Method({"POST", "GET"})
-     * @Route("/{id}/delete", name="admin_page_delete")
+     * @Route("/{id}/delete/{token}", name="admin_page_delete")
      * @Secure(roles="ROLE_ADMIN")
      * @param string $id The document ID
      *
@@ -157,8 +157,8 @@ class AdminPageController extends Controller
 
         $form->bind($request);
 
-        if (null === $token) {
-            $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $request->query->get('token'));
+        if (null !== $token) {
+            $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $token);
         }
 
         if ($form->isValid() || true === $token) {
@@ -174,10 +174,10 @@ class AdminPageController extends Controller
             $dm->remove($document);
             $dm->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'This person was successfully deleted!');
+            $this->get('session')->getFlashBag()->add('success', 'success.page.admin.page.delete');
 
         } else {
-            $this->getFlashBag->add('failure', 'The form is not valid');
+            $this->getFlashBag->add('error', 'error.page.admin.page.not.valid');
         }
 
         return $this->redirect($this->generateUrl('admin_persons'));
@@ -199,12 +199,12 @@ class AdminPageController extends Controller
         $token      = $this->get('form.csrf_provider')->isCsrfTokenValid('batch', $request->get('token'));
 
         if (!$ids = $request->get('ids')) {
-            $this->get('session')->getFlashBag()->add('failure', 'You must select at least one item');
+            $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.no.item');
             return $this->redirect($this->generateUrl('admin_persons'));
         }
 
         if (!$action = $request->get('batchAction')) {
-            $this->get('session')->getFlashBag()->add('failure', 'You must select an action to execute on the selected items');
+            $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.no.action');
             return $this->redirect($this->generateUrl('admin_persons'));
         }
 
@@ -215,7 +215,7 @@ class AdminPageController extends Controller
         }
 
         if (false === $token) {
-            $this->get('session')->getFlashBag()->add('failure', 'CSRF Attack detected! This is bad. Very Bad hombre!');
+            $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.csrf');
 
             return $this->redirect($this->generateUrl('admin_persons'));
         }

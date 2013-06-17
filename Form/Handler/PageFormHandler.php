@@ -41,11 +41,11 @@ class PageFormHandler
             if ($this->form->isValid()) {
 
                 $page->upload();
-                $this->setFlash('success', $page->getName() . ' was successfully updated!');
+                $this->setFlash('success', ' success.page.admin.page.edit');
 
                 return true;
             } else {
-                $this->setFlash('failure', 'The form is not valid');
+                $this->setFlash('error', 'error.page.admin.page.not.valid');
             }
         }
     }
