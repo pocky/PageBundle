@@ -29,7 +29,7 @@ class InstallConfigCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $manager    = $this->getDocumentManager();
+        $manager    = $this->getManager();
         $output->writeln('<comment>First step: Create general parameter</comment>');
 
         $result   = $this->createPage($manager, $output);
@@ -77,7 +77,7 @@ class InstallConfigCommand extends ContainerAwareCommand
         return '<info>The property Page was created!</info>';
     }
 
-    private function getDocumentManager()
+    private function getManager()
     {
         return $this->getContainer()->get('black_engine.manager.config');
     }

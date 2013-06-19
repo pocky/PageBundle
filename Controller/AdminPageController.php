@@ -36,8 +36,8 @@ class AdminPageController extends Controller
      */
     public function indexAction()
     {
-        $documentManager    = $this->getDocumentManager();
-        $repository         = $documentManager->getDocumentRepository();
+        $documentManager    = $this->getManager();
+        $repository         = $documentManager->getRepository();
 
         $rawDocuments       = $repository->findAll();
         $csrf               = $this->container->get('form.csrf_provider');
@@ -68,7 +68,7 @@ class AdminPageController extends Controller
      */
     public function newAction()
     {
-        $documentManager    = $this->getDocumentManager();
+        $documentManager    = $this->getManager();
         $document           = $documentManager->createInstance();
         $document->setStatus('draft');
 
@@ -105,8 +105,8 @@ class AdminPageController extends Controller
      */
     public function editAction($id)
     {
-        $documentManager    = $this->getDocumentManager();
-        $repository         = $documentManager->getDocumentRepository();
+        $documentManager    = $this->getManager();
+        $repository         = $documentManager->getRepository();
 
         $document = $repository->findOneById($id);
 
@@ -163,8 +163,8 @@ class AdminPageController extends Controller
 
         if ($form->isValid() || true === $token) {
 
-            $dm         = $this->getDocumentManager();
-            $repository = $dm->getDocumentRepository();
+            $dm         = $this->getManager();
+            $repository = $dm->getRepository();
             $document   = $repository->findOneById($id);
 
             if (!$document) {
@@ -242,7 +242,7 @@ class AdminPageController extends Controller
      *
      * @return DocumentManager
      */
-    protected function getDocumentManager()
+    protected function getManager()
     {
         return $this->get('black_page.manager.page');
     }
