@@ -41,21 +41,21 @@ class PageType extends AbstractType
     {
         $builder
             ->add('name', 'text', array(
-                    'label'         => 'page.admin.form.name'
+                    'label'         => 'page.admin.page.name.text'
                 )
             )
             ->add('slug', 'text', array(
-                    'label'         => 'page.admin.form.slug',
+                    'label'         => 'page.admin.page.slug.text',
                     'required'      => false
                 )
             )
             ->add('description', 'textarea', array(
-                    'label'         => 'page.admin.form.description',
+                    'label'         => 'page.admin.page.description.text',
                     'required'      => false
                 )
             )
             ->add('text', 'ckeditor', array(
-                    'label'         => 'page.admin.form.text',
+                    'label'         => 'page.admin.page.text.text',
                     'filebrowser_image_browse_url' => array(
                         'route'            => 'elfinder',
                         'route_parameters' => array(),
@@ -63,33 +63,36 @@ class PageType extends AbstractType
                 )
             )
             ->add('author', 'text', array(
-                    'label'         => 'page.admin.form.author',
+                    'label'         => 'page.admin.page.author.text',
                     'required'      => false
                 )
             )
             ->add('image', 'file', array(
-                    'label'         => 'page.admin.form.image',
+                    'label'         => 'page.admin.page.image.text',
                     'required'      => false
                 )
             )
             ->add('status', 'choice', array(
-                    'label'         => 'page.admin.form.status.label',
-                    'empty_value'   => 'page.admin.form.status.empty',
+                    'label'         => 'page.admin.page.status.text',
+                    'empty_value'   => 'page.admin.page.status.empty',
                     'choice_list'   => $this->status
                 ))
             ->add('enabled', 'choice', array(
-                    'label'         => 'page.admin.form.enabled.label',
-                    'empty_value'   => 'page.admin.form.enabled.empty',
+                    'label'         => 'page.admin.page.enabled.text',
+                    'empty_value'   => 'page.admin.page.enabled.empty',
                     'choice_list'   => $this->enabled
                 )
             )
             ->add('datePublished', 'date', array(
-                    'label'         => 'page.admin.form.datePublished',
+                    'label'         => 'page.admin.page.datePublished.text',
                     'years'         => array_reverse(
                         range(2000, date('Y', strtotime('now')))
                     ),
                     'required'      => false,
-                    'empty_value'   => array('year' => 'admin.year', 'month' => 'admin.month', 'day' => 'admin.day')
+                    'empty_value'   => array(
+                        'year' => 'page.admin.page.year.datePublished.choice.text',
+                        'month' => 'page.admin.page.month.datePublished.choice.text',
+                        'day' => 'page.admin.page.datePublished.choice.day.text')
                 )
             )
         ;

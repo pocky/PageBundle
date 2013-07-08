@@ -1,36 +1,16 @@
-{% extends 'BlackAdminBundle::base.html.twig' %}
-{% block body %}
+{% extends 'BlackPageBundle:AdminPage:base.html.twig' %}
+{% block content_top %}
+    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "page.admin.contentTop.new.text"} %}
+{% endblock %}
+{% block page_content %}
+<div class="fluid">
 
-    {% include 'BlackAdminBundle:Admin:header.html.twig' %}
-    {% include 'BlackAdminBundle:Admin:sidebar.html.twig' %}
-    {% include 'BlackPageBundle:AdminPage:sidebar.html.twig' %}
+    <form id="validate" class="main" action="{{ path(admin_new) }}"  method="post" {{ form_enctype(form) }}>
 
-    {% set title = "Create a new page" %}
-    {% set admin_index = 'admin_page' %}
-    {% set admin_delete = 'admin_page_delete' %}
+        {% include 'BlackPageBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': 'page.admin.new.page.txt'} %}
 
-    <div id="content">
-        {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "New page"} %}
-        {% include 'BlackPageBundle:AdminPage:breadLine.html.twig' with {'route': 'admin_page_new', 'text': "New page"} %}
+        {% include 'BlackAdminBundle:AdminForm:actions.html.twig' %}
+    </form>
 
-        <!-- Main content -->
-        <div class="wrapper">
-
-            {% include 'BlackAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
-            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.FlashBag()} %}
-
-            <div class="fluid">
-
-                <form id="validate" class="main" action="{{ path('admin_page_new') }}"  method="post" {{ form_enctype(form) }}>
-
-                    {% include 'BlackPageBundle:AdminForm:fieldset.html.twig' with {'form': form} %}
-
-                    {% include 'BlackAdminBundle:AdminForm:actions.html.twig' %}
-                </form>
-
-            </div>
-
-        </div>
-    </div>
-
+</div>
 {% endblock %}

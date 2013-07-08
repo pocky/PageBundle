@@ -28,13 +28,13 @@ class EnabledList extends LazyChoiceList
         $property   = $this->getPageProperty();
 
         $array = array(
-            'public'    => 'page.admin.form.enabled.choices.public',
-            'private'   => 'page.admin.form.enabled.choices.private'
+            'public'    => 'page.admin.page.enabled.choice.public',
+            'private'   => 'page.admin.page.enabled.choice.private'
         );
 
         if ('true' === $property['page_protected']) {
             $array += array(
-                'protected' => 'page.admin.form.enabled.choices.protected'
+                'protected' => 'page.admin.page.enabled.choice.protected'
             );
         }
 

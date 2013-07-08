@@ -42,17 +42,17 @@ class PageConfigType extends AbstractType
             ->add($builder
                 ->create('value', 'form', array(
                         'by_reference'  => false,
-                        'label'         => 'engine.admin.config.form.name'
+                        'label'         => 'page.admin.config.text'
                     )
                 )
                 ->add('page_protected', 'choice', array(
-                        'label'             => 'page.admin.config.form.page.protected.label',
+                        'label'             => 'page.admin.config.protected.text',
                         'required'          => false,
-                        'empty_value'       => 'page.admin.config.form.page.protected.empty',
+                        'empty_value'       => 'page.admin.config.protected.empty',
                         'preferred_choices' => array('false'),
                         'choices'           => array(
-                            'true'          => 'page.admin.config.form.page.protected.yes',
-                            'false'         => 'page.admin.config.form.page.protected.no'
+                            'true'          => 'page.admin.config.protected.choice.yes',
+                            'false'         => 'page.admin.config.protected.choice.no'
                         )
                     )
                 )

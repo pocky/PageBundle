@@ -36,8 +36,8 @@ class AdminPageController extends Controller
      */
     public function indexAction()
     {
-        $documentManager    = $this->getDocumentManager();
-        $repository         = $documentManager->getDocumentRepository();
+        $documentManager    = $this->getManager();
+        $repository         = $documentManager->getRepository();
 
         $rawDocuments       = $repository->findAll();
         $csrf               = $this->container->get('form.csrf_provider');
@@ -68,8 +68,8 @@ class AdminPageController extends Controller
      */
     public function newAction()
     {
-        $documentManager    = $this->getDocumentManager();
-        $document           = $documentManager->createPage();
+        $documentManager    = $this->getManager();
+        $document           = $documentManager->createInstance();
         $document->setStatus('draft');
 
         $formHandler    = $this->get('black_page.page.form.handler');
@@ -105,8 +105,8 @@ class AdminPageController extends Controller
      */
     public function editAction($id)
     {
-        $documentManager    = $this->getDocumentManager();
-        $repository         = $documentManager->getDocumentRepository();
+        $documentManager    = $this->getManager();
+        $repository         = $documentManager->getRepository();
 
         $document = $repository->findOneById($id);
 
@@ -142,13 +142,14 @@ class AdminPageController extends Controller
      * Deletes a Page document.
      *
      * @Method({"POST", "GET"})
-     * @Route("/{id}/delete", name="admin_page_delete")
+     * @Route("/{id}/delete/{token}", name="admin_page_delete")
      * @Secure(roles="ROLE_ADMIN")
+     *
      * @param string $id The document ID
+     * @param null $token
      *
-     * @return array
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function deleteAction($id, $token = null)
     {
@@ -157,14 +158,14 @@ class AdminPageController extends Controller
 
         $form->bind($request);
 
-        if (null === $token) {
-            $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $request->query->get('token'));
+        if (null !== $token) {
+            $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $token);
         }
 
         if ($form->isValid() || true === $token) {
 
-            $dm         = $this->getDocumentManager();
-            $repository = $dm->getDocumentRepository();
+            $dm         = $this->getManager();
+            $repository = $dm->getRepository();
             $document   = $repository->findOneById($id);
 
             if (!$document) {
@@ -174,10 +175,10 @@ class AdminPageController extends Controller
             $dm->remove($document);
             $dm->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'This person was successfully deleted!');
+            $this->get('session')->getFlashBag()->add('success', 'success.page.admin.page.delete');
 
         } else {
-            $this->getFlashBag->add('failure', 'The form is not valid');
+            $this->getFlashBag->add('error', 'error.page.admin.page.not.valid');
         }
 
         return $this->redirect($this->generateUrl('admin_persons'));
@@ -199,12 +200,12 @@ class AdminPageController extends Controller
         $token      = $this->get('form.csrf_provider')->isCsrfTokenValid('batch', $request->get('token'));
 
         if (!$ids = $request->get('ids')) {
-            $this->get('session')->getFlashBag()->add('failure', 'You must select at least one item');
+            $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.no.item');
             return $this->redirect($this->generateUrl('admin_persons'));
         }
 
         if (!$action = $request->get('batchAction')) {
-            $this->get('session')->getFlashBag()->add('failure', 'You must select an action to execute on the selected items');
+            $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.no.action');
             return $this->redirect($this->generateUrl('admin_persons'));
         }
 
@@ -215,7 +216,7 @@ class AdminPageController extends Controller
         }
 
         if (false === $token) {
-            $this->get('session')->getFlashBag()->add('failure', 'CSRF Attack detected! This is bad. Very Bad hombre!');
+            $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.csrf');
 
             return $this->redirect($this->generateUrl('admin_persons'));
         }
@@ -242,7 +243,7 @@ class AdminPageController extends Controller
      *
      * @return DocumentManager
      */
-    protected function getDocumentManager()
+    protected function getManager()
     {
         return $this->get('black_page.manager.page');
     }

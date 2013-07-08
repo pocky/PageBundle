@@ -1,38 +1,22 @@
-{% extends 'BlackAdminBundle::base.html.twig' %}
-{% block body %}
+{% extends 'BlackEngineBundle:AdminConfig:base.html.twig' %}
+{% block content_top %}
+    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "page.admin.contentTop.config.page.text"} %}
+{% endblock %}
+{% block page_content %}
+<div class="fluid">
 
-    {% include 'BlackAdminBundle:Admin:header.html.twig' %}
-    {% include 'BlackAdminBundle:Admin:sidebar.html.twig' %}
-    {% include 'BlackEngineBundle:AdminConfig:sidebar.html.twig' %}
+    <form id="validate" novalidate class="main grid9" action="{{ path('admin_config_page') }}" method="post" {{ form_enctype(form) }}>
+        {% include 'BlackAdminBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "page.admin.fieldset.config.text"} %}
+    </form>
 
-    <div id="content">
-        {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with { 'title': "engine.admin.config.general.title"} %}
-        {% include 'BlackEngineBundle:AdminConfig:breadLine.html.twig' with {'route': 'admin_config_new', 'text': "engine.admin.config.shortcut"} %}
-
-        <!-- Main content -->
-        <div class="wrapper">
-
-            {% include 'BlackAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
-            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.FlashBag()} %}
-
-            <div class="fluid">
-
-                <form id="validate" novalidate class="main grid9" action="{{ path('admin_config_page') }}" method="post" {{ form_enctype(form) }}>
-                    {% include 'BlackAdminBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "page.admin.config.form.page.title"} %}
-                </form>
-
-                <div class="grid3">
-                    <div class="widget">
-                        <div class="whead"><h6>{% trans %}admin.actions{% endtrans %}</h6><div class="clear"></div></div>
-                        <div class="body">
-                            <input type="submit" value="{% trans %}admin.action.update{% endtrans %}" form="validate" class="buttonM bGreen floatL" /><div class="clear"></div>
-                        </div>
-                    </div>
-                </div>
-
+    <div class="grid3">
+        <div class="widget">
+            <div class="whead"><h6>{% trans from "views" %}page.admin.page.actions.text{% endtrans %}</h6><div class="clear"></div></div>
+            <div class="body">
+                <input type="submit" value="{% trans from "form" %}page.admin.page.submit.value{% endtrans %}" form="validate" class="buttonM bGreen floatL" /><div class="clear"></div>
             </div>
-
         </div>
     </div>
 
+</div>
 {% endblock %}
