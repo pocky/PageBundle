@@ -16,7 +16,7 @@
         <div class="wrapper">
 
             {% include 'BlackAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
-            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.FlashBag()} %}
+            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.flashBag} %}
 
             <div class="fluid">
 

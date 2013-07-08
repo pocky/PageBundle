@@ -144,11 +144,12 @@ class AdminPageController extends Controller
      * @Method({"POST", "GET"})
      * @Route("/{id}/delete", name="admin_page_delete")
      * @Secure(roles="ROLE_ADMIN")
+     *
      * @param string $id The document ID
+     * @param null $token
      *
-     * @return array
-     *
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If document doesn't exists
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function deleteAction($id, $token = null)
     {
@@ -177,7 +178,7 @@ class AdminPageController extends Controller
             $this->get('session')->getFlashBag()->add('success', 'This person was successfully deleted!');
 
         } else {
-            $this->getFlashBag->add('failure', 'The form is not valid');
+            $this->get('session')->getFlashBag()->add('failure', 'The form is not valid');
         }
 
         return $this->redirect($this->generateUrl('admin_persons'));
