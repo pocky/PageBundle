@@ -1,34 +1,17 @@
-{% extends 'BlackAdminBundle::base.html.twig' %}
-{% block body %}
+{% extends 'BlackPageBundle:AdminPage:base.html.twig' %}
 
-    {% include 'BlackAdminBundle:Admin:header.html.twig' %}
-    {% include 'BlackAdminBundle:Admin:sidebar.html.twig' %}
-    {% include 'BlackPageBundle:AdminPage:sidebar.html.twig' %}
+{% block content_top %}
+    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "page.admin.contentTop.edit.text"} %}
+{% endblock %}
 
-    {% set admin_index = 'admin_page_index' %}
-    {% set admin_delete = 'admin_page_delete' %}
+{% block page_content %}
+<div class="fluid">
 
-    <div id="content">
-        {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "page.admin.edit.title"} %}
-        {% include 'BlackPageBundle:AdminPage:breadLine.html.twig' with {'route': 'admin_page_new', 'text': "page.admin.new"} %}
+    <form id="validate" class="main" action="{{ path(admin_edit, { 'id': document.id }) }}" method="post" {{ form_enctype(form) }}>
+        {% include 'BlackPageBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': 'page.admin.edit.page.txt'} %}
+    </form>
 
-        <!-- Main content -->
-        <div class="wrapper">
+    {% include 'BlackAdminBundle:AdminForm:actions.html.twig' with {'document': document} %}
 
-            {% include 'BlackAdminBundle:AdminForm:errors.html.twig' with {'form': form} %}
-            {% include 'BlackAdminBundle:Admin:flashes.html.twig' with {'flashes': app.session.flashBag} %}
-
-            <div class="fluid">
-
-                <form id="validate" class="main" action="{{ path('admin_page_edit', { 'id': document.id }) }}" method="post" {{ form_enctype(form) }}>
-                    {% include 'BlackPageBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "Edit a page"} %}
-                </form>
-
-                {% include 'BlackAdminBundle:AdminForm:actions.html.twig' with {'document': document} %}
-
-            </div>
-
-        </div>
-    </div>
-
+</div>
 {% endblock %}

@@ -18,8 +18,8 @@ class StatusList extends LazyChoiceList
     protected function loadChoiceList()
     {
         $array = array(
-            'draft'     => 'page.admin.form.status.choices.draft',
-            'publish'   => 'page.admin.form.status.choices.publish'
+            'draft'     => 'page.admin.page.status.choice.draft',
+            'publish'   => 'page.admin.page.status.choice.publish'
         );
 
         $choices = new SimpleChoiceList($array);

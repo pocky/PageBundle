@@ -38,7 +38,7 @@ class AdminConfigController extends Controller
      */
     public function pageAction()
     {
-        $documentManager    = $this->getDocumentManager();
+        $documentManager    = $this->getManager();
         $document           = $documentManager->findPropertyByName('Page');
 
         if (!$document) {
@@ -65,7 +65,7 @@ class AdminConfigController extends Controller
      *
      * @return DocumentManager
      */
-    protected function getDocumentManager()
+    protected function getManager()
     {
         return $this->get('black_engine.manager.config');
     }

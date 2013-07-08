@@ -37,7 +37,7 @@ class PageController extends Controller
      */
     public function indexAction()
     {
-        $documentManager    = $this->getDocumentManager();
+        $documentManager    = $this->getManager();
         $documents          = $documentManager->findPublishedPages();
 
         if (!$documents) {
@@ -77,7 +77,7 @@ class PageController extends Controller
      */
     public function recentPagesAction($max = 3)
     {
-        $documentManager    = $this->getDocumentManager();
+        $documentManager    = $this->getManager();
         $documents = $documentManager->findLastPublishedPages($max);
 
         return array(
@@ -94,7 +94,7 @@ class PageController extends Controller
      */
     public function menuPagesAction()
     {
-        $documentManager    = $this->getDocumentManager();
+        $documentManager    = $this->getManager();
         $documents = $documentManager->findPublishedPages();
 
         return array(
@@ -107,7 +107,7 @@ class PageController extends Controller
      *
      * @return DocumentManager
      */
-    protected function getDocumentManager()
+    protected function getManager()
     {
         return $this->get('black_page.manager.page');
     }

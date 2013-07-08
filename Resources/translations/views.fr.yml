@@ -1,0 +1,76 @@
+page:
+  admin:
+    actions:
+      text: Actions
+      back:
+        text: Retour
+      
+    breadLine:
+      page:
+        breadcrumb:
+          a:
+            text: Gérer les pages
+            title: Gérer les pages
+        new:
+          text: Créer une page
+      shortcut:
+        text: Raccourci
+          
+    contentTop:
+      config:
+        page:
+          text: Configurations des pages
+      new:
+        text: Créer une page
+      edit:
+        text: Editer une page
+      page:
+        text: Pages
+          
+    edit:
+      page:
+        text: Modifier une page
+          
+    fieldset:
+      config:
+        text: Configuration des pages
+    
+    index:
+      page:
+        text: Pages
+    
+    new:
+      page:
+        text: Nouvelle page
+    
+    sidebar:
+      pages:
+        text: Pages
+        a:
+          text: Voir vos pages
+          title: Voir vos pages
+          
+    page:
+      actions:
+        text: Actions
+
+  www:
+    index:
+      read:
+        a:
+          text: Lire la suite
+          title: Lire la suite de %name%
+    
+    memuPages:
+      content:
+        a:
+          title: Accéder au contenu de la page %name%
+      error:
+        text: Il n'y a pas de pages.
+    
+    recentPages:
+      content:
+        a:
+          title: Accéder au contenu de la page %name%
+      error:
+        text: Il n'y a pas de pages.

@@ -1,58 +1,58 @@
-page:
-    not:
-        found: Il n'y a pas de pages disponibles à cette adresse
-    menu:
-        title: Accéder au contenu de la page %name%
-    link:
-        title: Lire la suite de %name%
-        read: Lire la suite
-    admin:
-        title: Pages
-        slug: "Future url pour votre page :"
-        breadcrumb: Voir vos pages
-        new: Créer une page
-        nav:
-            title: Voir vos pages
-        edit:
-            title: Editer une page
-        form:
-            general: General
-            content: Contenu
-            options: Informations optionnelles
-            settings: Propriétés
-            name: Titre
-            slug: Permalien
-            description: Description
-            text: Contenu
-            author: Auteur
-            image: Illustration
-            datePublished: Date de publication
-            status:
-                label: Statut de publication
-                empty: Choisir une valeur
-                choices:
-                    draft: Brouillon
-                    publish: Publié
-            enabled:
-                label: Visibilité de la page
-                empty: Choisir une valeur
-                choices:
-                    public: Publique
-                    private: Privée
-                    protected: Protégée
-            item:
-                other: Autre
-
-        config:
-            nav:
-                page:
-                    title: Accéder à vos paramètres des pages
-                    a: Paramètres des pages
-            form:
-                page:
-                    title: Paramètres des pages
-                    protected:
-                        label: Activer la protection des pages
-                        empty: Choisir une valeur
-                        yes: Oui
-                        no: Non (conseillé)
+#page:
+#    not:
+#        found: Il n'y a pas de pages disponibles à cette adresse
+#    menu:
+#        title: Accéder au contenu de la page %name%
+#    link:
+#        title: Lire la suite de %name%
+#        read: Lire la suite
+#    admin:
+#        title: Pages
+#        slug: "Future url pour votre page :"
+#        breadcrumb: Voir vos pages
+#        new: Créer une page
+#        nav:
+#            title: Voir vos pages
+#        edit:
+#            title: Editer une page
+#        form:
+#            general: General
+#            content: Contenu
+#            options: Informations optionnelles
+#            settings: Propriétés
+#            name: Titre
+#            slug: Permalien
+#            description: Description
+#            text: Contenu
+#            author: Auteur
+#            image: Illustration
+#            datePublished: Date de publication
+#            status:
+#                label: Statut de publication
+#                empty: Choisir une valeur
+#                choices:
+#                    draft: Brouillon
+#                    publish: Publié
+#            enabled:
+#                label: Visibilité de la page
+#                empty: Choisir une valeur
+#                choices:
+#                    public: Publique
+#                    private: Privée
+#                    protected: Protégée
+#            item:
+#                other: Autre
+#
+#        config:
+#            nav:
+#                page:
+#                    title: Accéder à vos paramètres des pages
+#                    a: Paramètres des pages
+#            form:
+#                page:
+#                    title: Paramètres des pages
+#                    protected:
+#                        label: Activer la protection des pages
+#                        empty: Choisir une valeur
+#                        yes: Oui
+#                        no: Non (conseillé)
