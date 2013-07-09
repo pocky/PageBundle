@@ -9,47 +9,80 @@
  */
 namespace Black\Bundle\PageBundle\Model;
 
+/**
+ * Class PageInterface
+ *
+ * @package Black\Bundle\PageBundle\Model
+ */
 interface PageInterface
 {
-    function computeEtag();
-    function getStatusPublication();
-    
-    function getId();
-    
-    function setAbout($about);
-    function getAbout();
-    
-    function setAuthor($author);
-    function getAuthor();
-    
-    function setDatePublished($datePublished);
-    function getDatePublished();
-    
-    function setImage($image);
-    function getImage();
-    
-    function setStatus($status);
-    function getStatus();
-    
-    function setText($text);
-    function getText();
-    
-    function setPrimaryImageOfPage($primaryImageOfPage);
-    function getPrimaryImageOfPage();
-    
-    static function getStatusEnabled();
-    
-    function setEnabled($enabled);
-    function getEnabled();
-    
-    function isPublic();
-    function isProtected();
-    function isPrivate();
-    
-    function getRouteName();
-    function upload();
-    
-    function getAbsolutePath();
-    function getWebPath();
-    function getUploadDir();
+    /**
+     * @return mixed
+     */
+    public function getStatusPublication();
+
+    /**
+     * @return mixed
+     */
+    public function getId();
+
+    /**
+     * @return mixed
+     */
+    public function getAbout();
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor();
+
+    /**
+     * @return mixed
+     */
+    public function getDatePublished();
+
+    /**
+     * @return mixed
+     */
+    public function getImage();
+
+    /**
+     * @return mixed
+     */
+    public function getStatus();
+
+    /**
+     * @return mixed
+     */
+    public function getText();
+
+    /**
+     * @return mixed
+     */
+    public function getPrimaryImageOfPage();
+
+    /**
+     * @return mixed
+     */
+    public function getEnabled();
+
+    /**
+     * @return mixed
+     */
+    public function isPublic();
+
+    /**
+     * @return mixed
+     */
+    public function isProtected();
+
+    /**
+     * @return mixed
+     */
+    public function isPrivate();
+
+    /**
+     * @return mixed
+     */
+    public function getRouteName();
 }
