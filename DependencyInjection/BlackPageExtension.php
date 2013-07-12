@@ -33,14 +33,20 @@ class BlackPageExtension extends Extension
         try {
             $loader->load(sprintf('%s.xml', $config['db_driver']));
         } catch (\InvalidArgumentException $e) {
-            throw new \InvalidArgumentException(sprintf('The db_driver "%s" is not supported by engine', $config['db_driver']));
+            throw new \InvalidArgumentException(
+                sprintf('The db_driver "%s" is not supported by engine', $config['db_driver'])
+            );
         }
 
-        $this->remapParametersNamespaces($config, $container, array(
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
                 ''      => array(
                     'page_class'          => 'black_page.page.model.class',
                 )
-            ));
+            )
+        );
 
         if (!empty($config['page'])) {
             $this->loadPage($config['page'], $container, $loader);
@@ -61,9 +67,13 @@ class BlackPageExtension extends Extension
             $loader->load(sprintf('%s.xml', $basename));
         }
 
-        $this->remapParametersNamespaces($config, $container, array(
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
                 'form'  => 'black_page.page.form.%s',
-            ));
+            )
+        );
     }
 
     private function loadProxy(array $config, ContainerBuilder $container, XmlFileLoader $loader)
@@ -72,16 +82,23 @@ class BlackPageExtension extends Extension
             $loader->load(sprintf('%s.xml', $basename));
         }
 
-        $this->remapParametersNamespaces($config, $container, array(
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
                 'proxy'  => 'black_page.proxy.%s',
-            ));
+            )
+        );
     }
 
     private function loadConfig(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         $loader->load('config.xml');
 
-        $this->remapParametersNamespaces($config, $container, array(
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
                 'form' => 'black_page.config.form.%s',
             )
         );

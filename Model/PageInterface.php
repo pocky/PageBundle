@@ -11,45 +11,34 @@ namespace Black\Bundle\PageBundle\Model;
 
 interface PageInterface
 {
-    function computeEtag();
-    function getStatusPublication();
+    public function computeEtag();
     
-    function getId();
+    public function getId();
     
-    function setAbout($about);
-    function getAbout();
+    public function getAbout();
     
-    function setAuthor($author);
-    function getAuthor();
+    public function getAuthor();
     
-    function setDatePublished($datePublished);
-    function getDatePublished();
+    public function getDatePublished();
     
-    function setImage($image);
-    function getImage();
+    public function getImage();
     
-    function setStatus($status);
-    function getStatus();
+    public function getStatus();
     
-    function setText($text);
-    function getText();
+    public function getText();
     
-    function setPrimaryImageOfPage($primaryImageOfPage);
-    function getPrimaryImageOfPage();
+    public function getPrimaryImageOfPage();
     
-    static function getStatusEnabled();
+    public function getEnabled();
     
-    function setEnabled($enabled);
-    function getEnabled();
+    public function isPublic();
+    public function isProtected();
+    public function isPrivate();
     
-    function isPublic();
-    function isProtected();
-    function isPrivate();
+    public function getRouteName();
+    public function upload();
     
-    function getRouteName();
-    function upload();
-    
-    function getAbsolutePath();
-    function getWebPath();
-    function getUploadDir();
+    public function getAbsolutePath();
+    public function getWebPath();
+    public function getUploadDir();
 }

@@ -30,7 +30,7 @@ class AdminPageController extends Controller
      * Show lists of Persons
      *
      * @Method("GET")
-     * @Route("/index.html", name="admin_page")
+     * @Route("/index.html", name="admin_page_index")
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
@@ -48,7 +48,7 @@ class AdminPageController extends Controller
 
             $documents[] = array(
                 'id'                         => $document->getId(),
-                'page.admin.form.name'       => $document->getName()
+                'page.admin.page.name.text'  => $document->getName()
             );
         }
 

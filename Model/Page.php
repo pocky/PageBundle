@@ -308,7 +308,7 @@ abstract class Page implements PageInterface
     /**
      * @return string
      */
-    protected function getUploadRootDir()
+    public function getUploadRootDir()
     {
         return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
     }
@@ -332,9 +332,8 @@ abstract class Page implements PageInterface
     /**
      * @return string
      */
-    protected function getUploadDir()
+    public function getUploadDir()
     {
         return 'uploads/page';
     }
 }
-

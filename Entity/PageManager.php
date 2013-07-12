@@ -8,10 +8,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\PageBundle\Document;
+namespace Black\Bundle\PageBundle\Entity;
 
 use Black\Bundle\PageBundle\Model\PageManagerInterface;
-use Black\Bundle\PageBundle\Document\BaseManager;
+use Black\Bundle\PageBundle\Entity\BaseManager;
 
 class PageManager extends BaseManager implements PageManagerInterface
 {

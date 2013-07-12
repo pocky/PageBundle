@@ -17,5 +17,4 @@ namespace Black\Bundle\PageBundle\Model;
  */
 interface PageManagerInterface
 {
-
 }

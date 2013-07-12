@@ -3,7 +3,7 @@ success:
     admin:
       page:
         delete: La page a bien été supprimée.
-        edit: La page a bien été édité
+        edit: La page a bien été édité.
   
 error:
   page:
