@@ -13,8 +13,16 @@ namespace Black\Bundle\PageBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityNotFoundException;
 
+/**
+ * PageRepository
+ */
 class PageRepository extends EntityRepository
 {
+    /**
+     * @param string $slug
+     * 
+     * @return Page
+     */
     public function getPageBySlug($slug)
     {
         $qb = $this->getQueryBuilder()
@@ -25,6 +33,11 @@ class PageRepository extends EntityRepository
         return $qb->getSingleResult();
     }
 
+    /**
+     * @param integer $id
+     * 
+     * @return page
+     */
     public function getPageById($id)
     {
         $qb = $this->getQueryBuilder()
@@ -35,6 +48,11 @@ class PageRepository extends EntityRepository
         return $qb->getSingleResult();
     }
 
+    /**
+     * @param string $status
+     * 
+     * @return array
+     */
     public function getPagesByStatus($status)
     {
         $qb = $this->getQueryBuilder()
@@ -46,6 +64,12 @@ class PageRepository extends EntityRepository
         return $qb->execute();
     }
 
+    /**
+     * @param string  $status
+     * @param integer $limit
+     * 
+     * @return array
+     */
     public function getPages($status, $limit = null)
     {
         $qb = $this->getQueryBuilder()
@@ -56,14 +80,15 @@ class PageRepository extends EntityRepository
         if ($limit) {
             $qb = $qb->limit($limit);
         }
-        
+
         $qb = $this->getQuery();
-        
+
         return $qb->execute();
     }
 
-    private function getQueryBuilder()
+
+    protected function getQueryBuilder($alias = 'p')
     {
-        return $this->createQueryBuilder('p');
+        return $this->createQueryBuilder($alias);
     }
 }

@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('black_page');
 
-        $supportedDrivers = array('mongodb', 'mysql');
+        $supportedDrivers = array('mongodb', 'orm');
 
         $rootNode
             ->children()
@@ -31,11 +31,12 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->validate()
                         ->ifNotInArray($supportedDrivers)
-                        ->thenInvalid('The database driver must be either \'mongodb, mysql\'.')
+                        ->thenInvalid('The database driver must be either \'mongodb\', \'orm\'.')
                     ->end()
                 ->end()
 
                 ->scalarNode('page_class')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('page_manager')->defaultValue('Black\\Bundle\\PageBundle\\Doctrine\\PageManager')->end()
             ->end();
 
         $this->addPageSection($rootNode);

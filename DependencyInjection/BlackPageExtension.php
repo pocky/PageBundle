@@ -44,6 +44,7 @@ class BlackPageExtension extends Extension
             array(
                 ''      => array(
                     'page_class'          => 'black_page.page.model.class',
+                    'page_manager'        => 'black_page.page.manager',
                 )
             )
         );
@@ -135,6 +136,9 @@ class BlackPageExtension extends Extension
         }
     }
 
+    /**
+     * @return string
+     */
     public function getAlias()
     {
         return 'black_page';

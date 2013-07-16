@@ -12,7 +12,7 @@ namespace Black\Bundle\PageBundle\Entity;
 
 use Black\Bundle\PageBundle\Model\Page as AbstractPage;
 use Black\Bundle\EngineBundle\Traits\ThingEntityTrait;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -36,7 +36,7 @@ class Page extends AbstractPage
     protected $id;
 
     /**
-     * @ORM\Column(name="author", type="string", nullable=true)
+     * @ORM\Column(name="author", type="string", length=255, nullable=true)
      */
     protected $author;
 
@@ -53,7 +53,7 @@ class Page extends AbstractPage
     protected $image;
 
     /**
-     * @ORM\Column(name="status", type="string", nullable=true)
+     * @ORM\Column(name="status", type="string", length=255, nullable=true)
      */
     protected $status;
 
@@ -69,7 +69,7 @@ class Page extends AbstractPage
     protected $primaryImageOfPage;
 
     /**
-     * @ORM\Column(name="enabled", type="string", nullable=true)
+     * @ORM\Column(name="enabled", type="string", length=255, nullable=true)
      */
     protected $enabled;
 
