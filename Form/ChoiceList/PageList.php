@@ -14,6 +14,9 @@ use Black\Bundle\PageBundle\Model\PageManagerInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
+/**
+ * PageList
+ */
 class PageList extends LazyChoiceList
 {
     /**
@@ -41,7 +44,7 @@ class PageList extends LazyChoiceList
             $choices += array('/page/' . $page->getSlug() . '.html' => $page->getName());
         }
 
-        $choices += array('other' => 'page.admin.page.choice.other');
+        $choices += array('other' => 'page.admin.page.item.choice.other');
 
         $choices = new SimpleChoiceList($choices);
 

@@ -15,19 +15,25 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * PageType
+ */
 class PageType extends AbstractType
 {
-    private $class;
-    private $enabled;
-    private $status;
+    protected $dbDriver;
+    protected $class;
+    protected $enabled;
+    protected $status;
 
     /**
-     * @param $class
+     * @param string              $dbDriver
+     * @param string              $class
      * @param ChoiceListInterface $enabled
      * @param ChoiceListInterface $status
      */
-    public function __construct($class, ChoiceListInterface $enabled, ChoiceListInterface $status)
+    public function __construct($dbDriver, $class, ChoiceListInterface $enabled, ChoiceListInterface $status)
     {
+        $this->dbDriver = $dbDriver;
         $this->class    = $class;
         $this->enabled  = $enabled;
         $this->status   = $status;
@@ -35,7 +41,7 @@ class PageType extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

@@ -18,13 +18,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Page Entity
- *
- * @ORM\Table(name="page",indexes={
- *          @ORM\Index(name="name_idx", columns={"name"})
- *      })
- * @ORM\Entity(repositoryClass="Black\Bundle\PageBundle\Entity\PageRepository")
  */
-class Page extends AbstractPage
+abstract class Page extends AbstractPage
 {
     use ThingEntityTrait;
 
@@ -72,6 +67,15 @@ class Page extends AbstractPage
      * @ORM\Column(name="enabled", type="string", length=255, nullable=true)
      */
     protected $enabled;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
+    }
 
     /**
      * @ORM\PostRemove()

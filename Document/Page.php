@@ -19,12 +19,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Page Document
  *
- * @ODM\Document(
- *      collection = "Pages",
- *      repositoryClass = "Black\Bundle\PageBundle\Document\PageRepository"
- * )
+ * @ODM\MappedSuperclass()
  */
-class Page extends AbstractPage
+abstract class Page extends AbstractPage
 {
     use ThingDocumentTrait;
 
