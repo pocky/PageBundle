@@ -44,6 +44,11 @@ page:
         text: Nouvelle page
     
     sidebar:
+      config:
+        pages:
+          a:
+            text: Paramètres des pages
+            title: Paramètres des pages
       pages:
         text: Pages
         a:

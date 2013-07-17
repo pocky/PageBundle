@@ -17,14 +17,16 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * InstallConfigCommand
+ */
 class InstallConfigCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
             ->setName('black:page:install')
-            ->setDescription('Create needed object for your orm/odm')
-        ;
+            ->setDescription('Create needed object for your orm/odm');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -69,8 +71,7 @@ class InstallConfigCommand extends ContainerAwareCommand
         $object
             ->setName('Page')
             ->setValue($value)
-            ->setProtected(true)
-        ;
+            ->setProtected(true);
 
         $manager->persist($object);
 

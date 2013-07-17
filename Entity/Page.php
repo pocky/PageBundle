@@ -8,68 +8,77 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\PageBundle\Document;
+namespace Black\Bundle\PageBundle\Entity;
 
 use Black\Bundle\PageBundle\Model\Page as AbstractPage;
-use Black\Bundle\EngineBundle\Traits\ThingDocumentTrait;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use Black\Bundle\EngineBundle\Traits\ThingEntityTrait;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Page Document
- *
- * @ODM\MappedSuperclass()
+ * Page Entity
  */
 abstract class Page extends AbstractPage
 {
-    use ThingDocumentTrait;
+    use ThingEntityTrait;
 
     /**
-     * @ODM\Id
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @ODM\String
+     * @ORM\Column(name="author", type="string", length=255, nullable=true)
      */
     protected $author;
 
     /**
-     * @ODM\Date
+     * @ORM\Column(name="date_published", type="datetime", nullable=true)
      * @Gedmo\Timestampable(on="create")
      */
     protected $datePublished;
 
     /**
-     * @ODM\String
+     * @ORM\Column(name="image", type="string", nullable=true)
      * @Assert\Image(maxSize="2M")
      */
     protected $image;
 
     /**
-     * @ODM\String
+     * @ORM\Column(name="status", type="string", length=255, nullable=true)
      */
     protected $status;
 
     /**
-     * @ODM\String
+     * @ORM\Column(name="text", type="string", nullable=true)
      * @Assert\Type(type="string")
      */
     protected $text;
 
     /**
-     * @ODM\String
+     * @ORM\Column(name="primary_image_of_page", type="string", nullable=true)
      */
     protected $primaryImageOfPage;
 
     /**
-     * @ODM\String
+     * @ORM\Column(name="enabled", type="string", length=255, nullable=true)
      */
     protected $enabled;
 
     /**
-     * @ODM\PostRemove()
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * @ORM\PostRemove()
      */
     public function removeUpload()
     {

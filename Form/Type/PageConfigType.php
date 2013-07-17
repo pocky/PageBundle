@@ -39,13 +39,20 @@ class PageConfigType extends AbstractType
     {
         $builder
             ->remove('name')
-            ->add($builder
-                ->create('value', 'form', array(
+            ->add(
+                $builder
+                ->create(
+                    'value',
+                    'form',
+                    array(
                         'by_reference'  => false,
                         'label'         => 'page.admin.config.text'
                     )
                 )
-                ->add('page_protected', 'choice', array(
+                ->add(
+                    'page_protected',
+                    'choice',
+                    array(
                         'label'             => 'page.admin.config.protected.text',
                         'required'          => false,
                         'empty_value'       => 'page.admin.config.protected.empty',
@@ -56,16 +63,17 @@ class PageConfigType extends AbstractType
                         )
                     )
                 )
-            )
-        ;
+            );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults(
+            array(
                 'data_class'    => $this->class,
                 'intention'     => 'page_config_form'
-            ));
+            )
+        );
     }
 
     /**

@@ -11,6 +11,9 @@ namespace Black\Bundle\PageBundle\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Page
+ */
 abstract class Page implements PageInterface
 {
     /**
@@ -92,7 +95,7 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param $about
+     * @param string $about
      *
      * @return $this
      */
@@ -112,7 +115,7 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param $author
+     * @param string $author
      *
      * @return $this
      */
@@ -132,7 +135,7 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param $datePublished
+     * @param datetime $datePublished
      *
      * @return $this
      */
@@ -152,7 +155,7 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param $image
+     * @param string $image
      *
      * @return $this
      */
@@ -172,7 +175,7 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param $status
+     * @param string $status
      *
      * @return $this
      */
@@ -192,7 +195,7 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param $text
+     * @param string $text
      *
      * @return $this
      */
@@ -212,7 +215,7 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param $primaryImageOfPage
+     * @param string $primaryImageOfPage
      */
     public function setPrimaryImageOfPage($primaryImageOfPage)
     {
@@ -236,7 +239,7 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param $enabled
+     * @param string $enabled
      *
      * @return $this
      */
@@ -292,7 +295,7 @@ abstract class Page implements PageInterface
     }
 
     /**
-     *
+     * Upload
      */
     public function upload()
     {
@@ -308,7 +311,7 @@ abstract class Page implements PageInterface
     /**
      * @return string
      */
-    protected function getUploadRootDir()
+    public function getUploadRootDir()
     {
         return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
     }
@@ -332,9 +335,8 @@ abstract class Page implements PageInterface
     /**
      * @return string
      */
-    protected function getUploadDir()
+    public function getUploadDir()
     {
         return 'uploads/page';
     }
 }
-

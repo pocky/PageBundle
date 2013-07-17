@@ -14,10 +14,16 @@ use Black\Bundle\EngineBundle\Model\ConfigManagerInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
+/**
+ * EnabledList
+ */
 class EnabledList extends LazyChoiceList
 {
     private $manager;
 
+    /**
+     * @param \Black\Bundle\EngineBundle\Model\ConfigManagerInterface $manager
+     */
     public function __construct(ConfigManagerInterface $manager)
     {
         $this->manager = $manager;

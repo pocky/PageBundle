@@ -9,10 +9,10 @@
     </parameters>
 
     <services>
-        <service id="black_page.document.manager" alias="doctrine.odm.mongodb.document_manager" />
+        <service id="black_page.entity.manager" alias="doctrine.orm.entity_manager" />
 
         <service id="black_page.manager.page" class="%black_page.manager.page%">
-            <argument type="service" id="black_page.document.manager" />
+            <argument type="service" id="black_page.entity.manager" />
             <argument>%black_page.page.model.class%</argument>
         </service>
     </services>
