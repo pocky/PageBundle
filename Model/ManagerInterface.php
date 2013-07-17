@@ -8,8 +8,9 @@
 namespace Black\Bundle\PageBundle\Model;
 
 /**
- *
- * @author dallas62
+ * ManagerInterface
+ * 
+ * @author dallas62 <dallas62@free.fr>
  */
 interface ManagerInterface
 {
@@ -17,12 +18,12 @@ interface ManagerInterface
      * @return mixed
      */
     public function getManager();
-    
+
     /**
      * @return mixed
      */
     public function getRepository();
-    
+
     /**
      * @return mixed
      */
