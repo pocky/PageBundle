@@ -19,7 +19,7 @@ interface PageInterface
     /**
      * @return mixed
      */
-    public function getStatusPublication();
+    static public function getStatusPublication();
 
     /**
      * @return mixed

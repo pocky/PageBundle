@@ -34,6 +34,8 @@ class PageController extends Controller
      * @Method("GET")
      * @Route("/all.html", name="pages")
      * @Template()
+     * 
+     * @return Template
      */
     public function indexAction()
     {
@@ -52,9 +54,13 @@ class PageController extends Controller
     /**
      * Show page by slug
      *
+     * @param string $slug
+     * 
      * @Method("GET")
      * @Route("/{slug}.html", name="page_show")
      * @Template()
+     * 
+     * @return Template
      */
     public function showAction($slug)
     {
@@ -70,10 +76,14 @@ class PageController extends Controller
 
     /**
      * Recent pages (embed action)
-     *
+     * 
+     * @param integer $max
+     * 
      * @Method("GET")
      * @Route("/recent/{max}", name="_pages_recent")
      * @Template()
+     * 
+     * @return Template
      */
     public function recentPagesAction($max = 3)
     {
@@ -91,6 +101,8 @@ class PageController extends Controller
      * @Method("GET")
      * @Route("/menu", name="_pages_menu")
      * @Template()
+     * 
+     * @return Template
      */
     public function menuPagesAction()
     {

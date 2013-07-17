@@ -12,6 +12,7 @@
         </service>
 
         <service id="black_page.page.form.type" class="%black_page.page.form.type%">
+            <argument>%black_engine.db_driver%</argument>
             <argument>%black_page.page.model.class%</argument>
             <argument type="service" id="black_page.page.form.enabled_list" />
             <argument type="service" id="black_page.page.form.status_list" />

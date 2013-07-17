@@ -11,7 +11,7 @@
 namespace Black\Bundle\PageBundle\Proxy;
 
 use Black\Bundle\SeoBundle\Model\SeoInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Black\Bundle\PageBundle\Model\PageManagerInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,13 +58,13 @@ class PageProxy implements ProxyInterface
     protected $kernel;
 
     /**
-     * @param ObjectManager $manager
-     * @param SeoInterface $seo
-     * @param SecurityContext $context
-     * @param Request $request
-     * @param Kernel $kernel
+     * @param PageManagerInterface $manager
+     * @param SeoInterface         $seo
+     * @param SecurityContext      $context
+     * @param Request              $request
+     * @param Kernel               $kernel
      */
-    public function __construct(ObjectManager $manager, SeoInterface $seo, SecurityContext $context, Request $request, Kernel $kernel)
+    public function __construct(PageManagerInterface $manager, SeoInterface $seo, SecurityContext $context, Request $request, Kernel $kernel)
     {
         $this->manager = $manager;
         $this->seo      = $seo;
@@ -74,7 +74,7 @@ class PageProxy implements ProxyInterface
     }
 
     /**
-     * @param $property
+     * @param string $property
      *
      * @return array|NotFoundHttpException
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
@@ -116,15 +116,14 @@ class PageProxy implements ProxyInterface
     }
 
     /**
-     * @param $object
+     * @param Object $object
      */
     protected function formatSeo($object)
     {
         if ($seo = $this->getSeo()) {
             $seo
                 ->setTitle($object->getSeo()->getTitle())
-                ->setDescription($object->getSeo()->getDescription())
-            ;
+                ->setDescription($object->getSeo()->getDescription());
 
             if ($object->getSeo()->getKeywords()) {
                 $seo->setKeywords($object->getSeo()->getKeywords());
@@ -133,7 +132,7 @@ class PageProxy implements ProxyInterface
     }
 
     /**
-     * @param $object
+     * @param Object $object
      *
      * @return Response
      */
@@ -172,7 +171,7 @@ class PageProxy implements ProxyInterface
     }
 
     /**
-     * @param $role
+     * @param array $role
      *
      * @return bool
      */

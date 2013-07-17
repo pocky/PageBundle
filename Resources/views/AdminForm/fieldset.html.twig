@@ -3,21 +3,21 @@
 
 <fieldset class="grid9">
     <div class="widget">
-        <div class="whead"><h6>{% trans %}page.admin.form.general{% endtrans %}</h6><div class="clear"></div></div>
+        <div class="whead"><h6>{% trans from "form" %}page.admin.page.general.text{% endtrans %}</h6><div class="clear"></div></div>
         {{ form_row(form.name) }}
         <div class="formRow">
             <div class="grid2">{{ form_label(form.slug) }}</div>
             <div class="grid10">
                 {{ form_widget(form.slug) }}
                 {{ form_errors(form.slug) }}
-                {% if document.slug %}
+                {% if(document.slug) %}
                     <p>
-                        <b>{% form.slug.vars.label|trans({}, "form") %}</b>
+                        <b>{{ form.slug.vars.label|trans({}, "form") }}</b>
                         {{ black.site_url is defined ? black.site_url }}/page/<span id="slug">{{ document.slug }}</span>.html
                     </p>
                 {% else %}
                     <p>
-                        <b>{% form.slug.vars.label|trans({}, "form") %}</b>
+                        <b>{{ form.slug.vars.label|trans({}, "form") }}</b>
                         {{ black.site_url is defined ? black.site_url }}/page/<span id="slug">_______</span>.html
                     </p>
                 {% endif %}
