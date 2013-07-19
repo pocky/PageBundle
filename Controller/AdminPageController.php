@@ -12,6 +12,7 @@
 namespace Black\Bundle\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -33,29 +34,49 @@ class AdminPageController extends Controller
      * @Route("/index.html", name="admin_page_index")
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
+     * 
+     * @return array
      */
     public function indexAction()
     {
-        $documentManager    = $this->getManager();
-        $repository         = $documentManager->getRepository();
-
-        $rawDocuments       = $repository->findAll();
         $csrf               = $this->container->get('form.csrf_provider');
 
-        $documents = array();
+        $keys = array(
+            'id',
+            'page.admin.page.name.text',
+        );
 
+        return array(
+            'keys'      => $keys,
+            'csrf'      => $csrf
+        );
+    }
+
+    /**
+     * Show lists of Events
+     *
+     * @Method("GET")
+     * @Route("/list.json", name="admin_pages_json")
+     * @Secure(roles="ROLE_ADMIN")
+     * 
+     * @return Response
+     */
+    public function ajaxListAction()
+    {
+        $manager       = $this->getManager();
+        $repository    = $manager->getRepository();
+        $rawDocuments  = $repository->findAll();
+
+        $documents = array('aaData' => array());
         foreach ($rawDocuments as $document) {
-
-            $documents[] = array(
-                'id'                         => $document->getId(),
-                'page.admin.page.name.text'  => $document->getName()
+            $documents['aaData'][] = array(
+                $document->getId(),
+                $document->getName(),
+                null
             );
         }
 
-        return array(
-            'documents' => $documents,
-            'csrf'      => $csrf
-        );
+        return new Response(json_encode($documents));
     }
 
     /**
@@ -64,7 +85,9 @@ class AdminPageController extends Controller
      * @Method({"GET", "POST"})
      * @Route("/new", name="admin_page_new")
      * @Secure(roles="ROLE_ADMIN")
-     * @Template()
+     * @Template()\
+     * 
+     * @return array
      */
     public function newAction()
     {
@@ -89,14 +112,14 @@ class AdminPageController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Person document.
+     * Displays a form to edit an existing Page document.
+     *
+     * @param string $id The document ID
      *
      * @Method({"GET", "POST"})
      * @Route("/{id}/edit", name="admin_page_edit")
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
-     *
-     * @param string $id The document ID
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
@@ -141,12 +164,12 @@ class AdminPageController extends Controller
     /**
      * Deletes a Page document.
      *
+     * @param string    $id
+     * @param null      $token
+     *
      * @Method({"POST", "GET"})
      * @Route("/{id}/delete/{token}", name="admin_page_delete")
      * @Secure(roles="ROLE_ADMIN")
-     *
-     * @param string $id The document ID
-     * @param null $token
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
@@ -159,7 +182,7 @@ class AdminPageController extends Controller
         $form->bind($request);
 
         if (null !== $token) {
-            $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete' . $id, $token);
+            $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete', $token);
         }
 
         if ($form->isValid() || true === $token) {
@@ -201,11 +224,13 @@ class AdminPageController extends Controller
 
         if (!$ids = $request->get('ids')) {
             $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.no.item');
+
             return $this->redirect($this->generateUrl('admin_persons'));
         }
 
         if (!$action = $request->get('batchAction')) {
             $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.no.action');
+
             return $this->redirect($this->generateUrl('admin_persons'));
         }
 
