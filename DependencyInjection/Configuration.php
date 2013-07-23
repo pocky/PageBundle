@@ -114,7 +114,7 @@ class Configuration implements ConfigurationInterface
                                     ->defaultValue('Black\\Bundle\\PageBundle\\Form\\Type\\PageConfigType')
                                 ->end()
                                 ->scalarNode('page_config_handler')
-                                    ->defaultValue('Black\\Bundle\\EngineBundle\\Form\\Handler\\ConfigFormHandler')
+                                    ->defaultValue('Black\\Bundle\\PersonBundle\\Form\\Handler\\ConfigFormHandler')
                                 ->end()
                             ->end()
                         ->end()

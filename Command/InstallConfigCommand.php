@@ -10,7 +10,7 @@
 
 namespace Black\Bundle\PageBundle\Command;
 
-use Black\Bundle\EngineBundle\Model\ConfigManagerInterface;
+use Black\Bundle\ConfigBundle\Model\ConfigManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -80,6 +80,6 @@ class InstallConfigCommand extends ContainerAwareCommand
 
     private function getManager()
     {
-        return $this->getContainer()->get('black_engine.manager.config');
+        return $this->getContainer()->get('black_config.manager.config');
     }
 }

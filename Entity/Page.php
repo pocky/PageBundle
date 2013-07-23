@@ -11,7 +11,7 @@
 namespace Black\Bundle\PageBundle\Entity;
 
 use Black\Bundle\PageBundle\Model\Page as AbstractPage;
-use Black\Bundle\EngineBundle\Traits\ThingEntityTrait;
+use Black\Bundle\CommonBundle\Traits\ThingEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
