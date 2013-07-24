@@ -67,6 +67,6 @@ class AdminConfigController extends Controller
      */
     protected function getManager()
     {
-        return $this->get('black_engine.manager.config');
+        return $this->get('black_config.manager.config');
     }
 }

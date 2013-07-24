@@ -12,10 +12,8 @@
         </service>
 
         <service id="black_page.page.form.type" class="%black_page.page.form.type%">
-            <argument>%black_engine.db_driver%</argument>
+            <argument>%black_person.db_driver%</argument>
             <argument>%black_page.page.model.class%</argument>
-            <argument type="service" id="black_page.page.form.enabled_list" />
-            <argument type="service" id="black_page.page.form.status_list" />
             <tag name="form.type" alias="black_page_page" />
         </service>
 
@@ -27,14 +25,36 @@
         </service>
 
         <service id="black_page.page.form.enabled_list" class="%black_page.page.form.enabled_list%" public="false">
-            <argument type="service" id="black_engine.manager.config" />
+            <argument type="service" id="black_config.manager.config" />
+            <tag name="form.type" alias="black_page_choice_list_enabled" />
         </service>
+        
+        <service id="black_page.page.form.enabled_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
+            <argument type="service" id="black_page.page.form.enabled_list" />
+            <argument>black_page_choice_list_enabled</argument>
+            <tag name="form.type" alias="black_page_choice_list_enabled" />
+        </service>
+
 
         <service id="black_page.page.form.page_list" class="%black_page.page.form.page_list%" public="false">
             <argument type="service" id="black_page.manager.page" />
+            <tag name="form.type" alias="black_page_choice_list_page" />
+        </service>
+        
+        <service id="black_page.page.form.page_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
+            <argument type="service" id="black_page.page.form.page_list" />
+            <argument>black_page_choice_list_page</argument>
+            <tag name="form.type" alias="black_page_choice_list_page" />
         </service>
 
-        <service id="black_page.page.form.status_list" class="%black_page.page.form.status_list%" public="false" />
+
+        <service id="black_page.page.form.status_list" class="%black_page.page.form.status_list%" public="false"/>
+        
+        <service id="black_page.page.form.status_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
+            <argument type="service" id="black_page.page.form.status_list" />
+            <argument>black_page_choice_list_status</argument>
+            <tag name="form.type" alias="black_page_choice_list_status" />
+        </service>
 
     </services>
 </container>
