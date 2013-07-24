@@ -22,21 +22,16 @@ class PageType extends AbstractType
 {
     protected $dbDriver;
     protected $class;
-    protected $enabled;
-    protected $status;
-
     /**
      * @param string              $dbDriver
      * @param string              $class
      * @param ChoiceListInterface $enabled
      * @param ChoiceListInterface $status
      */
-    public function __construct($dbDriver, $class, ChoiceListInterface $enabled, ChoiceListInterface $status)
+    public function __construct($dbDriver, $class)
     {
         $this->dbDriver = $dbDriver;
         $this->class    = $class;
-        $this->enabled  = $enabled;
-        $this->status   = $status;
     }
 
     /**
@@ -98,20 +93,18 @@ class PageType extends AbstractType
             )
             ->add(
                 'status',
-                'choice',
+                'black_page_choice_list_status',
                 array(
                     'label'         => 'page.admin.page.status.text',
-                    'empty_value'   => 'page.admin.page.status.empty',
-                    'choice_list'   => $this->status
+                    'empty_value'   => 'page.admin.page.status.empty'
                 )
             )
             ->add(
                 'enabled',
-                'choice',
+                'black_page_choice_list_enabled',
                 array(
                     'label'         => 'page.admin.page.enabled.text',
-                    'empty_value'   => 'page.admin.page.enabled.empty',
-                    'choice_list'   => $this->enabled
+                    'empty_value'   => 'page.admin.page.enabled.empty'
                 )
             )
             ->add(
