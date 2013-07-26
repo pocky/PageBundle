@@ -39,13 +39,11 @@ class PageList extends LazyChoiceList
     {
         $choices    = array();
         $pages      = $this->getPages();
+        $choices += array('other' => 'page.admin.page.item.choice.other');
 
         foreach ($pages as $page) {
             $choices += array('/page/' . $page->getSlug() . '.html' => $page->getName());
         }
-
-        $choices += array('other' => 'page.admin.page.item.choice.other');
-
         $choices = new SimpleChoiceList($choices);
 
         return $choices;

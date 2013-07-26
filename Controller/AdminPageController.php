@@ -204,7 +204,7 @@ class AdminPageController extends Controller
             $this->getFlashBag->add('error', 'error.page.admin.page.not.valid');
         }
 
-        return $this->redirect($this->generateUrl('admin_persons'));
+        return $this->redirect($this->generateUrl('admin_page_index'));
     }
 
     /**
@@ -225,13 +225,13 @@ class AdminPageController extends Controller
         if (!$ids = $request->get('ids')) {
             $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.no.item');
 
-            return $this->redirect($this->generateUrl('admin_persons'));
+            return $this->redirect($this->generateUrl('admin_page_index'));
         }
 
         if (!$action = $request->get('batchAction')) {
             $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.no.action');
 
-            return $this->redirect($this->generateUrl('admin_persons'));
+            return $this->redirect($this->generateUrl('admin_page_index'));
         }
 
         if (!method_exists($this, $method = $action . 'Action')) {
@@ -243,14 +243,14 @@ class AdminPageController extends Controller
         if (false === $token) {
             $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.csrf');
 
-            return $this->redirect($this->generateUrl('admin_persons'));
+            return $this->redirect($this->generateUrl('admin_page_index'));
         }
 
         foreach ($ids as $id) {
             $this->$method($id, $token);
         }
 
-        return $this->redirect($this->generateUrl('admin_persons'));
+        return $this->redirect($this->generateUrl('admin_page_index'));
 
     }
 

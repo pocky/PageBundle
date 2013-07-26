@@ -20,17 +20,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PageType extends AbstractType
 {
-    protected $dbDriver;
-    protected $class;
     /**
-     * @param string              $dbDriver
-     * @param string              $class
-     * @param ChoiceListInterface $enabled
-     * @param ChoiceListInterface $status
+     * @var type 
      */
-    public function __construct($dbDriver, $class)
+    protected $class;
+    
+    /**
+     * @param string              $class
+     */
+    public function __construct($class)
     {
-        $this->dbDriver = $dbDriver;
         $this->class    = $class;
     }
 
@@ -45,7 +44,8 @@ class PageType extends AbstractType
                 'name',
                 'text',
                 array(
-                    'label'         => 'page.admin.page.name.text'
+                    'label'         => 'page.admin.page.name.text',
+                    'required'      => true
                 )
             )
             ->add(
@@ -80,7 +80,7 @@ class PageType extends AbstractType
                 'text',
                 array(
                     'label'         => 'page.admin.page.author.text',
-                    'required'      => false
+                    'required'      => true
                 )
             )
             ->add(
@@ -96,7 +96,8 @@ class PageType extends AbstractType
                 'black_page_choice_list_status',
                 array(
                     'label'         => 'page.admin.page.status.text',
-                    'empty_value'   => 'page.admin.page.status.empty'
+                    'empty_value'   => 'page.admin.page.status.empty',
+                    'required'      => true
                 )
             )
             ->add(
@@ -104,7 +105,8 @@ class PageType extends AbstractType
                 'black_page_choice_list_enabled',
                 array(
                     'label'         => 'page.admin.page.enabled.text',
-                    'empty_value'   => 'page.admin.page.enabled.empty'
+                    'empty_value'   => 'page.admin.page.enabled.empty',
+                    'required'      => true
                 )
             )
             ->add(
@@ -115,7 +117,7 @@ class PageType extends AbstractType
                     'years'         => array_reverse(
                         range(2000, date('Y', strtotime('now')))
                     ),
-                    'required'      => false,
+                    'required'      => true,
                     'empty_value'   => array(
                         'year' => 'page.admin.page.datePublished.choice.year.text',
                         'month' => 'page.admin.page.datePublished.choice.month.text',

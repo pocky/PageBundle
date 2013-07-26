@@ -60,6 +60,10 @@ page:
         text: Actions
 
   www:
+    page:
+      not:
+        found:
+          La page demandée n'a pas été trouvée
     index:
       read:
         a:
