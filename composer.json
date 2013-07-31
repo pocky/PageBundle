@@ -17,7 +17,7 @@
         "black/common-bundle": "dev-master"
     },
     "autoload": {
-        "psr-0": { "Black\\PageBundle": "" }
+        "psr-0": { "Black\\Bundle\\PageBundle": "" }
     },
-    "target-dir": "Black/PageBundle"
+    "target-dir": "Black/Bundle/PageBundle"
 }
