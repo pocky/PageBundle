@@ -12,6 +12,7 @@ namespace Black\Bundle\PageBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityNotFoundException;
+use Doctrine\ORM\NoResultException;
 
 /**
  * PageRepository
@@ -30,7 +31,14 @@ class PageRepository extends EntityRepository
                 ->setParameter('slug', $slug)
                 ->getQuery();
 
-        return $qb->getSingleResult();
+        try {
+            $page = $qb->getSingleResult();
+        } catch (NoResultException $e) {
+            throw new EntityNotFoundException(
+                sprintf('Unable to find an page object identified by "%s".', $slug)
+            );
+        }
+        return $page;
     }
 
     /**
@@ -45,7 +53,14 @@ class PageRepository extends EntityRepository
                 ->setParameter('id', $id)
                 ->getQuery();
 
-        return $qb->getSingleResult();
+        try {
+            $page = $qb->getSingleResult();
+        } catch (EntityNotFoundException $e) {
+            throw new EntityNotFoundException(
+                sprintf('Unable to find an page object identified by "%s".', $id)
+            );
+        }
+        return $page;
     }
 
     /**
