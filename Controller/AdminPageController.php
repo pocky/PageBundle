@@ -247,7 +247,7 @@ class AdminPageController extends Controller
         }
 
         foreach ($ids as $id) {
-            $this->$method($id, $token);
+            $this->$method($id, $this->get('form.csrf_provider')->generateCsrfToken('delete'));
         }
 
         return $this->redirect($this->generateUrl('admin_page_index'));
