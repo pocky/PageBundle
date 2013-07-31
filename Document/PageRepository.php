@@ -21,7 +21,14 @@ class PageRepository extends DocumentRepository
             ->field('slug')->equals($slug)
             ->getQuery();
 
-        return $qb->getSingleResult();
+        try {
+            $page = $qb->getSingleResult();
+        } catch (DocumentNotFoundException $e) {
+            throw new DocumentNotFoundException(
+                sprintf('Unable to find an page object identified by "%s".', $slug)
+            );
+        }
+        return $page;
     }
 
     public function getPageById($id)
@@ -30,7 +37,14 @@ class PageRepository extends DocumentRepository
             ->field('id')->equals($id)
             ->getQuery();
 
-        return $qb->getSingleResult();
+        try {
+            $page = $qb->getSingleResult();
+        } catch (NoResultException $e) {
+            throw new DocumentNotFoundException(
+                sprintf('Unable to find an page object identified by "%s".', $id)
+            );
+        }
+        return $page;
     }
 
     public function getPagesByStatus($status)
