@@ -68,6 +68,7 @@ class AdminPageController extends Controller
         $rawDocuments  = $repository->findAll();
 
         $documents = array('aaData' => array());
+
         foreach ($rawDocuments as $document) {
             $documents['aaData'][] = array(
                 $document->getId(),
