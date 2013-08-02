@@ -21,6 +21,9 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  */
 class PageConfigType extends AbstractType
 {
+    /**
+     * @var string
+     */
     private $class;
 
     /**
@@ -63,15 +66,28 @@ class PageConfigType extends AbstractType
                         )
                     )
                 )
+                ->add(
+                    'page_home',
+                    'black_page_choice_list_page_id',
+                    array(
+                        'label'         => 'page.admin.config.home.text',
+                        'required'      => false,
+                        'empty_value'   => 'page.admin.config.home.empty'
+                    )
+                )
             );
     }
 
+    /**
+     * @param OptionsResolverInterface $resolver
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(
             array(
-                'data_class'    => $this->class,
-                'intention'     => 'page_config_form'
+                'data_class'            => $this->class,
+                'intention'             => 'page_config_form',
+                'translation_domain'    => 'form'
             )
         );
     }

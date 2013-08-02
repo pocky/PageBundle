@@ -37,11 +37,21 @@
         <service id="black_page.page.form.page_list" class="%black_page.page.form.page_list%" public="false">
             <argument type="service" id="black_page.manager.page" />
         </service>
-        
+
         <service id="black_page.page.form.page_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
             <argument type="service" id="black_page.page.form.page_list" />
             <argument>black_page_choice_list_page</argument>
             <tag name="form.type" alias="black_page_choice_list_page" />
+        </service>
+
+        <service id="black_page.page.form.page_id_list" class="%black_page.page.form.page_id_list%" public="false">
+            <argument type="service" id="black_page.manager.page" />
+        </service>
+        
+        <service id="black_page.page.form.page_id_type" class="Black\Bundle\CommonBundle\Form\Type\CustomChoiceListType" public="true">
+            <argument type="service" id="black_page.page.form.page_id_list" />
+            <argument>black_page_choice_list_page_id</argument>
+            <tag name="form.type" alias="black_page_choice_list_page_id" />
         </service>
 
 

@@ -75,6 +75,9 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('page_list')
                                     ->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\PageList')
                                 ->end()
+                                ->scalarNode('page_id_list')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\PageIdList')
+                                ->end()
                             ->end()
                         ->end()
 
