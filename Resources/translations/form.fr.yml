@@ -10,7 +10,7 @@ page:
       delete:
         submit:
           value: Supprimer
-    
+
     config:
       text: Paramètres des pages
       protected:
@@ -19,6 +19,9 @@ page:
         choice:
           yes: Oui
           no: Non (conseillé)
+      home:
+        text: Page d'accueil
+        empty: Aucune
 
     page:
       general:
