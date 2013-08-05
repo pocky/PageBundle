@@ -20,9 +20,10 @@ use Doctrine\ORM\NoResultException;
 class PageRepository extends EntityRepository
 {
     /**
-     * @param string $slug
-     * 
-     * @return Page
+     * @param $slug
+     *
+     * @return mixed
+     * @throws \Doctrine\ORM\EntityNotFoundException
      */
     public function getPageBySlug($slug)
     {
@@ -42,9 +43,10 @@ class PageRepository extends EntityRepository
     }
 
     /**
-     * @param integer $id
-     * 
-     * @return page
+     * @param $id
+     *
+     * @return mixed
+     * @throws \Doctrine\ORM\EntityNotFoundException
      */
     public function getPageById($id)
     {
@@ -101,7 +103,33 @@ class PageRepository extends EntityRepository
         return $qb->execute();
     }
 
+    /**
+     * @param $text
+     *
+     * @return mixed
+     */
+    public function searchPage($text)
+    {
+        $qb = $this->getQueryBuilder();
 
+        $qb = $qb
+            ->where($qb->expr()->orX(
+                    $qb->expr()->like('name', 'text'),
+                    $qb->expr()->like('text', 'text'),
+                    $qb->expr()->like('description', 'text')
+                ))
+            ->setParameter('text', $text)
+            ->getQuery()
+        ;
+
+        return $qb->execute();
+    }
+
+    /**
+     * @param string $alias
+     *
+     * @return \Doctrine\ORM\QueryBuilder
+     */
     protected function getQueryBuilder($alias = 'p')
     {
         return $this->createQueryBuilder($alias);
