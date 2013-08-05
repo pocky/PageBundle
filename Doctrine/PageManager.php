@@ -145,6 +145,16 @@ class PageManager implements PageManagerInterface
     }
 
     /**
+     * @param $text
+     *
+     * @return mixed
+     */
+    public function findPage($text)
+    {
+        return $this->getRepository()->searchPage($text);
+    }
+
+    /**
      * @param string $slug
      * 
      * @return Page
