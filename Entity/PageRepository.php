@@ -118,7 +118,7 @@ class PageRepository extends EntityRepository
                     $qb->expr()->like('text', 'text'),
                     $qb->expr()->like('description', 'text')
                 ))
-            ->setParameter('text', $text)
+            ->setParameter('text', '%' . $text . '%')
             ->getQuery()
         ;
 

@@ -121,9 +121,24 @@ class PageRepository extends DocumentRepository
     }
 
     /**
+     * @param $author
+     *
+     * @return array|bool|\Doctrine\MongoDB\ArrayIterator|\Doctrine\MongoDB\Cursor|\Doctrine\MongoDB\EagerCursor|mixed|null
+     */
+    public function getPagesByAuthor($author)
+    {
+        $qb = $this->getQueryBuilder()
+            ->field('author')->equals($author)
+            ->sort('updatedAt', 'desc')
+            ->getQuery();
+
+        return $qb->execute();
+    }
+
+    /**
      * @return \Doctrine\ODM\MongoDB\Query\Builder
      */
-    private function getQueryBuilder()
+    protected function getQueryBuilder()
     {
         return $this->createQueryBuilder();
     }

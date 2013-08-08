@@ -209,4 +209,14 @@ class PageManager implements PageManagerInterface
     {
         return $this->getRepository()->getPages('draft', $limit);
     }
+
+    /**
+     * @param $author
+     *
+     * @return mixed
+     */
+    public function findPagesByAuthor($author)
+    {
+        return $this->getRepository()->getPagesByAuthor($author);
+    }
 }

@@ -52,13 +52,16 @@ page:
       pages:
         text: Pages
         a:
-          text: Voir vos pages
+          text: Liste des pages
           title: Voir vos pages
           
     page:
       actions:
         text: Actions
 
+    js:
+      remove:
+        text: Enlever
   www:
     page:
       not:

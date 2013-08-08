@@ -30,6 +30,8 @@ page:
         text: Contenu
       options:
         text: Informations optionnelles
+      seo:
+        text: SEO
       settings:
         text: Propriétés
       name:

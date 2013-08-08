@@ -1,0 +1,45 @@
+{% block script %}
+<script type="text/javascript">
+    {% block js %}
+    jQuery(document).ready(function() {
+        var seoKeywordCount = {{ form.seo.keywords|length }};
+
+        jQuery('#black_page_page_form_seo_keywords').children('.formRow').each(function() {
+            addSeoKeywordmDeleteLink($(this));
+        });
+            
+        jQuery('#add-another-keyword').click(function() {
+            var seoKeywordList = jQuery('#black_page_page_form_seo_keywords');
+
+            var newWidget = seoKeywordList.attr('data-prototype');
+            newWidget = newWidget.replace(/__name__/g, seoKeywordCount);
+            seoKeywordCount++;
+
+            var newDiv = jQuery('<div class="formRow noBorderB"></div>').html(newWidget);
+            addSeoKeywordmDeleteLink(newDiv);
+            newDiv.appendTo(seoKeywordList);
+            JQueryUIApplyStyle(newDiv);
+            return false;
+        });
+
+        jQuery('#slug').slugify('#black_page_page_form_name')
+
+        function addSeoKeywordmDeleteLink($tagFormDiv) {
+            var $removeFormA = $('<a href="#" class="add buttonS bRed mt10">{% trans from "views" %}page.admin.js.remove.text{% endtrans %}</a>');
+            $tagFormDiv.first('.formRow .grid9').append($removeFormA);
+
+            $removeFormA.on('click', function(e) {
+                seoKeywordCount--;
+                e.preventDefault();
+                $tagFormDiv.remove();
+            });
+        }
+        
+        function JQueryUIApplyStyle($newDiv) {
+            $newDiv.find("select, .check, .check :checkbox, input:radio, input:file").uniform();
+        }
+    });
+
+    {% endblock %}
+</script>
+{% endblock %}

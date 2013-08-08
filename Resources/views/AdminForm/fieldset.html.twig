@@ -40,6 +40,14 @@
             <img style="border: 1px solid #cecece; padding: 5px; margin-top: 10px" src="/uploads/page/{{ document.primaryImageOfPage }}" height="200" />
         {% endif %}
     </div>
+
+    <div class="widget">
+        <div class="whead"><h6>{% trans from "form" %}page.admin.page.seo.text{% endtrans %}</h6><div class="clear"></div></div>
+        {{ form_row(form.seo.title) }}
+        {{ form_row(form.seo.description) }}
+        {{ form_row(form.seo.keywords) }}
+        {{ form_row(form.seo.linkCanonical) }}
+    </div>
 </fieldset>
 
 <fieldset class="grid3">
@@ -86,8 +94,4 @@
     </div>
 </fieldset>
 
-<script>
-    jQuery('document').ready(function() {
-        $('#slug').slugify('#black_page_page_form_name')
-    })
-</script>
+{% include 'BlackPageBundle:AdminPage:js.html.twig' %}
