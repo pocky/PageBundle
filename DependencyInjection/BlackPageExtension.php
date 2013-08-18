@@ -62,6 +62,11 @@ class BlackPageExtension extends Extension
         }
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
     private function loadPage(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         foreach (array('page') as $basename) {
@@ -77,6 +82,11 @@ class BlackPageExtension extends Extension
         );
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
     private function loadProxy(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         foreach (array('proxy') as $basename) {
@@ -92,6 +102,11 @@ class BlackPageExtension extends Extension
         );
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
     private function loadConfig(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
         $loader->load('config.xml');
@@ -105,6 +120,11 @@ class BlackPageExtension extends Extension
         );
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $map
+     */
     protected function remapParameters(array $config, ContainerBuilder $container, array $map)
     {
         foreach ($map as $name => $paramName) {
@@ -114,6 +134,11 @@ class BlackPageExtension extends Extension
         }
     }
 
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param array            $namespaces
+     */
     protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
     {
         foreach ($namespaces as $ns => $map) {
