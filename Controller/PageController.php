@@ -36,6 +36,7 @@ class PageController extends Controller
      * @Template()
      * 
      * @return Template
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function indexAction()
     {
@@ -124,6 +125,9 @@ class PageController extends Controller
         return $this->get('black_page.manager.page');
     }
 
+    /**
+     * @return object
+     */
     protected function getProxy()
     {
         return $this->get('black_page.proxy');

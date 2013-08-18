@@ -46,6 +46,9 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addPageSection(ArrayNodeDefinition $node)
     {
         $node
@@ -86,6 +89,9 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addProxySection(ArrayNodeDefinition $node)
     {
         $node
@@ -101,6 +107,9 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addConfigSection(ArrayNodeDefinition $node)
     {
         $node
