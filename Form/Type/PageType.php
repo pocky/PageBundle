@@ -61,18 +61,22 @@ class PageType extends AbstractType
                 'textarea',
                 array(
                     'label'         => 'page.admin.page.description.text',
-                    'required'      => false
+                    'required'      => false,
+                    'attr'          => array(
+                        'class'         => 'tinymce',
+                        'data-theme'    => 'advanced'
+                    )
                 )
             )
             ->add(
                 'text',
-                'ckeditor',
+                'textarea',
                 array(
                     'label'         => 'page.admin.page.text.text',
-                    'filebrowser_image_browse_url' => array(
-                        'route'            => 'elfinder',
-                        'route_parameters' => array(),
-                    ),
+                    'attr'          => array(
+                        'class'         => 'tinymce',
+                        'data-theme'    => 'advanced'
+                    )
                 )
             )
             ->add(

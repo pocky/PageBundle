@@ -41,13 +41,6 @@
         {% endif %}
     </div>
 
-    <div class="widget">
-        <div class="whead"><h6>{% trans from "form" %}page.admin.page.seo.text{% endtrans %}</h6><div class="clear"></div></div>
-        {{ form_row(form.seo.title) }}
-        {{ form_row(form.seo.description) }}
-        {{ form_row(form.seo.keywords) }}
-        {{ form_row(form.seo.linkCanonical) }}
-    </div>
 </fieldset>
 
 <fieldset class="grid3">
@@ -93,5 +86,8 @@
         {{ form_rest(form) }}
     </div>
 </fieldset>
+
+{{ elfinder_tinymce_init4() }}
+{{ tinymce_init() }}
 
 {% include 'BlackPageBundle:AdminPage:js.html.twig' %}
