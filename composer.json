@@ -14,7 +14,7 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "black/common-bundle": "dev-master"
+        "black/common-bundle": "@dev"
     },
     "autoload": {
         "psr-0": { "Black\\Bundle\\PageBundle": "" }
