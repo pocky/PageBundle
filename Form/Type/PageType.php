@@ -11,7 +11,6 @@
 namespace Black\Bundle\PageBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ChoiceListInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -24,7 +23,7 @@ class PageType extends AbstractType
      * @var type 
      */
     protected $class;
-    
+
     /**
      * @param string              $class
      */
