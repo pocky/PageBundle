@@ -94,7 +94,9 @@ class AdminPageController extends Controller
     {
         $documentManager    = $this->getManager();
         $document           = $documentManager->createInstance();
+
         $document->setStatus('draft');
+        $document->setDatePublished(new \DateTime('now'));
 
         $formHandler    = $this->get('black_page.page.form.handler');
         $process        = $formHandler->process($document);
