@@ -79,6 +79,16 @@ abstract class Page implements PageInterface
     }
 
     /**
+     *
+     */
+    public function __construct()
+    {
+        $this->datePublished    = new \DateTime('now');
+        $this->enabled          = 'public';
+        $this->status           = 'draft';
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
