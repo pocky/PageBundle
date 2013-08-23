@@ -17,11 +17,19 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+
 /**
- * InstallConfigCommand
+ * Class InstallConfigCommand
+ *
+ * @package Black\Bundle\PageBundle\Command
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class InstallConfigCommand extends ContainerAwareCommand
 {
+    /**
+     *
+     */
     protected function configure()
     {
         $this
@@ -29,6 +37,10 @@ class InstallConfigCommand extends ContainerAwareCommand
             ->setDescription('Create needed object for your orm/odm');
     }
 
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $manager    = $this->getManager();
@@ -42,6 +54,12 @@ class InstallConfigCommand extends ContainerAwareCommand
 
     }
 
+    /**
+     * @param ConfigManagerInterface $manager
+     * @param OutputInterface        $output
+     *
+     * @return string
+     */
     private function createPage(ConfigManagerInterface $manager, OutputInterface $output)
     {
         if ($manager->findPropertyByName('Page')) {
@@ -49,7 +67,7 @@ class InstallConfigCommand extends ContainerAwareCommand
         }
 
         $object = $manager->createInstance();
-        $value  = array();
+        $value  = array('page_home' => null);
 
         $dialog = $this->getHelperSet()->get('dialog');
 
@@ -78,6 +96,9 @@ class InstallConfigCommand extends ContainerAwareCommand
         return '<info>The property Page was created!</info>';
     }
 
+    /**
+     * @return object
+     */
     private function getManager()
     {
         return $this->getContainer()->get('black_config.manager.config');
