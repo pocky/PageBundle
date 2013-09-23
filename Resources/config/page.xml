@@ -20,7 +20,6 @@
             <argument type="service" id="black_page.page.form" />
             <argument type="service" id="request" />
             <argument type="service" id="session" />
-            <argument type="service" id="doctrine_mongodb" />
         </service>
 
         <service id="black_page.page.form.enabled_list" class="%black_page.page.form.enabled_list%" public="false">

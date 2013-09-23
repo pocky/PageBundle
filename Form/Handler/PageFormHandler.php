@@ -41,7 +41,7 @@ class PageFormHandler
             if ($this->form->isValid()) {
 
                 $page->upload();
-                $this->setFlash('success', ' success.page.admin.page.edit');
+                $this->setFlash('success', 'success.page.admin.page.edit');
 
                 return true;
             } else {
