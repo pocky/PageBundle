@@ -91,12 +91,13 @@ class PageProxy implements ProxyInterface
             throw new NotFoundHttpException('Requested page not found.');
         }
 
+        $this->formatSeo($object);
         $response = $this->prepareResponse($object);
 
         if ($response->isNotModified($this->getRequest())) {
             return array(
                 'object'   => $object,
-                'response' => $response
+                'response' => $response,
             );
         }
 
@@ -109,8 +110,6 @@ class PageProxy implements ProxyInterface
                 throw new AccessDeniedException();
             }
         }
-
-        $this->formatSeo($object);
 
         return array(
             'object'    => $object,
@@ -138,7 +137,6 @@ class PageProxy implements ProxyInterface
                 $seo->setKeywords($object->getSeo()->getKeywords());
             }
         }
-
     }
 
     /**

@@ -20,7 +20,6 @@
             <argument type="service" id="black_page.page.form" />
             <argument type="service" id="request" />
             <argument type="service" id="session" />
-            <argument type="service" id="doctrine_mongodb" />
         </service>
 
         <service id="black_page.page.form.enabled_list" class="%black_page.page.form.enabled_list%" public="false">
@@ -32,7 +31,6 @@
             <argument>black_page_choice_list_enabled</argument>
             <tag name="form.type" alias="black_page_choice_list_enabled" />
         </service>
-
 
         <service id="black_page.page.form.page_list" class="%black_page.page.form.page_list%" public="false">
             <argument type="service" id="black_page.manager.page" />
@@ -53,7 +51,6 @@
             <argument>black_page_choice_list_page_id</argument>
             <tag name="form.type" alias="black_page_choice_list_page_id" />
         </service>
-
 
         <service id="black_page.page.form.status_list" class="%black_page.page.form.status_list%" public="false"/>
         

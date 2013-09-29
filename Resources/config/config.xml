@@ -20,7 +20,6 @@
             <argument type="service" id="black_page.config.form" />
             <argument type="service" id="request" />
             <argument type="service" id="session" />
-            <argument type="service" id="doctrine_mongodb" />
         </service>
     </services>
 </container>

@@ -63,22 +63,6 @@ abstract class Page implements PageInterface
     protected $routeName = 'page_show';
 
     /**
-     * @return string
-     */
-    public function computeEtag()
-    {
-        return md5($this->getText());
-    }
-
-    /**
-     * @return array
-     */
-    public static function getStatusPublication()
-    {
-        return array('draft', 'publish');
-    }
-
-    /**
      *
      */
     public function __construct()
@@ -86,6 +70,14 @@ abstract class Page implements PageInterface
         $this->datePublished    = new \DateTime('now');
         $this->enabled          = 'public';
         $this->status           = 'draft';
+    }
+
+    /**
+     * @return string
+     */
+    public function computeETag()
+    {
+        return md5($this->getText());
     }
 
     /**
@@ -182,6 +174,14 @@ abstract class Page implements PageInterface
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatusPublication()
+    {
+        return array('draft', 'publish');
     }
 
     /**

@@ -73,7 +73,7 @@ class PageRepository extends EntityRepository
     public function getPagesByStatus($status)
     {
         $qb = $this->getQueryBuilder()
-                ->where('p.status LIKE :status')
+                ->where('p.status = :status')
                 ->orderBy('p.updatedAt', 'desc')
                 ->setParameter('status', $status)
                 ->getQuery();
@@ -90,15 +90,15 @@ class PageRepository extends EntityRepository
     public function getPages($status, $limit = null)
     {
         $qb = $this->getQueryBuilder()
-                ->where('p.status LIKE :status')
+                ->where('p.status = :status')
                 ->orderBy('p.updatedAt', 'desc')
                 ->setParameter('status', $status);
 
         if ($limit) {
-            $qb = $qb->limit($limit);
+            $qb = $qb->setMaxResults($limit);
         }
 
-        $qb = $this->getQuery();
+        $qb = $qb->getQuery();
 
         return $qb->execute();
     }
