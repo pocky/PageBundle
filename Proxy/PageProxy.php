@@ -123,15 +123,22 @@ class PageProxy implements ProxyInterface
      */
     protected function formatSeo($object)
     {
-        if ($seo = $this->getSeo()) {
-            $seo
-                ->setTitle($object->getSeo()->getTitle())
-                ->setDescription($object->getSeo()->getDescription());
+        if ($this->getSeo()) {
+            $seo = $this->getSeo();
+
+            if ($object->getSeo()->getTitle()) {
+                $seo->setTitle($object->getSeo()->getTitle());
+            }
+
+            if ($object->getSeo()->getDescription()) {
+                $seo->setDescription($object->getSeo()->getDescription());
+            }
 
             if ($object->getSeo()->getKeywords()) {
                 $seo->setKeywords($object->getSeo()->getKeywords());
             }
         }
+
     }
 
     /**
