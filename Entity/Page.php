@@ -18,17 +18,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Page Entity
+ *
+ * @ORM\MappedSuperclass()
  */
 abstract class Page extends AbstractPage
 {
     use ThingEntityTrait;
-
-    /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
 
     /**
      * @ORM\Column(name="author", type="string", length=255, nullable=true)
@@ -53,7 +48,7 @@ abstract class Page extends AbstractPage
     protected $status;
 
     /**
-     * @ORM\Column(name="text", type="string", nullable=true)
+     * @ORM\Column(name="text", type="text", nullable=true)
      * @Assert\Type(type="string")
      */
     protected $text;
