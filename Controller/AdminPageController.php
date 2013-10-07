@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -21,15 +21,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
- * Controller managing the person profile`
+ * Class AdminPageController
  *
  * @Route("/admin/page")
+ *
+ * @package Black\Bundle\PageBundle\Controller
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class AdminPageController extends Controller
 {
     /**
-     * Show lists of Persons
-     *
      * @Method("GET")
      * @Route("/index.html", name="admin_page_index")
      * @Secure(roles="ROLE_ADMIN")
@@ -53,8 +55,6 @@ class AdminPageController extends Controller
     }
 
     /**
-     * Show lists of Events
-     *
      * @Method("GET")
      * @Route("/list.json", name="admin_pages_json")
      * @Secure(roles="ROLE_ADMIN")
@@ -81,8 +81,6 @@ class AdminPageController extends Controller
     }
 
     /**
-     * Displays a form to create a new Person document.
-     *
      * @Method({"GET", "POST"})
      * @Route("/new", name="admin_page_new")
      * @Secure(roles="ROLE_ADMIN")
@@ -115,8 +113,6 @@ class AdminPageController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Page document.
-     *
      * @param string $id The document ID
      *
      * @Method({"GET", "POST"})
@@ -165,8 +161,6 @@ class AdminPageController extends Controller
     }
 
     /**
-     * Deletes a Page document.
-     *
      * @param string    $id
      * @param null      $token
      *
@@ -211,8 +205,6 @@ class AdminPageController extends Controller
     }
 
     /**
-     * Batch action for 1/n document.
-     *
      * @Method({"POST"})
      * @Route("/batch", name="admin_page_batch")
      *
@@ -267,8 +259,6 @@ class AdminPageController extends Controller
     }
 
     /**
-     * Returns the DocumentManager
-     *
      * @return DocumentManager
      */
     protected function getManager()

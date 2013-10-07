@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -16,13 +16,37 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use Black\Bundle\PageBundle\Model\PageInterface;
 
+/**
+ * Class PageFormHandler
+ *
+ * @package Black\Bundle\PageBundle\Form\Handler
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class PageFormHandler
 {
+    /**
+     * @var \Symfony\Component\HttpFoundation\Request
+     */
     protected $request;
+    /**
+     * @var \Symfony\Component\Form\FormInterface
+     */
     protected $form;
+    /**
+     * @var
+     */
     protected $factory;
+    /**
+     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
+     */
     protected $session;
 
+    /**
+     * @param FormInterface    $form
+     * @param Request          $request
+     * @param SessionInterface $session
+     */
     public function __construct(FormInterface $form, Request $request, SessionInterface $session)
     {
         $this->form     = $form;
@@ -30,6 +54,11 @@ class PageFormHandler
         $this->session  = $session;
     }
 
+    /**
+     * @param PageInterface $page
+     *
+     * @return bool
+     */
     public function process(PageInterface $page)
     {
         $this->form->setData($page);
@@ -50,12 +79,19 @@ class PageFormHandler
         }
     }
 
+    /**
+     * @return FormInterface
+     */
     public function getForm()
     {
         return $this->form;
     }
 
-    protected function setFlash($name, $msg)
+    /**
+     * @param $name
+     * @param $msg
+     * @return mixed
+     */protected function setFlash($name, $msg)
     {
         return $this->session->getFlashBag()->add($name, $msg);
     }

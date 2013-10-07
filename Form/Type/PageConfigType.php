@@ -1,13 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PageBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -15,9 +16,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Config Type
+ * Class PageConfigType
  *
- * @class ConfigType
+ * @package Black\Bundle\PageBundle\Form\Type
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PageConfigType extends AbstractType
 {
@@ -44,18 +47,12 @@ class PageConfigType extends AbstractType
             ->remove('name')
             ->add(
                 $builder
-                ->create(
-                    'value',
-                    'form',
-                    array(
+                ->create('value', 'form', array(
                         'by_reference'  => false,
                         'label'         => 'page.admin.config.text'
                     )
                 )
-                ->add(
-                    'page_protected',
-                    'choice',
-                    array(
+                ->add('page_protected', 'choice', array(
                         'label'             => 'page.admin.config.protected.text',
                         'required'          => false,
                         'empty_value'       => 'page.admin.config.protected.empty',
@@ -66,10 +63,7 @@ class PageConfigType extends AbstractType
                         )
                     )
                 )
-                ->add(
-                    'page_home',
-                    'black_page_choice_list_page_id',
-                    array(
+                ->add('page_home', 'black_page_choice_list_page_id', array(
                         'label'         => 'page.admin.config.home.text',
                         'required'      => false,
                         'empty_value'   => 'page.admin.config.home.empty'

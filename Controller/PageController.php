@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -22,15 +22,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
- * Controller managing the person profile`
+ * Class PageController
  *
  * @Route("/page")
+ *
+ * @package Black\Bundle\PageBundle\Controller
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PageController extends Controller
 {
     /**
-     * index of Pages
-     *
      * @Method("GET")
      * @Route("/all.html", name="pages")
      * @Template()
@@ -53,8 +55,6 @@ class PageController extends Controller
     }
 
     /**
-     * Show page by slug
-     *
      * @param string $slug
      * 
      * @Method("GET")
@@ -76,8 +76,6 @@ class PageController extends Controller
     }
 
     /**
-     * Recent pages (embed action)
-     * 
      * @param integer $max
      * 
      * @Method("GET")
@@ -97,8 +95,6 @@ class PageController extends Controller
     }
 
     /**
-     * Create a menu (embed action)
-     *
      * @Method("GET")
      * @Route("/menu", name="_pages_menu")
      * @Template()
@@ -116,8 +112,6 @@ class PageController extends Controller
     }
 
     /**
-     * Returns the DocumentManager
-     *
      * @return DocumentManager
      */
     protected function getManager()

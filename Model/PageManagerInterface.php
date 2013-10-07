@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -14,6 +15,8 @@ namespace Black\Bundle\PageBundle\Model;
  * Class PageManagerInterface
  *
  * @package Black\Bundle\PageBundle\Model
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 interface PageManagerInterface
 {

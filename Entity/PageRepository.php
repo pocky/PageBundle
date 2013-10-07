@@ -1,13 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PageBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
@@ -15,7 +16,11 @@ use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\NoResultException;
 
 /**
- * PageRepository
+ * Class PageRepository
+ *
+ * @package Black\Bundle\PageBundle\Entity
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PageRepository extends EntityRepository
 {

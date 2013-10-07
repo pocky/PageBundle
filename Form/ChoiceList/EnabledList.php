@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -15,10 +16,17 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
 /**
- * EnabledList
+ * Class EnabledList
+ *
+ * @package Black\Bundle\PageBundle\Form\ChoiceList
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class EnabledList extends LazyChoiceList
 {
+    /**
+     * @var \Black\Bundle\ConfigBundle\Model\ConfigManagerInterface
+     */
     private $manager;
 
     /**
@@ -29,6 +37,9 @@ class EnabledList extends LazyChoiceList
         $this->manager = $manager;
     }
 
+    /**
+     * @return SimpleChoiceList
+     */
     protected function loadChoiceList()
     {
         $property   = $this->getPageProperty();
@@ -49,6 +60,9 @@ class EnabledList extends LazyChoiceList
         return $choices;
     }
 
+    /**
+     * @return mixed
+     */
     protected function getPageProperty()
     {
         $property = $this->manager->findPropertyByName('Page');
