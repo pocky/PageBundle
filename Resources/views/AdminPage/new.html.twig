@@ -6,10 +6,7 @@
 <div class="fluid">
 
     <form id="validate" class="main" action="{{ path(admin_new) }}"  method="post" {{ form_enctype(form) }}>
-
-        {% include 'BlackPageBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': 'page.admin.new.page.txt'} %}
-
-        {% include 'BlackAdminBundle:AdminForm:actions.html.twig' %}
+        {% include 'BlackPageBundle:AdminPage:fieldset.html.twig' with {'form': form, 'title': 'page.admin.new.page.txt'} %}
     </form>
 
 </div>

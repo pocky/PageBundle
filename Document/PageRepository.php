@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Document;
 
+use Black\Bundle\PageBundle\Model\PageRepositoryInferface;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 use Doctrine\ODM\MongoDB\DocumentNotFoundException;
 
@@ -21,7 +22,7 @@ use Doctrine\ODM\MongoDB\DocumentNotFoundException;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageRepository extends DocumentRepository
+class PageRepository extends DocumentRepository implements PageRepositoryInferface
 {
     /**
      * @param $slug

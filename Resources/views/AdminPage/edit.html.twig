@@ -8,10 +8,8 @@
 <div class="fluid">
 
     <form id="validate" class="main" action="{{ path(admin_edit, { 'id': document.id }) }}" method="post" {{ form_enctype(form) }}>
-        {% include 'BlackPageBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': 'page.admin.edit.page.txt'} %}
+        {% include 'BlackPageBundle:AdminPage:fieldset.html.twig' with {'form': form, 'title': 'page.admin.edit.page.txt'} %}
     </form>
-
-    {% include 'BlackAdminBundle:AdminForm:actions.html.twig' with {'document': document} %}
 
 </div>
 {% endblock %}

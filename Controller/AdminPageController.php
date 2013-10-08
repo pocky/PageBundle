@@ -100,10 +100,7 @@ class AdminPageController extends Controller
         $process        = $formHandler->process($document);
 
         if ($process) {
-            $documentManager->persist($document);
-            $documentManager->flush();
-
-            return $this->redirect($this->generateUrl('admin_page_edit', array('id' => $document->getId())));
+            return $this->redirect($formHandler->getUrl());
         }
 
         return array(
@@ -133,7 +130,7 @@ class AdminPageController extends Controller
         $document = $repository->findOneById($id);
 
         if (!$document) {
-            throw $this->createNotFoundException('Unable to find Person document.');
+            throw $this->createNotFoundException('Unable to find this document.');
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
@@ -142,27 +139,22 @@ class AdminPageController extends Controller
             }
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-
         $formHandler    = $this->get('black_page.page.form.handler');
         $process        = $formHandler->process($document);
 
         if ($process) {
-            $documentManager->flush();
-
-            return $this->redirect($this->generateUrl('admin_page_edit', array('id' => $id)));
+            return $this->redirect($formHandler->getUrl());
         }
 
         return array(
             'document'      => $document,
-            'form'          => $formHandler->getForm()->createView(),
-            'delete_form'   => $deleteForm->createView()
+            'form'          => $formHandler->getForm()->createView()
         );
     }
 
     /**
-     * @param string    $id
-     * @param null      $token
+     * @param      $id
+     * @param null $token
      *
      * @Method({"POST", "GET"})
      * @Route("/{id}/delete/{token}", name="admin_page_delete")
@@ -176,7 +168,7 @@ class AdminPageController extends Controller
         $form       = $this->createDeleteForm($id);
         $request    = $this->getRequest();
 
-        $form->bind($request);
+        $form->handleRequest($request);
 
         if (null !== $token) {
             $token = $this->get('form.csrf_provider')->isCsrfTokenValid('delete', $token);
@@ -189,7 +181,7 @@ class AdminPageController extends Controller
             $document   = $repository->findOneById($id);
 
             if (!$document) {
-                throw $this->createNotFoundException('Unable to find Person document.');
+                throw $this->createNotFoundException('Unable to find this document.');
             }
 
             $dm->remove($document);
@@ -249,6 +241,11 @@ class AdminPageController extends Controller
 
     }
 
+    /**
+     * @param $id
+     *
+     * @return \Symfony\Component\Form\Form
+     */
     private function createDeleteForm($id)
     {
         $form = $this->createFormBuilder(array('id' => $id))

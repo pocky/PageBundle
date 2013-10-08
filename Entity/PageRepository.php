@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Entity;
 
+use Black\Bundle\PageBundle\Model\PageRepositoryInferface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\NoResultException;
@@ -22,7 +23,7 @@ use Doctrine\ORM\NoResultException;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageRepository extends EntityRepository
+class PageRepository extends EntityRepository implements PageRepositoryInferface
 {
     /**
      * @param $slug
@@ -71,9 +72,9 @@ class PageRepository extends EntityRepository
     }
 
     /**
-     * @param string $status
-     * 
-     * @return array
+     * @param $status
+     *
+     * @return mixed
      */
     public function getPagesByStatus($status)
     {
@@ -82,6 +83,22 @@ class PageRepository extends EntityRepository
                 ->orderBy('p.updatedAt', 'desc')
                 ->setParameter('status', $status)
                 ->getQuery();
+
+        return $qb->execute();
+    }
+
+    /**
+     * @param $author
+     *
+     * @return mixed
+     */
+    public function getPagesByAuthor($author)
+    {
+        $qb = $this->getQueryBuilder()
+            ->where('p.author = :author')
+            ->orderBy('p.updatedAt', 'desc')
+            ->setParameter('author', $author)
+            ->getQuery();
 
         return $qb->execute();
     }

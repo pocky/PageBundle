@@ -44,7 +44,7 @@ class PageList extends LazyChoiceList
     {
         $choices    = array();
         $pages      = $this->getPages();
-        $choices += array('other' => 'page.admin.page.item.choice.other');
+        $choices += array('other' => 'black.page.choiceList.page.choice.other');
 
         foreach ($pages as $page) {
             $choices += array('/page/' . $page->getSlug() . '.html' => $page->getName());

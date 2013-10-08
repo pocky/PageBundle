@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Form\Type;
 
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -30,11 +31,18 @@ class PageType extends AbstractType
     protected $class;
 
     /**
-     * @param string              $class
+     * @var \Symfony\Component\EventDispatcher\EventSubscriberInterface
      */
-    public function __construct($class)
+    protected $eventSubscriber;
+
+    /**
+     * @param                          $class
+     * @param EventSubscriberInterface $eventSubscriber
+     */
+    public function __construct($class, EventSubscriberInterface $eventSubscriber)
     {
-        $this->class    = $class;
+        $this->class            = $class;
+        $this->eventSubscriber  = $eventSubscriber;
     }
 
     /**
@@ -43,28 +51,26 @@ class PageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->addEventSubscriber($this->eventSubscriber);
+
         $builder
             ->add('name', 'text', array(
-                    'label'         => 'page.admin.page.name.text',
+                    'label'         => 'black.page.type.page.name.label',
                     'required'      => true
                 )
             )
             ->add('slug', 'text', array(
-                    'label'         => 'page.admin.page.slug.text',
+                    'label'         => 'black.page.type.page.slug.label',
                     'required'      => false
                 )
             )
             ->add('description', 'textarea', array(
-                    'label'         => 'page.admin.page.description.text',
-                    'required'      => false,
-                    'attr'          => array(
-                        'class'         => 'tinymce',
-                        'data-theme'    => 'advanced'
-                    )
+                    'label'         => 'black.page.type.page.description.label',
+                    'required'      => false
                 )
             )
             ->add('text', 'textarea', array(
-                    'label'         => 'page.admin.page.text.text',
+                    'label'         => 'black.page.type.page.text.label',
                     'attr'          => array(
                         'class'         => 'tinymce',
                         'data-theme'    => 'advanced'
@@ -72,39 +78,40 @@ class PageType extends AbstractType
                 )
             )
             ->add('author', 'text', array(
-                    'label'         => 'page.admin.page.author.text',
+                    'label'         => 'black.page.type.page.author.label',
                     'required'      => true
                 )
             )
             ->add('image', 'file', array(
-                    'label'         => 'page.admin.page.image.text',
+                    'label'         => 'black.page.type.page.image.label',
                     'required'      => false
                 )
             )
             ->add('status', 'black_page_choice_list_status', array(
-                    'label'         => 'page.admin.page.status.text',
-                    'empty_value'   => 'page.admin.page.status.empty',
+                    'label'         => 'black.page.type.page.status.label',
+                    'empty_value'   => 'black.page.type.page.status.empty',
                     'required'      => true
                 )
             )
             ->add('enabled', 'black_page_choice_list_enabled', array(
-                    'label'         => 'page.admin.page.enabled.text',
-                    'empty_value'   => 'page.admin.page.enabled.empty',
+                    'label'         => 'black.page.type.page.enabled.label',
+                    'empty_value'   => 'black.page.type.page.enabled.empty',
                     'required'      => true
                 )
             )
             ->add('datePublished', 'date', array(
-                    'label'         => 'page.admin.page.datePublished.text',
+                    'label'         => 'black.page.type.page.datePublished.label',
                     'years'         => array_reverse(
                         range(2000, date('Y', strtotime('now')))
                     ),
                     'required'      => true,
                     'empty_value'   => array(
-                        'year'  => 'page.admin.page.datePublished.choice.year.text',
-                        'month' => 'page.admin.page.datePublished.choice.month.text',
-                        'day'   => 'page.admin.page.datePublished.choice.day.text')
+                        'year'  => 'black.page.type.page.datePublished.choice.year.text',
+                        'month' => 'black.page.type.page.datePublished.choice.month.text',
+                        'day'   => 'black.page.type.page.datePublished.choice.day.text')
                 )
-            );
+            )
+        ;
     }
 
     /**

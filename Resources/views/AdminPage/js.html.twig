@@ -2,9 +2,9 @@
 <script type="text/javascript">
     {% block js %}
     jQuery(document).ready(function() {
-        jQuery('#slug').slugify('#black_page_page_form_name')
+        $('#slug').slugify('{{ "#" ~ form.name.vars.id }}')
+        $('{{ "#" ~ form.slug.vars.id }}').slugify('{{ "#" ~ form.name.vars.id }}')
     });
-
     {% endblock %}
 </script>
 {% endblock %}

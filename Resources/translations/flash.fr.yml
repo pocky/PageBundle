@@ -4,7 +4,6 @@ success:
       page:
         delete: La page a bien été supprimée.
         edit: La page a bien été édité.
-  
 error:
   page:
     admin:
@@ -15,4 +14,3 @@ error:
           action: Vous devez sélectionner une action!
         not:
           valid: Le formulaire n'est pas valide!
-          
