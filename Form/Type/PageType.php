@@ -110,8 +110,7 @@ class PageType extends AbstractType
                         'month' => 'black.page.type.page.datePublished.choice.month.text',
                         'day'   => 'black.page.type.page.datePublished.choice.day.text')
                 )
-            )
-        ;
+            );
     }
 
     /**

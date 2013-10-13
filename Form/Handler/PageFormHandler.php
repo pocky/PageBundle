@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use Black\Bundle\PageBundle\Model\PageInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
 
 /**
  * Class PageFormHandler
@@ -64,10 +65,11 @@ class PageFormHandler
     protected $url;
 
     /**
-     * @param FormInterface        $form
+     * @param FormInterface $form
      * @param PageManagerInterface $pageManager
-     * @param Request              $request
-     * @param SessionInterface     $session
+     * @param Request $request
+     * @param Router $router
+     * @param SessionInterface $session
      */
     public function __construct(FormInterface $form, PageManagerInterface $pageManager, Request $request, Router $router, SessionInterface $session)
     {
@@ -76,19 +78,6 @@ class PageFormHandler
         $this->request      = $request;
         $this->router       = $router;
         $this->session      = $session;
-    }
-
-    /**
-     * @param $url
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
-
-    public function getUrl()
-    {
-        return $this->url;
     }
 
     /**
@@ -124,7 +113,21 @@ class PageFormHandler
         return $this->form;
     }
 
+    /**
+     * @param $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
 
     /**
      * @param PageInterface $page

@@ -45,6 +45,7 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
                 sprintf('Unable to find an page object identified by "%s".', $slug)
             );
         }
+
         return $page;
     }
 
@@ -68,6 +69,7 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
                 sprintf('Unable to find an page object identified by "%s".', $id)
             );
         }
+
         return $page;
     }
 
@@ -136,13 +138,12 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
 
         $qb = $qb
             ->where($qb->expr()->orX(
-                    $qb->expr()->like('name', 'text'),
-                    $qb->expr()->like('text', 'text'),
-                    $qb->expr()->like('description', 'text')
-                ))
+                $qb->expr()->like('name', 'text'),
+                $qb->expr()->like('text', 'text'),
+                $qb->expr()->like('description', 'text')
+            ))
             ->setParameter('text', '%' . $text . '%')
-            ->getQuery()
-        ;
+            ->getQuery();
 
         return $qb->execute();
     }

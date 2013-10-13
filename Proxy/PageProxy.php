@@ -85,7 +85,7 @@ class PageProxy implements ProxyInterface
     public function createResponse($property)
     {
         $authenticated  = $this->checkRole('IS_AUTHENTICATED_FULLY');
-        try{
+        try {
             $object         = $this->createQuery($property);
         } catch (\Exception $e) {
             $object = null;
@@ -125,7 +125,7 @@ class PageProxy implements ProxyInterface
      */
     protected function formatSeo($object)
     {
-        if ($this->getSeo()) {
+        if ($this->getSeo() && $object->getSeo()) {
             $seo = $this->getSeo();
 
             if ($object->getSeo()->getTitle()) {

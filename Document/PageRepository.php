@@ -43,6 +43,7 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
                 sprintf('Unable to find an page object identified by "%s".', $slug)
             );
         }
+
         return $page;
     }
 
@@ -64,6 +65,7 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
                 sprintf('Unable to find an page object identified by "%s".', $id)
             );
         }
+
         return $page;
     }
 
