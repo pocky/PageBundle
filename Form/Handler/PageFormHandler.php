@@ -137,11 +137,12 @@ class PageFormHandler
     protected function onSave(PageInterface $page)
     {
         $page->upload();
-        $this->pageManager->persist($page);
 
         if (!$page->getId()) {
-            $this->pageManager->flush();
+            $this->pageManager->persist($page);
         }
+
+        $this->pageManager->flush();
 
         if ($this->form->get('save')->isClicked()) {
             $this->setUrl($this->generateUrl('admin_page_edit', array('id' => $page->getId())));
