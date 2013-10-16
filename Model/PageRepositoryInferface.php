@@ -20,7 +20,6 @@ namespace Black\Bundle\PageBundle\Model;
  */
 interface PageRepositoryInferface
 {
-
     /**
      * @param $slug
      *

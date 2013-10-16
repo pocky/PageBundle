@@ -43,6 +43,8 @@ class PageConfigType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->addEventSubscriber($this->eventSubscriber);
+
         $builder
             ->remove('name')
             ->add(
