@@ -1,0 +1,12 @@
+black:
+    adminPage:
+
+        fieldset:
+            general:
+                header: Général
+            content:
+                header: Contenu
+            options:
+                header: Optionnel
+            settings:
+                header: Paramètres

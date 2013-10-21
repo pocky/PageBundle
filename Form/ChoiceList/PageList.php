@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -15,7 +16,11 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
 /**
- * PageList
+ * Class PageList
+ *
+ * @package Black\Bundle\PageBundle\Form\ChoiceList
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PageList extends LazyChoiceList
 {
@@ -39,7 +44,7 @@ class PageList extends LazyChoiceList
     {
         $choices    = array();
         $pages      = $this->getPages();
-        $choices += array('other' => 'page.admin.page.item.choice.other');
+        $choices += array('other' => 'black.page.choiceList.page.choice.other');
 
         foreach ($pages as $page) {
             $choices += array('/page/' . $page->getSlug() . '.html' => $page->getName());

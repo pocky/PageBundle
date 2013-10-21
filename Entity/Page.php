@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -17,9 +18,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Page Entity
+ * Class Page
  *
  * @ORM\MappedSuperclass()
+ *
+ * @package Black\Bundle\PageBundle\Entity
+ * @author  Alexandre Balmes <abalmes@activcompany.com>
+ * @license http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode CC BY-NC-ND 3.0
  */
 abstract class Page extends AbstractPage
 {

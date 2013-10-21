@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -20,15 +20,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
- * Controller managing the person profile`
+ * Class AdminConfigController
  *
  * @Route("/admin/config")
+ *
+ * @package Black\Bundle\PageBundle\Controller
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class AdminConfigController extends Controller
 {
     /**
-     * Display a page form based on PageConfigType.
-     *
      * @Route("/page.html", name="admin_config_page")
      * @Secure(roles="ROLE_ADMIN")
      * @Template()
@@ -61,8 +63,6 @@ class AdminConfigController extends Controller
     }
 
     /**
-     * Returns the DocumentManager
-     *
      * @return DocumentManager
      */
     protected function getManager()

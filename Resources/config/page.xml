@@ -13,12 +13,15 @@
 
         <service id="black_page.page.form.type" class="%black_page.page.form.type%">
             <argument>%black_page.page.model.class%</argument>
+            <argument type="service" id="black_admin.form.event.button" />
             <tag name="form.type" alias="black_page_page" />
         </service>
 
         <service id="black_page.page.form.handler" class="%black_page.page.form.handler%" scope="request" public="true">
             <argument type="service" id="black_page.page.form" />
+            <argument type="service" id="black_page.manager.page" />
             <argument type="service" id="request" />
+            <argument type="service" id="router" />
             <argument type="service" id="session" />
         </service>
 

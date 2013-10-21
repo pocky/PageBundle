@@ -1,18 +1,24 @@
 <?php
+
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PageBundle\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Page
+ * Class Page
+ *
+ * @package Black\Bundle\PageBundle\Model
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 abstract class Page implements PageInterface
 {
@@ -75,9 +81,15 @@ abstract class Page implements PageInterface
     /**
      * @return string
      */
-    public function computeETag()
+    public function computeEtag()
     {
-        return md5($this->getText());
+        return md5(serialize(
+                array(
+                    $this->getName(),
+                    $this->getDescription(),
+                    $this->getText()
+                )
+            ));
     }
 
     /**

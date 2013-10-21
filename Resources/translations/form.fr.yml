@@ -1,75 +1,76 @@
-page:
-  admin:
-    actions:
-      create:
-        submit:
-          value: Créer
-      edit:
-        submit:
-          value: Editer
-      delete:
-        submit:
-          value: Supprimer
-
-    config:
-      text: Paramètres des pages
-      protected:
-        text: Activer la protection des pages
-        empty: Choisir une valeur
-        choice:
-          yes: Oui
-          no: Non (conseillé)
-      home:
-        text: Page d'accueil
-        empty: Aucune
-
+black:
     page:
-      general:
-        text: Général
-      content:
-        text: Contenu
-      options:
-        text: Informations optionnelles
-      seo:
-        text: SEO
-      settings:
-        text: Propriétés
-      name:
-        text: Titre
-      slug:
-        text: Permalien
-      description:
-        text: Description
-      text:
-        text: Contenu
-      author:
-        text: Auteur
-      image:
-        text: Illustration
-      datePublished:
-        text: Date de publication
-        choice:
-          year:
-            text: Année
-          month:
-            text: Mois
-          day:
-            text: Jour
-      status:
-        text: Statut de publication
-        empty: Choisir une valeur
-        choice:
-          draft: Brouillon
-          publish: Publié
-      enabled:
-        text: Visibilité de la page
-        empty: Choisir une valeur
-        choice:
-          public: Publique
-          private: Privée
-          protected: Protégée
-      item:
-        choice:
-          other: Autre
-      submit:
-        value: Envoyer
+
+        choiceList:
+            enabled:
+                choice:
+                    public: Publique
+                    private: Privée
+                    protected: Protégée
+            page:
+                choice:
+                    other: Autre
+            status:
+                choice:
+                    draft: Brouillon
+                    publish: Publié
+
+        type:
+            config:
+                label: Paramètres des pages
+                protected:
+                    label: Activer la protection des pages
+                    empty: Choisir une valeur
+                    choice:
+                        yes: Oui
+                        no: Non (conseillé)
+                home:
+                    label: Page d'accueil
+                    empty: Aucune
+
+            page:
+                general:
+                    label: Général
+                content:
+                    label: Contenu
+                options:
+                    label: Informations optionnelles
+                seo:
+                    label: SEO
+                settings:
+                    label: Propriétés
+                name:
+                    label: Titre
+                slug:
+                    label: Permalien
+                description:
+                    label: Description
+                text:
+                    label: Contenu
+                author:
+                    label: Auteur
+                image:
+                    label: Illustration
+                datePublished:
+                    label: Date de publication
+                    choice:
+                        year:
+                            label: Année
+                        month:
+                            label: Mois
+                        day:
+                            label: Jour
+                status:
+                    label: Statut
+                    empty: Status de publication
+                enabled:
+                    label: Visibilité
+                    empty: Visibilité de la page
+                save:
+                    label: Enregistrer
+                saveAndAdd:
+                    label: Enregistrer et Ajouter
+                delete:
+                    label: Supprimer
+                reset:
+                    label: Annuler les modifications

@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -24,6 +25,8 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  * Class PageProxy
  *
  * @package Black\Bundle\PageBundle\Proxy
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PageProxy implements ProxyInterface
 {
@@ -74,15 +77,16 @@ class PageProxy implements ProxyInterface
     }
 
     /**
-     * @param string $property
+     * @param $property
      *
-     * @return array|NotFoundHttpException
+     * @return array
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function createResponse($property)
     {
         $authenticated  = $this->checkRole('IS_AUTHENTICATED_FULLY');
-        try{
+        try {
             $object         = $this->createQuery($property);
         } catch (\Exception $e) {
             $object = null;
@@ -122,19 +126,20 @@ class PageProxy implements ProxyInterface
      */
     protected function formatSeo($object)
     {
-        if ($this->getSeo()) {
-            $seo = $this->getSeo();
+        $seo = $this->getSeo();
 
-            if ($object->getSeo()->getTitle()) {
-                $seo->setTitle($object->getSeo()->getTitle());
+        if ($meta = $object->getSeo()) {
+
+            if ($meta->getTitle()) {
+                $seo->setTitle($meta->getTitle());
             }
 
-            if ($object->getSeo()->getDescription()) {
-                $seo->setDescription($object->getSeo()->getDescription());
+            if ($meta->getDescription()) {
+                $seo->setDescription($meta->getDescription());
             }
 
-            if ($object->getSeo()->getKeywords()) {
-                $seo->setKeywords($object->getSeo()->getKeywords());
+            if ($meta->getKeywords()) {
+                $seo->setKeywords($meta->getKeywords());
             }
         }
     }

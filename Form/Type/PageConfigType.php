@@ -1,13 +1,14 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PageBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -15,9 +16,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Config Type
+ * Class PageConfigType
  *
- * @class ConfigType
+ * @package Black\Bundle\PageBundle\Form\Type
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PageConfigType extends AbstractType
 {
@@ -40,39 +43,32 @@ class PageConfigType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->addEventSubscriber($this->eventSubscriber);
+
         $builder
             ->remove('name')
             ->add(
                 $builder
-                ->create(
-                    'value',
-                    'form',
-                    array(
+                ->create('value', 'form', array(
                         'by_reference'  => false,
-                        'label'         => 'page.admin.config.text'
+                        'label'         => 'black.page.type.config.label'
                     )
                 )
-                ->add(
-                    'page_protected',
-                    'choice',
-                    array(
-                        'label'             => 'page.admin.config.protected.text',
+                ->add('page_protected', 'choice', array(
+                        'label'             => 'black.page.type.config.protected.label',
                         'required'          => false,
-                        'empty_value'       => 'page.admin.config.protected.empty',
+                        'empty_value'       => 'black.page.type.config.protected.empty',
                         'preferred_choices' => array('false'),
                         'choices'           => array(
-                            'true'          => 'page.admin.config.protected.choice.yes',
-                            'false'         => 'page.admin.config.protected.choice.no'
+                            'true'          => 'black.page.type.config.protected.choice.yes',
+                            'false'         => 'black.page.type.config.protected.choice.no'
                         )
                     )
                 )
-                ->add(
-                    'page_home',
-                    'black_page_choice_list_page_id',
-                    array(
-                        'label'         => 'page.admin.config.home.text',
+                ->add('page_home', 'black_page_choice_list_page_id', array(
+                        'label'         => 'black.page.type.config.home.text',
                         'required'      => false,
-                        'empty_value'   => 'page.admin.config.home.empty'
+                        'empty_value'   => 'black.page.type.config.home.empty'
                     )
                 )
             );

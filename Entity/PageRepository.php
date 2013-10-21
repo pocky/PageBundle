@@ -1,23 +1,29 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PageBundle\Entity;
 
+use Black\Bundle\PageBundle\Model\PageRepositoryInferface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\NoResultException;
 
 /**
- * PageRepository
+ * Class PageRepository
+ *
+ * @package Black\Bundle\PageBundle\Entity
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageRepository extends EntityRepository
+class PageRepository extends EntityRepository implements PageRepositoryInferface
 {
     /**
      * @param $slug
@@ -39,6 +45,7 @@ class PageRepository extends EntityRepository
                 sprintf('Unable to find an page object identified by "%s".', $slug)
             );
         }
+
         return $page;
     }
 
@@ -62,13 +69,14 @@ class PageRepository extends EntityRepository
                 sprintf('Unable to find an page object identified by "%s".', $id)
             );
         }
+
         return $page;
     }
 
     /**
-     * @param string $status
-     * 
-     * @return array
+     * @param $status
+     *
+     * @return mixed
      */
     public function getPagesByStatus($status)
     {
@@ -77,6 +85,22 @@ class PageRepository extends EntityRepository
                 ->orderBy('p.updatedAt', 'desc')
                 ->setParameter('status', $status)
                 ->getQuery();
+
+        return $qb->execute();
+    }
+
+    /**
+     * @param $author
+     *
+     * @return mixed
+     */
+    public function getPagesByAuthor($author)
+    {
+        $qb = $this->getQueryBuilder()
+            ->where('p.author = :author')
+            ->orderBy('p.updatedAt', 'desc')
+            ->setParameter('author', $author)
+            ->getQuery();
 
         return $qb->execute();
     }
@@ -114,13 +138,12 @@ class PageRepository extends EntityRepository
 
         $qb = $qb
             ->where($qb->expr()->orX(
-                    $qb->expr()->like('name', 'text'),
-                    $qb->expr()->like('text', 'text'),
-                    $qb->expr()->like('description', 'text')
-                ))
+                $qb->expr()->like('name', 'text'),
+                $qb->expr()->like('text', 'text'),
+                $qb->expr()->like('description', 'text')
+            ))
             ->setParameter('text', '%' . $text . '%')
-            ->getQuery()
-        ;
+            ->getQuery();
 
         return $qb->execute();
     }

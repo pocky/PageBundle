@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -14,7 +15,11 @@ use Black\Bundle\PageBundle\Model\PageManagerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * PageManager
+ * Class PageManager
+ *
+ * @package Black\Bundle\PageBundle\Doctrine
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PageManager implements PageManagerInterface
 {

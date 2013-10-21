@@ -1,15 +1,17 @@
 <?php
 
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Black\Bundle\PageBundle\Document;
 
+use Black\Bundle\PageBundle\Model\PageRepositoryInferface;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 use Doctrine\ODM\MongoDB\DocumentNotFoundException;
 
@@ -20,7 +22,7 @@ use Doctrine\ODM\MongoDB\DocumentNotFoundException;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageRepository extends DocumentRepository
+class PageRepository extends DocumentRepository implements PageRepositoryInferface
 {
     /**
      * @param $slug
@@ -41,6 +43,7 @@ class PageRepository extends DocumentRepository
                 sprintf('Unable to find an page object identified by "%s".', $slug)
             );
         }
+
         return $page;
     }
 
@@ -62,6 +65,7 @@ class PageRepository extends DocumentRepository
                 sprintf('Unable to find an page object identified by "%s".', $id)
             );
         }
+
         return $page;
     }
 

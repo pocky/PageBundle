@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -15,10 +16,17 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
 /**
- * EnabledList
+ * Class EnabledList
+ *
+ * @package Black\Bundle\PageBundle\Form\ChoiceList
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class EnabledList extends LazyChoiceList
 {
+    /**
+     * @var \Black\Bundle\ConfigBundle\Model\ConfigManagerInterface
+     */
     private $manager;
 
     /**
@@ -29,18 +37,21 @@ class EnabledList extends LazyChoiceList
         $this->manager = $manager;
     }
 
+    /**
+     * @return SimpleChoiceList
+     */
     protected function loadChoiceList()
     {
         $property   = $this->getPageProperty();
 
         $array = array(
-            'public'    => 'page.admin.page.enabled.choice.public',
-            'private'   => 'page.admin.page.enabled.choice.private'
+            'public'    => 'black.page.choiceList.enabled.choice.public',
+            'private'   => 'black.page.choiceList.enabled.choice.private'
         );
 
         if ('true' === $property['page_protected']) {
             $array += array(
-                'protected' => 'page.admin.page.enabled.choice.protected'
+                'protected' => 'black.page.choiceList.enabled.choice.protected'
             );
         }
 
@@ -49,6 +60,9 @@ class EnabledList extends LazyChoiceList
         return $choices;
     }
 
+    /**
+     * @return mixed
+     */
     protected function getPageProperty()
     {
         $property = $this->manager->findPropertyByName('Page');

@@ -3,7 +3,9 @@
 
 <fieldset class="grid9">
     <div class="widget">
-        <div class="whead"><h6>{% trans from "form" %}page.admin.page.general.text{% endtrans %}</h6><div class="clear"></div></div>
+        <div class="whead"><h6>{% trans from "view" %}black.adminPage.fieldset.general.header{% endtrans %}</h6>
+            <div class="clear"></div>
+        </div>
         {{ form_row(form.name) }}
         <div class="formRow">
             <div class="grid2">{{ form_label(form.slug) }}</div>
@@ -27,13 +29,17 @@
     </div>
 
     <div class="widget">
-        <div class="whead"><h6>{% trans from "form" %}page.admin.page.content.text{% endtrans %}</h6><div class="clear"></div></div>
+        <div class="whead"><h6>{% trans from "view" %}black.adminPage.fieldset.content.header{% endtrans %}</h6>
+            <div class="clear"></div>
+        </div>
         {{ form_row(form.description) }}
         {{ form_row(form.text) }}
     </div>
 
     <div class="widget">
-        <div class="whead"><h6>{% trans from "form" %}page.admin.page.options.text{% endtrans %}</h6><div class="clear"></div></div>
+        <div class="whead"><h6>{% trans from "view" %}black.adminPage.fieldset.options.header{% endtrans %}</h6>
+            <div class="clear"></div>
+        </div>
         {{ form_row(form.image) }}
         {% if document.primaryImageOfPage %}
             <div class="grid2">&nbsp;</div>
@@ -45,7 +51,9 @@
 
 <fieldset class="grid3">
     <div class="widget">
-        <div class="whead"><h6>{% trans from "form" %}page.admin.page.settings.text{% endtrans %}</h6><div class="clear"></div></div>
+        <div class="whead"><h6>{% trans from "view" %}black.adminPage.fieldset.settings.header{% endtrans %}</h6>
+            <div class="clear"></div>
+        </div>
 
         <div class="formRow">
             <div class="grid4">{{ form_label(form.author) }}</div>
@@ -82,8 +90,18 @@
             </div>
             <div class="clear"></div>
         </div>
+    </div>
+</fieldset>
 
-        {{ form_rest(form) }}
+<fieldset class="grid3">
+    <div class="widget fixed">
+        <div class="whead"><h6>{% trans from "view" %}black.adminForm.fieldset.actions.header{% endtrans %}</h6>
+            <div class="clear"></div>
+        </div>
+        <div class="body">
+            {{ form_rest(form) }}
+        </div>
+        <div class="clear"></div>
     </div>
 </fieldset>
 

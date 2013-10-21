@@ -1,6 +1,7 @@
 <?php
+
 /*
- * This file is part of the Blackengine package.
+ * This file is part of the Black package.
  *
  * (c) Alexandre Balmes <albalmes@gmail.com>
  *
@@ -13,13 +14,23 @@ namespace Black\Bundle\PageBundle\Form\ChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
+/**
+ * Class StatusList
+ *
+ * @package Black\Bundle\PageBundle\Form\ChoiceList
+ * @author  Alexandre Balmes <albalmes@gmail.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
+ */
 class StatusList extends LazyChoiceList
 {
+    /**
+     * @return SimpleChoiceList
+     */
     protected function loadChoiceList()
     {
         $array = array(
-            'draft'     => 'page.admin.page.status.choice.draft',
-            'publish'   => 'page.admin.page.status.choice.publish'
+            'draft'     => 'black.page.choiceList.status.choice.draft',
+            'publish'   => 'black.page.choiceList.status.choice.publish'
         );
 
         $choices = new SimpleChoiceList($array);
@@ -27,6 +38,9 @@ class StatusList extends LazyChoiceList
         return $choices;
     }
 
+    /**
+     * @return $this
+     */
     protected function getClass()
     {
         return $this;
