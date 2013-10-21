@@ -83,7 +83,13 @@ abstract class Page implements PageInterface
      */
     public function computeEtag()
     {
-        return md5($this->getText());
+        return md5(serialize(
+                array(
+                    $this->getName(),
+                    $this->getDescription(),
+                    $this->getText()
+                )
+            ));
     }
 
     /**

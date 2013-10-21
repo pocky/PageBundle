@@ -15,10 +15,8 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
 use Black\Bundle\PageBundle\Model\PageInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
 
 /**
  * Class PageFormHandler

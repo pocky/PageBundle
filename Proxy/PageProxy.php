@@ -77,10 +77,11 @@ class PageProxy implements ProxyInterface
     }
 
     /**
-     * @param string $property
+     * @param $property
      *
-     * @return array|NotFoundHttpException
+     * @return array
      * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function createResponse($property)
     {
@@ -125,19 +126,20 @@ class PageProxy implements ProxyInterface
      */
     protected function formatSeo($object)
     {
-        if ($this->getSeo() && $object->getSeo()) {
-            $seo = $this->getSeo();
+        $seo = $this->getSeo();
 
-            if ($object->getSeo()->getTitle()) {
-                $seo->setTitle($object->getSeo()->getTitle());
+        if ($meta = $object->getSeo()) {
+
+            if ($meta->getTitle()) {
+                $seo->setTitle($meta->getTitle());
             }
 
-            if ($object->getSeo()->getDescription()) {
-                $seo->setDescription($object->getSeo()->getDescription());
+            if ($meta->getDescription()) {
+                $seo->setDescription($meta->getDescription());
             }
 
-            if ($object->getSeo()->getKeywords()) {
-                $seo->setKeywords($object->getSeo()->getKeywords());
+            if ($meta->getKeywords()) {
+                $seo->setKeywords($meta->getKeywords());
             }
         }
     }
