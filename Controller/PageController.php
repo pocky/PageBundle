@@ -90,7 +90,7 @@ class PageController extends Controller
         $documents = $documentManager->findLastPublishedPages($max);
 
         return array(
-            'documents' => $documents,
+            'documents' => $documents
         );
     }
 

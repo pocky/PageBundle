@@ -1,10 +1,12 @@
 <div id="dyn" class="hiddenpars">
-    <a class="tOptions" title="{% trans from "views" %}admin.admin.table.options.a.title{% endtrans %}"><img src="/bundles/blackadmin/images/icons/options" alt="{% trans from "views" %}admin.admin.table.options.img.alt{% endtrans %}" /></a>
+    <a class="tOptions" title="{% trans from "views" %}admin.admin.table.options.a.title{% endtrans %}">
+        <img src="/admin/images/icons/options.png" alt="{% trans from "views" %}admin.admin.table.options.img.alt{% endtrans %}" />
+    </a>
 
-    <table id="personsTable" cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia">
+    <table id="pageTable" cellpadding="0" cellspacing="0" width="100%" class="tDefault checkAll tMedia">
         <thead>
             <tr>
-                <td style="width: 30px"><img src="/bundles/blackadmin/images/elements/other/tableArrows.png" alt="" /></td>
+                <td style="width: 30px"><img src="/admin/images/elements/other/tableArrows.png" alt="" /></td>
                 {% for key in keys %}
                    {% if 'id' != key %}
                           <td class="sortCol"><div>{{ key|trans({}, "form") }}<span></span></div></td>
@@ -46,17 +48,17 @@
         }
         
         $(document).ready(function() {
-            $('#personsTable').dataTable( {
+            $('#pageTable').dataTable( {
                 "bProcessing": true,
                 "bDeferRender": true,
                 "sAjaxSource": '{{ path('admin_pages_json') }}',
-                
+
                 "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                     var id = aData[0];
                     $('td:eq(0)', nRow).html(admin_id(id));
                     $('td:eq(2)', nRow).html(admin_edit(id)+admin_delete(id));
                   },
-                
+
                 "aoColumns": [
                     null,
                     { "sClass": "textL" },

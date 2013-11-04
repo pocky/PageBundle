@@ -238,7 +238,6 @@ class AdminPageController extends Controller
         }
 
         return $this->redirect($this->generateUrl('admin_page_index'));
-
     }
 
     /**
@@ -246,7 +245,7 @@ class AdminPageController extends Controller
      *
      * @return \Symfony\Component\Form\Form
      */
-    private function createDeleteForm($id)
+    protected function createDeleteForm($id)
     {
         $form = $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')
