@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Controller;
 
+use Black\Bundle\PageBundle\Exception\PageNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -130,7 +131,7 @@ class AdminPageController extends Controller
         $document = $repository->findOneById($id);
 
         if (!$document) {
-            throw $this->createNotFoundException('Unable to find this document.');
+            throw new PageNotFoundException();
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {

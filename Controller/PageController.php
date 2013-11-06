@@ -46,7 +46,7 @@ class PageController extends Controller
         $documents          = $documentManager->findPublishedPages();
 
         if (!$documents) {
-            throw $this->createNotFoundException('page.not.found');
+            throw new PageNotFoundException();
         }
 
         return array(
