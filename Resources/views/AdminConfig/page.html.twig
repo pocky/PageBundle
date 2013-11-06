@@ -1,7 +1,7 @@
 {% extends 'BlackConfigBundle:AdminConfig:base.html.twig' %}
 
 {% block content_top %}
-    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "page.admin.contentTop.config.page.text"} %}
+    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "black.bundle.page.adminConfig.page.contentTop.config.page.text"} %}
 {% endblock %}
 
 {% block page_content %}
@@ -13,9 +13,9 @@
 
     <div class="grid3">
         <div class="widget">
-            <div class="whead"><h6>{% trans from "views" %}page.admin.page.actions.text{% endtrans %}</h6><div class="clear"></div></div>
+            <div class="whead"><h6>{% trans from "views" %}black.bundle.page.adminConfig.page.admin.actions.text{% endtrans %}</h6><div class="clear"></div></div>
             <div class="body">
-                <input type="submit" value="{% trans from "form" %}page.admin.page.submit.value{% endtrans %}" form="validate" class="buttonM bGreen floatL" /><div class="clear"></div>
+                <input type="submit" value="{% trans from "views" %}black.bundle.page.adminConfig.page.admin.actions.submit.value{% endtrans %}" form="validate" class="buttonM bGreen floatL" /><div class="clear"></div>
             </div>
         </div>
     </div>

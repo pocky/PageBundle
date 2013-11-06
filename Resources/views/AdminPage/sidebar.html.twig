@@ -4,7 +4,8 @@
     <div class="secWrapper">
         <div class="secTop">
             <div class="balance">
-                <div class="balInfo">{% trans from "views" %}page.admin.sidebar.pages.text{% endtrans %}</div>
+                <div class="balInfo">{% trans from "views" %}
+                    black.bundle.page.adminPage.sidebar.pages.text{% endtrans %}</div>
             </div>
         </div>
 
@@ -22,8 +23,11 @@
             <div id="general">
                 <ul class="subNav">
                     <li>
-                        <a href="{{ path('admin_page_index') }}" title="{% trans from "views" %}page.admin.sidebar.pages.a.title{% endtrans %}" {% if currentPath == path('admin_page_index') %}class="this"{% endif %}>
-                            <span class="icos-list2"></span>{% trans from "views" %}page.admin.sidebar.pages.a.text{% endtrans %}
+                        <a href="{{ path('admin_page_index') }}"
+                           title="{% trans from "views" %}black.bundle.page.adminPage.sidebar.pages.a.title{% endtrans %}"
+                           {% if currentPath == path('admin_page_index') %}class="this"{% endif %}>
+                            <span class="icos-list2"></span>{% trans from "views" %}
+                            black.bundle.page.adminPage.pages.a.text{% endtrans %}
                         </a>
                     </li>
                 </ul>
@@ -34,5 +38,5 @@
     </div>
     <div class="clear"></div>
 </div>
-</div>
+
 {#  Sidebar ends  #}
