@@ -46,7 +46,7 @@ class PageController extends Controller
         $documents          = $documentManager->findPublishedPages();
 
         if (!$documents) {
-            throw $this->createNotFoundException('page.not.found');
+            throw new PageNotFoundException();
         }
 
         return array(
@@ -90,7 +90,7 @@ class PageController extends Controller
         $documents = $documentManager->findLastPublishedPages($max);
 
         return array(
-            'documents' => $documents,
+            'documents' => $documents
         );
     }
 

@@ -1,88 +1,83 @@
-page:
-  admin:
-    actions:
-      text: Actions
-      back:
-        text: Retour
-      
-    breadLine:
-      page:
-        breadcrumb:
-          a:
-            text: Gérer les pages
-            title: Gérer les pages
-        new:
-          text: Créer une page
-      shortcut:
-        text: Raccourci
-          
-    contentTop:
-      config:
+black:
+    bundle:
         page:
-          text: Configurations des pages
-      new:
-        text: Créer une page
-      edit:
-        text: Editer une page
-      page:
-        text: Pages
-          
-    edit:
-      page:
-        text: Modifier une page
-          
-    fieldset:
-      config:
-        text: Configuration des pages
-    
-    index:
-      page:
-        text: Pages
-    
-    new:
-      page:
-        text: Nouvelle page
-    
-    sidebar:
-      config:
-        pages:
-          a:
-            text: Paramètres des pages
-            title: Paramètres des pages
-      pages:
-        text: Pages
-        a:
-          text: Liste des pages
-          title: Voir vos pages
-          
-    page:
-      actions:
-        text: Actions
-
-    js:
-      remove:
-        text: Enlever
-  www:
-    page:
-      not:
-        found:
-          La page demandée n'a pas été trouvée
-    index:
-      read:
-        a:
-          text: Lire la suite
-          title: Lire la suite de %name%
-    
-    memuPages:
-      content:
-        a:
-          title: Accéder au contenu de la page %name%
-      error:
-        text: Il n'y a pas de pages.
-    
-    recentPages:
-      content:
-        a:
-          title: Accéder au contenu de la page %name%
-      error:
-        text: Il n'y a pas de pages.
+            adminPage:
+                base:
+                    breadLine:
+                        page:
+                            new:
+                                text: Créer une page
+                            breadcrumb:
+                                a:
+                                text: Gérer les pages
+                                title: Gérer les pages
+                edit:
+                    contentTop:
+                        edit:
+                            text: Editer une page
+                    edit:
+                        page:
+                            text: Modifier une page
+                fieldset:
+                    general:
+                        header: Général
+                    content:
+                        header: Contenu
+                    options:
+                        header: Optionnel
+                    settings:
+                        header: Paramètres
+                index:
+                    text: Pages
+                new:
+                    contentTop:
+                        new:
+                            text: Configurations des pages
+                    new:
+                        page:
+                            text: Nouvelle page
+                sidebar:
+                    pages:
+                        text: Pages
+                        a:
+                            text: Liste des pages
+                            title: Voir vos pages
+                table:
+                    options:
+                        a:
+                            title: Options
+                        img:
+                            alt: Options
+                        text: Options
+            adminConfig:
+                page:
+                    contentTop:
+                        config:
+                            page:
+                                text: Configurations des pages
+                    admin:
+                        actions:
+                            text: Actions
+                            submit:
+                                value:  a compléter submit value
+            page:
+                content:
+                index:
+                    www:
+                        index:
+                            read:
+                                a:
+                                    text: Lire la suite
+                menuPages:
+                    content:
+                        a:
+                            title: Accéder au contenu de la page %name%
+                    error:
+                        text: Il n'y a pas de pages.
+                recentPages:
+                    content:
+                        a:
+                            title: Accéder au contenu de la page %name%
+                    error:
+                        text: Il n'y a pas de pages.
+                show:

@@ -86,13 +86,14 @@ class PageProxy implements ProxyInterface
     public function createResponse($property)
     {
         $authenticated  = $this->checkRole('IS_AUTHENTICATED_FULLY');
+
         try {
             $object         = $this->createQuery($property);
         } catch (\Exception $e) {
             $object = null;
         }
         if (!$object) {
-            throw new NotFoundHttpException('Requested page not found.');
+            throw new PageNotFoundException();
         }
 
         $this->formatSeo($object);
