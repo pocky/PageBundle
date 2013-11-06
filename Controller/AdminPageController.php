@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Controller;
 
+use Black\Bundle\PageBundle\Exception\PageNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -130,7 +131,7 @@ class AdminPageController extends Controller
         $document = $repository->findOneById($id);
 
         if (!$document) {
-            throw $this->createNotFoundException('Unable to find this document.');
+            throw new PageNotFoundException();
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
@@ -238,7 +239,6 @@ class AdminPageController extends Controller
         }
 
         return $this->redirect($this->generateUrl('admin_page_index'));
-
     }
 
     /**
@@ -246,7 +246,7 @@ class AdminPageController extends Controller
      *
      * @return \Symfony\Component\Form\Form
      */
-    private function createDeleteForm($id)
+    protected function createDeleteForm($id)
     {
         $form = $this->createFormBuilder(array('id' => $id))
             ->add('id', 'hidden')

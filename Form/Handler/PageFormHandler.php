@@ -28,6 +28,21 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class PageFormHandler
 {
     /**
+     * @var \Symfony\Component\Form\FormInterface
+     */
+    protected $form;
+
+    /**
+     * @var
+     */
+    protected $factory;
+
+    /**
+     * @var \Black\Bundle\PageBundle\Model\PageManagerInterface
+     */
+    protected $pageManager;
+
+    /**
      * @var \Symfony\Component\HttpFoundation\Request
      */
     protected $request;
@@ -36,21 +51,6 @@ class PageFormHandler
      * @var \Symfony\Bundle\FrameworkBundle\Routing\Router
      */
     protected $router;
-
-    /**
-     * @var \Symfony\Component\Form\FormInterface
-     */
-    protected $form;
-
-    /**
-     * @var \Black\Bundle\PageBundle\Model\PageManagerInterface
-     */
-    protected $pageManager;
-
-    /**
-     * @var
-     */
-    protected $factory;
 
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
