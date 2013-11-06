@@ -49,10 +49,6 @@ black:
                         img:
                             alt: Options
                         text: Options
-
-
-
-
             adminConfig:
                 page:
                     contentTop:
@@ -63,7 +59,7 @@ black:
                         actions:
                             text: Actions
                             submit:
-                                value: ***submit value***
+                                value:  a compléter submit value
             page:
                 content:
                 index:
