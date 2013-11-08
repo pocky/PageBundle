@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Form\Type;
 
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -25,16 +26,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class PageConfigType extends AbstractType
 {
     /**
-     * @var string
+     * @var type
      */
-    private $class;
+    protected $class;
 
     /**
      * @param string $class The Person class name
      */
     public function __construct($class)
     {
-        $this->class = $class;
+        $this->class            = $class;
     }
 
     /**
@@ -43,8 +44,6 @@ class PageConfigType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber($this->eventSubscriber);
-
         $builder
             ->remove('name')
             ->add(
