@@ -1,76 +1,76 @@
 black:
-    page:
-
-        choiceList:
-            enabled:
-                choice:
-                    public: Publique
-                    private: Privée
-                    protected: Protégée
-            page:
-                choice:
-                    other: Autre
-            status:
-                choice:
-                    draft: Brouillon
-                    publish: Publié
-
-        type:
-            config:
-                label: Paramètres des pages
-                protected:
-                    label: Activer la protection des pages
-                    empty: Choisir une valeur
-                    choice:
-                        yes: Oui
-                        no: Non (conseillé)
-                home:
-                    label: Page d'accueil
-                    empty: Aucune
-
-            page:
-                general:
-                    label: Général
-                content:
-                    label: Contenu
-                options:
-                    label: Informations optionnelles
-                seo:
-                    label: SEO
-                settings:
-                    label: Propriétés
-                name:
-                    label: Titre
-                slug:
-                    label: Permalien
-                description:
-                    label: Description
-                text:
-                    label: Contenu
-                author:
-                    label: Auteur
-                image:
-                    label: Illustration
-                datePublished:
-                    label: Date de publication
-                    choice:
-                        year:
-                            label: Année
-                        month:
-                            label: Mois
-                        day:
-                            label: Jour
-                status:
-                    label: Statut
-                    empty: Status de publication
+    bundle:
+        page:
+            choiceList:
                 enabled:
-                    label: Visibilité
-                    empty: Visibilité de la page
-                save:
-                    label: Enregistrer
-                saveAndAdd:
-                    label: Enregistrer et Ajouter
-                delete:
-                    label: Supprimer
-                reset:
-                    label: Annuler les modifications
+                    choice:
+                        public: Publique
+                        private: Privée
+                        protected: Protégée
+                page:
+                    choice:
+                        other: Autre
+                status:
+                    choice:
+                        draft: Brouillon
+                        publish: Publié
+
+            type:
+                config:
+                    label: Paramètres des pages
+                    protected:
+                        label: Activer la protection des pages
+                        empty: Choisir une valeur
+                        choice:
+                            yes: Oui
+                            no: Non (conseillé)
+                    home:
+                        label: Page d'accueil
+                        empty: Aucune
+
+                page:
+                    general:
+                        label: Général
+                    content:
+                        label: Contenu
+                    options:
+                        label: Informations optionnelles
+                    seo:
+                        label: SEO
+                    settings:
+                        label: Propriétés
+                    name:
+                        label: Titre
+                    slug:
+                        label: Permalien
+                    description:
+                        label: Description
+                    text:
+                        label: Contenu
+                    author:
+                        label: Auteur
+                    image:
+                        label: Illustration
+                    datePublished:
+                        label: Date de publication
+                        choice:
+                            year:
+                                label: Année
+                            month:
+                                label: Mois
+                            day:
+                                label: Jour
+                    status:
+                        label: Statut
+                        empty: Status de publication
+                    enabled:
+                        label: Visibilité
+                        empty: Visibilité de la page
+                    save:
+                        label: Enregistrer
+                    saveAndAdd:
+                        label: Enregistrer et Ajouter
+                    delete:
+                        label: Supprimer
+                    reset:
+                        label: Annuler les modifications

@@ -51,24 +51,24 @@ class PageConfigType extends AbstractType
                 $builder
                 ->create('value', 'form', array(
                         'by_reference'  => false,
-                        'label'         => 'black.page.type.config.label'
+                        'label'         => 'black.bundle.page.type.config.label'
                     )
                 )
                 ->add('page_protected', 'choice', array(
-                        'label'             => 'black.page.type.config.protected.label',
+                        'label'             => 'black.bundle.page.type.config.protected.label',
                         'required'          => false,
-                        'empty_value'       => 'black.page.type.config.protected.empty',
+                        'empty_value'       => 'black.bundle.page.type.config.protected.empty',
                         'preferred_choices' => array('false'),
                         'choices'           => array(
-                            'true'          => 'black.page.type.config.protected.choice.yes',
-                            'false'         => 'black.page.type.config.protected.choice.no'
+                            'true'          => 'black.bundle.page.type.config.protected.choice.yes',
+                            'false'         => 'black.bundle.page.type.config.protected.choice.no'
                         )
                     )
                 )
                 ->add('page_home', 'black_page_choice_list_page_id', array(
-                        'label'         => 'black.page.type.config.home.text',
+                        'label'         => 'black.bundle.page.type.config.home.text',
                         'required'      => false,
-                        'empty_value'   => 'black.page.type.config.home.empty'
+                        'empty_value'   => 'black.bundle.page.type.config.home.empty'
                     )
                 )
             );

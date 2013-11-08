@@ -55,22 +55,22 @@ class PageType extends AbstractType
 
         $builder
             ->add('name', 'text', array(
-                    'label'         => 'black.page.type.page.name.label',
+                    'label'         => 'black.bundle.page.type.page.name.label',
                     'required'      => true
                 )
             )
             ->add('slug', 'text', array(
-                    'label'         => 'black.page.type.page.slug.label',
+                    'label'         => 'black.bundle.page.type.page.slug.label',
                     'required'      => false
                 )
             )
             ->add('description', 'textarea', array(
-                    'label'         => 'black.page.type.page.description.label',
+                    'label'         => 'black.bundle.page.type.page.description.label',
                     'required'      => false
                 )
             )
             ->add('text', 'textarea', array(
-                    'label'         => 'black.page.type.page.text.label',
+                    'label'         => 'black.bundle.page.type.page.text.label',
                     'attr'          => array(
                         'class'         => 'tinymce',
                         'data-theme'    => 'advanced'
@@ -78,37 +78,37 @@ class PageType extends AbstractType
                 )
             )
             ->add('author', 'text', array(
-                    'label'         => 'black.page.type.page.author.label',
+                    'label'         => 'black.bundle.page.type.page.author.label',
                     'required'      => true
                 )
             )
             ->add('image', 'file', array(
-                    'label'         => 'black.page.type.page.image.label',
+                    'label'         => 'black.bundle.page.type.page.image.label',
                     'required'      => false
                 )
             )
             ->add('status', 'black_page_choice_list_status', array(
-                    'label'         => 'black.page.type.page.status.label',
-                    'empty_value'   => 'black.page.type.page.status.empty',
+                    'label'         => 'black.bundle.page.type.page.status.label',
+                    'empty_value'   => 'black.bundle.page.type.page.status.empty',
                     'required'      => true
                 )
             )
             ->add('enabled', 'black_page_choice_list_enabled', array(
-                    'label'         => 'black.page.type.page.enabled.label',
-                    'empty_value'   => 'black.page.type.page.enabled.empty',
+                    'label'         => 'black.bundle.page.type.page.enabled.label',
+                    'empty_value'   => 'black.bundle.page.type.page.enabled.empty',
                     'required'      => true
                 )
             )
             ->add('datePublished', 'date', array(
-                    'label'         => 'black.page.type.page.datePublished.label',
+                    'label'         => 'black.bundle.page.type.page.datePublished.label',
                     'years'         => array_reverse(
                         range(2000, date('Y', strtotime('now')))
                     ),
                     'required'      => true,
                     'empty_value'   => array(
-                        'year'  => 'black.page.type.page.datePublished.choice.year.text',
-                        'month' => 'black.page.type.page.datePublished.choice.month.text',
-                        'day'   => 'black.page.type.page.datePublished.choice.day.text')
+                        'year'  => 'black.bundle.page.type.page.datePublished.choice.year.text',
+                        'month' => 'black.bundle.page.type.page.datePublished.choice.month.text',
+                        'day'   => 'black.bundle.page.type.page.datePublished.choice.day.text')
                 )
             );
     }
