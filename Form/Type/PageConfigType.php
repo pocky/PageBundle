@@ -65,7 +65,7 @@ class PageConfigType extends AbstractType
                     )
                 )
                 ->add('page_home', 'black_page_choice_list_page_id', array(
-                        'label'         => 'black.bundle.page.type.config.home.text',
+                        'label'         => 'black.bundle.page.type.config.home.label',
                         'required'      => false,
                         'empty_value'   => 'black.bundle.page.type.config.home.empty'
                     )

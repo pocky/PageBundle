@@ -47,8 +47,8 @@
         $(document).ready(function() {
             $('#pageTable').dataTable( {
                 "bProcessing": true,
-                "bDeferRender": true,
                 "bDestroy": true,
+                "bDeferRender": true,
                 "sAjaxSource": '{{ path('admin_pages_json') }}',
 
                 "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {

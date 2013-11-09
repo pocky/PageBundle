@@ -16,7 +16,7 @@ black:
                                 text:
                     contentTop:
                         page:
-                            text: Configurations des pages
+                            text: Pages
                 edit:
                     contentTop:
                         edit:
@@ -34,7 +34,7 @@ black:
                     settings:
                         header: Paramètres
                     actions:
-                        header: !actions?!
+                        header: Actions
                 index:
                     text: Pages
                 new:

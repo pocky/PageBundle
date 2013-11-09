@@ -46,7 +46,7 @@ class AdminPageController extends Controller
 
         $keys = array(
             'id',
-            'black.bundle.page.adminPage.index.text',
+            'black.bundle.admin.controller.adminPage.index.text',
         );
 
         return array(
