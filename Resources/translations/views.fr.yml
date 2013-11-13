@@ -7,6 +7,7 @@ black:
                         page:
                             new:
                                 text: Créer une page
+                                title: Créer une page
                             breadcrumb:
                                 a:
                                     text: Gérer les pages
@@ -73,6 +74,7 @@ black:
                                 text: Actions
                             submit:
                                 value: Envoyer
+                                title: Envoyer les données
                     fieldset:
                         config:
                             text: Configuration des pages

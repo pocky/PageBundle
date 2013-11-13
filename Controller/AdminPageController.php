@@ -77,7 +77,6 @@ class AdminPageController extends Controller
                 null
             );
         }
-
         return new Response(json_encode($documents));
     }
 
