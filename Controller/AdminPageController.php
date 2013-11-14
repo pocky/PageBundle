@@ -46,7 +46,7 @@ class AdminPageController extends Controller
 
         $keys = array(
             'id',
-            'page.admin.page.name.text',
+            'black.bundle.admin.controller.adminPage.index.text',
         );
 
         return array(
@@ -77,7 +77,6 @@ class AdminPageController extends Controller
                 null
             );
         }
-
         return new Response(json_encode($documents));
     }
 
@@ -188,10 +187,10 @@ class AdminPageController extends Controller
             $dm->remove($document);
             $dm->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'success.page.admin.page.delete');
+            $this->get('session')->getFlashBag()->add('success', 'black.bundle.page.success.page.admin.page.delete');
 
         } else {
-            $this->getFlashBag->add('error', 'error.page.admin.page.not.valid');
+            $this->getFlashBag->add('error', 'black.bundle.page.error.page.admin.page.not.valid');
         }
 
         return $this->redirect($this->generateUrl('admin_page_index'));
@@ -211,13 +210,13 @@ class AdminPageController extends Controller
         $token      = $this->get('form.csrf_provider')->isCsrfTokenValid('batch', $request->get('token'));
 
         if (!$ids = $request->get('ids')) {
-            $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.no.item');
+            $this->get('session')->getFlashBag()->add('error', 'black.bundle.page.error.page.admin.page.no.item');
 
             return $this->redirect($this->generateUrl('admin_page_index'));
         }
 
         if (!$action = $request->get('batchAction')) {
-            $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.no.action');
+            $this->get('session')->getFlashBag()->add('error', 'black.bundle.page.error.page.admin.page.no.action');
 
             return $this->redirect($this->generateUrl('admin_page_index'));
         }
@@ -229,7 +228,7 @@ class AdminPageController extends Controller
         }
 
         if (false === $token) {
-            $this->get('session')->getFlashBag()->add('error', 'error.page.admin.page.csrf');
+            $this->get('session')->getFlashBag()->add('error', 'black.bundle.page.error.page.admin.page.csrf');
 
             return $this->redirect($this->generateUrl('admin_page_index'));
         }

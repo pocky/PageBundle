@@ -45,13 +45,13 @@ class EnabledList extends LazyChoiceList
         $property   = $this->getPageProperty();
 
         $array = array(
-            'public'    => 'black.page.choiceList.enabled.choice.public',
-            'private'   => 'black.page.choiceList.enabled.choice.private'
+            'public'    => 'black.bundle.page.choiceList.enabled.choice.public',
+            'private'   => 'black.bundle.page.choiceList.enabled.choice.private'
         );
 
         if ('true' === $property['page_protected']) {
             $array += array(
-                'protected' => 'black.page.choiceList.enabled.choice.protected'
+                'protected' => 'black.bundle.page.choiceList.enabled.choice.protected'
             );
         }
 

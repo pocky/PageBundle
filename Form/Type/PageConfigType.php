@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Form\Type;
 
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -25,16 +26,16 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class PageConfigType extends AbstractType
 {
     /**
-     * @var string
+     * @var type
      */
-    private $class;
+    protected $class;
 
     /**
      * @param string $class The Person class name
      */
     public function __construct($class)
     {
-        $this->class = $class;
+        $this->class            = $class;
     }
 
     /**
@@ -43,32 +44,30 @@ class PageConfigType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber($this->eventSubscriber);
-
         $builder
             ->remove('name')
             ->add(
                 $builder
                 ->create('value', 'form', array(
                         'by_reference'  => false,
-                        'label'         => 'black.page.type.config.label'
+                        'label'         => 'black.bundle.page.type.config.label'
                     )
                 )
                 ->add('page_protected', 'choice', array(
-                        'label'             => 'black.page.type.config.protected.label',
+                        'label'             => 'black.bundle.page.type.config.protected.label',
                         'required'          => false,
-                        'empty_value'       => 'black.page.type.config.protected.empty',
+                        'empty_value'       => 'black.bundle.page.type.config.protected.empty',
                         'preferred_choices' => array('false'),
                         'choices'           => array(
-                            'true'          => 'black.page.type.config.protected.choice.yes',
-                            'false'         => 'black.page.type.config.protected.choice.no'
+                            'true'          => 'black.bundle.page.type.config.protected.choice.yes',
+                            'false'         => 'black.bundle.page.type.config.protected.choice.no'
                         )
                     )
                 )
                 ->add('page_home', 'black_page_choice_list_page_id', array(
-                        'label'         => 'black.page.type.config.home.text',
+                        'label'         => 'black.bundle.page.type.config.home.label',
                         'required'      => false,
-                        'empty_value'   => 'black.page.type.config.home.empty'
+                        'empty_value'   => 'black.bundle.page.type.config.home.empty'
                     )
                 )
             );

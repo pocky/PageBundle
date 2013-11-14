@@ -7,10 +7,17 @@ black:
                         page:
                             new:
                                 text: Créer une page
+                                title: Créer une page
                             breadcrumb:
                                 a:
-                                text: Gérer les pages
-                                title: Gérer les pages
+                                    text: Gérer les pages
+                                    title: Gérer les pages
+                        menu:
+                            new:
+                                text:
+                    contentTop:
+                        page:
+                            text: Pages
                 edit:
                     contentTop:
                         edit:
@@ -27,6 +34,8 @@ black:
                         header: Optionnel
                     settings:
                         header: Paramètres
+                    actions:
+                        header: Actions
                 index:
                     text: Pages
                 new:
@@ -59,7 +68,16 @@ black:
                         actions:
                             text: Actions
                             submit:
-                                value:  a compléter submit value
+                                value:  !n!
+                        page:
+                            actions:
+                                text: Actions
+                            submit:
+                                value: Envoyer
+                                title: Envoyer les données
+                    fieldset:
+                        config:
+                            text: Configuration des pages
             page:
                 content:
                 index:

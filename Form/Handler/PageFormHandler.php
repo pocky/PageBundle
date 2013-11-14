@@ -131,7 +131,7 @@ class PageFormHandler
         $this->pageManager->remove($page);
         $this->pageManager->flush();
 
-        $this->setFlash('success', 'success.page.admin.page.delete');
+        $this->setFlash('success', 'black.bundle.page.success.page.admin.page.delete');
         $this->setUrl($this->generateUrl('admin_page_index'));
 
         return true;
@@ -142,7 +142,7 @@ class PageFormHandler
      */
     protected function onFailed()
     {
-        $this->setFlash('error', 'error.page.admin.page.not.valid');
+        $this->setFlash('error', 'black.bundle.page.error.page.admin.page.not.valid');
 
         return false;
     }

@@ -1,30 +1,38 @@
 <div id="dyn" class="hiddenpars">
-    <a class="tOptions" title="{% trans from "views" %}black.bundle.page.adminPage.table.options.a.title{% endtrans %}"><img src="/admin/images/elements/other/tableArrows.png" alt="{% trans from "views" %}black.bundle.page.adminPage.table.options.img.alt{% endtrans %}" /></a>
-    <table id="personsTable" cellpadding="0" cellspacing="0" width="100%" class="dTable tDefault checkAll tMedia">
-        <thead>
+    <a class="tOptions" title="{% trans from "views" %}black.bundle.page.adminPage.table.options.a.title{% endtrans %}"><img
+                src="/admin/images/elements/other/tableArrows.png"
+                alt="{% trans from "views" %}black.bundle.page.adminPage.table.options.img.alt{% endtrans %}"/></a>
+
+
+        <table id="pageTable" cellpadding="0" cellspacing="0" width="100%" class="dTable tDefault checkAll tMedia">
+            <thead>
             <tr>
-                <th style="width: 30px"><img src="/admin/images/elements/other/tableArrows.png" alt="" /></th>
+                <th style="width: 30px"><img src="/admin/images/elements/other/tableArrows.png" alt=""/></th>
                 {% for key in keys %}
-                   {% if 'id' != key %}
-                          <th class="sortCol"><div>{{ key|trans({}, "form") }}<span></span></div></th>
-                   {% endif %}
+                    {% if 'id' != key %}
+                        <th class="sortCol">
+                            <div>{{ key|trans({}, "form") }}<span></span></div>
+                        </th>
+                    {% endif %}
                 {% endfor %}
-                <th style="width: 100px">{% trans from "views" %}black.bundle.page.adminPage.table.options.text{% endtrans %}</th>
+                <th style="width: 100px">{% trans from "views" %}
+                    black.bundle.page.adminPage.table.options.text{% endtrans %}</th>
             </tr>
-        </thead>
-        <tbody>
-        </tbody>
-        {% include 'BlackAdminBundle:AdminTable:tfoot.html.twig' %}
-    </table>
+            </thead>
+            <tbody>
+            </tbody>
+            {% include 'BlackAdminBundle:AdminTable:tfoot.html.twig' %}
+        </table>
+
     <script>
         {% if app.environment == 'dev' %}
-            {% set env_path = '/app_dev.php' %}
+        {% set env_path = '/app_dev.php' %}
         {% else %}
-            {% set env_path = '' %}
+        {% set env_path = '' %}
         {% endif %}
         function admin_edit(id) {
             {% if is_granted('ROLE_ADMIN') %}
-            return "&nbsp;<a href=\"{{ env_path }}/admin/page/"+id+"/edit\" class=\"tablectrl_small bGreen tipS\" title=\"{% trans from "views" %}admin.admin.row.edit.title{% endtrans %}\">\
+            return "&nbsp;<a href=\"{{ env_path }}/admin/page/" + id + "/edit\" class=\"tablectrl_small bGreen tipS\" title=\"{% trans from "views" %}admin.admin.row.edit.title{% endtrans %}\">\
                 <span class=\"iconb\" data-icon=\"&#xe1db;\"></span>\
             </a>";
             {% else %}
@@ -33,7 +41,7 @@
         }
         function admin_delete(id) {
             {% if is_granted('ROLE_ADMIN') %}
-            return "&nbsp;<a href=\"{{ env_path }}/admin/page/"+id+"/delete/{{csrf.generateCsrfToken('delete')}}\" class=\"tablectrl_small bRed tipS\" title=\"{% trans from "views" %}admin.admin.row.delete.title{% endtrans %}\">\
+            return "&nbsp;<a href=\"{{ env_path }}/admin/page/" + id + "/delete/{{csrf.generateCsrfToken('delete')}}\" class=\"tablectrl_small bRed tipS\" title=\"{% trans from "views" %}admin.admin.row.delete.title{% endtrans %}\">\
                 <span class=\"iconb\" data-icon=\"&#xe136;\"></span>\
             </a>";
             {% else %}
@@ -41,31 +49,41 @@
             {% endif %}
         }
         function admin_id(id) {
-            return "<input type=\"checkbox\" name=\"ids[]\" value=\""+id+"\" />";
+            return "<input type=\"checkbox\" name=\"ids[]\" value=\"" + id + "\" />";
         }
 
-        $(document).ready(function() {
-            $('#pageTable').dataTable( {
+        $(document).ready(function () {
+            $('#pageTable').dataTable({
                 "bProcessing": true,
-                "bDeferRender": true,
                 "bDestroy": true,
                 "sAjaxSource": '{{ path('admin_pages_json') }}',
 
-                "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+
+                "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     var id = aData[0];
                     $('td:eq(0)', nRow).html(admin_id(id));
-                    $('td:eq(2)', nRow).html(admin_edit(id)+admin_delete(id));
-                  },
+                    $('td:eq(2)', nRow).html(admin_edit(id) + admin_delete(id));
+                },
 
                 "aoColumns": [
                     null,
                     { "sClass": "textL" },
                     null
                 ],
+                "bJQueryUI": false,
                 "bAutoWidth": false,
                 "sPaginationType": "full_numbers",
                 "sDom": '<"H"fl>tr<"F"ip>'
-            } );
-        } );
+            });
+
+            var options = $('div[id=pageTable_wrapper] > div:first-child');
+            options.hide();
+            $('.tOptions').click(function () {
+                options.slideToggle(200);
+            });
+            $('div[id=pageTable_wrapper] > div:last-child').addClass('tableFooter');
+
+        });
+
     </script>
 </div>
