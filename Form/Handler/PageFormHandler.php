@@ -31,32 +31,22 @@ class PageFormHandler
      * @var \Symfony\Component\Form\FormInterface
      */
     protected $form;
-
-    /**
-     * @var
-     */
-    protected $factory;
-
     /**
      * @var \Black\Bundle\PageBundle\Model\PageManagerInterface
      */
     protected $pageManager;
-
     /**
      * @var \Symfony\Component\HttpFoundation\Request
      */
     protected $request;
-
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Routing\Router
      */
     protected $router;
-
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     protected $session;
-
     /**
      * @var
      */
@@ -76,6 +66,22 @@ class PageFormHandler
         $this->request      = $request;
         $this->router       = $router;
         $this->session      = $session;
+    }
+
+    /**
+     * @return FormInterface
+     */
+    public function getForm()
+    {
+        return $this->form;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 
     /**
@@ -104,27 +110,41 @@ class PageFormHandler
     }
 
     /**
-     * @return FormInterface
-     */
-    public function getForm()
-    {
-        return $this->form;
-    }
-
-    /**
-     * @param $url
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
-
-    /**
+     * @param       $route
+     * @param array $parameters
+     * @param       $referenceType
+     *
      * @return mixed
      */
-    public function getUrl()
+    protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
     {
-        return $this->url;
+        return $this->router->generate($route, $parameters, $referenceType);
+    }
+
+    /**
+     * @param $page
+     *
+     * @return bool
+     */
+    protected function onDelete($page)
+    {
+        $this->pageManager->remove($page);
+        $this->pageManager->flush();
+
+        $this->setFlash('success', 'success.page.admin.page.delete');
+        $this->setUrl($this->generateUrl('admin_page_index'));
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function onFailed()
+    {
+        $this->setFlash('error', 'error.page.admin.page.not.valid');
+
+        return false;
     }
 
     /**
@@ -156,32 +176,6 @@ class PageFormHandler
     }
 
     /**
-     * @param $page
-     *
-     * @return bool
-     */
-    protected function onDelete($page)
-    {
-        $this->pageManager->remove($page);
-        $this->pageManager->flush();
-
-        $this->setFlash('success', 'success.page.admin.page.delete');
-        $this->setUrl($this->generateUrl('admin_page_index'));
-
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function onFailed()
-    {
-        $this->setFlash('error', 'error.page.admin.page.not.valid');
-
-        return false;
-    }
-
-    /**
      * @param $name
      * @param $msg
      * @return mixed
@@ -192,14 +186,10 @@ class PageFormHandler
     }
 
     /**
-     * @param       $route
-     * @param array $parameters
-     * @param       $referenceType
-     *
-     * @return mixed
+     * @param $url
      */
-    public function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
+    protected function setUrl($url)
     {
-        return $this->router->generate($route, $parameters, $referenceType);
+        $this->url = $url;
     }
 }
