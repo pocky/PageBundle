@@ -31,22 +31,27 @@ class PageFormHandler
      * @var \Symfony\Component\Form\FormInterface
      */
     protected $form;
+
     /**
      * @var \Black\Bundle\PageBundle\Model\PageManagerInterface
      */
     protected $pageManager;
+
     /**
      * @var \Symfony\Component\HttpFoundation\Request
      */
     protected $request;
+
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Routing\Router
      */
     protected $router;
+
     /**
      * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
      */
     protected $session;
+
     /**
      * @var
      */
@@ -163,12 +168,14 @@ class PageFormHandler
         $this->pageManager->flush();
 
         if ($this->form->get('save')->isClicked()) {
+            $this->setFlash('success','black.bundle.page.success.page.admin.page.save');
             $this->setUrl($this->generateUrl('admin_page_edit', array('id' => $page->getId())));
 
             return true;
         }
 
         if ($this->form->get('saveAndAdd')->isClicked()) {
+            $this->setFlash('success','black.bundle.page.success.page.admin.page.saveAndAdd');
             $this->setUrl($this->generateUrl('admin_page_new'));
 
             return true;

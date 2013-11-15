@@ -1,6 +1,6 @@
 <div id="dyn" class="hiddenpars">
     <a class="tOptions" title="{% trans from "views" %}black.bundle.page.adminPage.table.options.a.title{% endtrans %}"><img
-                src="/admin/images/elements/other/tableArrows.png"
+                src="/admin/images/icons/options.png"
                 alt="{% trans from "views" %}black.bundle.page.adminPage.table.options.img.alt{% endtrans %}"/></a>
 
 
@@ -32,7 +32,7 @@
         {% endif %}
         function admin_edit(id) {
             {% if is_granted('ROLE_ADMIN') %}
-            return "&nbsp;<a href=\"{{ env_path }}/admin/page/" + id + "/edit\" class=\"tablectrl_small bGreen tipS\" title=\"{% trans from "views" %}admin.admin.row.edit.title{% endtrans %}\">\
+            return "&nbsp;<a href=\"{{ env_path }}/admin/page/" + id + "/edit\" class=\"tablectrl_small bGreen tipS\" title=\"{% trans from "views" %}black.bundle.page.adminPage.table.edit.text{% endtrans %}\">\
                 <span class=\"iconb\" data-icon=\"&#xe1db;\"></span>\
             </a>";
             {% else %}
@@ -41,7 +41,7 @@
         }
         function admin_delete(id) {
             {% if is_granted('ROLE_ADMIN') %}
-            return "&nbsp;<a href=\"{{ env_path }}/admin/page/" + id + "/delete/{{csrf.generateCsrfToken('delete')}}\" class=\"tablectrl_small bRed tipS\" title=\"{% trans from "views" %}admin.admin.row.delete.title{% endtrans %}\">\
+            return "&nbsp;<a href=\"{{ env_path }}/admin/page/" + id + "/delete/{{csrf.generateCsrfToken('delete')}}\" class=\"tablectrl_small bRed tipS\" title=\"{% trans from "views" %}black.bundle.page.adminPage.table.delete.text{% endtrans %}\">\
                 <span class=\"iconb\" data-icon=\"&#xe136;\"></span>\
             </a>";
             {% else %}
@@ -54,7 +54,7 @@
 
         $(document).ready(function () {
             $('#pageTable').dataTable({
-                "bProcessing": true,
+                "bProcessing": false,
                 "bDestroy": true,
                 "sAjaxSource": '{{ path('admin_pages_json') }}',
 
@@ -77,6 +77,7 @@
             });
 
             var options = $('div[id=pageTable_wrapper] > div:first-child');
+            options.addClass('tablePars');
             options.hide();
             $('.tOptions').click(function () {
                 options.slideToggle(200);

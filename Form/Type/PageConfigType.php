@@ -31,11 +31,17 @@ class PageConfigType extends AbstractType
     protected $class;
 
     /**
+     * @var
+     */
+    protected $buttonSubscriber;
+
+    /**
      * @param string $class The Person class name
      */
-    public function __construct($class)
+    public function __construct($class, EventSubscriberInterface $buttonSubscriber)
     {
         $this->class            = $class;
+        $this->buttonSubscriber = $buttonSubscriber;
     }
 
     /**
@@ -44,6 +50,7 @@ class PageConfigType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder->addEventSubscriber($this->buttonSubscriber);
         $builder
             ->remove('name')
             ->add(

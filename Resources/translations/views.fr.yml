@@ -58,6 +58,10 @@ black:
                         img:
                             alt: Options
                         text: Options
+                    edit :
+                        text: Editer
+                    delete:
+                        text: Supprimer
             adminConfig:
                 page:
                     contentTop:
