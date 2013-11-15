@@ -5,8 +5,10 @@ black:
                 page:
                     admin:
                         page:
-                            delete: La page a bien été supprimée.
-                            edit: La page a bien été édité.
+                            delete: La page a bien été supprimée
+                            edit: La page a bien été édité
+                            save: Votre page a bien été sauvée
+                            saveAndAdd: Votre page a bien été sauvée et publiée
             error:
                 page:
                     admin:
