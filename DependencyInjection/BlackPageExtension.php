@@ -49,10 +49,6 @@ class BlackPageExtension extends Extension
             )
         );
 
-        foreach (array('controller') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
         if (!empty($config['page'])) {
             $this->loadPage($config['page'], $container, $loader);
         }

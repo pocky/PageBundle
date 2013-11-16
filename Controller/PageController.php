@@ -11,51 +11,27 @@
 
 namespace Black\Bundle\PageBundle\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Serializer\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use JMS\SecurityExtraBundle\Annotation\Secure;
-
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Black\Bundle\PageBundle\Model\PageManagerInterface;
-use Black\Bundle\PageBundle\Proxy\ProxyInterface;
 
 /**
  * Class PageController
+ *
+ * @Route("/page")
  *
  * @package Black\Bundle\PageBundle\Controller
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageController
+class PageController extends Controller
 {
-    /**
-     * @var \Symfony\Bundle\FrameworkBundle\Templating\EngineInterface
-     */
-    private $templating;
-
-    /**
-     * @var \Black\Bundle\PageBundle\Model\PageManagerInterface
-     */
-    private $pageManager;
-
-    /**
-     * @var \Black\Bundle\PageBundle\Proxy\ProxyInterface
-     */
-    private $proxy;
-
-    /**
-     * @param EngineInterface      $templating
-     * @param PageManagerInterface $pageManager
-     * @param ProxyInterface       $proxy
-     */
-    public function __construct(EngineInterface $templating, PageManagerInterface $pageManager, ProxyInterface $proxy)
-    {
-        $this->templating   = $templating;
-        $this->pageManager  = $pageManager;
-        $this->proxy        = $proxy;
-    }
-
     /**
      * @Method("GET")
      * @Route("/all.html", name="pages")
@@ -66,7 +42,8 @@ class PageController
      */
     public function indexAction()
     {
-        $documents          = $this->pageManager->findPublishedPages();
+        $documentManager    = $this->getManager();
+        $documents          = $documentManager->findPublishedPages();
 
         if (!$documents) {
             throw new PageNotFoundException();
@@ -79,17 +56,19 @@ class PageController
 
     /**
      * @param string $slug
-     *
+     * 
      * @Method("GET")
-     * @Route("/page/{slug}.html", name="page_show")
-     *
+     * @Route("/{slug}.html", name="page_show")
+     * @Template()
+     * 
      * @return Template
      */
     public function showAction($slug)
     {
-        $response   = $this->proxy->createResponse($slug);
+        $proxy      = $this->getProxy();
+        $response   = $proxy->createResponse($slug);
 
-        return $this->templating->renderResponse(
+        return $this->render(
             'BlackPageBundle:Page:show.html.twig',
             array('document' => $response['object']),
             $response['response']
@@ -130,5 +109,21 @@ class PageController
         return array(
             'documents' => $documents,
         );
+    }
+
+    /**
+     * @return DocumentManager
+     */
+    protected function getManager()
+    {
+        return $this->get('black_page.manager.page');
+    }
+
+    /**
+     * @return object
+     */
+    protected function getProxy()
+    {
+        return $this->get('black_page.proxy');
     }
 }
