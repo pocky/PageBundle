@@ -1,24 +1,13 @@
 {% extends 'BlackConfigBundle:AdminConfig:base.html.twig' %}
 
 {% block content_top %}
-    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "page.admin.contentTop.config.page.text"} %}
+    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "black.bundle.page.adminConfig.page.contentTop.config.page.text"} %}
 {% endblock %}
 
 {% block page_content %}
 <div class="fluid">
-
-    <form id="validate" novalidate class="main grid9" action="{{ path('admin_config_page') }}" method="post" {{ form_enctype(form) }}>
+    <form id="validate" novalidate class="main" action="{{ path('admin_config_page') }}" method="post" {{ form_enctype(form) }}>
         {% include 'BlackAdminBundle:AdminForm:fieldset.html.twig' with {'form': form, 'title': "page.admin.fieldset.config.text"} %}
     </form>
-
-    <div class="grid3">
-        <div class="widget">
-            <div class="whead"><h6>{% trans from "views" %}page.admin.page.actions.text{% endtrans %}</h6><div class="clear"></div></div>
-            <div class="body">
-                <input type="submit" value="{% trans from "form" %}page.admin.page.submit.value{% endtrans %}" form="validate" class="buttonM bGreen floatL" /><div class="clear"></div>
-            </div>
-        </div>
-    </div>
-
 </div>
 {% endblock %}

@@ -93,7 +93,7 @@ class PageProxy implements ProxyInterface
             $object = null;
         }
         if (!$object) {
-            throw new NotFoundHttpException('Requested page not found.');
+            throw new PageNotFoundException();
         }
 
         $this->formatSeo($object);

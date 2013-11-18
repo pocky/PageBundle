@@ -31,11 +31,6 @@ abstract class Page extends AbstractPage
     use ThingDocumentTrait;
 
     /**
-     * @ODM\Id
-     */
-    protected $id;
-
-    /**
      * @ODM\String
      */
     protected $author;

@@ -1,14 +1,14 @@
 {% extends 'BlackPageBundle:AdminPage:base.html.twig' %}
 
 {% block content_top %}
-    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "page.admin.contentTop.edit.text"} %}
+    {% include 'BlackAdminBundle:Admin:contentTop.html.twig' with {'title': "black.bundle.page.adminPage.edit.contentTop.edit.text"} %}
 {% endblock %}
 
 {% block page_content %}
 <div class="fluid">
 
     <form id="validate" class="main" action="{{ path(admin_edit, { 'id': document.id }) }}" method="post" {{ form_enctype(form) }}>
-        {% include 'BlackPageBundle:AdminPage:fieldset.html.twig' with {'form': form, 'title': 'page.admin.edit.page.txt'} %}
+        {% include 'BlackPageBundle:AdminPage:fieldset.html.twig' with {'form': form, 'title': 'black.bundle.page.adminPage.edit.edit.page.text'} %}
     </form>
 
 </div>
