@@ -41,7 +41,6 @@ class Configuration implements ConfigurationInterface
 
         $this->addPageSection($rootNode);
         $this->addProxySection($rootNode);
-        $this->addConfigSection($rootNode);
 
         return $treeBuilder;
     }
@@ -60,30 +59,15 @@ class Configuration implements ConfigurationInterface
                         ->arrayNode('form')
                         ->addDefaultsIfNotSet()
                             ->children()
-                                ->scalarNode('name')
-                                    ->defaultValue('black_page_page_form')
-                                ->end()
-                                ->scalarNode('type')
-                                    ->defaultValue('Black\\Bundle\\PageBundle\\Form\\Type\\PageType')
-                                ->end()
-                                ->scalarNode('handler')
-                                    ->defaultValue('Black\\Bundle\\PageBundle\\Form\\Handler\\PageFormHandler')
-                                ->end()
-                                ->scalarNode('enabled_list')
-                                    ->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\EnabledList')
-                                ->end()
-                                ->scalarNode('status_list')
-                                    ->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\StatusList')
-                                ->end()
-                                ->scalarNode('page_list')
-                                    ->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\PageList')
-                                ->end()
-                                ->scalarNode('page_id_list')
-                                    ->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\PageIdList')
-                                ->end()
+                                ->scalarNode('name')->defaultValue('black_page_page_form')->end()
+                                ->scalarNode('type')->defaultValue('Black\\Bundle\\PageBundle\\Form\\Type\\PageType')->end()
+                                ->scalarNode('handler')->defaultValue('Black\\Bundle\\PageBundle\\Form\\Handler\\PageFormHandler')->end()
+                                ->scalarNode('enabled_list')->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\EnabledList')->end()
+                                ->scalarNode('status_list')->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\StatusList')->end()
+                                ->scalarNode('page_list')->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\PageList')->end()
+                                ->scalarNode('page_id_list')->defaultValue('Black\\Bundle\\PageBundle\\Form\\ChoiceList\\PageIdList')->end()
                             ->end()
                         ->end()
-
                     ->end()
                 ->end()
             ->end();
@@ -101,34 +85,6 @@ class Configuration implements ConfigurationInterface
                     ->canBeUnset()
                         ->children()
                             ->scalarNode('class')->defaultValue('Black\\Bundle\\PageBundle\\Proxy\\PageProxy')->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end();
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addConfigSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('config')
-                    ->addDefaultsIfNotSet()
-                    ->canBeUnset()
-                        ->children()
-                        ->arrayNode('form')
-                        ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('page_config_name')->defaultValue('black_page_config')->end()
-                                ->scalarNode('page_config_type')
-                                    ->defaultValue('Black\\Bundle\\PageBundle\\Form\\Type\\PageConfigType')
-                                ->end()
-                                ->scalarNode('page_config_handler')
-                                    ->defaultValue('Black\\Bundle\\ConfigBundle\\Form\\Handler\\ConfigFormHandler')
-                                ->end()
-                            ->end()
                         ->end()
                     ->end()
                 ->end()

@@ -101,6 +101,7 @@ class PageType extends AbstractType
             )
             ->add('datePublished', 'date', array(
                     'label'         => 'black.bundle.page.type.page.datePublished.label',
+                    'widget'        => 'single_text',
                     'years'         => array_reverse(
                         range(2000, date('Y', strtotime('now')))
                     ),

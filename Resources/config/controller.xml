@@ -10,7 +10,6 @@
 
     <services>
         <service id="black_page.controller.page" class="%black_page.page.controller.class%" scope="request">
-            <argument type="service" id="templating" />
             <argument type="service" id="black_page.manager.page" />
             <argument type="service" id="black_page.proxy" />
         </service>

@@ -11,16 +11,14 @@
 
 namespace Black\Bundle\PageBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use JMS\SecurityExtraBundle\Annotation\Secure;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Black\Bundle\CommonBundle\Controller\ControllerInterface;
+use Black\Bundle\CommonBundle\Doctrine\ManagerInterface;
+use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-
-use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
-use Black\Bundle\PageBundle\Model\PageManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Black\Bundle\PageBundle\Proxy\ProxyInterface;
 
 /**
@@ -32,38 +30,101 @@ use Black\Bundle\PageBundle\Proxy\ProxyInterface;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageController implements PageControllerInterface
+class PageController implements ControllerInterface
 {
     /**
-     * @var
+     * @var \Black\Bundle\CommonBundle\Controller\ControllerInterface
      */
-    protected $templating;
-
+    protected $controller;
     /**
-     * @var
+     * @var \Black\Bundle\CommonBundle\Form\Handler\HandlerInterface
      */
-    protected $pageManager;
-
+    protected $handler;
     /**
-     * @var
+     * @var \Black\Bundle\CommonBundle\Doctrine\ManagerInterface
+     */
+    protected $manager;
+    /**
+     * @var \Black\Bundle\PageBundle\Proxy\ProxyInterface
      */
     protected $proxy;
 
     /**
-     * @param EngineInterface      $templating
-     * @param PageManagerInterface $pageManager
-     * @param ProxyInterface       $proxy
+     * @param ControllerInterface    $controller
+     * @param HttpExceptionInterface $exception
+     * @param ManagerInterface       $manager
+     * @param HandlerInterface       $handler
      */
-    public function __construct(EngineInterface $templating, PageManagerInterface $pageManager, ProxyInterface $proxy)
+    public function __construct(
+        ControllerInterface $controller,
+        HttpExceptionInterface $exception,
+        ManagerInterface $manager,
+        HandlerInterface $handler,
+        ProxyInterface $proxy
+    )
     {
-        $this->templating   = $templating;
-        $this->pageManager  = $pageManager;
+        $this->controller   = $controller;
+        $this->manager      = $manager;
+        $this->handler      = $handler;
         $this->proxy        = $proxy;
+
+        $controller->setException($exception);
+        $controller->setManager($manager);
+        $controller->setHandler($handler);
+    }
+
+    /**
+     * @Method({"GET", "POST"})
+     * @Route("/new", name="page_create")
+     * @Template()
+     *
+     * @return array
+     */
+    public function createAction()
+    {
+        return $this->controller->createAction();
+    }
+
+    /**
+     * @Method({"POST", "GET"})
+     * @Route("/{value}/delete", name="page_delete")
+     *
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function deleteAction($value)
+    {
+        return $this->controller->deleteAction($value);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getException()
+    {
+        return $this->exception;
+    }
+
+    /**
+     * @return HandlerInterface
+     */
+    public function getHandler()
+    {
+        return $this->handler;
+    }
+
+    /**
+     * @return ManagerInterface
+     */
+    public function getManager()
+    {
+        return $this->manager;
     }
 
     /**
      * @Method("GET")
-     * @Route("/all.html", name="pages")
+     * @Route("/index.html", name="page_index")
      * @Template()
      * 
      * @return Template
@@ -71,32 +132,22 @@ class PageController implements PageControllerInterface
      */
     public function indexAction()
     {
-        $documents          = $this->pageManager->findPublishedPages();
-
-        if (!$documents) {
-            throw new PageNotFoundException();
-        }
-
-        return array(
-            'documents' => $documents,
-        );
+        return $this->controller->indexAction();
     }
 
     /**
-     * @param string $slug
-     * 
      * @Method("GET")
-     * @Route("/{slug}.html", name="page_show")
+     * @Route("/menu", name="_pages_menu")
      * @Template()
-     * 
+     *
      * @return Template
      */
-    public function showAction($slug)
+    public function menuPagesAction()
     {
-        $response   = $this->proxy->createResponse($slug);
+        $documents = $this->pageManager->findPublishedPages();
 
         return array(
-            'document' => $response['object']
+            'documents' => $documents,
         );
     }
 
@@ -119,18 +170,34 @@ class PageController implements PageControllerInterface
     }
 
     /**
+     * @param string $slug
+     *
      * @Method("GET")
-     * @Route("/menu", name="_pages_menu")
+     * @Route("/{slug}.html", name="page_show")
      * @Template()
-     * 
+     *
      * @return Template
      */
-    public function menuPagesAction()
+    public function showAction($slug)
     {
-        $documents = $this->pageManager->findPublishedPages();
+        $response   = $this->proxy->createResponse($slug);
 
         return array(
-            'documents' => $documents,
+            'document' => $response['object']
         );
+    }
+
+    /**
+     * @Method({"GET", "POST"})
+     * @Route("/{value}/update", name="page_update")
+     * @Template()
+     *
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function updateAction($value)
+    {
+        return $this->controller->updateAction($value);
     }
 }
