@@ -54,6 +54,7 @@ class PageController implements ControllerInterface
      * @param HttpExceptionInterface $exception
      * @param ManagerInterface       $manager
      * @param HandlerInterface       $handler
+     * @param ProxyInterface         $proxy
      */
     public function __construct(
         ControllerInterface $controller,
@@ -126,7 +127,7 @@ class PageController implements ControllerInterface
      * @Method("GET")
      * @Route("/index.html", name="page_index")
      * @Template()
-     * 
+     *
      * @return Template
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
@@ -173,14 +174,14 @@ class PageController implements ControllerInterface
      * @param string $slug
      *
      * @Method("GET")
-     * @Route("/{slug}.html", name="page_show")
+     * @Route("/{value}.html", name="page_show")
      * @Template()
      *
      * @return Template
      */
-    public function showAction($slug)
+    public function showAction($value)
     {
-        $response   = $this->proxy->createResponse($slug);
+        $response   = $this->proxy->createResponse($value);
 
         return array(
             'document' => $response['object']

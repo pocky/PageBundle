@@ -82,11 +82,11 @@ class PageType extends AbstractType
                     'required'      => true
                 )
             )
-            ->add('image', 'file', array(
+            /*->add('image', 'file', array(
                     'label'         => 'black.bundle.page.type.page.image.label',
                     'required'      => false
                 )
-            )
+            )*/
             ->add('status', 'black_page_choice_list_status', array(
                     'label'         => 'black.bundle.page.type.page.status.label',
                     'empty_value'   => 'black.bundle.page.type.page.status.empty',

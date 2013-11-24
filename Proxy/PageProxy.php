@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Black\Bundle\PageBundle\Exception\PageNotFoundException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
@@ -170,7 +170,7 @@ class PageProxy implements ProxyInterface
     {
         $request = $this->getRequest();
 
-        return $request->get('slug');
+        return $request->get('value');
     }
 
     /**
@@ -179,7 +179,7 @@ class PageProxy implements ProxyInterface
     protected function createQuery()
     {
         $param  = $this->getRequestParam();
-        $object = $this->getManager()->findPageBySlug($param);
+        $object = $this->getManager()->findDocument($param);
 
         return $object;
     }
@@ -193,7 +193,11 @@ class PageProxy implements ProxyInterface
     {
         $context   = $this->getContext();
 
-        return $context->isGranted($role);
+        if ($context->getToken()) {
+            return $context->isGranted($role);
+        }
+
+        return;
     }
 
     /**

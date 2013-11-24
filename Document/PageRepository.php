@@ -25,6 +25,23 @@ use Doctrine\ODM\MongoDB\DocumentNotFoundException;
 class PageRepository extends DocumentRepository implements PageRepositoryInferface
 {
     /**
+     * @param $key
+     *
+     * @return array|bool|\Doctrine\MongoDB\ArrayIterator|\Doctrine\MongoDB\Cursor|\Doctrine\MongoDB\EagerCursor|mixed|null
+     */
+    public function getPageByIdOrSlug($key)
+    {
+        $qb     = $this->getQueryBuilder();
+
+        $qb = $qb
+            ->addOr($qb->expr()->field('id')->equals($key))
+            ->addOr($qb->expr()->field('slug')->equals($key))
+            ->getQuery();
+
+        return $qb->getSingleResult();
+    }
+
+    /**
      * @param $slug
      *
      * @return object
@@ -36,15 +53,7 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
             ->field('slug')->equals($slug)
             ->getQuery();
 
-        try {
-            $page = $qb->getSingleResult();
-        } catch (DocumentNotFoundException $e) {
-            throw new DocumentNotFoundException(
-                sprintf('Unable to find an page object identified by "%s".', $slug)
-            );
-        }
-
-        return $page;
+        return $qb->getSingleResult();
     }
 
     /**
@@ -58,15 +67,7 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
             ->field('id')->equals($id)
             ->getQuery();
 
-        try {
-            $page = $qb->getSingleResult();
-        } catch (NoResultException $e) {
-            throw new DocumentNotFoundException(
-                sprintf('Unable to find an page object identified by "%s".', $id)
-            );
-        }
-
-        return $page;
+        return $qb->getSingleResult();
     }
 
     /**

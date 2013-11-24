@@ -5,12 +5,17 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.page.controller.class">Black\Bundle\PageBundle\Controller\PageController</parameter>
+        <parameter key="black_page.exception.class">Black\Bundle\PageBundle\Exception\PageNotFoundException</parameter>
     </parameters>
 
     <services>
-        <service id="black_page.controller.page" class="%black_page.page.controller.class%" scope="request">
+        <service id="black_page.exception.page" class="%black_page.exception.class%" />
+
+        <service id="black_page.controller.page" class="%black_page.controller.class.page%" scope="request">
+            <argument type="service" id="black_common.controller.common" />
+            <argument type="service" id="black_page.exception.page" />
             <argument type="service" id="black_page.manager.page" />
+            <argument type="service" id="black_page.page.form.handler" />
             <argument type="service" id="black_page.proxy" />
         </service>
     </services>

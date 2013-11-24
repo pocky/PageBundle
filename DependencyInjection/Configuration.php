@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
 
         $this->addPageSection($rootNode);
         $this->addProxySection($rootNode);
+        $this->addControllerSection($rootNode);
 
         return $treeBuilder;
     }
@@ -85,6 +86,30 @@ class Configuration implements ConfigurationInterface
                     ->canBeUnset()
                         ->children()
                             ->scalarNode('class')->defaultValue('Black\\Bundle\\PageBundle\\Proxy\\PageProxy')->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function addControllerSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('controller')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->arrayNode('class')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('page')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Controller\\PageController')
+                                ->end()
+                            ->end()
                         ->end()
                     ->end()
                 ->end()
