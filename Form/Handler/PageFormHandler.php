@@ -69,6 +69,7 @@ class PageFormHandler implements HandlerInterface
      * @param Request              $request
      * @param Router               $router
      * @param SessionInterface     $session
+     * @param array                $parameters
      */
     public function __construct(
         FormInterface $form,

@@ -38,10 +38,6 @@ class BlackPageExtension extends Extension
             );
         }
 
-        foreach (array('controller') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
         $this->remapParametersNamespaces(
             $config,
             $container,
