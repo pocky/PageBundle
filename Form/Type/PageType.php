@@ -107,9 +107,9 @@ class PageType extends AbstractType
                     ),
                     'required'      => true,
                     'empty_value'   => array(
-                        'year'  => 'black.bundle.page.type.page.datePublished.choice.year.text',
-                        'month' => 'black.bundle.page.type.page.datePublished.choice.month.text',
-                        'day'   => 'black.bundle.page.type.page.datePublished.choice.day.text')
+                        'year'  => 'black.bundle.page.type.page.datePublished.choice.year.label',
+                        'month' => 'black.bundle.page.type.page.datePublished.choice.month.label',
+                        'day'   => 'black.bundle.page.type.page.datePublished.choice.day.label')
                 )
             );
     }

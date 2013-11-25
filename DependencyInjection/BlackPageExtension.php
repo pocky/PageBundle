@@ -97,7 +97,7 @@ class BlackPageExtension extends Extension
             $config,
             $container,
             array(
-                'proxy'  => 'black_page.proxy.%s',
+                ''  => 'black_page.proxy.%s',
             )
         );
     }
@@ -145,6 +145,7 @@ class BlackPageExtension extends Extension
 
             if ($ns) {
                 if (!array_key_exists($ns, $config)) {
+                    var_dump($ns);
                     continue;
                 }
                 $namespaceConfig = $config[$ns];

@@ -67,7 +67,7 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
      */
     public function getPageById($id)
     {
-        $qb = $this->getQueryBuilder()
+        $qb = $this->getQueryBuilder('p')
                 ->where('p.id = :id')
                 ->setParameter('id', $id)
                 ->getQuery();
@@ -158,5 +158,21 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
     protected function getQueryBuilder($alias = 'p')
     {
         return $this->createQueryBuilder($alias);
+    }
+
+    public function countPages(){
+        $qb = $this->getQueryBuilder()
+            ->select('count(p)')
+            ->getQuery();
+
+            try {
+            $page = $qb->getSingleScalarResult();
+        } catch (NoResultException $e) {
+            throw new EntityNotFoundException(
+                sprintf('No pages founded')
+            );
+        }
+
+        return $page;
     }
 }

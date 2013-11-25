@@ -222,4 +222,13 @@ class PageManager implements PageManagerInterface, ManagerInterface
     {
         return $this->getRepository()->getPagesByAuthor($author);
     }
+
+    /**
+     * @return string
+     * @todo ajouter methode pour doc
+     */
+    public function countPages()
+    {
+        return $this->getRepository()->countPages();
+    }
 }

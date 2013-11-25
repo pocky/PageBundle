@@ -27,7 +27,6 @@ black:
                     home:
                         label: Page d'accueil
                         empty: Aucune
-
                 page:
                     general:
                         label: Général

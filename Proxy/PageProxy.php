@@ -31,49 +31,51 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class PageProxy implements ProxyInterface
 {
     /**
+     * @var \Symfony\Component\Security\Core\SecurityContext
+     */
+    protected $context;
+    /**
      * @var
      */
     protected $manager;
-
+    /**
+     * @var
+     */
+    protected $proxyEnabled;
+    /**
+     * @var \Symfony\Component\HttpFoundation\Request
+     */
+    protected $request;
+    /**
+     * @var \Symfony\Component\HttpFoundation\Response
+     */
+    protected $response;
     /**
      * @var \Black\Bundle\SeoBundle\Model\SeoInterface
      */
     protected $seo;
 
     /**
-     * @var \Symfony\Component\Security\Core\SecurityContext
-     */
-    protected $context;
-
-    /**
-     * @var \Symfony\Component\HttpFoundation\Request
-     */
-    protected $request;
-
-    /**
-     * @var \Symfony\Component\HttpFoundation\Response
-     */
-    protected $response;
-
-    /**
-     * @var \Symfony\Component\HttpKernel\Kernel
-     */
-    protected $kernel;
-
-    /**
      * @param PageManagerInterface $manager
-     * @param SeoInterface         $seo
      * @param SecurityContext      $context
+     * @param                      $proxyEnabled
      * @param Request              $request
-     * @param Kernel               $kernel
+     * @param SeoInterface         $seo
      */
-    public function __construct(PageManagerInterface $manager, SeoInterface $seo, SecurityContext $context, Request $request, Kernel $kernel)
+    public function __construct(
+        PageManagerInterface $manager,
+        SecurityContext $context,
+        $proxyEnabled,
+        Request $request,
+        SeoInterface $seo
+    )
     {
-        $this->manager = $manager;
-        $this->seo      = $seo;
-        $this->context  = $context;
-        $this->request  = $request;
-        $this->kernel   = $kernel;
+        $this->manager      = $manager;
+        $this->context      = $context;
+        $this->proxyEnabled = $proxyEnabled;
+        $this->request      = $request;
+        $this->seo          = $seo;
+
     }
 
     /**
@@ -123,6 +125,17 @@ class PageProxy implements ProxyInterface
     }
 
     /**
+     * @return mixed
+     */
+    protected function createQuery()
+    {
+        $param  = $this->getRequestParam();
+        $object = $this->getManager()->findPageBySlug($param);
+
+        return $object;
+    }
+
+    /**
      * @param Object $object
      */
     protected function formatSeo($object)
@@ -146,24 +159,6 @@ class PageProxy implements ProxyInterface
     }
 
     /**
-     * @param Object $object
-     *
-     * @return Response
-     */
-    protected function prepareResponse($object)
-    {
-        $response = $this->getResponse();
-
-        if ('prod' === $this->getKernel()->getEnvironment()) {
-            $response->setEtag($object->computeEtag());
-            $response->setLastModified($object->getUpdatedAt());
-            $response->setPublic();
-        }
-
-        return $response;
-    }
-
-    /**
      * @return mixed|null
      */
     protected function getRequestParam()
@@ -171,16 +166,6 @@ class PageProxy implements ProxyInterface
         $request = $this->getRequest();
 
         return $request->get('value');
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function createQuery($property)
-    {
-        $object = $this->getManager()->findDocument($property);
-
-        return $object;
     }
 
     /**
@@ -208,19 +193,21 @@ class PageProxy implements ProxyInterface
     }
 
     /**
-     * @return mixed
+     * @param Object $object
+     *
+     * @return Response
      */
-    private function getManager()
+    protected function prepareResponse($object)
     {
-        return $this->manager;
-    }
+        $response = $this->getResponse();
 
-    /**
-     * @return SeoInterface
-     */
-    private function getSeo()
-    {
-        return $this->seo;
+        if ($this->proxyEnabled) {
+            $response->setEtag($object->computeEtag());
+            $response->setLastModified($object->getUpdatedAt());
+            $response->setPublic();
+        }
+
+        return $response;
     }
 
     /**
@@ -232,11 +219,11 @@ class PageProxy implements ProxyInterface
     }
 
     /**
-     * @return null|\Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+     * @return mixed
      */
-    private function getToken()
+    private function getManager()
     {
-        return $this->getContext()->getToken();
+        return $this->manager;
     }
 
     /**
@@ -256,10 +243,18 @@ class PageProxy implements ProxyInterface
     }
 
     /**
-     * @return Kernel
+     * @return SeoInterface
      */
-    private function getKernel()
+    private function getSeo()
     {
-        return $this->kernel;
+        return $this->seo;
+    }
+
+    /**
+     * @return null|\Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+     */
+    private function getToken()
+    {
+        return $this->getContext()->getToken();
     }
 }

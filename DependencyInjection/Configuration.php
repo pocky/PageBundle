@@ -86,6 +86,7 @@ class Configuration implements ConfigurationInterface
                     ->canBeUnset()
                         ->children()
                             ->scalarNode('class')->defaultValue('Black\\Bundle\\PageBundle\\Proxy\\PageProxy')->end()
+                            ->scalarNode('enabled')->defaultValue('false')
                         ->end()
                     ->end()
                 ->end()
