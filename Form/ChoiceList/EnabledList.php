@@ -66,7 +66,7 @@ class EnabledList extends LazyChoiceList
     protected function getPageProperty()
     {
         $property = $this->manager->findPropertyByName('Page');
-git 
+
         return $property->getValue();
     }
 }
