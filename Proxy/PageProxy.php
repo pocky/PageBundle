@@ -176,10 +176,9 @@ class PageProxy implements ProxyInterface
     /**
      * @return mixed
      */
-    protected function createQuery()
+    protected function createQuery($property)
     {
-        $param  = $this->getRequestParam();
-        $object = $this->getManager()->findDocument($param);
+        $object = $this->getManager()->findDocument($property);
 
         return $object;
     }
