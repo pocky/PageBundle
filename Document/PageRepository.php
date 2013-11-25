@@ -146,4 +146,13 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
     {
         return $this->createQueryBuilder();
     }
+
+    /**
+     * @todo to test
+     * @return string
+     */
+    public function countPages()
+    {
+        return $qb = $this->getQueryBuilder()->getQuery()->execute()->count();
+    }
 }
