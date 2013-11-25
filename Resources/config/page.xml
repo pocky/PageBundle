@@ -13,7 +13,7 @@
 
         <service id="black_page.page.form.type" class="%black_page.page.form.type%">
             <argument>%black_page.page.model.class%</argument>
-            <argument type="service" id="black_admin.form.event.button" />
+            <argument type="service" id="black_assets.form.event.button" />
             <tag name="form.type" alias="black_page_page" />
         </service>
 
@@ -23,6 +23,13 @@
             <argument type="service" id="request" />
             <argument type="service" id="router" />
             <argument type="service" id="session" />
+            <argument type="collection">
+                <argument key="route" type="collection">
+                    <argument key="index">page_index</argument>
+                    <argument key="create">page_create</argument>
+                    <argument key="update">page_update</argument>
+                </argument>
+            </argument>
         </service>
 
         <service id="black_page.page.form.enabled_list" class="%black_page.page.form.enabled_list%" public="false">

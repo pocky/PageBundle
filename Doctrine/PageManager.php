@@ -12,6 +12,7 @@
 namespace Black\Bundle\PageBundle\Doctrine;
 
 use Black\Bundle\PageBundle\Model\PageManagerInterface;
+use Black\Bundle\CommonBundle\Doctrine\ManagerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
@@ -21,7 +22,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageManager implements PageManagerInterface
+class PageManager implements PageManagerInterface, ManagerInterface
 {
     /**
      * @var ObjectManager
@@ -103,29 +104,8 @@ class PageManager implements PageManagerInterface
         if (!$model instanceof $this->class) {
             throw new \InvalidArgumentException(gettype($model));
         }
-        $this->getManager()->remove($model);
-    }
 
-    /**
-     * Save and Flush a new model
-     *
-     * @param mixed $model
-     */
-    public function persistAndFlush($model)
-    {
-        $this->persist($model);
-        $this->flush();
-    }
-
-    /**
-     * Remove and flush
-     * 
-     * @param mixed $model
-     */
-    public function removeAndFlush($model)
-    {
         $this->getManager()->remove($model);
-        $this->getManager()->flush();
     }
 
     /**
@@ -147,6 +127,24 @@ class PageManager implements PageManagerInterface
     protected function getClass()
     {
         return $this->class;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function findDocuments()
+    {
+        return $this->repository->findAll();
+    }
+
+    /**
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function findDocument($value)
+    {
+        return $this->getRepository()->getPageByIdOrSlug($value);
     }
 
     /**

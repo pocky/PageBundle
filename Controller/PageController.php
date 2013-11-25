@@ -11,68 +11,144 @@
 
 namespace Black\Bundle\PageBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Serializer\Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use JMS\SecurityExtraBundle\Annotation\Secure;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Black\Bundle\CommonBundle\Controller\ControllerInterface;
+use Black\Bundle\CommonBundle\Doctrine\ManagerInterface;
+use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Black\Bundle\PageBundle\Exception\PageNotFoundException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use JMS\SecurityExtraBundle\Annotation\Secure;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+use Black\Bundle\PageBundle\Proxy\ProxyInterface;
 
 /**
  * Class PageController
  *
- * @Route("/page")
+ * @Route("/page", service="black_page.controller.page")
  *
  * @package Black\Bundle\PageBundle\Controller
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageController extends Controller
+class PageController implements ControllerInterface
 {
     /**
-     * @Method("GET")
-     * @Route("/all.html", name="pages")
+     * @var \Black\Bundle\CommonBundle\Controller\ControllerInterface
+     */
+    protected $controller;
+    /**
+     * @var \Black\Bundle\CommonBundle\Form\Handler\HandlerInterface
+     */
+    protected $handler;
+    /**
+     * @var \Black\Bundle\CommonBundle\Doctrine\ManagerInterface
+     */
+    protected $manager;
+    /**
+     * @var \Black\Bundle\PageBundle\Proxy\ProxyInterface
+     */
+    protected $proxy;
+
+    /**
+     * @param ControllerInterface    $controller
+     * @param HttpExceptionInterface $exception
+     * @param ManagerInterface       $manager
+     * @param HandlerInterface       $handler
+     * @param ProxyInterface         $proxy
+     */
+    public function __construct(
+        ControllerInterface $controller,
+        HttpExceptionInterface $exception,
+        ManagerInterface $manager,
+        HandlerInterface $handler,
+        ProxyInterface $proxy
+    )
+    {
+        $this->controller   = $controller;
+        $this->manager      = $manager;
+        $this->handler      = $handler;
+        $this->proxy        = $proxy;
+
+        $controller->setException($exception);
+        $controller->setManager($manager);
+        $controller->setHandler($handler);
+    }
+
+    /**
+     * @Method({"GET", "POST"})
+     * @Route("/new", name="page_create")
      * @Template()
-     * 
+     *
+     * @return array
+     */
+    public function createAction()
+    {
+        return $this->controller->createAction();
+    }
+
+    /**
+     * @Method({"POST", "GET"})
+     * @Route("/{value}/delete", name="page_delete")
+     *
+     * @param $value
+     *
+     * @return mixed
+     */
+    public function deleteAction($value)
+    {
+        return $this->controller->deleteAction($value);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getException()
+    {
+        return $this->exception;
+    }
+
+    /**
+     * @return HandlerInterface
+     */
+    public function getHandler()
+    {
+        return $this->handler;
+    }
+
+    /**
+     * @return ManagerInterface
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
+     * @Method("GET")
+     * @Route("/index.html", name="page_index")
+     * @Template()
+     *
      * @return Template
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function indexAction()
     {
-        $documentManager    = $this->getManager();
-        $documents          = $documentManager->findPublishedPages();
-
-        if (!$documents) {
-            throw new PageNotFoundException();
-        }
-
-        return array(
-            'documents' => $documents,
-        );
+        return $this->controller->indexAction();
     }
 
     /**
-     * @param string $slug
-     * 
      * @Method("GET")
-     * @Route("/{slug}.html", name="page_show")
+     * @Route("/menu", name="_pages_menu")
      * @Template()
-     * 
+     *
      * @return Template
      */
-    public function showAction($slug)
+    public function menuPagesAction()
     {
-        $proxy      = $this->getProxy();
-        $response   = $proxy->createResponse($slug);
+        $documents = $this->pageManager->findPublishedPages();
 
-        return $this->render(
-            'BlackPageBundle:Page:show.html.twig',
-            array('document' => $response['object']),
-            $response['response']
+        return array(
+            'documents' => $documents,
         );
     }
 
@@ -87,8 +163,7 @@ class PageController extends Controller
      */
     public function recentPagesAction($max = 3)
     {
-        $documentManager    = $this->getManager();
-        $documents = $documentManager->findLastPublishedPages($max);
+        $documents = $this->pageManager->findLastPublishedPages($max);
 
         return array(
             'documents' => $documents
@@ -96,35 +171,34 @@ class PageController extends Controller
     }
 
     /**
+     * @param string $slug
+     *
      * @Method("GET")
-     * @Route("/menu", name="_pages_menu")
+     * @Route("/{value}.html", name="page_show")
      * @Template()
-     * 
+     *
      * @return Template
      */
-    public function menuPagesAction()
+    public function showAction($value)
     {
-        $documentManager    = $this->getManager();
-        $documents = $documentManager->findPublishedPages();
+        $response   = $this->proxy->createResponse($value);
 
         return array(
-            'documents' => $documents,
+            'document' => $response['object']
         );
     }
 
     /**
-     * @return DocumentManager
+     * @Method({"GET", "POST"})
+     * @Route("/{value}/update", name="page_update")
+     * @Template()
+     *
+     * @param $value
+     *
+     * @return mixed
      */
-    protected function getManager()
+    public function updateAction($value)
     {
-        return $this->get('black_page.manager.page');
-    }
-
-    /**
-     * @return object
-     */
-    protected function getProxy()
-    {
-        return $this->get('black_page.proxy');
+        return $this->controller->updateAction($value);
     }
 }

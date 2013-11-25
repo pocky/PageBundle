@@ -26,6 +26,24 @@ use Doctrine\ORM\NoResultException;
 class PageRepository extends EntityRepository implements PageRepositoryInferface
 {
     /**
+     * @param $key
+     *
+     * @return mixed
+     */
+    public function getPageByIdOrSlug($key)
+    {
+        $qb     = $this->getQueryBuilder();
+
+        $qb = $qb
+            ->where('p.id = :key')
+            ->orWhere('p.slug = :key')
+            ->setParameter('key', $key)
+            ->getQuery();
+
+        return $qb->getSingleResult();
+    }
+
+    /**
      * @param $slug
      *
      * @return mixed
@@ -38,15 +56,7 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
                 ->setParameter('slug', $slug)
                 ->getQuery();
 
-        try {
-            $page = $qb->getSingleResult();
-        } catch (NoResultException $e) {
-            throw new EntityNotFoundException(
-                sprintf('Unable to find an page object identified by "%s".', $slug)
-            );
-        }
-
-        return $page;
+        return $qb->getSingleResult();
     }
 
     /**
@@ -62,14 +72,7 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
                 ->setParameter('id', $id)
                 ->getQuery();
 
-        try {
-            $page = $qb->getResult();
-        } catch (EntityNotFoundException $e) {
-            throw new EntityNotFoundException(
-                sprintf('Unable to find an page object identified by "%s".', $id)
-            );
-        }
-        return $page;
+        return $qb->getSingleResult();
     }
 
     /**
