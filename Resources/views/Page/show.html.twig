@@ -1,7 +1,14 @@
-{% extends '::base.html.twig' %}
+{% extends 'BlackMenuBundle:Menu:base.html.twig' %}
+
+{% set path = path is defined ? path : '' %}
 
 {% block body %}
+    <header>
+        <h2>Page Show</h2>
+    </header>
 
-    {% include 'BlackPageBundle:Page:content.html.twig' %}
+    {% if document %}
+        {% include 'BlackPageBundle:Page:content.html.twig' %}
+    {% endif %}
 
-{% endblock body %}
+{% endblock %}
