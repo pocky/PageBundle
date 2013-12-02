@@ -12,14 +12,10 @@
 namespace Black\Bundle\PageBundle\Form\Handler;
 
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Doctrine\Bundle\MongoDBBundle\ManagerRegistry;
-use Black\Bundle\PageBundle\Model\PageInterface;
-use Black\Bundle\PageBundle\Model\PageManagerInterface;
+use Black\Bundle\CommonBundle\Configuration\Configuration;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
+use Black\Bundle\PageBundle\Model\PageInterface;
 
 /**
  * Class PageFormHandler
@@ -31,61 +27,29 @@ use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
 class PageFormHandler implements HandlerInterface
 {
     /**
-     * @var
-     */
-    protected $factory;
-    /**
      * @var \Symfony\Component\Form\FormInterface
      */
     protected $form;
     /**
      * @var
      */
-    protected $manager;
-    /**
-     * @var
-     */
-    protected $parameters;
-    /**
-     * @var \Symfony\Component\HttpFoundation\Request
-     */
-    protected $request;
-    /**
-     * @var \Symfony\Bundle\FrameworkBundle\Routing\Router
-     */
-    protected $router;
-    /**
-     * @var \Symfony\Component\HttpFoundation\Session\SessionInterface
-     */
-    protected $session;
+    protected $configuration;
     /**
      * @var
      */
     protected $url;
 
     /**
-     * @param FormInterface        $form
-     * @param PageManagerInterface $manager
-     * @param Request              $request
-     * @param Router               $router
-     * @param SessionInterface     $session
-     * @param array                $parameters
+     * @param FormInterface $form
+     * @param Configuration $configuration
      */
     public function __construct(
         FormInterface $form,
-        PageManagerInterface $manager,
-        Request $request,
-        Router $router,
-        SessionInterface $session,
-        array $parameters = array()
+        Configuration $configuration
     )
     {
-        $this->form         = $form;
-        $this->manager      = $manager;
-        $this->parameters   = $parameters;
-        $this->request      = $request;
-        $this->router       = $router;
-        $this->session      = $session;
+        $this->form             = $form;
+        $this->configuration    = $configuration;
     }
 
     /**
@@ -113,9 +77,9 @@ class PageFormHandler implements HandlerInterface
     {
         $this->form->setData($page);
 
-        if ('POST' === $this->request->getMethod()) {
+        if ('POST' === $this->configuration->getRequest()->getMethod()) {
 
-            $this->form->handleRequest($this->request);
+            $this->form->handleRequest($this->configuration->getRequest());
 
             if ($this->form->has('delete') && $this->form->get('delete')->isClicked()) {
                 return $this->onDelete($page);
@@ -146,7 +110,7 @@ class PageFormHandler implements HandlerInterface
      */
     protected function generateUrl($route, $parameters = array(), $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH)
     {
-        return $this->router->generate($route, $parameters, $referenceType);
+        return $this->configuration->getRouter()->generate($route, $parameters, $referenceType);
     }
 
     /**
@@ -156,11 +120,11 @@ class PageFormHandler implements HandlerInterface
      */
     protected function onDelete(PageInterface $page)
     {
-        $this->manager->remove($page);
-        $this->manager->flush();
+        $this->configuration->getManager()->remove($page);
+        $this->configuration->getManager()->flush();
 
-        $this->setFlash('success', 'black.bundle.page.success.page.admin.page.delete');
-        $this->setUrl($this->generateUrl($this->parameters['route']['index']));
+        $this->configuration->setFlash('success', 'black.bundle.page.success.page.admin.page.delete');
+        $this->setUrl($this->generateUrl($this->configuration->getParameter('route')['index']));
 
         return true;
     }
@@ -170,7 +134,7 @@ class PageFormHandler implements HandlerInterface
      */
     protected function onFailed()
     {
-        $this->setFlash('error', 'black.bundle.page.error.page.admin.page.not.valid');
+        $this->configuration->setFlash('error', 'black.bundle.page.error.page.admin.page.not.valid');
 
         return false;
     }
@@ -185,33 +149,23 @@ class PageFormHandler implements HandlerInterface
         $page->upload();
 
         if (!$page->getId()) {
-            $this->manager->persist($page);
+            $this->configuration->getManager()->persist($page);
         }
 
-        $this->manager->flush();
+        $this->configuration->getManager()->flush();
 
         if ($this->form->get('save')->isClicked()) {
-            $this->setFlash('success','black.bundle.page.success.page.admin.page.save');
-            $this->setUrl($this->generateUrl($this->parameters['route']['update'], array('value' => $page->getId())));
+            $this->configuration->setFlash('success', 'black.bundle.page.success.page.admin.page.save');
+            $this->setUrl($this->generateUrl($this->configuration->getParameter('route')['update'], array('value' => $page->getId())));
 
             return true;
         }
 
         if ($this->form->get('saveAndAdd')->isClicked()) {
-            $this->setFlash('success','black.bundle.page.success.page.admin.page.saveAndAdd');
-            $this->setUrl($this->generateUrl($this->parameters['route']['create']));
+            $this->configuration->setFlash('success', 'black.bundle.page.success.page.admin.page.saveAndAdd');
+            $this->setUrl($this->generateUrl($this->configuration->getParameter('route')['create']));
 
             return true;
         }
-    }
-
-    /**
-     * @param $name
-     * @param $msg
-     * @return mixed
-     */
-    protected function setFlash($name, $msg)
-    {
-        return $this->session->getFlashBag()->add($name, $msg);
     }
 }

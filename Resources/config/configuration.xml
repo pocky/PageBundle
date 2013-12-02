@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="black_page.configuration.class.page">Black\Bundle\CommonBundle\Configuration\Configuration</parameter>
+    </parameters>
+
+    <services>
+        <service id="black_page.configuration.page" class="%black_page.configuration.class.page%" scope="request">
+            <argument type="service" id="request" />
+            <argument type="service" id="router" />
+            <argument type="service" id="session" />
+            <argument type="service" id="black_page.exception.page" />
+            <argument type="service" id="black_page.manager.page" />
+            <argument type="collection">
+                <argument key="route" type="collection">
+                    <argument key="index">page_index</argument>
+                    <argument key="create">page_create</argument>
+                    <argument key="update">page_update</argument>
+                </argument>
+            </argument>
+        </service>
+    </services>
+</container>

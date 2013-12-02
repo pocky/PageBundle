@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -12,9 +12,7 @@
         <service id="black_page.exception.page" class="%black_page.exception.class%" />
 
         <service id="black_page.controller.page" class="%black_page.controller.class.page%" scope="request">
-            <argument type="service" id="black_common.controller.common" />
-            <argument type="service" id="black_page.exception.page" />
-            <argument type="service" id="black_page.manager.page" />
+            <argument type="service" id="black_page.configuration.page" />
             <argument type="service" id="black_page.page.form.handler" />
             <argument type="service" id="black_page.proxy" />
         </service>

@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -19,17 +19,7 @@
 
         <service id="black_page.page.form.handler" class="%black_page.page.form.handler%" scope="request" public="true">
             <argument type="service" id="black_page.page.form" />
-            <argument type="service" id="black_page.manager.page" />
-            <argument type="service" id="request" />
-            <argument type="service" id="router" />
-            <argument type="service" id="session" />
-            <argument type="collection">
-                <argument key="route" type="collection">
-                    <argument key="index">page_index</argument>
-                    <argument key="create">page_create</argument>
-                    <argument key="update">page_update</argument>
-                </argument>
-            </argument>
+            <argument type="service" id="black_page.configuration.page" />
         </service>
 
         <service id="black_page.page.form.enabled_list" class="%black_page.page.form.enabled_list%" public="false">

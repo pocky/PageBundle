@@ -11,15 +11,13 @@
 
 namespace Black\Bundle\PageBundle\Controller;
 
-use Black\Bundle\CommonBundle\Controller\ControllerInterface;
-use Black\Bundle\CommonBundle\Doctrine\ManagerInterface;
+use Black\Bundle\CommonBundle\Controller\CommonController;
+use Black\Bundle\CommonBundle\Configuration\Configuration;
 use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
+use Black\Bundle\PageBundle\Proxy\ProxyInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use JMS\SecurityExtraBundle\Annotation\Secure;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use Black\Bundle\PageBundle\Proxy\ProxyInterface;
 
 /**
  * Class PageController
@@ -30,48 +28,23 @@ use Black\Bundle\PageBundle\Proxy\ProxyInterface;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageController implements ControllerInterface
+class PageController extends CommonController
 {
-    /**
-     * @var \Black\Bundle\CommonBundle\Controller\ControllerInterface
-     */
-    protected $controller;
-    /**
-     * @var \Black\Bundle\CommonBundle\Form\Handler\HandlerInterface
-     */
-    protected $handler;
-    /**
-     * @var \Black\Bundle\CommonBundle\Doctrine\ManagerInterface
-     */
-    protected $manager;
     /**
      * @var \Black\Bundle\PageBundle\Proxy\ProxyInterface
      */
     protected $proxy;
 
     /**
-     * @param ControllerInterface    $controller
-     * @param HttpExceptionInterface $exception
-     * @param ManagerInterface       $manager
-     * @param HandlerInterface       $handler
-     * @param ProxyInterface         $proxy
+     * @param Configuration    $configuration
+     * @param HandlerInterface $handler
+     * @param ProxyInterface   $proxy
      */
-    public function __construct(
-        ControllerInterface $controller,
-        HttpExceptionInterface $exception,
-        ManagerInterface $manager,
-        HandlerInterface $handler,
-        ProxyInterface $proxy
-    )
+    public function __construct(Configuration $configuration, HandlerInterface $handler, ProxyInterface $proxy)
     {
-        $this->controller   = $controller;
-        $this->manager      = $manager;
-        $this->handler      = $handler;
-        $this->proxy        = $proxy;
+        parent::__construct($configuration, $handler);
 
-        $controller->setException($exception);
-        $controller->setManager($manager);
-        $controller->setHandler($handler);
+        $this->proxy    = $proxy;
     }
 
     /**
@@ -83,7 +56,7 @@ class PageController implements ControllerInterface
      */
     public function createAction()
     {
-        return $this->controller->createAction();
+        return parent::createAction();
     }
 
     /**
@@ -96,31 +69,7 @@ class PageController implements ControllerInterface
      */
     public function deleteAction($value)
     {
-        return $this->controller->deleteAction($value);
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getException()
-    {
-        return $this->exception;
-    }
-
-    /**
-     * @return HandlerInterface
-     */
-    public function getHandler()
-    {
-        return $this->handler;
-    }
-
-    /**
-     * @return ManagerInterface
-     */
-    public function getManager()
-    {
-        return $this->manager;
+        return parent::deleteAction($value);
     }
 
     /**
@@ -133,7 +82,7 @@ class PageController implements ControllerInterface
      */
     public function indexAction()
     {
-        return $this->controller->indexAction();
+        return parent::indexAction();
     }
 
     /**
@@ -145,7 +94,7 @@ class PageController implements ControllerInterface
      */
     public function menuPagesAction()
     {
-        $documents = $this->pageManager->findPublishedPages();
+        $documents = $this->configuration->getManager()->findPublishedPages();
 
         return array(
             'documents' => $documents,
@@ -163,7 +112,7 @@ class PageController implements ControllerInterface
      */
     public function recentPagesAction($max = 3)
     {
-        $documents = $this->pageManager->findLastPublishedPages($max);
+        $documents = $this->configuration->getManager()->findLastPublishedPages($max);
 
         return array(
             'documents' => $documents
@@ -171,15 +120,15 @@ class PageController implements ControllerInterface
     }
 
     /**
-     * @param string $slug
+     * @param string $value
      *
      * @Method("GET")
-     * @Route("/{value}.html", name="page_show")
+     * @Route("/{value}.html", name="page_read")
      * @Template()
      *
      * @return Template
      */
-    public function showAction($value)
+    public function readAction($value)
     {
         $response   = $this->proxy->createResponse($value);
 
@@ -199,6 +148,6 @@ class PageController implements ControllerInterface
      */
     public function updateAction($value)
     {
-        return $this->controller->updateAction($value);
+        return parent::updateAction($value);
     }
 }
