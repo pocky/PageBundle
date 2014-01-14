@@ -6,6 +6,7 @@ black:
                     admin:
                         page:
                             delete: La page a bien été supprimée
+                            delete2: Les pages ont bien été supprimées
                             edit: La page a bien été édité
                             save: Votre page a bien été sauvée
                             saveAndAdd: Votre page a bien été sauvée et publiée
