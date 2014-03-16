@@ -2,7 +2,7 @@
     "name": "black/page-bundle",
     "type": "symfony-bundle",
     "description": "Symfony BlackPageBundle",
-    "keywords": ["Page manager"],
+    "keywords": ["Bundle", "Symfony", "Black"],
     "homepage": "http://www.lablackroom.com",
     "license": "MIT",
     "authors": [
@@ -14,8 +14,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "black/common-bundle": "@dev",
-        "black/seo-bundle": "@dev"
+        "black/common-bundle": "0.2.*",
+        "black/seo-bundle": "0.2.*"
     },
     "autoload": {
         "psr-0": { "Black\\Bundle\\PageBundle": "" }
