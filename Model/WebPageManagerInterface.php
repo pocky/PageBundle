@@ -12,12 +12,12 @@
 namespace Black\Bundle\PageBundle\Model;
 
 /**
- * Class PageManagerInterface
+ * Interface WebPageManagerInterface
  *
  * @package Black\Bundle\PageBundle\Model
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-interface PageManagerInterface
+interface WebPageManagerInterface
 {
 }

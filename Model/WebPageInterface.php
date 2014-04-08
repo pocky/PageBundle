@@ -12,33 +12,28 @@
 namespace Black\Bundle\PageBundle\Model;
 
 /**
- * Class PageInterface
+ * Interface WebPageInterface
  *
  * @package Black\Bundle\PageBundle\Model
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-interface PageInterface
+interface WebPageInterface
 {
     /**
      * @return mixed
      */
-    static public function getStatusPublication();
-
-    /**
-     * @return mixed
-     */
-    public function getId();
-
-    /**
-     * @return mixed
-     */
-    public function getAbout();
-
-    /**
-     * @return mixed
-     */
     public function getAuthor();
+
+    /**
+     * @return mixed
+     */
+    public function getDateCreated();
+
+    /**
+     * @return mixed
+     */
+    public function getDateModified();
 
     /**
      * @return mixed
@@ -48,45 +43,30 @@ interface PageInterface
     /**
      * @return mixed
      */
+    public function getHeadline();
+
+    /**
+     * @return mixed
+     */
     public function getImage();
 
     /**
      * @return mixed
      */
-    public function getStatus();
+    public function getPublication();
+
+    /**
+     * @return mixed
+     */
+    public function getName();
+
+    /**
+     * @return mixed
+     */
+    public function getSlug();
 
     /**
      * @return mixed
      */
     public function getText();
-
-    /**
-     * @return mixed
-     */
-    public function getPrimaryImageOfPage();
-
-    /**
-     * @return mixed
-     */
-    public function getEnabled();
-
-    /**
-     * @return mixed
-     */
-    public function isPublic();
-
-    /**
-     * @return mixed
-     */
-    public function isProtected();
-
-    /**
-     * @return mixed
-     */
-    public function isPrivate();
-
-    /**
-     * @return mixed
-     */
-    public function getRouteName();
 }

@@ -12,49 +12,49 @@
 namespace Black\Bundle\PageBundle\Model;
 
 /**
- * Class PageRepositoryInferface
+ * Class WebPageRepositoryInferface
  *
  * @package Black\Bundle\PageBundle\Model
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-interface PageRepositoryInferface
+interface WebPageRepositoryInferface
 {
     /**
      * @param $slug
      *
      * @return mixed
      */
-    public function getPageBySlug($slug);
+    public function getWebPageBySlug($slug);
 
     /**
      * @param $id
      * @return mixed
      */
-    public function getPageById($id);
+    public function getWebPageById($id);
 
     /**
      * @param $status
      * @return mixed
      */
-    public function getPagesByStatus($status);
+    public function getWebPagesByStatus($status);
 
     /**
      * @param      $status
      * @param null $limit
      * @return mixed
      */
-    public function getPages($status, $limit = null);
+    public function getWebPages($status, $limit = null);
 
     /**
      * @param $text
      * @return mixed
      */
-    public function searchPage($text);
+    public function searchWebPage($text);
 
     /**
      * @param $author
      * @return mixed
      */
-    public function getPagesByAuthor($author);
+    public function getWebPagesByAuthor($author);
 }
