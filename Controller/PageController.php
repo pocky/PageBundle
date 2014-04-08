@@ -28,7 +28,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageController extends CommonController
+class PageController
 {
     /**
      * @var \Black\Bundle\PageBundle\Proxy\ProxyInterface
@@ -36,14 +36,10 @@ class PageController extends CommonController
     protected $proxy;
 
     /**
-     * @param Configuration    $configuration
-     * @param HandlerInterface $handler
      * @param ProxyInterface   $proxy
      */
-    public function __construct(Configuration $configuration, HandlerInterface $handler, ProxyInterface $proxy)
+    public function __construct(ProxyInterface $proxy)
     {
-        parent::__construct($configuration, $handler);
-
         $this->proxy    = $proxy;
     }
 
@@ -56,7 +52,7 @@ class PageController extends CommonController
      */
     public function createAction()
     {
-        return parent::createAction();
+        return array();
     }
 
     /**
@@ -69,7 +65,7 @@ class PageController extends CommonController
      */
     public function deleteAction($value)
     {
-        return parent::deleteAction($value);
+        return array();
     }
 
     /**
@@ -82,7 +78,7 @@ class PageController extends CommonController
      */
     public function indexAction()
     {
-        return parent::indexAction();
+        return array();
     }
 
     /**
@@ -94,7 +90,7 @@ class PageController extends CommonController
      */
     public function menuPagesAction()
     {
-        $documents = $this->configuration->getManager()->findPublishedPages();
+        $documents = $this->getManager()->findPublishedPages();
 
         return array(
             'documents' => $documents,
@@ -112,7 +108,7 @@ class PageController extends CommonController
      */
     public function recentPagesAction($max = 3)
     {
-        $documents = $this->configuration->getManager()->findLastPublishedPages($max);
+        $documents = $this->getManager()->findLastPublishedPages($max);
 
         return array(
             'documents' => $documents
@@ -148,6 +144,6 @@ class PageController extends CommonController
      */
     public function updateAction($value)
     {
-        return parent::updateAction($value);
+        return array();
     }
 }
