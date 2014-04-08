@@ -23,6 +23,37 @@ use Symfony\Component\Validator\Constraints as Assert;
 abstract class Page implements PageInterface
 {
     /**
+     * A short description of the item
+     *
+     * @Assert\Type(type="string")
+     */
+    protected $description;
+
+    /**
+     * The name of the item
+     *
+     * @Assert\Length(max="255")
+     * @Assert\Type(type="string")
+     */
+    protected $name;
+
+    /**
+     * The slug of the item
+     *
+     * @Assert\Length(max="255")
+     * @Assert\Type(type="string")
+     * @Gedmo\Slug(fields={"name"})
+     */
+    protected $slug;
+
+    /**
+     * URL of the item
+     *
+     * @Assert\Url
+     */
+    protected $url;
+
+    /**
      * @var
      */
     protected $about;
@@ -94,6 +125,74 @@ abstract class Page implements PageInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * @return string $name
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string $slug
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @return string $url
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return $this
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
     }
 
     /**

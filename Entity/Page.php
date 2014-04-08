@@ -12,8 +12,8 @@
 namespace Black\Bundle\PageBundle\Entity;
 
 use Black\Bundle\PageBundle\Model\Page as AbstractPage;
-use Black\Bundle\CommonBundle\Traits\ThingEntityTrait;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -28,7 +28,35 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 abstract class Page extends AbstractPage
 {
-    use ThingEntityTrait;
+    use TimestampableEntity;
+
+    /**
+     * A short description of the item
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    protected $description;
+
+    /**
+     * The name of the item
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    protected $name;
+
+    /**
+     * The slug of the item
+     *
+     * @ORM\Column(length=255, unique=true)
+     */
+    protected $slug;
+
+    /**
+     * URL of the item
+     *
+     * @ORM\Column(name="url", type="text", nullable=true)
+     */
+    protected $url;
 
     /**
      * @ORM\Column(name="author", type="string", length=255, nullable=true)

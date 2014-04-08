@@ -12,8 +12,8 @@
 namespace Black\Bundle\PageBundle\Document;
 
 use Black\Bundle\PageBundle\Model\Page as AbstractPage;
-use Black\Bundle\CommonBundle\Traits\ThingDocumentTrait;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
+use Gedmo\Timestampable\Traits\TimestampableDocument;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -28,7 +28,33 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 abstract class Page extends AbstractPage
 {
-    use ThingDocumentTrait;
+    use TimestampableDocument;
+
+    /**
+     * @ODM\String
+     */
+    protected $description;
+
+    /**
+     * The name of the item
+     *
+     * @ODM\String
+     */
+    protected $name;
+
+    /**
+     * The slug of the item
+     *
+     * @ODM\String
+     */
+    protected $slug;
+
+    /**
+     * URL of the items
+     *
+     * @ODM\String
+     */
+    protected $url;
 
     /**
      * @ODM\String
