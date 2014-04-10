@@ -14,13 +14,13 @@ namespace Black\Bundle\PageBundle\Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class UserNotFoundException
+ * Class WebPageNotFoundException
  *
  * @package Black\Bundle\PageBundle\Exception
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageNotFoundException extends NotFoundHttpException
+class WebPageNotFoundException extends NotFoundHttpException
 {
     /**
      * Constructor.

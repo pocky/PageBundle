@@ -12,23 +12,23 @@
 namespace Black\Bundle\PageBundle\Proxy;
 
 use Black\Bundle\SeoBundle\Model\SeoInterface;
-use Black\Bundle\PageBundle\Model\PageManagerInterface;
+use Black\Bundle\PageBundle\Model\WebPageManagerInterface;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Black\Bundle\PageBundle\Exception\PageNotFoundException;
+use Black\Bundle\PageBundle\Exception\WebPageNotFoundException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
- * Class PageProxy
+ * Class WebPageProxy
  *
  * @package Black\Bundle\PageBundle\Proxy
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageProxy implements ProxyInterface
+class WebPageProxy implements ProxyInterface
 {
     /**
      * @var \Symfony\Component\Security\Core\SecurityContext
@@ -56,14 +56,14 @@ class PageProxy implements ProxyInterface
     protected $seo;
 
     /**
-     * @param PageManagerInterface $manager
-     * @param SecurityContext      $context
-     * @param                      $proxyEnabled
-     * @param Request              $request
-     * @param SeoInterface         $seo
+     * @param WebPageManagerInterface $manager
+     * @param SecurityContext         $context
+     * @param                         $proxyEnabled
+     * @param Request                 $request
+     * @param SeoInterface            $seo
      */
     public function __construct(
-        PageManagerInterface $manager,
+        WebPageManagerInterface $manager,
         SecurityContext $context,
         $proxyEnabled,
         Request $request,
@@ -87,15 +87,15 @@ class PageProxy implements ProxyInterface
      */
     public function createResponse($property)
     {
-        $authenticated  = $this->checkRole('IS_AUTHENTICATED_FULLY');
+        $authenticated = $this->checkRole('IS_AUTHENTICATED_FULLY');
 
         try {
-            $object         = $this->createQuery($property);
+            $object = $this->createQuery($property);
         } catch (\Exception $e) {
             $object = null;
         }
         if (!$object) {
-            throw new PageNotFoundException();
+            throw new WebPageNotFoundException();
         }
 
         $this->formatSeo($object);

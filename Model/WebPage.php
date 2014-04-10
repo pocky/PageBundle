@@ -33,6 +33,7 @@ abstract class WebPage implements WebPageInterface
      *
      * @Assert\Type(type="string")
      * @Assert\Length(max="255")
+     * @Assert\NotNull
      */
     protected $name;
 
@@ -67,7 +68,7 @@ abstract class WebPage implements WebPageInterface
     /**
      * URL of an image of the WebPage
      *
-     * @var
+     * @Assert\Image(maxSize="2M")
      */
     protected $image;
 
@@ -75,6 +76,7 @@ abstract class WebPage implements WebPageInterface
      * Publication of the page
      *
      * @Assert\Choice(callback="getPublicationStatus")
+     * @Assert\NotNull
      */
     protected $publication;
 
@@ -141,11 +143,11 @@ abstract class WebPage implements WebPageInterface
     }
 
     /**
-     * @param $dateCreated
+     * @param \DateTime $dateCreated
      *
      * @return $this
      */
-    public function setDateCreated($dateCreated)
+    public function setDateCreated(\DateTime $dateCreated)
     {
         $this->dateCreated = $dateCreated;
 
@@ -161,11 +163,11 @@ abstract class WebPage implements WebPageInterface
     }
 
     /**
-     * @param $dateModified
+     * @param \DateTime $dateModified
      *
      * @return $this
      */
-    public function setDateModified($dateModified)
+    public function setDateModified(\DateTime $dateModified)
     {
         $this->dateModified = $dateModified;
 
@@ -181,11 +183,11 @@ abstract class WebPage implements WebPageInterface
     }
 
     /**
-     * @param $datePublished
+     * @param \DateTime $datePublished
      *
      * @return $this
      */
-    public function setDatePublished($datePublished)
+    public function setDatePublished(\DateTime $datePublished)
     {
         $this->datePublished = $datePublished;
 

@@ -15,13 +15,13 @@ use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
 /**
- * Class StatusList
+ * Class PublicationStatusList
  *
  * @package Black\Bundle\PageBundle\Form\ChoiceList
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class StatusList extends LazyChoiceList
+class PublicationStatusList extends LazyChoiceList
 {
     /**
      * @return SimpleChoiceList

@@ -11,9 +11,8 @@
 
 namespace Black\Bundle\PageBundle\Document;
 
-use Black\Bundle\PageBundle\Model\PageRepositoryInferface;
+use Black\Bundle\PageBundle\Model\WebPageRepositoryInferface;
 use Doctrine\ODM\MongoDB\DocumentRepository;
-use Doctrine\ODM\MongoDB\DocumentNotFoundException;
 
 /**
  * Class PageRepository
@@ -22,16 +21,18 @@ use Doctrine\ODM\MongoDB\DocumentNotFoundException;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageRepository extends DocumentRepository implements PageRepositoryInferface
+class WebPageRepository extends DocumentRepository implements WebPageRepositoryInferface
 {
     /**
      * @param $key
      *
-     * @return array|bool|\Doctrine\MongoDB\ArrayIterator|\Doctrine\MongoDB\Cursor|\Doctrine\MongoDB\EagerCursor|mixed|null
+     * @return array|null|object
+     * @throws \UnexpectedValueException
+     * @throws \BadMethodCallException
      */
-    public function getPageByIdOrSlug($key)
+    public function getWebPageByIdOrSlug($key)
     {
-        $qb     = $this->getQueryBuilder();
+        $qb = $this->getQueryBuilder();
 
         $qb = $qb
             ->addOr($qb->expr()->field('id')->equals($key))
@@ -44,10 +45,11 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
     /**
      * @param $slug
      *
-     * @return object
-     * @throws \Doctrine\ODM\MongoDB\DocumentNotFoundException
+     * @return array|mixed|null|object
+     * @throws \UnexpectedValueException
+     * @throws \BadMethodCallException
      */
-    public function getPageBySlug($slug)
+    public function getWebPageBySlug($slug)
     {
         $qb = $this->getQueryBuilder()
             ->field('slug')->equals($slug)
@@ -58,10 +60,12 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
 
     /**
      * @param $id
-     * @return object
-     * @throws \Doctrine\ODM\MongoDB\DocumentNotFoundException
+     *
+     * @return array|mixed|null|object
+     * @throws \UnexpectedValueException
+     * @throws \BadMethodCallException
      */
-    public function getPageById($id)
+    public function getWebPageById($id)
     {
         $qb = $this->getQueryBuilder()
             ->field('id')->equals($id)
@@ -72,9 +76,12 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
 
     /**
      * @param $status
-     * @return array|bool|\Doctrine\MongoDB\ArrayIterator|\Doctrine\MongoDB\Cursor|\Doctrine\MongoDB\EagerCursor|mixed|null
+     *
+     * @return mixed
+     * @throws \Doctrine\MongoDB\Exception\ResultException
+     * @throws \Exception
      */
-    public function getPagesByStatus($status)
+    public function getWebPagesByStatus($status)
     {
         $qb = $this->getQueryBuilder()
             ->field('status')->equals($status)
@@ -87,14 +94,16 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
     /**
      * @param      $status
      * @param null $limit
-     * @return array|bool|\Doctrine\MongoDB\ArrayIterator|\Doctrine\MongoDB\Cursor|\Doctrine\MongoDB\EagerCursor|mixed|null
+     *
+     * @return mixed
+     * @throws \Doctrine\MongoDB\Exception\ResultException
+     * @throws \Exception
      */
-    public function getPages($status, $limit = null)
+    public function getWebPages($status, $limit = null)
     {
         $qb = $this->getQueryBuilder()
             ->field('status')->equals($status)
-            ->sort('updatedAt', 'desc')
-        ;
+            ->sort('updatedAt', 'desc');
 
         if ($limit) {
             $qb = $qb->limit($limit);
@@ -109,8 +118,10 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
      * @param $text
      *
      * @return mixed
+     * @throws \Doctrine\MongoDB\Exception\ResultException
+     * @throws \Exception
      */
-    public function searchPage($text)
+    public function searchWebPage($text)
     {
         $text = new \MongoRegex('/' . $text . '/\i');
 
@@ -119,8 +130,7 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
             ->addOr($qb->expr()->field('name')->equals($text))
             ->addOr($qb->expr()->field('text')->equals($text))
             ->addOr($qb->expr()->field('description')->equals($text))
-            ->getQuery()
-        ;
+            ->getQuery();
 
         return $qb->execute();
     }
@@ -128,9 +138,11 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
     /**
      * @param $author
      *
-     * @return array|bool|\Doctrine\MongoDB\ArrayIterator|\Doctrine\MongoDB\Cursor|\Doctrine\MongoDB\EagerCursor|mixed|null
+     * @return mixed
+     * @throws \Doctrine\MongoDB\Exception\ResultException
+     * @throws \Exception
      */
-    public function getPagesByAuthor($author)
+    public function getWebPagesByAuthor($author)
     {
         $qb = $this->getQueryBuilder()
             ->field('author')->equals($author)
@@ -146,14 +158,5 @@ class PageRepository extends DocumentRepository implements PageRepositoryInferfa
     protected function getQueryBuilder()
     {
         return $this->createQueryBuilder();
-    }
-
-    /**
-     * @todo to test
-     * @return string
-     */
-    public function countPages()
-    {
-        return $qb = $this->getQueryBuilder()->getQuery()->execute()->count();
     }
 }

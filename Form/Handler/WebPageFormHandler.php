@@ -18,13 +18,13 @@ use Black\Bundle\CommonBundle\Form\Handler\HandlerInterface;
 use Black\Bundle\PageBundle\Model\PageInterface;
 
 /**
- * Class PageFormHandler
+ * Class WebPageFormHandler
  *
  * @package Black\Bundle\PageBundle\Form\Handler
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageFormHandler implements HandlerInterface
+class WebPageFormHandler implements HandlerInterface
 {
     /**
      * @var \Symfony\Component\Form\FormInterface

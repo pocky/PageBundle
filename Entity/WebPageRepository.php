@@ -11,26 +11,30 @@
 
 namespace Black\Bundle\PageBundle\Entity;
 
-use Black\Bundle\PageBundle\Model\PageRepositoryInferface;
+use Black\Bundle\PageBundle\Model\WebPageRepositoryInferface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\NoResultException;
 
 /**
- * Class PageRepository
+ * Class WebPageRepository
  *
  * @package Black\Bundle\PageBundle\Entity
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageRepository extends EntityRepository implements PageRepositoryInferface
+class WebPageRepository extends EntityRepository implements WebPageRepositoryInferface
 {
     /**
      * @param $key
      *
      * @return mixed
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \InvalidArgumentException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getPageByIdOrSlug($key)
+    public function getWebPageByIdOrSlug($key)
     {
         $qb     = $this->getQueryBuilder();
 
@@ -47,9 +51,12 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
      * @param $slug
      *
      * @return mixed
-     * @throws \Doctrine\ORM\EntityNotFoundException
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \InvalidArgumentException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getPageBySlug($slug)
+    public function getWebPageBySlug($slug)
     {
         $qb = $this->getQueryBuilder()
                 ->where('p.slug LIKE :slug')
@@ -63,9 +70,12 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
      * @param $id
      *
      * @return mixed
-     * @throws \Doctrine\ORM\EntityNotFoundException
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \InvalidArgumentException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getPageById($id)
+    public function getWebPageById($id)
     {
         $qb = $this->getQueryBuilder('p')
                 ->where('p.id = :id')
@@ -79,8 +89,11 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
      * @param $status
      *
      * @return mixed
+     * @throws \InvalidArgumentException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
-    public function getPagesByStatus($status)
+    public function getWebPagesByStatus($status)
     {
         $qb = $this->getQueryBuilder()
                 ->where('p.status = :status')
@@ -95,8 +108,11 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
      * @param $author
      *
      * @return mixed
+     * @throws \InvalidArgumentException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
-    public function getPagesByAuthor($author)
+    public function getWebPagesByAuthor($author)
     {
         $qb = $this->getQueryBuilder()
             ->where('p.author = :author')
@@ -108,12 +124,15 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
     }
 
     /**
-     * @param string  $status
-     * @param integer $limit
-     * 
-     * @return array
+     * @param      $status
+     * @param null $limit
+     *
+     * @return mixed
+     * @throws \InvalidArgumentException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
-    public function getPages($status, $limit = null)
+    public function getWebPages($status, $limit = null)
     {
         $qb = $this->getQueryBuilder()
                 ->where('p.status = :status')
@@ -133,8 +152,11 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
      * @param $text
      *
      * @return mixed
+     * @throws \InvalidArgumentException
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
-    public function searchPage($text)
+    public function searchWebPage($text)
     {
         $qb = $this->getQueryBuilder();
 
@@ -154,25 +176,10 @@ class PageRepository extends EntityRepository implements PageRepositoryInferface
      * @param string $alias
      *
      * @return \Doctrine\ORM\QueryBuilder
+     * @throws \InvalidArgumentException
      */
     protected function getQueryBuilder($alias = 'p')
     {
         return $this->createQueryBuilder($alias);
-    }
-
-    public function countPages(){
-        $qb = $this->getQueryBuilder()
-            ->select('count(p)')
-            ->getQuery();
-
-            try {
-            $page = $qb->getSingleScalarResult();
-        } catch (NoResultException $e) {
-            throw new EntityNotFoundException(
-                sprintf('No pages founded')
-            );
-        }
-
-        return $page;
     }
 }

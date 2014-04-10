@@ -17,13 +17,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Class PageType
+ * Class WebPageType
  *
  * @package Black\Bundle\PageBundle\Form\Type
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageType extends AbstractType
+class WebPageType extends AbstractType
 {
     /**
      * @var type 
@@ -41,8 +41,8 @@ class PageType extends AbstractType
      */
     public function __construct($class, EventSubscriberInterface $eventSubscriber)
     {
-        $this->class            = $class;
-        $this->eventSubscriber  = $eventSubscriber;
+        $this->class           = $class;
+        $this->eventSubscriber = $eventSubscriber;
     }
 
     /**
@@ -54,6 +54,11 @@ class PageType extends AbstractType
         $builder->addEventSubscriber($this->eventSubscriber);
 
         $builder
+            ->add('description', 'textarea', array(
+                    'label'         => 'black.bundle.page.type.page.description.label',
+                    'required'      => false
+                )
+            )
             ->add('name', 'text', array(
                     'label'         => 'black.bundle.page.type.page.name.label',
                     'required'      => true
@@ -64,11 +69,7 @@ class PageType extends AbstractType
                     'required'      => false
                 )
             )
-            ->add('description', 'textarea', array(
-                    'label'         => 'black.bundle.page.type.page.description.label',
-                    'required'      => false
-                )
-            )
+
             ->add('text', 'textarea', array(
                     'label'         => 'black.bundle.page.type.page.text.label',
                     'attr'          => array(
@@ -133,6 +134,6 @@ class PageType extends AbstractType
      */
     public function getName()
     {
-        return 'black_page_page';
+        return 'black_page_webpage';
     }
 }

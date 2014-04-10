@@ -11,28 +11,28 @@
 
 namespace Black\Bundle\PageBundle\Form\ChoiceList;
 
-use Black\Bundle\PageBundle\Model\PageManagerInterface;
+use Black\Bundle\PageBundle\Model\WebPageManagerInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 
 /**
- * Class PageIdList
+ * WebPageIdList create an array of list with the id/name as key/value
  *
  * @package Black\Bundle\PageBundle\Form\ChoiceList
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageIdList extends LazyChoiceList
+class WebPageIdList extends LazyChoiceList
 {
     /**
-     * @var PageManagerInterface
+     * @var WebPageManagerInterface
      */
     private $manager;
 
     /**
-     * @param PageManagerInterface $manager
+     * @param WebPageManagerInterface $manager
      */
-    public function __construct(PageManagerInterface $manager)
+    public function __construct(WebPageManagerInterface $manager)
     {
         $this->manager = $manager;
     }
@@ -42,12 +42,13 @@ class PageIdList extends LazyChoiceList
      */
     protected function loadChoiceList()
     {
-        $choices    = array();
-        $pages      = $this->getPages();
+        $choices = array();
+        $pages   = $this->getWebPages();
 
         foreach ($pages as $page) {
             $choices += array($page->getId() => $page->getName());
         }
+
         $choices = new SimpleChoiceList($choices);
 
         return $choices;
@@ -56,9 +57,9 @@ class PageIdList extends LazyChoiceList
     /**
      * @return mixed
      */
-    protected function getPages()
+    protected function getWebPages()
     {
-        $pages = $this->manager->findPublishedPages();
+        $pages = $this->manager->findPublishedWebPages();
 
         return $pages;
     }
