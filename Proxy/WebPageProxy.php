@@ -28,7 +28,7 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class WebPageProxy implements ProxyInterface
+class WebPageProxy
 {
     /**
      * @var \Symfony\Component\Security\Core\SecurityContext

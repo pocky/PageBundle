@@ -11,7 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Doctrine;
 
-use Black\Bundle\PageBundle\Model\PageManagerInterface;
+use Black\Bundle\PageBundle\Model\WebPageManagerInterface;
 use Black\Bundle\CommonBundle\Doctrine\ManagerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -22,7 +22,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  * @author  Alexandre Balmes <albalmes@gmail.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageManager implements PageManagerInterface, ManagerInterface
+class PageManager implements WebPageManagerInterface, ManagerInterface
 {
     /**
      * @var ObjectManager
@@ -47,11 +47,10 @@ class PageManager implements PageManagerInterface, ManagerInterface
      */
     public function __construct(ObjectManager $dm, $class)
     {
-        $this->manager     = $dm;
-        $this->repository  = $dm->getRepository($class);
-
-        $metadata          = $dm->getClassMetadata($class);
-        $this->class       = $metadata->name;
+        $this->manager    = $dm;
+        $this->repository = $dm->getRepository($class);
+        $metadata         = $dm->getClassMetadata($class);
+        $this->class      = $metadata->name;
     }
 
     /**
@@ -122,14 +121,6 @@ class PageManager implements PageManagerInterface, ManagerInterface
     }
 
     /**
-     * @return string
-     */
-    protected function getClass()
-    {
-        return $this->class;
-    }
-
-    /**
      * @return mixed
      */
     public function findDocuments()
@@ -144,7 +135,7 @@ class PageManager implements PageManagerInterface, ManagerInterface
      */
     public function findDocument($value)
     {
-        return $this->getRepository()->getPageByIdOrSlug($value);
+        return $this->getRepository()->getWebPageByIdOrSlug($value);
     }
 
     /**
@@ -152,9 +143,9 @@ class PageManager implements PageManagerInterface, ManagerInterface
      *
      * @return mixed
      */
-    public function findPage($text)
+    public function findWebPage($text)
     {
-        return $this->getRepository()->searchPage($text);
+        return $this->getRepository()->searchWebPage($text);
     }
 
     /**
@@ -162,9 +153,9 @@ class PageManager implements PageManagerInterface, ManagerInterface
      * 
      * @return Page
      */
-    public function findPageBySlug($slug)
+    public function findWebPageBySlug($slug)
     {
-        return $this->getRepository()->getPageBySlug($slug);
+        return $this->getRepository()->getWebPageBySlug($slug);
     }
 
     /**
@@ -172,9 +163,9 @@ class PageManager implements PageManagerInterface, ManagerInterface
      * 
      * @return Page
      */
-    public function findPageById($id)
+    public function findWebPageById($id)
     {
-        return $this->getRepository()->getPageByid($id);
+        return $this->getRepository()->getWebPageByid($id);
     }
 
     /**
@@ -182,7 +173,7 @@ class PageManager implements PageManagerInterface, ManagerInterface
      */
     public function findDraftPages()
     {
-        return $this->getRepository()->getPagesByStatus('draft');
+        return $this->getRepository()->getWebPagesByStatus('draft');
     }
 
     /**
@@ -190,7 +181,7 @@ class PageManager implements PageManagerInterface, ManagerInterface
      */
     public function findPublishedPages()
     {
-        return $this->getRepository()->getPagesByStatus('publish');
+        return $this->getRepository()->getWebPagesByStatus('publish');
     }
 
     /**
@@ -200,7 +191,7 @@ class PageManager implements PageManagerInterface, ManagerInterface
      */
     public function findLastPublishedPages($limit = 3)
     {
-        return $this->getRepository()->getPages('publish', $limit);
+        return $this->getRepository()->getWebPages('publish', $limit);
     }
 
     /**
@@ -210,7 +201,7 @@ class PageManager implements PageManagerInterface, ManagerInterface
      */
     public function findLastDraftPages($limit = 3)
     {
-        return $this->getRepository()->getPages('draft', $limit);
+        return $this->getRepository()->getWebPages('draft', $limit);
     }
 
     /**
@@ -218,17 +209,16 @@ class PageManager implements PageManagerInterface, ManagerInterface
      *
      * @return mixed
      */
-    public function findPagesByAuthor($author)
+    public function findWebPagesByAuthor($author)
     {
-        return $this->getRepository()->getPagesByAuthor($author);
+        return $this->getRepository()->getWebPagesByAuthor($author);
     }
 
     /**
      * @return string
-     * @todo ajouter methode pour doc
      */
-    public function countPages()
+    protected function getClass()
     {
-        return $this->getRepository()->countPages();
+        return $this->class;
     }
 }
