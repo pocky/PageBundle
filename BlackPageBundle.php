@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\PageBundle;
 
+use Black\Bundle\PageBundle\DependencyInjection\BlackPageExtension;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -22,4 +23,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class BlackPageBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getContainerExtension()
+    {
+        return new BlackPageExtension();
+    }
 }
