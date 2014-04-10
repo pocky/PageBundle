@@ -68,8 +68,7 @@ class WebPageProxy
         $proxyEnabled,
         Request $request,
         SeoInterface $seo
-    )
-    {
+    ) {
         $this->manager      = $manager;
         $this->context      = $context;
         $this->proxyEnabled = $proxyEnabled;
