@@ -31,18 +31,11 @@ class WebPageType extends AbstractType
     protected $class;
 
     /**
-     * @var \Symfony\Component\EventDispatcher\EventSubscriberInterface
+     * @param string $class
      */
-    protected $eventSubscriber;
-
-    /**
-     * @param                          $class
-     * @param EventSubscriberInterface $eventSubscriber
-     */
-    public function __construct($class, EventSubscriberInterface $eventSubscriber)
+    public function __construct($class)
     {
-        $this->class           = $class;
-        $this->eventSubscriber = $eventSubscriber;
+        $this->class = $class;
     }
 
     /**
@@ -51,66 +44,61 @@ class WebPageType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addEventSubscriber($this->eventSubscriber);
-
         $builder
-            ->add('description', 'textarea', array(
-                    'label'         => 'black.bundle.page.type.page.description.label',
-                    'required'      => false
-                )
-            )
             ->add('name', 'text', array(
-                    'label'         => 'black.bundle.page.type.page.name.label',
+                    'label'         => 'black.bundle.page.type.webpage.name.label',
                     'required'      => true
                 )
             )
             ->add('slug', 'text', array(
-                    'label'         => 'black.bundle.page.type.page.slug.label',
+                    'label'         => 'black.bundle.page.type.webpage.slug.label',
+                    'required'      => false
+                )
+            )
+
+            ->add('headline', 'textarea', array(
+                    'label'         => 'black.bundle.page.type.webpage.headline.label',
                     'required'      => false
                 )
             )
 
             ->add('text', 'textarea', array(
-                    'label'         => 'black.bundle.page.type.page.text.label',
+                    'label'         => 'black.bundle.page.type.webpage.text.label',
                     'attr'          => array(
                         'class'         => 'tinymce',
                         'data-theme'    => 'advanced'
                     )
                 )
             )
-            ->add('author', 'text', array(
-                    'label'         => 'black.bundle.page.type.page.author.label',
-                    'required'      => true
-                )
-            )
-            /*->add('image', 'file', array(
-                    'label'         => 'black.bundle.page.type.page.image.label',
+
+            ->add('image', 'file', array(
+                    'label'         => 'black.bundle.page.type.webpage.image.label',
                     'required'      => false
                 )
-            )*/
-            ->add('status', 'black_page_choice_list_status', array(
-                    'label'         => 'black.bundle.page.type.page.status.label',
-                    'empty_value'   => 'black.bundle.page.type.page.status.empty',
+            )
+
+            ->add('author', 'text', array(
+                    'label'         => 'black.bundle.page.type.webpage.author.label',
                     'required'      => true
                 )
             )
-            ->add('enabled', 'black_page_choice_list_enabled', array(
-                    'label'         => 'black.bundle.page.type.page.enabled.label',
-                    'empty_value'   => 'black.bundle.page.type.page.enabled.empty',
+            ->add('publication', 'black_page_choice_list_status', array(
+                    'label'         => 'black.bundle.page.type.webpage.publication.label',
+                    'empty_value'   => 'black.bundle.page.type.webpage.publication.empty',
                     'required'      => true
                 )
             )
             ->add('datePublished', 'date', array(
-                    'label'         => 'black.bundle.page.type.page.datePublished.label',
+                    'label'         => 'black.bundle.page.type.webpage.datePublished.label',
                     'widget'        => 'single_text',
                     'years'         => array_reverse(
                         range(2000, date('Y', strtotime('now')))
                     ),
                     'required'      => true,
                     'empty_value'   => array(
-                        'year'  => 'black.bundle.page.type.page.datePublished.choice.year.label',
-                        'month' => 'black.bundle.page.type.page.datePublished.choice.month.label',
-                        'day'   => 'black.bundle.page.type.page.datePublished.choice.day.label')
+                        'year'  => 'black.bundle.page.type.webpage.datePublished.choice.year.label',
+                        'month' => 'black.bundle.page.type.webpage.datePublished.choice.month.label',
+                        'day'   => 'black.bundle.page.type.webpage.datePublished.choice.day.label')
                 )
             );
     }
@@ -123,7 +111,7 @@ class WebPageType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class'            => $this->class,
-                'intention'             => 'page_form',
+                'intention'             => 'webpage_form',
                 'translation_domain'    => 'form'
             )
         );
