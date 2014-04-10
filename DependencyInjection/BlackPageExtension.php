@@ -17,6 +17,17 @@ class BlackPageExtension extends Extension
 {
     /**
      * {@inheritDoc}
+     *
+     * @param array            $configs
+     * @param ContainerBuilder $container
+     *
+     * @throws \RuntimeException
+     * @throws \Symfony\Component\DependencyInjection\Exception\BadMethodCallException
+     * @throws \Symfony\Component\Config\Exception\FileLoaderLoadException
+     * @throws \InvalidArgumentException
+     * @throws \Exception
+     * @throws \Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException
+     * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -24,7 +35,7 @@ class BlackPageExtension extends Extension
         $configuration = new Configuration($this->getAlias());
         $config        = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         if (!isset($config['db_driver'])) {
             throw new \InvalidArgumentException('You must provide the black_page.db_driver configuration');
@@ -46,84 +57,22 @@ class BlackPageExtension extends Extension
             $config,
             $container,
             array(
-                ''      => array(
+                '' => array(
                     'page_class'          => 'black_page.page.model.class',
                     'page_manager'        => 'black_page.page.manager',
                 )
             )
         );
-
-        if (!empty($config['page'])) {
-            $this->loadPage($config['page'], $container, $loader);
-        }
-
-        if (!empty($config['proxy'])) {
-            $this->loadProxy($config['proxy'], $container, $loader);
-        }
-
-        if (!empty($config['controller'])) {
-            $this->loadController($config['controller'], $container, $loader);
-        }
     }
 
     /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
+     * {@inheritdoc}
+     *
+     * @return string
      */
-    private function loadPage(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    public function getAlias()
     {
-        foreach (array('page') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            array(
-                'form'  => 'black_page.page.form.%s',
-            )
-        );
-    }
-
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
-     */
-    private function loadProxy(array $config, ContainerBuilder $container, XmlFileLoader $loader)
-    {
-        foreach (array('proxy') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            array(
-                ''  => 'black_page.proxy.%s',
-            )
-        );
-    }
-
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
-     */
-    private function loadController(array $config, ContainerBuilder $container, XmlFileLoader $loader)
-    {
-        foreach (array('controller') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            array(
-                'class'    => 'black_page.controller.class.%s',
-            )
-        );
+        return 'black_page';
     }
 
     /**
@@ -148,16 +97,16 @@ class BlackPageExtension extends Extension
     protected function remapParametersNamespaces(array $config, ContainerBuilder $container, array $namespaces)
     {
         foreach ($namespaces as $ns => $map) {
-
             if ($ns) {
                 if (!array_key_exists($ns, $config)) {
-                    var_dump($ns);
                     continue;
                 }
+
                 $namespaceConfig = $config[$ns];
             } else {
                 $namespaceConfig = $config;
             }
+
             if (is_array($map)) {
                 $this->remapParameters($namespaceConfig, $container, $map);
             } else {
@@ -166,13 +115,5 @@ class BlackPageExtension extends Extension
                 }
             }
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getAlias()
-    {
-        return 'black_page';
     }
 }
