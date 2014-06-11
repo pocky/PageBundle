@@ -11,7 +11,8 @@
 
 namespace Black\Bundle\PageBundle;
 
-use Black\Bundle\PageBundle\DependencyInjection\BlackPageExtension;
+use Black\Bundle\PageBundle\Application\DependencyInjection\BlackPageExtension;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -29,5 +30,43 @@ class BlackPageBundle extends Bundle
     public function getContainerExtension()
     {
         return new BlackPageExtension();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function registerCommands(Application $application)
+    {
+        if (!is_dir($dir = $this->getPath().'/Application/Command')) {
+            return;
+        }
+
+        $finder = new Finder();
+        $finder->files()->name('*Command.php')->in($dir);
+
+        $prefix = $this->getNamespace().'\\Application\\Command';
+        foreach ($finder as $file) {
+            $ns = $prefix;
+
+            if ($relativePath = $file->getRelativePath()) {
+                $ns .= '\\'.strtr($relativePath, '/', '\\');
+            }
+
+            $class = $ns.'\\'.$file->getBasename('.php');
+
+            if ($this->container) {
+                $alias = 'console.command.'.strtolower(str_replace('\\', '_', $class));
+                if ($this->container->has($alias)) {
+                    continue;
+                }
+            }
+
+            $r = new \ReflectionClass($class);
+
+            if ($r->isSubclassOf('Symfony\\Component\\Console\\Command\\Command') &&
+                !$r->isAbstract() && !$r->getConstructor()->getNumberOfRequiredParameters()) {
+                $application->add($r->newInstance());
+            }
+        }
     }
 }
