@@ -16,12 +16,13 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * Class WebPage
+ *
  * {@inheritdoc}
  *
  * @ODM\MappedSuperclass(repositoryClass="")
  *
- * @package Black\Bundle\PageBundle\Domain\Document
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
 abstract class WebPage extends AbstractWebPage

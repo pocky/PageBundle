@@ -15,10 +15,9 @@ use Black\Bundle\PageBundle\Domain\Model\WebPageRepositoryInferface;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
 /**
- * Class PageRepository
+ * Class WebPageRepository
  *
- * @package Black\Bundle\PageBundle\Domain\Document
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class WebPageRepository extends DocumentRepository implements WebPageRepositoryInferface

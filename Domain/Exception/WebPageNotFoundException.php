@@ -16,8 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Class WebPageNotFoundException
  *
- * @package Black\Bundle\PageBundle\Domain\Exception
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class WebPageNotFoundException extends NotFoundHttpException
@@ -29,7 +28,7 @@ class WebPageNotFoundException extends NotFoundHttpException
      * @param \Exception $previous The previous exception
      * @param integer    $code     The internal exception code
      */
-    public function __construct($message = 'Page Not Found!', \Exception $previous = null, $code = 0)
+    public function __construct($message = 'WebPage Not Found!', \Exception $previous = null, $code = 0)
     {
         parent::__construct($message, $previous, $code);
     }

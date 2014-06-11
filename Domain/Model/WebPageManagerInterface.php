@@ -15,8 +15,6 @@ namespace Black\Bundle\PageBundle\Domain\Model;
  * Interface WebPageManagerInterface
  *
  * @package Black\Bundle\PageBundle\Domain\Model
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
- * @license http://opensource.org/licenses/mit-license.php MIT
  */
 interface WebPageManagerInterface
 {

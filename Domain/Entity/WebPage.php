@@ -17,13 +17,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * Class WebPage
+ *
  * {@inheritdoc}
  *
  * @ORM\MappedSuperclass(repositoryClass="Black\Bundle\PageBundle\Domain\Entity\WebPageRepository")
  *
- * @package Black\Bundle\PageBundle\Domain\Entity
- * @author  Alexandre Balmes <abalmes@activcompany.com>
- * @license http://creativecommons.org/licenses/by-nc-nd/3.0/legalcode CC BY-NC-ND 3.0
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
+ * @license http://opensource.org/licenses/mit-license.php MIT
  */
 abstract class WebPage extends AbstractWebPage
 {

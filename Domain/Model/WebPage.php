@@ -15,10 +15,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * Class WebPage
+ *
  * A web page. Every web page is implicitly assumed to be declared to be of type WebPage.
  *
- * @package Black\Bundle\PageBundle\Domain\Model
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
 abstract class WebPage implements WebPageInterface

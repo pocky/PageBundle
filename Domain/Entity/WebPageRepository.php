@@ -19,8 +19,7 @@ use Doctrine\ORM\NoResultException;
 /**
  * Class WebPageRepository
  *
- * @package Black\Bundle\PageBundle\Domain\Entity
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class WebPageRepository extends EntityRepository implements WebPageRepositoryInferface
@@ -36,7 +35,7 @@ class WebPageRepository extends EntityRepository implements WebPageRepositoryInf
      */
     public function getWebPageByIdOrSlug($key)
     {
-        $qb     = $this->getQueryBuilder();
+        $qb = $this->getQueryBuilder();
 
         $qb = $qb
             ->where('p.id = :key')

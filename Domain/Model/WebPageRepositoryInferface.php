@@ -12,11 +12,9 @@
 namespace Black\Bundle\PageBundle\Domain\Model;
 
 /**
- * Class WebPageRepositoryInferface
+ * Interface WebPageRepositoryInferface
  *
  * @package Black\Bundle\PageBundle\Domain\Model
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
- * @license http://opensource.org/licenses/mit-license.php MIT
  */
 interface WebPageRepositoryInferface
 {
