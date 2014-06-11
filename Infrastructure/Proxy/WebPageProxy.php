@@ -12,20 +12,18 @@
 namespace Black\Bundle\PageBundle\Infrastructure\Proxy;
 
 use Black\Bundle\SeoBundle\Model\SeoInterface;
-use Black\Bundle\PageBundle\Infrastructure\Model\WebPageManagerInterface;
-use Symfony\Component\HttpKernel\Kernel;
+use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Black\Bundle\PageBundle\Infrastructure\Exception\WebPageNotFoundException;
+use Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
  * Class WebPageProxy
  *
- * @package Black\Bundle\PageBundle\Infrastructure\Proxy
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class WebPageProxy

@@ -9,29 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\PageBundle\Application\Command\Bus;
+namespace Black\Bundle\PageBundle\Application\CQRS\Bus;
 
-use Black\Bundle\CommonBundle\Command\BusInterface;
-use Black\Bundle\PageBundle\Application\Command\CreateWebPage\CreateWebPageCommand;
-use Black\Bundle\PageBundle\Application\Command\CreateWebPage\CreateWebPageHandler;
+use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;
+use Black\Bundle\PageBundle\Application\CQRS\UpdateWebPage\UpdateWebPageCommand;
+use Black\Bundle\PageBundle\Application\CQRS\UpdateWebPage\UpdateWebPageHandler;
 use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
 use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
 
 /**
- * Class CreateWebPageBus
+ * Class UpdateWebPageBus
  *
- * @package Black\Bundle\PageBundle\Application\Command\Bus
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class CreateWebPageBus implements BusInterface
+class UpdateWebPageBus implements CommandBusInterface
 {
     /**
-     * @param CreateWebPageHandler    $handler
+     * @param UpdateWebPageHandler    $handler
      * @param WebPageManagerInterface $manager
      */
     public function __construct(
-        CreateWebPageHandler $handler,
+        UpdateWebPageHandler $handler,
         WebPageManagerInterface $manager
     ) {
         $this->handler = $handler;
@@ -61,7 +60,7 @@ class CreateWebPageBus implements BusInterface
      */
     protected function create(WebPageInterface $webPage)
     {
-        $command = new CreateWebPageCommand($webPage, $this->manager);
+        $command = new UpdateWebPageCommand($webPage, $this->manager);
         $this->handler->invoke($command);
 
         $result = $this->handler->execute();

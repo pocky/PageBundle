@@ -11,15 +11,14 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\Infrastructure\Doctrine;
 
-use Black\Bundle\PageBundle\Infrastructure\Infrastructure\Model\WebPageManagerInterface;
-use Black\Bundle\CommonBundle\Doctrine\ManagerInterface;
+use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
+use Black\Bundle\CommonBundle\Infrastructure\Doctrine\ManagerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * Class PageManager
  *
- * @package Black\Bundle\PageBundle\Infrastructure\Infrastructure\Doctrine
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class PageManager implements WebPageManagerInterface, ManagerInterface

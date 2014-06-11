@@ -9,29 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\PageBundle\Application\Command\Bus;
+namespace Black\Bundle\PageBundle\Infrastructure\CQRS\Bus;
 
-use Black\Bundle\CommonBundle\Command\BusInterface;
-use Black\Bundle\PageBundle\Application\Command\UpdateWebPage\UpdateWebPageCommand;
-use Black\Bundle\PageBundle\Application\Command\UpdateWebPage\UpdateWebPageHandler;
-use Black\Bundle\PageBundle\Application\Model\WebPageInterface;
-use Black\Bundle\PageBundle\Application\Model\WebPageManagerInterface;
+use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;
+use Black\Bundle\PageBundle\Infrastructure\CQRS\CreateWebPage\CreateWebPageCommand;
+use Black\Bundle\PageBundle\Infrastructure\CQRS\CreateWebPage\CreateWebPageHandler;
+use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
+use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
 
 /**
- * Class UpdateWebPageBus
+ * Class CreateWebPageBus
  *
- * @package Black\Bundle\PageBundle\Application\Command\Bus
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class UpdateWebPageBus implements BusInterface
+class CreateWebPageBus implements CommandBusInterface
 {
     /**
-     * @param UpdateWebPageHandler    $handler
+     * @param CreateWebPageHandler    $handler
      * @param WebPageManagerInterface $manager
      */
     public function __construct(
-        UpdateWebPageHandler $handler,
+        CreateWebPageHandler $handler,
         WebPageManagerInterface $manager
     ) {
         $this->handler = $handler;
@@ -61,7 +60,7 @@ class UpdateWebPageBus implements BusInterface
      */
     protected function create(WebPageInterface $webPage)
     {
-        $command = new UpdateWebPageCommand($webPage, $this->manager);
+        $command = new CreateWebPageCommand($webPage, $this->manager);
         $this->handler->invoke($command);
 
         $result = $this->handler->execute();

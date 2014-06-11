@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\PageBundle\Application\Command\CreateWebPage;
+namespace Black\Bundle\PageBundle\Infrastructure\CQRS\CreateWebPage;
 
-use Black\Bundle\PageBundle\Application\Model\WebPageInterface;
-use Black\Bundle\CommonBundle\Command\CommandInterface;
-use Black\Bundle\PageBundle\Application\Model\WebPageManagerInterface;
+use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
+use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
+use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
 
 /**
  * Class CreateWebPageCommand
  *
- * @package Black\Bundle\PageBundle\Application\Command\CreateWebPage
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class CreateWebPageCommand implements CommandInterface

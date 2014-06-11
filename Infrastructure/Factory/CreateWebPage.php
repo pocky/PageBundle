@@ -11,21 +11,20 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\Factory;
 
-use Black\Bundle\PageBundle\Infrastructure\Model\WebPageManagerInterface;
+use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
 
 /**
  * Class CreateWebPage
  *
  * Create a new WebPage
  *
- * @package Black\Bundle\ConfigBundle\Factory
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class CreateWebPage
 {
     /**
-     * @var \Black\Bundle\PageBundle\Infrastructure\Model\WebPageManagerInterface
+     * @var \Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface
      */
     protected $manager;
 

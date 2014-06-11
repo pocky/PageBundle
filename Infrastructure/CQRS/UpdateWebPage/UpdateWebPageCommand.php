@@ -9,18 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\PageBundle\Application\Command\UpdateWebPage;
+namespace Black\Bundle\PageBundle\Application\CQRS\UpdateWebPage;
 
-use Black\Bundle\PageBundle\Application\Model\WebPageInterface;
-use Black\Bundle\PageBundle\Application\Model\WebPageManagerInterface;
-use Black\Bundle\PageBundle\Application\Factory\CreateWebPage;
-use Black\Bundle\CommonBundle\Command\CommandInterface;
+use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
+use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
+use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
 
 /**
  * Class UpdateWebPageCommand
  *
- * @package Black\Bundle\PageBundle\Application\Command\UpdateWebPage
- * @author  Alexandre Balmes <alexandre@lablackroom.com>
+ * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
 class UpdateWebPageCommand implements CommandInterface
