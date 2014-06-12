@@ -12,7 +12,7 @@
 namespace Black\Bundle\PageBundle\Infrastructure\Proxy;
 
 use Black\Bundle\SeoBundle\Model\SeoInterface;
-use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
+use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

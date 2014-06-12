@@ -46,7 +46,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->scalarNode('page_class')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('page_manager')->defaultValue('Black\\Bundle\\PageBundle\\Doctrine\\WebPageManager')->end()
+                ->scalarNode('page_manager')->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\Doctrine\\WebPageManager')->end()
             ->end();
 
         return $treeBuilder;

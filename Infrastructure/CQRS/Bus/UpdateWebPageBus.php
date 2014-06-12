@@ -15,7 +15,7 @@ use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;
 use Black\Bundle\PageBundle\Application\CQRS\UpdateWebPage\UpdateWebPageCommand;
 use Black\Bundle\PageBundle\Application\CQRS\UpdateWebPage\UpdateWebPageHandler;
 use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
-use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
+use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 
 /**
  * Class UpdateWebPageBus

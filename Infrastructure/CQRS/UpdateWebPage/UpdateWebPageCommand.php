@@ -12,7 +12,7 @@
 namespace Black\Bundle\PageBundle\Application\CQRS\UpdateWebPage;
 
 use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
-use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
+use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
 
 /**

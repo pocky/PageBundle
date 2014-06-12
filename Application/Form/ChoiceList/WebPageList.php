@@ -11,7 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Application\Form\ChoiceList;
 
-use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
+use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\LazyChoiceList;
 use Symfony\Component\Form\Extension\Core\ChoiceList\SimpleChoiceList;
 

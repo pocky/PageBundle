@@ -13,7 +13,7 @@ namespace Black\Bundle\PageBundle\Infrastructure\CQRS\CreateWebPage;
 
 use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
-use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
+use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 
 /**
  * Class CreateWebPageCommand

@@ -9,10 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\PageBundle\Infrastructure\Infrastructure\Doctrine;
+namespace Black\Bundle\PageBundle\Infrastructure\Doctrine;
 
-use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
-use Black\Bundle\CommonBundle\Infrastructure\Doctrine\ManagerInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
@@ -21,7 +19,7 @@ use Doctrine\Common\Persistence\ObjectManager;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageManager implements WebPageManagerInterface, ManagerInterface
+class PageManager implements WebPageManagerInterface
 {
     /**
      * @var ObjectManager

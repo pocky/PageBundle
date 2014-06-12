@@ -11,7 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\Factory;
 
-use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
+use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 
 /**
  * Class CreateWebPage
@@ -24,7 +24,7 @@ use Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface;
 class CreateWebPage
 {
     /**
-     * @var \Black\Bundle\PageBundle\Domain\Model\WebPageManagerInterface
+     * @var \Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface
      */
     protected $manager;
 
