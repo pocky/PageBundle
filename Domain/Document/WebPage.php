@@ -53,28 +53,14 @@ abstract class WebPage extends AbstractWebPage
      *
      * @ODM\String
      */
+    protected $about;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @ODM\String
+     */
     protected $text;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @ODM\String
-     */
-    protected $author;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @ODM\String
-     */
-    protected $image;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @ODM\String
-     */
-    protected $publication;
 
     /**
      * {@inheritdoc}

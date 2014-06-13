@@ -25,11 +25,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
 abstract class WebPage implements WebPageInterface
 {
     /**
-     * @var
-     */
-    protected $id;
-
-    /**
      * The name of the WebPage
      *
      * @Assert\Type(type="string")
@@ -55,31 +50,19 @@ abstract class WebPage implements WebPageInterface
     protected $headline;
 
     /**
+     * The subject matter of the content.
+     *
+     * @Assert\Type(type="string")
+     */
+    protected $about;
+
+    /**
      * The textual content of the WebPage
      *
      * @Assert\Type(type="string")
      */
     protected $text;
 
-    /**
-     * The author of the WebPage
-     */
-    protected $author;
-
-    /**
-     * URL of an image of the WebPage
-     *
-     * @Assert\Image(maxSize="2M")
-     */
-    protected $image;
-
-    /**
-     * Publication of the page
-     *
-     * @Assert\Choice(callback="getPublicationStatus")
-     * @Assert\NotNull
-     */
-    protected $publication;
 
     /**
      * The date on which the WebPage was created
@@ -108,115 +91,16 @@ abstract class WebPage implements WebPageInterface
     /**
      * Construct the WebPage
      */
-    public function __construct()
+    public function __construct(WebPageId $id, $name)
     {
+        $this->id            = $id;
+        $this->name          = $name;
         $this->dateCreated   = new \DateTime();
         $this->dateModified  = new \DateTime();
-        $this->datePublished = new \DateTime();
     }
 
     /**
-     * @return mixed
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
-     * @param $author
-     *
-     * @return $this
-     */
-    public function setAuthor($author)
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateCreated()
-    {
-        return $this->dateCreated;
-    }
-
-    /**
-     * @param \DateTime $dateCreated
-     *
-     * @return $this
-     */
-    public function setDateCreated(\DateTime $dateCreated)
-    {
-        $this->dateCreated = $dateCreated;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDateModified()
-    {
-        return $this->dateModified;
-    }
-
-    /**
-     * @param \DateTime $dateModified
-     *
-     * @return $this
-     */
-    public function setDateModified(\DateTime $dateModified)
-    {
-        $this->dateModified = $dateModified;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDatePublished()
-    {
-        return $this->datePublished;
-    }
-
-    /**
-     * @param \DateTime $datePublished
-     *
-     * @return $this
-     */
-    public function setDatePublished(\DateTime $datePublished)
-    {
-        $this->datePublished = $datePublished;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getHeadline()
-    {
-        return $this->headline;
-    }
-
-    /**
-     * @param $headline
-     *
-     * @return $this
-     */
-    public function setHeadline($headline)
-    {
-        $this->headline = $headline;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
+     * @return WebPageId
      */
     public function getId()
     {
@@ -226,69 +110,9 @@ abstract class WebPage implements WebPageInterface
     /**
      * @return mixed
      */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param $image
-     *
-     * @return $this
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPublication()
-    {
-        return $this->publication;
-    }
-
-    /**
-     * @param $publication
-     *
-     * @return $this
-     */
-    public function setPublication($publication)
-    {
-        $this->publication = $publication;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getPublicationStatus()
-    {
-        return ['published', 'draft'];
-    }
-
-    /**
-     * @return mixed
-     */
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * @param $name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -302,20 +126,71 @@ abstract class WebPage implements WebPageInterface
     /**
      * @return mixed
      */
+    public function getHeadline()
+    {
+        return $this->headline;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getText()
     {
         return $this->text;
     }
 
     /**
-     * @param $text
-     *
-     * @return $this
+     * @return mixed
      */
-    public function setText($text)
+    public function getDateCreated()
     {
-        $this->text = $text;
+        return $this->dateCreated;
+    }
 
-        return $this;
+    /**
+     * @return mixed
+     */
+    public function getDateModified()
+    {
+        return $this->dateModified;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDatePublished()
+    {
+        return $this->datePublished;
+    }
+
+    /**
+     * @param $name
+     * @param $headline
+     * @param $about
+     * @param $text
+     */
+    public function write($name, $headline, $about, $text)
+    {
+        $this->name         = $name;
+        $this->headline     = $headline;
+        $this->about        = $about;
+        $this->text         = $text;
+        $this->dateModified = new \DateTime();
+    }
+
+    /**
+     * @param \DateTime $dateTime
+     */
+    public function publish(\DateTime $dateTime)
+    {
+        $this->datePublished = $dateTime;
     }
 }

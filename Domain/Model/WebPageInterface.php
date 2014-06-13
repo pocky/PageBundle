@@ -11,60 +11,32 @@
 
 namespace Black\Bundle\PageBundle\Domain\Model;
 
+use Black\DDD\DDDinPHP\Domain\Model\EntityInterface;
+
 /**
  * Interface WebPageInterface
  *
  * @package Black\Bundle\PageBundle\Domain\Model
  */
-interface WebPageInterface
+interface WebPageInterface extends EntityInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getAuthor();
-
-    /**
-     * @return mixed
-     */
-    public function getDateCreated();
-
-    /**
-     * @return mixed
-     */
-    public function getDateModified();
-
-    /**
-     * @return mixed
-     */
-    public function getDatePublished();
-
-    /**
-     * @return mixed
-     */
-    public function getHeadline();
-
-    /**
-     * @return mixed
-     */
-    public function getImage();
-
-    /**
-     * @return mixed
-     */
-    public function getPublication();
-
-    /**
-     * @return mixed
-     */
     public function getName();
 
-    /**
-     * @return mixed
-     */
     public function getSlug();
 
-    /**
-     * @return mixed
-     */
+    public function getHeadline();
+
+    public function getAbout();
+
     public function getText();
+
+    public function getDateCreated();
+
+    public function getDateModified();
+
+    public function getDatePublished();
+
+    public function write($name, $headline, $about, $text);
+
+    public function publish(\DateTime $dateTime);
 }

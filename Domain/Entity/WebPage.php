@@ -54,28 +54,14 @@ abstract class WebPage extends AbstractWebPage
      *
      * @ORM\Column(type="text", nullable=true)
      */
+    protected $about;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
     protected $text;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $author;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $image;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $publication;
 
     /**
      * {@inheritdoc}
@@ -97,14 +83,4 @@ abstract class WebPage extends AbstractWebPage
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $datePublished;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __construct()
-    {
-        $this->dateCreated   = new \DateTime();
-        $this->dateModified  = new \DateTime();
-        $this->datePublished = new \DateTime();
-    }
 }
