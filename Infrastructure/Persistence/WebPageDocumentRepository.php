@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\PageBundle\Domain\Document;
+namespace Black\Bundle\PageBundle\Infrastructure\Persistence;
 
-use Black\Bundle\PageBundle\Domain\Model\WebPageRepositoryInferface;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
 /**
@@ -20,7 +19,7 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class WebPageRepository extends DocumentRepository implements WebPageRepositoryInferface
+class WebPageDocumentRepository extends DocumentRepository implements WebPageRepositoryInferface
 {
     /**
      * @param $key

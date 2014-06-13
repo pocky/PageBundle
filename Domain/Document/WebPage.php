@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * {@inheritdoc}
  *
- * @ODM\MappedSuperclass(repositoryClass="")
+ * @ODM\MappedSuperclass(repositoryClass="Black\Bundle\PageBundle\Infrastructure\Persistence\WebPageDocumentRepository")
  *
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT

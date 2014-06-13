@@ -21,7 +21,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *
  * {@inheritdoc}
  *
- * @ORM\MappedSuperclass(repositoryClass="Black\Bundle\PageBundle\Domain\Entity\WebPageRepository")
+ * @ORM\MappedSuperclass(repositoryClass="Black\Bundle\PageBundle\Infrastructure\Persistence\WebPageEntityRepository")
  *
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT

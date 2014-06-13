@@ -9,20 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\PageBundle\Domain\Entity;
+namespace Black\Bundle\PageBundle\Infrastructure\Persistence;
 
-use Black\Bundle\PageBundle\Domain\Model\WebPageRepositoryInferface;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\EntityNotFoundException;
-use Doctrine\ORM\NoResultException;
 
 /**
- * Class WebPageRepository
+ * Class WebPageEntityRepository
  *
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class WebPageRepository extends EntityRepository implements WebPageRepositoryInferface
+class WebPageEntityRepository extends EntityRepository implements WebPageRepositoryInferface
 {
     /**
      * @param $key
