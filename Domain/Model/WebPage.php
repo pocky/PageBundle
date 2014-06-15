@@ -193,4 +193,19 @@ abstract class WebPage implements WebPageInterface
     {
         $this->datePublished = $dateTime;
     }
+
+    /**
+     * @param $name
+     * @param $headline
+     * @param $about
+     * @param $text
+     */
+    public function rewrite($name, $headline, $about, $text)
+    {
+        $this->name         = $name;
+        $this->headline     = $headline;
+        $this->about        = $about;
+        $this->text         = $text;
+        $this->dateModified = new \DateTime();
+    }
 }
