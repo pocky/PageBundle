@@ -68,38 +68,6 @@ class WebPageType extends AbstractType
                         'data-theme' => 'advanced',
                     ],
                 ]
-            )
-
-            ->add('image', 'file', [
-                    'label' => 'black.bundle.page.type.webpage.image.label',
-                    'required' => false,
-                ]
-            )
-
-            ->add('author', 'text', [
-                    'label' => 'black.bundle.page.type.webpage.author.label',
-                    'required' => true,
-                ]
-            )
-            ->add('publication', 'black_page_choice_list_status', [
-                    'label' => 'black.bundle.page.type.webpage.publication.label',
-                    'empty_value' => 'black.bundle.page.type.webpage.publication.empty',
-                    'required' => true,
-                ]
-            )
-            ->add('datePublished', 'date', [
-                    'label' => 'black.bundle.page.type.webpage.datePublished.label',
-                    'widget' => 'single_text',
-                    'years' => array_reverse(
-                        range(2000, date('Y', strtotime('now')))
-                    ),
-                    'required' => true,
-                    'empty_value' => [
-                        'year' => 'black.bundle.page.type.webpage.datePublished.choice.year.label',
-                        'month' => 'black.bundle.page.type.webpage.datePublished.choice.month.label',
-                        'day' => 'black.bundle.page.type.webpage.datePublished.choice.day.label',
-                    ],
-                ]
             );
     }
 

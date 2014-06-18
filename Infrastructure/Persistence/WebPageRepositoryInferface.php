@@ -20,41 +20,5 @@ use Black\DDD\DDDinPHP\Infrastructure\Persistence\RepositoryInterface;
  */
 interface WebPageRepositoryInferface extends RepositoryInterface
 {
-    /**
-     * @param $slug
-     *
-     * @return mixed
-     */
-    public function getWebPageBySlug($slug);
 
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function getWebPageById($id);
-
-    /**
-     * @param $status
-     * @return mixed
-     */
-    public function getWebPagesByStatus($status);
-
-    /**
-     * @param      $status
-     * @param null $limit
-     * @return mixed
-     */
-    public function getWebPages($status, $limit = null);
-
-    /**
-     * @param $text
-     * @return mixed
-     */
-    public function searchWebPage($text);
-
-    /**
-     * @param $author
-     * @return mixed
-     */
-    public function getWebPagesByAuthor($author);
 }

@@ -71,7 +71,7 @@ class WebPageFormHandler implements HandlerInterface
                 return $this->execute($webPage);
             }
 
-            return $this->fail();
+            return $this->stop();
         }
     }
 
@@ -90,7 +90,7 @@ class WebPageFormHandler implements HandlerInterface
     /**
      * @return bool
      */
-    public function fail()
+    public function stop()
     {
         return false;
     }

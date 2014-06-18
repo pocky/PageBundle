@@ -19,6 +19,6 @@ use Black\Bundle\CommonBundle\Infrastructure\Doctrine\ManagerInterface;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-interface WebPageManagerInterface extends ManagerInterface
+interface WebPageManagerInterface
 {
 }
