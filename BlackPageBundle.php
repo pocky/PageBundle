@@ -12,8 +12,8 @@
 namespace Black\Bundle\PageBundle;
 
 use Black\Bundle\PageBundle\Application\DependencyInjection\BlackPageExtension;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\Console\Application;
 
 /**
  * Class BlackPageBundle
