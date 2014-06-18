@@ -9,25 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\PageBundle\Infrastructure\Doctrine;
+namespace Black\Bundle\PageBundle\Domain\Mongo;
 
-use Black\Bundle\PageBundle\Domain\Model\WebPageId;
+use Black\Bundle\PageBundle\Domain\Model\WebPageId as AbstractWebPageId;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 /**
- * Interface WebPageManagerInterface
+ * Class WebPageId
+ *
+ * {@inheritdoc}
+ *
+ * @ODM\EmbeddedDocument()
  *
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-interface WebPageManagerInterface
+class WebPageId extends AbstractWebPageId
 {
     /**
-     * Create an object
-     *
-     * @param WebPageId $id
-     * @param $name
-     *
-     * @return mixed
+     * @ODM\String
      */
-    public function createInstance(WebPageId $id, $name);
+    protected $value;
 }

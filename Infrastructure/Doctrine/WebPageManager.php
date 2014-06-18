@@ -23,6 +23,17 @@ use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 class WebPageManager extends AbstractManager implements WebPageManagerInterface
 {
     /**
+     * @return mixed
+     */
+    public function createInstance(WebPageId $id, $name)
+    {
+        $class  = $this->getClass();
+        $object = new $class($id, $name);
+
+        return $object;
+    }
+
+    /**
      * @param WebPageId $id
      * @return mixed
      */

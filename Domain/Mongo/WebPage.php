@@ -30,6 +30,13 @@ abstract class WebPage extends AbstractWebPage
     /**
      * {@inheritdoc}
      *
+     * @ODM\EmbedOne(targetDocument="Black\Bundle\PageBundle\Domain\Mongo\WebPageId")
+     */
+    protected $webPageId;
+
+    /**
+     * {@inheritdoc}
+     *
      * @ODM\String
      */
     protected $name;

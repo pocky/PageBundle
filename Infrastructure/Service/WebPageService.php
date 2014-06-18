@@ -11,7 +11,7 @@
 namespace Black\Bundle\PageBundle\Infrastructure\Service;
 
 
-use Black\Bundle\PageBundle\Domain\Model\WebPageId;
+use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\DDD\DDDinPHP\Infrastructure\Service\ServiceInterface;
 use Rhumsaa\Uuid\Uuid;
@@ -33,8 +33,8 @@ class WebPageService implements ServiceInterface
     public function create($name)
     {
         $pageId  = new WebPageId(Uuid::uuid1());
-        $webPage = $this->manager->createInstance($pageId->getValue(), $name);
-        $webPage = $this->manager->persist($webPage);
+        $webPage = $this->manager->createInstance($pageId, $name);
+        $webPage = $this->manager->add($webPage);
 
         return $webPage;
     }

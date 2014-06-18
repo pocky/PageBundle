@@ -25,9 +25,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
 abstract class WebPage implements WebPageInterface
 {
     /**
-     * @var WebPageId
+     * @var mixed
      */
     protected $id;
+
+    /**
+     * @var
+     */
+    protected $webPageId;
 
     /**
      * The name of the WebPage
@@ -98,18 +103,26 @@ abstract class WebPage implements WebPageInterface
      */
     public function __construct(WebPageId $id, $name)
     {
-        $this->id            = $id;
+        $this->webPageId     = $id;
         $this->name          = $name;
         $this->dateCreated   = new \DateTime();
         $this->dateModified  = new \DateTime();
     }
 
     /**
-     * @return WebPageId
+     * @return mixed
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return WebPageId
+     */
+    public function getWebPageId()
+    {
+        return $this->webPageId;
     }
 
     /**

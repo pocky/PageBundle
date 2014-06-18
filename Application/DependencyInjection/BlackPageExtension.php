@@ -18,17 +18,6 @@ class BlackPageExtension extends Extension
 {
     /**
      * {@inheritDoc}
-     *
-     * @param array            $configs
-     * @param ContainerBuilder $container
-     *
-     * @throws \RuntimeException
-     * @throws \Symfony\Component\DependencyInjection\Exception\BadMethodCallException
-     * @throws \Symfony\Component\Config\Exception\FileLoaderLoadException
-     * @throws \InvalidArgumentException
-     * @throws \Exception
-     * @throws \Symfony\Component\Config\Exception\FileLoaderImportCircularReferenceException
-     * @throws \Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
      */
     public function load(array $configs, ContainerBuilder $container)
     {
