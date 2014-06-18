@@ -50,20 +50,16 @@ class BlackPageExtension extends Extension
             );
         }
 
-        foreach (['configuration'] as $basename) {
+        foreach ([] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            [
+        $this->remapParametersNamespaces($config, $container, [
                 '' => [
-                    'page_class' => 'black_page.page.model.class',
-                    'page_manager' => 'black_page.page.manager',
+                    'page_class' => 'black_page.webpage.model.class',
+                    'page_manager' => 'black_page.webpage.manager',
                 ]
-            ]
-        );
+            ]);
     }
 
     /**
