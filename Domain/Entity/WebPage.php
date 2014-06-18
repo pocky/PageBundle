@@ -31,6 +31,13 @@ abstract class WebPage extends AbstractWebPage
     /**
      * {@inheritdoc}
      *
+     * @ODM\Embedded(class="Black\Bundle\PageBundle\Domain\Entity\WebPageId")
+     */
+    protected $webPageId;
+
+    /**
+     * {@inheritdoc}
+     *
      * @ORM\Column(type="string", length=255)
      */
     protected $name;
