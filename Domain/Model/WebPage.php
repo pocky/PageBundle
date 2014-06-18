@@ -25,6 +25,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
 abstract class WebPage implements WebPageInterface
 {
     /**
+     * @var WebPageId
+     */
+    protected $id;
+
+    /**
      * The name of the WebPage
      *
      * @Assert\Type(type="string")
@@ -200,7 +205,7 @@ abstract class WebPage implements WebPageInterface
      * @param $about
      * @param $text
      */
-    public function rewrite($name, $headline, $about, $text)
+    public function edit($name, $headline, $about, $text)
     {
         $this->name         = $name;
         $this->headline     = $headline;
