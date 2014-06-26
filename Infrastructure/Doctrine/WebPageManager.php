@@ -13,6 +13,7 @@ namespace Black\Bundle\PageBundle\Infrastructure\Doctrine;
 
 use Black\Bundle\CommonBundle\Infrastructure\Doctrine\AbstractManager;
 use Black\Bundle\PageBundle\Domain\Model\WebPageId;
+use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
 
 /**
  * Class WebPageManager
@@ -23,14 +24,16 @@ use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 class WebPageManager extends AbstractManager implements WebPageManagerInterface
 {
     /**
+     * @param WebPageId $id
+     * @param $name
      * @return mixed
      */
     public function createInstance(WebPageId $id, $name)
     {
-        $class  = $this->getClass();
-        $object = new $class($id, $name);
+        $class   = $this->getClass();
+        $webPage = new $class($id, $name);
 
-        return $object;
+        return $webPage;
     }
 
     /**
@@ -39,7 +42,7 @@ class WebPageManager extends AbstractManager implements WebPageManagerInterface
      */
     public function find(WebPageId $id)
     {
-        return $this->repository->findOneById($id);
+        return $this->repository->findWebPageByWebPageId($id);
     }
 
     /**
@@ -51,28 +54,28 @@ class WebPageManager extends AbstractManager implements WebPageManagerInterface
     }
 
     /**
-     * @param $object
+     * @param $webPage
      * @throws \InvalidArgumentException
      */
-    public function add($object)
+    public function add(WebPageInterface $webPage)
     {
-        if (!$object instanceof $this->class) {
-            throw new \InvalidArgumentException(gettype($object));
+        if (!$webPage instanceof $this->class) {
+            throw new \InvalidArgumentException(gettype($webPage));
         }
 
-        $this->manager->persist($object);
+        $this->manager->persist($webPage);
     }
 
     /**
-     * @param $object
+     * @param $webPage
      * @throws \InvalidArgumentException
      */
-    public function remove($object)
+    public function remove(WebPageInterface $webPage)
     {
-        if (!$object instanceof $this->class) {
-            throw new \InvalidArgumentException(gettype($object));
+        if (!$webPage instanceof $this->class) {
+            throw new \InvalidArgumentException(gettype($webPage));
         }
 
-        $this->getManager()->remove($object);
+        $this->getManager()->remove($webPage);
     }
 }

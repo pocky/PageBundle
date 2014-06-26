@@ -11,6 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\Persistence;
 
+use Black\Bundle\PageBundle\Domain\Entity\WebPageId;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -21,6 +22,16 @@ use Doctrine\ORM\EntityRepository;
  */
 class WebPageEntityRepository extends EntityRepository implements WebPageRepositoryInferface
 {
+    public function findWebPageByWebPageId(WebPageId $id)
+    {
+        $query = $this->getQueryBuilder()
+            ->where('p.webPageId.value = :id')
+            ->setParameter('id', $id)
+            ->getQuery();
+
+        return $query->getSingleResult();
+    }
+
     /**
      * @param string $alias
      *
