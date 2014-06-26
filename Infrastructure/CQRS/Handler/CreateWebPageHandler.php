@@ -21,7 +21,7 @@ use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandHandlerInterface;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class CreateWebPageHandler implements CommandHandlerInterface
+final class CreateWebPageHandler implements CommandHandlerInterface
 {
     /**
      * @var \Black\Bundle\PageBundle\Infrastructure\Service\WebPageWriteService

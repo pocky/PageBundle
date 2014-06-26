@@ -41,9 +41,9 @@ class WebPageWriteService implements ServiceInterface
 
     /**
      * @param WebPageInterface $webPage
-     * @param \DateTime $dateTime
+     * @param $dateTime
      */
-    public function publish(WebPageInterface $webPage, \DateTime $dateTime = 'now')
+    public function publish(WebPageInterface $webPage, $dateTime = 'now')
     {
         if ('now' === $dateTime) {
             $dateTime = new \DateTime();

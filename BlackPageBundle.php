@@ -12,6 +12,7 @@
 namespace Black\Bundle\PageBundle;
 
 use Black\Bundle\PageBundle\Application\DependencyInjection\BlackPageExtension;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\Console\Application;
 
