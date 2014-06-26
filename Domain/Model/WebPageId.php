@@ -35,6 +35,14 @@ class WebPageId implements ValueObjectInterface
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf('%s', $this->getValue());
+    }
+
+    /**
      * @return mixed
      */
     public function getValue()
