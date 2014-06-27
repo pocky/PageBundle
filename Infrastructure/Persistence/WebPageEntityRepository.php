@@ -26,7 +26,7 @@ class WebPageEntityRepository extends EntityRepository implements WebPageReposit
     {
         $query = $this->getQueryBuilder()
             ->where('p.webPageId.value = :id')
-            ->setParameter('id', $id)
+            ->setParameter('id', $id->getValue())
             ->getQuery();
 
         return $query->getSingleResult();

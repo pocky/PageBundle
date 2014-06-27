@@ -22,10 +22,10 @@ use MongoDBODMProxies\__CG__\Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
  */
 class WebPageMongoRepository extends DocumentRepository implements WebPageRepositoryInferface
 {
-    public function findWebPageByWebPageId(WebPageId $id)
+    public function findWebPageByWebPageId($id)
     {
         $query = $this->getQueryBuilder()
-            ->where('webPageId.value')->equals($id)
+            ->field('webPageId.value')->equals($id->getValue())
             ->getQuery();
 
         return $query->getSingleResult();
