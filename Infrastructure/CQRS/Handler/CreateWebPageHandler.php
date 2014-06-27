@@ -12,8 +12,11 @@ namespace Black\Bundle\PageBundle\Infrastructure\CQRS\Handler;
 
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Command\CreateWebPageCommand;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
+use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageCreatedEvent;
+use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageCreatedSubscriber;
 use Black\Bundle\PageBundle\Infrastructure\Service\WebPageWriteService;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandHandlerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class CreateWebPageHandler
@@ -44,10 +47,19 @@ final class CreateWebPageHandler implements CommandHandlerInterface
     }
 
     /**
-     * @param $command
+     * @param CreateWebPageCommand $command
+     * @return mixed
      */
     public function handle(CreateWebPageCommand $command)
     {
-        $this->service->create($this->manager, $command->getName());
+        $page = $this->service->create($this->manager, $command->getName());
+        $this->manager->flush();
+
+        $dispatcher = new EventDispatcher();
+        $event      = new WebPageCreatedEvent($page->getWebPageId()->getValue(), $page->getName());
+        $subscriber = new WebPageCreatedSubscriber($event);
+        $dispatcher->addSubscriber($subscriber);
+
+        $dispatcher->dispatch('web_page.created', $event);
     }
 } 

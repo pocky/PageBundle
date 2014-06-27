@@ -34,7 +34,7 @@ class WebPageWriteService implements ServiceInterface
     {
         $pageId  = new WebPageId(Uuid::uuid1());
         $webPage = $manager->createInstance($pageId, $name);
-        $webPage = $manager->add($webPage);
+        $manager->add($webPage);
 
         return $webPage;
     }
