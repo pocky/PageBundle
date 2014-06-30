@@ -10,13 +10,11 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\Service;
 
-
 use Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException;
-use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
 use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\DDD\DDDinPHP\Infrastructure\Service\ServiceInterface;
-use Rhumsaa\Uuid\Uuid;
+use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
 
 class WebPageReadService implements ServiceInterface
 {
@@ -46,7 +44,13 @@ class WebPageReadService implements ServiceInterface
         $page = $this->manager->find($id);
 
         if ($page->getWebPageId()->isEqualTo($id)) {
-            return $page;
+
+            $dto = new WebPageDTO(
+                $page->getWebPageId()->getValue(),
+                $page->getName()
+            );
+
+            return $dto;
         }
 
         throw new WebPageNotFoundException();

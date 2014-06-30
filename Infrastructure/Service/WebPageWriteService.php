@@ -32,7 +32,7 @@ class WebPageWriteService implements ServiceInterface
      */
     public function create(WebPageManagerInterface $manager, $name)
     {
-        $pageId  = new WebPageId(Uuid::uuid1());
+        $pageId  = new WebPageId(Uuid::uuid4());
         $webPage = $manager->createInstance($pageId, $name);
         $manager->add($webPage);
 
