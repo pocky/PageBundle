@@ -44,7 +44,7 @@ final class WebPageCreatedEvent extends Event implements DomainEventInterface
     /**
      * @return string
      */
-    public function message()
+    public function execute()
     {
         return sprintf('The page %s was successfully created with %s identifier', $this->name, $this->webPageId);
     }

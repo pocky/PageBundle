@@ -46,6 +46,6 @@ class WebPageCreatedSubscriber implements EventSubscriberInterface
      */
     public function onWebPageCreated(WebPageCreatedEvent $event)
     {
-        $this->logger->info($event->message());
+        $this->logger->info($event->execute());
     }
 } 
