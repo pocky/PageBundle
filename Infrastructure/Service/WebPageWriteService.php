@@ -12,7 +12,6 @@ namespace Black\Bundle\PageBundle\Infrastructure\Service;
 
 
 use Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException;
-use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
 use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\DDD\DDDinPHP\Infrastructure\Service\ServiceInterface;
@@ -20,6 +19,11 @@ use Rhumsaa\Uuid\Uuid;
 
 class WebPageWriteService implements ServiceInterface
 {
+    /**
+     * @var \Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface
+     */
+    protected $manager;
+
     /**
      * @param WebPageManagerInterface $webPageManager
      */

@@ -47,6 +47,10 @@ class WebPageReadService implements ServiceInterface
         $id = new WebPageId($id);
         $page = $this->manager->find($id);
 
+        if (null === $page) {
+            throw new WebPageNotFoundException();
+        }
+
         if ($this->specification->isSatisfiedBy($page)) {
 
             $dto = new WebPageDTO(
@@ -59,7 +63,5 @@ class WebPageReadService implements ServiceInterface
 
             return $dto;
         }
-
-        throw new WebPageNotFoundException();
     }
 } 
