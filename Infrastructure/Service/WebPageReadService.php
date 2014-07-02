@@ -51,7 +51,10 @@ class WebPageReadService implements ServiceInterface
 
             $dto = new WebPageDTO(
                 $page->getWebPageId()->getValue(),
-                $page->getName()
+                $page->getName(),
+                $page->getHeadline(),
+                $page->getAbout(),
+                $page->getText()
             );
 
             return $dto;

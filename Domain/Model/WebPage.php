@@ -198,14 +198,12 @@ abstract class WebPage implements WebPageInterface
     }
 
     /**
-     * @param $name
      * @param $headline
      * @param $about
      * @param $text
      */
-    public function write($name, $headline, $about, $text)
+    public function write($headline, $about, $text)
     {
-        $this->name         = $name;
         $this->headline     = $headline;
         $this->about        = $about;
         $this->text         = $text;

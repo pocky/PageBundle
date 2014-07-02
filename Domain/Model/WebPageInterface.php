@@ -36,7 +36,7 @@ interface WebPageInterface extends EntityInterface
 
     public function getDatePublished();
 
-    public function write($name, $headline, $about, $text);
+    public function write($headline, $about, $text);
 
     public function publish(\DateTime $dateTime);
 }

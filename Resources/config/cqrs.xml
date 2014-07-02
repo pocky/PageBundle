@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="black_page.infrastructure.cqrs.handler.create_web_page.class">Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\CreateWebPageHandler</parameter>
+        <parameter key="black_page.infrastructure.cqrs.handler.write_web_page.class">Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\WriteWebPageHandler</parameter>
     </parameters>
 
     <services>
@@ -14,8 +15,14 @@
             <argument type="service" id="black_page.infrastructure.service.write" />
             <argument type="service" id="black_page.manager.webpage" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="black_page.infrastructure.domain_event.event.subscriber" />
+            <argument type="service" id="black_page.infrastructure.domain_event.subscriber.created" />
         </service>
 
+        <service id="black_page.infrastructure.cqrs.handler.write_web_page" class="%black_page.infrastructure.cqrs.handler.write_web_page.class%">
+            <argument type="service" id="black_page.infrastructure.service.write" />
+            <argument type="service" id="black_page.manager.webpage" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="black_page.infrastructure.domain_event.subscriber.writed" />
+        </service>
     </services>
 </container>

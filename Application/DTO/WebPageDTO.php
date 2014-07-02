@@ -31,13 +31,34 @@ class WebPageDTO implements DTOInterface
     protected $name;
 
     /**
+     * @var
+     */
+    protected $headline;
+
+    /**
+     * @var
+     */
+    protected $about;
+
+    /**
+     * @var
+     */
+    protected $text;
+
+    /**
      * @param $id
      * @param $name
+     * @param $headline
+     * @param $about
+     * @param $text
      */
-    public function __construct($id, $name)
+    public function __construct($id, $name, $headline = null, $about = null, $text = null)
     {
-        $this->id   = $id;
-        $this->name = $name;
+        $this->id       = $id;
+        $this->name     = $name;
+        $this->headline = $headline;
+        $this->about    = $about;
+        $this->text     = $text;
     }
 
     /**
@@ -54,6 +75,30 @@ class WebPageDTO implements DTOInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHeadline()
+    {
+        return $this->headline;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getText()
+    {
+        return $this->text;
     }
 
     /**

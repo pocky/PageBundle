@@ -7,15 +7,28 @@
     <parameters>
         <parameter key="black_page.infrastructure.domain_event.event.created.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageCreatedEvent</parameter>
         <parameter key="black_page.infrastructure.domain_event.subscriber.created.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageCreatedSubscriber</parameter>
+
+        <parameter key="black_page.infrastructure.domain_event.event.writed.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageWritedEvent</parameter>
+        <parameter key="black_page.infrastructure.domain_event.subscriber.writed.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageWritedSubscriber</parameter>
     </parameters>
 
     <services>
 
+        <!-- Events -->
         <service id="black_page.infrastructure.domain_event.event.created"
                  class="%black_page.infrastructure.domain_event.event.created.class%" />
 
-        <service id="black_page.infrastructure.domain_event.event.subscriber"
+        <service id="black_page.infrastructure.domain_event.event.writed"
+                 class="%black_page.infrastructure.domain_event.event.writed.class%" />
+
+        <!-- Subscribers -->
+        <service id="black_page.infrastructure.domain_event.subscriber.created"
                  class="%black_page.infrastructure.domain_event.subscriber.created.class%">
+            <argument type="service" id="logger" />
+        </service>
+
+        <service id="black_page.infrastructure.domain_event.subscriber.writed"
+                 class="%black_page.infrastructure.domain_event.subscriber.writed.class%">
             <argument type="service" id="logger" />
         </service>
 
