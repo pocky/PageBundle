@@ -52,7 +52,7 @@ class WebPageDTO implements DTOInterface
      * @param $about
      * @param $text
      */
-    public function __construct($id, $name, $headline = null, $about = null, $text = null)
+    public function __construct($id, $name = 'New WebPage!', $headline = null, $about = null, $text = null)
     {
         $this->id       = $id;
         $this->name     = $name;

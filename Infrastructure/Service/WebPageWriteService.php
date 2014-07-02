@@ -65,15 +65,27 @@ class WebPageWriteService implements ServiceInterface
     }
 
     /**
-     * @param WebPageInterface $webPage
-     * @param $dateTime
+     * @param $webPageId
+     * @param string $dateTime
+     *
+     * @return WebPageNotFoundException
      */
-    public function publish(WebPageInterface $webPage, $dateTime = 'now')
+    public function publish($webPageId, $dateTime = 'now')
     {
+        $pageId  = new WebPageId($webPageId);
+        $webPage = $this->manager->find($pageId);
+
+        if (!$webPage) {
+            return new WebPageNotFoundException();
+        }
+
         if ('now' === $dateTime) {
             $dateTime = new \DateTime();
         }
 
         $webPage->publish($dateTime);
+        $this->manager->add($webPage);
+
+        return $webPage;
     }
 } 

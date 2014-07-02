@@ -8,6 +8,7 @@
         <parameter key="black_page.application.controller.create_page.class">Black\Bundle\PageBundle\Application\Controller\CreatePageController</parameter>
         <parameter key="black_page.application.controller.write_page.class">Black\Bundle\PageBundle\Application\Controller\WritePageController</parameter>
         <parameter key="black_page.application.controller.read_page.class">Black\Bundle\PageBundle\Application\Controller\ReadPageController</parameter>
+        <parameter key="black_page.application.controller.publish_page.class">Black\Bundle\PageBundle\Application\Controller\PublishPageController</parameter>
     </parameters>
 
     <services>
@@ -22,6 +23,12 @@
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_page.infrastructure.cqrs.handler.write_web_page" />
             <argument>Black\Bundle\PageBundle\Infrastructure\CQRS\Command\WriteWebPageCommand</argument>
+        </service>
+
+        <service id="black_page.application.controller.publish_page" class="%black_page.application.controller.publish_page.class%">
+            <argument type="service" id="black_common.infrastructure.command.bus" />
+            <argument type="service" id="black_page.infrastructure.cqrs.handler.publish_web_page" />
+            <argument>Black\Bundle\PageBundle\Infrastructure\CQRS\Command\PublishWebPageCommand</argument>
         </service>
 
         <service id="black_page.application.controller.read_page" class="%black_page.application.controller.read_page.class%">

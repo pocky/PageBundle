@@ -10,6 +10,10 @@
 
         <parameter key="black_page.infrastructure.domain_event.event.writed.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageWritedEvent</parameter>
         <parameter key="black_page.infrastructure.domain_event.subscriber.writed.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageWritedSubscriber</parameter>
+
+        <parameter key="black_page.infrastructure.domain_event.event.published.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPagePublishedEvent</parameter>
+        <parameter key="black_page.infrastructure.domain_event.subscriber.published.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPagePublishedSubscriber</parameter>
+
     </parameters>
 
     <services>
@@ -21,6 +25,9 @@
         <service id="black_page.infrastructure.domain_event.event.writed"
                  class="%black_page.infrastructure.domain_event.event.writed.class%" />
 
+        <service id="black_page.infrastructure.domain_event.event.published"
+                 class="%black_page.infrastructure.domain_event.event.published.class%" />
+
         <!-- Subscribers -->
         <service id="black_page.infrastructure.domain_event.subscriber.created"
                  class="%black_page.infrastructure.domain_event.subscriber.created.class%">
@@ -29,6 +36,11 @@
 
         <service id="black_page.infrastructure.domain_event.subscriber.writed"
                  class="%black_page.infrastructure.domain_event.subscriber.writed.class%">
+            <argument type="service" id="logger" />
+        </service>
+
+        <service id="black_page.infrastructure.domain_event.subscriber.published"
+                 class="%black_page.infrastructure.domain_event.subscriber.published.class%">
             <argument type="service" id="logger" />
         </service>
 

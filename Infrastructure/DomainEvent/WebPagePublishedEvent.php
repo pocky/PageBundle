@@ -14,12 +14,12 @@ use Black\DDD\DDDinPHP\Infrastructure\DomainEvent\DomainEventInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class WebPageWritedEvent
+ * Class WebPagePublishedEvent
  *
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-final class WebPageWritedEvent extends Event implements DomainEventInterface
+final class WebPagePublishedEvent extends Event implements DomainEventInterface
 {
     /**
      * @var
@@ -46,6 +46,6 @@ final class WebPageWritedEvent extends Event implements DomainEventInterface
      */
     public function execute()
     {
-        return sprintf('The page %s was successfully writed for %s identifier', $this->name, $this->webPageId);
+        return sprintf('The page %s was successfully published for %s identifier', $this->name, $this->webPageId);
     }
 } 

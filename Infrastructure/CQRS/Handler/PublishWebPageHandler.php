@@ -10,21 +10,21 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\CQRS\Handler;
 
-use Black\Bundle\PageBundle\Infrastructure\CQRS\Command\WriteWebPageCommand;
+use Black\Bundle\PageBundle\Infrastructure\CQRS\Command\PublishWebPageCommand;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
-use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageWritedEvent;
-use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageWritedSubscriber;
+use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPagePublishedEvent;
+use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPagePublishedSubscriber;
 use Black\Bundle\PageBundle\Infrastructure\Service\WebPageWriteService;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandHandlerInterface;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 
 /**
- * Class WriteWebPageHandler
+ * Class PublishWebPageHandler
  *
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-final class WriteWebPageHandler implements CommandHandlerInterface
+final class PublishWebPageHandler implements CommandHandlerInterface
 {
     /**
      * @var \Black\Bundle\PageBundle\Infrastructure\Service\WebPageWriteService
@@ -42,7 +42,7 @@ final class WriteWebPageHandler implements CommandHandlerInterface
     protected $eventDispatcher;
 
     /**
-     * @var \Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageWritedSubscriber
+     * @var \Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPagePublishedSubscriber
      */
     protected $subscriber;
 
@@ -50,13 +50,13 @@ final class WriteWebPageHandler implements CommandHandlerInterface
      * @param WebPageWriteService $service
      * @param WebPageManagerInterface $manager
      * @param TraceableEventDispatcher $eventDispatcher
-     * @param WebPageWritedSubscriber $subscriber
+     * @param WebPagePublishedSubscriber $subscriber
      */
     public function __construct(
         WebPageWriteService $service,
         WebPageManagerInterface $manager,
         TraceableEventDispatcher $eventDispatcher,
-        WebPageWritedSubscriber $subscriber
+        WebPagePublishedSubscriber $subscriber
     ) {
         $this->service         = $service;
         $this->manager         = $manager;
@@ -65,22 +65,17 @@ final class WriteWebPageHandler implements CommandHandlerInterface
     }
 
     /**
-     * @param WriteWebPageCommand $command
+     * @param PublishWebPageCommand $command
      * @return mixed
      */
-    public function handle(WriteWebPageCommand $command)
+    public function handle(PublishWebPageCommand $command)
     {
-        $page = $this->service->write(
-            $command->getWebPageId(),
-            $command->getHeadline(),
-            $command->getAbout(),
-            $command->getText()
-        );
+        $page = $this->service->publish($command->getWebPageId());
 
         $this->manager->flush();
 
-        $event = new WebPageWritedEvent($page->getWebPageId()->getValue(), $page->getName());
+        $event = new WebPagePublishedEvent($page->getWebPageId()->getValue(), $page->getName());
         $this->eventDispatcher->addSubscriber($this->subscriber);
-        $this->eventDispatcher->dispatch('web_page.writed', $event);
+        $this->eventDispatcher->dispatch('web_page.published', $event);
     }
 }
