@@ -190,6 +190,14 @@ abstract class WebPage implements WebPageInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isPublished()
+    {
+        return $this->datePublished ? true : false;
+    }
+
+    /**
      * @param $name
      * @param $headline
      * @param $about

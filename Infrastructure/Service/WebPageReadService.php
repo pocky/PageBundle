@@ -15,6 +15,7 @@ use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\DDD\DDDinPHP\Infrastructure\Service\ServiceInterface;
 use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
+use Black\DDD\DDDinPHP\Application\Specification\SpecificationInterface;
 
 class WebPageReadService implements ServiceInterface
 {
@@ -25,17 +26,20 @@ class WebPageReadService implements ServiceInterface
 
     /**
      * @param WebPageManagerInterface $manager
+     * @param SpecificationInterface $specification
      */
-    public function __construct(WebPageManagerInterface $manager)
-    {
-        $this->manager = $manager;
+    public function __construct(
+        WebPageManagerInterface $manager,
+        SpecificationInterface $specification
+    ) {
+        $this->manager       = $manager;
+        $this->specification = $specification;
     }
 
     /**
      * @param $id
      *
-     * @return mixed
-     *
+     * @return WebPageDTO
      * @throws \Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException
      */
     public function read($id)
@@ -43,7 +47,7 @@ class WebPageReadService implements ServiceInterface
         $id = new WebPageId($id);
         $page = $this->manager->find($id);
 
-        if ($page->getWebPageId()->isEqualTo($id)) {
+        if ($this->specification->isSatisfiedBy($page)) {
 
             $dto = new WebPageDTO(
                 $page->getWebPageId()->getValue(),

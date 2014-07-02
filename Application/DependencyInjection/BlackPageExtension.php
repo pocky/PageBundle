@@ -39,7 +39,7 @@ class BlackPageExtension extends Extension
             );
         }
 
-        foreach (['service', 'event', 'cqrs'] as $basename) {
+        foreach (['controller', 'cqrs', 'event', 'service', 'specification'] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 

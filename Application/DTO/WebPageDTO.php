@@ -13,7 +13,7 @@ namespace Black\Bundle\PageBundle\Application\DTO;
 use Black\DDD\DDDinPHP\Application\DTO\DTOInterface;
 
 /**
- * Class WebPageDTO
+ * Class WebPage
  *
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT

@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="black_page.application.controller.create_page.class">Black\Bundle\PageBundle\Application\Controller\CreatePageController</parameter>
+        <parameter key="black_page.application.controller.read_page.class">Black\Bundle\PageBundle\Application\Controller\ReadPageController</parameter>
+    </parameters>
+
+    <services>
+
+        <service id="black_page.application.controller.create_page" class="%black_page.application.controller.create_page.class%">
+            <argument type="service" id="black_common.infrastructure.command.bus" />
+            <argument type="service" id="black_page.infrastructure.cqrs.handler.create_web_page" />
+            <argument>Black\Bundle\PageBundle\Infrastructure\CQRS\Command\CreateWebPageCommand</argument>
+        </service>
+
+        <service id="black_page.application.controller.read_page" class="%black_page.application.controller.read_page.class%">
+            <argument type="service" id="black_page.infrastructure.service.read" />
+        </service>
+
+    </services>
+</container>
