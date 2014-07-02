@@ -9,10 +9,12 @@
         <parameter key="black_page.application.controller.write_page.class">Black\Bundle\PageBundle\Application\Controller\WritePageController</parameter>
         <parameter key="black_page.application.controller.read_page.class">Black\Bundle\PageBundle\Application\Controller\ReadPageController</parameter>
         <parameter key="black_page.application.controller.publish_page.class">Black\Bundle\PageBundle\Application\Controller\PublishPageController</parameter>
+        <parameter key="black_page.application.controller.remove_page.class">Black\Bundle\PageBundle\Application\Controller\RemovePageController</parameter>
     </parameters>
 
     <services>
 
+        <!-- Write controllers -->
         <service id="black_page.application.controller.create_page" class="%black_page.application.controller.create_page.class%">
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_page.infrastructure.cqrs.handler.create_web_page" />
@@ -31,6 +33,13 @@
             <argument>Black\Bundle\PageBundle\Infrastructure\CQRS\Command\PublishWebPageCommand</argument>
         </service>
 
+        <service id="black_page.application.controller.remove_page" class="%black_page.application.controller.remove_page.class%">
+            <argument type="service" id="black_common.infrastructure.command.bus" />
+            <argument type="service" id="black_page.infrastructure.cqrs.handler.remove_web_page" />
+            <argument>Black\Bundle\PageBundle\Infrastructure\CQRS\Command\RemoveWebPageCommand</argument>
+        </service>
+
+        <!-- Read Controllers -->
         <service id="black_page.application.controller.read_page" class="%black_page.application.controller.read_page.class%">
             <argument type="service" id="black_page.infrastructure.service.read" />
         </service>

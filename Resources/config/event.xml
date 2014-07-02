@@ -14,6 +14,8 @@
         <parameter key="black_page.infrastructure.domain_event.event.published.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPagePublishedEvent</parameter>
         <parameter key="black_page.infrastructure.domain_event.subscriber.published.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPagePublishedSubscriber</parameter>
 
+        <parameter key="black_page.infrastructure.domain_event.event.removed.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageRemovedEvent</parameter>
+        <parameter key="black_page.infrastructure.domain_event.subscriber.removed.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageRemovedSubscriber</parameter>
     </parameters>
 
     <services>
@@ -28,6 +30,9 @@
         <service id="black_page.infrastructure.domain_event.event.published"
                  class="%black_page.infrastructure.domain_event.event.published.class%" />
 
+        <service id="black_page.infrastructure.domain_event.event.removed"
+                 class="%black_page.infrastructure.domain_event.event.removed.class%" />
+
         <!-- Subscribers -->
         <service id="black_page.infrastructure.domain_event.subscriber.created"
                  class="%black_page.infrastructure.domain_event.subscriber.created.class%">
@@ -41,6 +46,11 @@
 
         <service id="black_page.infrastructure.domain_event.subscriber.published"
                  class="%black_page.infrastructure.domain_event.subscriber.published.class%">
+            <argument type="service" id="logger" />
+        </service>
+
+        <service id="black_page.infrastructure.domain_event.subscriber.removed"
+                 class="%black_page.infrastructure.domain_event.subscriber.removed.class%">
             <argument type="service" id="logger" />
         </service>
 

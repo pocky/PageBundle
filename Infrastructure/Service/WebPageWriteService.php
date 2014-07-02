@@ -47,15 +47,16 @@ class WebPageWriteService implements ServiceInterface
      * @param $about
      * @param $text
      *
-     * @return WebPageNotFoundException
+     * @return mixed
+     * @throws \Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException
      */
     public function write($webPageId, $headline, $about, $text)
     {
         $pageId  = new WebPageId($webPageId);
         $webPage = $this->manager->find($pageId);
 
-        if (!$webPage) {
-            return new WebPageNotFoundException();
+        if (null === $webPage) {
+            throw new WebPageNotFoundException();
         }
 
         $webPage->write($headline, $about, $text);
@@ -68,15 +69,16 @@ class WebPageWriteService implements ServiceInterface
      * @param $webPageId
      * @param string $dateTime
      *
-     * @return WebPageNotFoundException
+     * @return mixed
+     * @throws \Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException
      */
     public function publish($webPageId, $dateTime = 'now')
     {
         $pageId  = new WebPageId($webPageId);
         $webPage = $this->manager->find($pageId);
 
-        if (!$webPage) {
-            return new WebPageNotFoundException();
+        if (null === $webPage) {
+            throw new WebPageNotFoundException();
         }
 
         if ('now' === $dateTime) {
@@ -85,6 +87,26 @@ class WebPageWriteService implements ServiceInterface
 
         $webPage->publish($dateTime);
         $this->manager->add($webPage);
+
+        return $webPage;
+    }
+
+    /**
+     * @param $webPageId
+     *
+     * @return mixed
+     * @throws \Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException
+     */
+    public function remove($webPageId)
+    {
+        $pageId  = new WebPageId($webPageId);
+        $webPage = $this->manager->find($pageId);
+
+        if (null === $webPage) {
+            throw new WebPageNotFoundException();
+        }
+
+        $this->manager->remove($webPage);
 
         return $webPage;
     }
