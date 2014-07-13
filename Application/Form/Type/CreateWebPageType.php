@@ -13,6 +13,7 @@ namespace Black\Bundle\PageBundle\Application\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -29,11 +30,18 @@ class CreateWebPageType extends AbstractType
     protected $class;
 
     /**
-     * @param string $class
+     * @var
      */
-    public function __construct($class)
+    protected $name;
+
+    /**
+     * @param $class
+     * @param $name
+     */
+    public function __construct($class, $name)
     {
         $this->class = $class;
+        $this->name  = $name;
     }
 
     /**
@@ -58,6 +66,12 @@ class CreateWebPageType extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => $this->class,
+                'empty_data' => function(FormInterface $form) {
+                        return new $this->class(
+                            null,
+                            $form->get('name')->getData()
+                        );
+                    },
                 'intention' => 'create_webpage_form',
                 'translation_domain' => 'form',
             ]
@@ -69,6 +83,6 @@ class CreateWebPageType extends AbstractType
      */
     public function getName()
     {
-        return 'black_page_create_webpage';
+        return $this->name;
     }
 }

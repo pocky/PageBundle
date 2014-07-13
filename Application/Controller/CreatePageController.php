@@ -14,6 +14,9 @@ namespace Black\Bundle\PageBundle\Application\Controller;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Command\CreateWebPageCommand;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\CreateWebPageHandler;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;
+use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class CreatePageController
@@ -58,9 +61,7 @@ class CreatePageController
      */
     public function createPageAction($name)
     {
-        $bus = $this->bus;
-
-        $bus->register($this->commandName,$this->handler);
-        $bus->handle(new CreateWebPageCommand($name));
+        $this->bus->register($this->commandName,$this->handler);
+        $this->bus->handle(new CreateWebPageCommand($name));
     }
 }

@@ -11,6 +11,7 @@
 namespace Black\Bundle\PageBundle\Infrastructure\Service;
 
 use Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException;
+use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
 use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\DDD\DDDinPHP\Infrastructure\Service\ServiceInterface;

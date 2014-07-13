@@ -28,7 +28,7 @@ class WebPageManager extends AbstractManager implements WebPageManagerInterface
      * @param $name
      * @return mixed
      */
-    public function createInstance(WebPageId $id, $name)
+    public function createInstance(WebPageId $id, $name = 'Default name')
     {
         $class   = $this->getClass();
         $webPage = new $class($id, $name);

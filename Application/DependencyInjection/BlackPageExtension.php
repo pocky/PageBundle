@@ -39,14 +39,15 @@ class BlackPageExtension extends Extension
             );
         }
 
-        foreach (['controller', 'cqrs', 'event', 'service', 'specification'] as $basename) {
+        foreach (['controller', 'cqrs', 'dto', 'event', 'form', 'service', 'specification'] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
         $this->remapParametersNamespaces($config, $container, [
                 '' => [
+                    'page_dto' => 'black_page.webpage.dto.class',
                     'page_class' => 'black_page.webpage.model.class',
-                    'page_manager' => 'black_page.webpage.manager',
+                    'page_manager' => 'black_page.webpage.manager.class',
                 ]
             ]);
     }

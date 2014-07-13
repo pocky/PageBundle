@@ -45,6 +45,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
 
+                ->scalarNode('page_dto')->defaultValue('Black\\Bundle\\PageBundle\\Application\\DTO\\WebPageDTO')->end()
                 ->scalarNode('page_class')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('page_manager')->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\Doctrine\\WebPageManager')->end()
             ->end();

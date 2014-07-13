@@ -12,6 +12,7 @@
 namespace Black\Bundle\PageBundle\Application\Form\Handler;
 
 use Black\Bundle\PageBundle\Application\Command\Bus\CreateWebPageBus;
+use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
 use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -36,55 +37,31 @@ class WebPageFormHandler implements HandlerInterface
     protected $request;
 
     /**
-     * @var \Black\Bundle\PageBundle\Application\Command\Bus\CreateWebPageBus
-     */
-    protected $bus;
-
-    /**
      * @param FormInterface    $form
      * @param RequestStack     $requestStack
-     * @param CreateWebPageBus $bus
      */
     public function __construct(
         FormInterface $form,
-        RequestStack $requestStack,
-        CreateWebPageBus $bus
+        RequestStack $requestStack
     ) {
         $this->form    = $form;
         $this->request = $requestStack->getCurrentRequest();
-        $this->bus     = $bus;
     }
 
     /**
-     * @param WebPageInterface $webPage
-     *
-     * @return bool
+     * @return bool|mixed
      */
-    public function process(WebPageInterface $webPage)
+    public function process()
     {
-        $this->form->setData($webPage);
-
         if ('POST' === $this->request->getMethod()) {
             $this->form->handleRequest($this->request);
 
             if ($this->form->isValid()) {
-                return $this->execute($webPage);
+                return $this->form->getData();
             }
 
             return $this->stop();
         }
-    }
-
-    /**
-     * @param WebPageInterface $webPage
-     *
-     * @return mixed
-     */
-    public function execute(WebPageInterface $webPage)
-    {
-        $page = $this->bus->handle($webPage);
-
-        return $page;
     }
 
     /**

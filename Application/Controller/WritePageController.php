@@ -59,11 +59,12 @@ class WritePageController
      */
     public function writePageAction(WebPageDTO $page)
     {
-        $bus = $this->bus;
-
-        $bus->register($this->commandName, $this->handler);
-        $bus->handle(
-            new WriteWebPageCommand($page->getId(), $page->getHeadline(), $page->getAbout(), $page->getText())
-        );
+        $this->bus->register($this->commandName, $this->handler);
+        $this->bus->handle(new WriteWebPageCommand(
+                $page->getId(),
+                $page->getHeadline(),
+                $page->getAbout(),
+                $page->getText()
+            ));
     }
 }

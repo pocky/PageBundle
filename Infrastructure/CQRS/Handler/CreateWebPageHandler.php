@@ -16,7 +16,11 @@ use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageCreatedEvent;
 use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageCreatedSubscriber;
 use Black\Bundle\PageBundle\Infrastructure\Service\WebPageWriteService;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandHandlerInterface;
+use Symfony\Component\BrowserKit\Response;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class CreateWebPageHandler
@@ -75,6 +79,7 @@ final class CreateWebPageHandler implements CommandHandlerInterface
 
         $event = new WebPageCreatedEvent($page->getWebPageId()->getValue(), $page->getName(),$page->getDateCreated());
         $this->eventDispatcher->addSubscriber($this->subscriber);
+
         $this->eventDispatcher->dispatch('web_page.created', $event);
     }
 } 

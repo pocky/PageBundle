@@ -12,6 +12,8 @@ namespace Black\Bundle\PageBundle\Infrastructure\DomainEvent;
 
 use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class WebPageCreatedSubscriber
@@ -47,5 +49,7 @@ class WebPageCreatedSubscriber implements EventSubscriberInterface
     public function onWebPageCreated(WebPageCreatedEvent $event)
     {
         $this->logger->info($event->execute());
+
+        return $event->getWebPageId();
     }
 } 

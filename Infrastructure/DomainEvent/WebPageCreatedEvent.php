@@ -11,6 +11,7 @@
 namespace Black\Bundle\PageBundle\Infrastructure\DomainEvent;
 
 use Black\DDD\DDDinPHP\Infrastructure\DomainEvent\DomainEventInterface;
+use GuzzleHttp\Message\Response;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -47,5 +48,21 @@ final class WebPageCreatedEvent extends Event implements DomainEventInterface
     public function execute()
     {
         return sprintf('The page %s was successfully created with %s identifier', $this->name, $this->webPageId);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWebPageId()
+    {
+        return $this->webPageId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 } 

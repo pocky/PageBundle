@@ -12,12 +12,12 @@
     <services>
 
         <service id="black_page.infrastructure.service.read" class="%black_page.infrastructure.service.read.class%">
-            <argument type="service" id="black_page.manager.webpage" />
+            <argument type="service" id="black_page.infrastructure.manager.webpage" />
             <argument type="service" id="black_page.application.speficication.page_published" />
         </service>
 
         <service id="black_page.infrastructure.service.write" class="%black_page.infrastructure.service.write.class%">
-            <argument type="service" id="black_page.manager.webpage" />
+            <argument type="service" id="black_page.infrastructure.manager.webpage" />
         </service>
 
     </services>

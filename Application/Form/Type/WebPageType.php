@@ -14,6 +14,7 @@ namespace Black\Bundle\PageBundle\Application\Form\Type;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -25,16 +26,23 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class WebPageType extends AbstractType
 {
     /**
-     * @var type 
+     * @var string
      */
     protected $class;
 
     /**
-     * @param string $class
+     * @var
      */
-    public function __construct($class)
+    protected $name;
+
+    /**
+     * @param $class
+     * @param $name
+     */
+    public function __construct($class, $name)
     {
         $this->class = $class;
+        $this->name  = $name;
     }
 
     /**
@@ -49,14 +57,15 @@ class WebPageType extends AbstractType
                     'required' => true,
                 ]
             )
-            ->add('slug', 'text', [
-                    'label' => 'black.bundle.page.type.webpage.slug.label',
+
+            ->add('headline', 'textarea', [
+                    'label' => 'black.bundle.page.type.webpage.headline.label',
                     'required' => false,
                 ]
             )
 
-            ->add('headline', 'textarea', [
-                    'label' => 'black.bundle.page.type.webpage.headline.label',
+            ->add('about', 'textarea', [
+                    'label' => 'black.bundle.page.type.webpage.about.label',
                     'required' => false,
                 ]
             )
@@ -79,6 +88,15 @@ class WebPageType extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => $this->class,
+                'empty_data' => function(FormInterface $form) {
+                        return new $this->class(
+                            null,
+                            $form->get('name')->getData(),
+                            $form->get('headline')->getData(),
+                            $form->get('about')->getData(),
+                            $form->get('text')->getData()
+                        );
+                    },
                 'intention' => 'webpage_form',
                 'translation_domain' => 'form'
             ]
@@ -90,6 +108,6 @@ class WebPageType extends AbstractType
      */
     public function getName()
     {
-        return 'black_page_webpage';
+        return $this->name;
     }
 }

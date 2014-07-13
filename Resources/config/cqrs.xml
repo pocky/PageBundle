@@ -15,28 +15,28 @@
 
         <service id="black_page.infrastructure.cqrs.handler.create_web_page" class="%black_page.infrastructure.cqrs.handler.create_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.manager.webpage" />
+            <argument type="service" id="black_page.infrastructure.manager.webpage" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="black_page.infrastructure.domain_event.subscriber.created" />
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.write_web_page" class="%black_page.infrastructure.cqrs.handler.write_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.manager.webpage" />
+            <argument type="service" id="black_page.infrastructure.manager.webpage" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="black_page.infrastructure.domain_event.subscriber.writed" />
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.publish_web_page" class="%black_page.infrastructure.cqrs.handler.publish_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.manager.webpage" />
+            <argument type="service" id="black_page.infrastructure.manager.webpage" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="black_page.infrastructure.domain_event.subscriber.published" />
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.remove_web_page" class="%black_page.infrastructure.cqrs.handler.remove_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.manager.webpage" />
+            <argument type="service" id="black_page.infrastructure.manager.webpage" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="black_page.infrastructure.domain_event.subscriber.removed" />
         </service>

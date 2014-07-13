@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="black_page.application.form.type.create_web_page.class">Black\Bundle\PageBundle\Application\Form\Type\CreateWebPageType</parameter>
+        <parameter key="black_page.application.form.type.web_page.class">Black\Bundle\PageBundle\Application\Form\Type\WebPageType</parameter>
+
+        <parameter key="black_page.application.form.handler.create_web_page.class">Black\Bundle\PageBundle\Application\Form\Handler\CreateWebPageFormHandler</parameter>
+        <parameter key="black_page.application.form.handler.web_page.class">Black\Bundle\PageBundle\Application\Form\Handler\WebPageFormHandler</parameter>
+    </parameters>
+
+    <services>
+        <!-- Form Types -->
+        <service id="black_page.application.form.type.create_web_page"
+                 class="%black_page.application.form.type.create_web_page.class%">
+            <argument>%black_page.webpage.dto.class%</argument>
+            <argument>black_page_create_web_page</argument>
+            <tag name="form.type" alias="black_page_create_web_page" />
+        </service>
+
+        <service id="black_page.application.form.type.web_page"
+                 class="%black_page.application.form.type.web_page.class%">
+            <argument>%black_page.webpage.dto.class%</argument>
+            <argument>black_page_web_page</argument>
+            <tag name="form.type" alias="black_page_web_page" />
+        </service>
+
+        <!-- Forms -->
+        <service id="black_page.application.form.create_web_page"
+                 factory-method="createNamed"
+                 factory-service="form.factory"
+                 class="Symfony\Component\Form\Form">
+            <argument>black_page_create_web_page</argument>
+            <argument type="service" id="black_page.application.form.type.create_web_page" />
+            <argument>null</argument>
+        </service>
+
+        <service id="black_page.application.form.web_page"
+                 factory-method="createNamed"
+                 factory-service="form.factory"
+                 class="Symfony\Component\Form\Form">
+            <argument>black_page_web_page</argument>
+            <argument type="service" id="black_page.application.form.type.web_page" />
+            <argument>null</argument>
+        </service>
+
+        <!-- Form Handlers -->
+        <service id="black_page.application.form.handler.create_web_page"
+                 class="%black_page.application.form.handler.web_page.class%"
+                 scope="request">
+            <argument type="service" id="black_page.application.form.create_web_page" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+        <service id="black_page.application.form.handler.web_page"
+                 class="%black_page.application.form.handler.web_page.class%"
+                 scope="request">
+            <argument type="service" id="black_page.application.form.web_page" />
+            <argument type="service" id="request_stack" />
+        </service>
+
+    </services>
+</container>

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Black package.
  *
@@ -8,26 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Black\Bundle\PageBundle\Application\Specification;
+namespace Black\Bundle\PageBundle\Application\Form\Handler;
 
+use Black\Bundle\PageBundle\Application\Command\Bus\CreateWebPageBus;
 use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
-use Black\DDD\DDDinPHP\Application\Specification\SpecificationInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Black\Bundle\CommonBundle\Application\Form\Handler\HandlerInterface;
 
 /**
- * Class PageIsPublishedSpecification
+ * Class CreateWebPageFormHandler
  *
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class PageIsPublishedSpecification implements SpecificationInterface
+class CreateWebPageFormHandler extends WebPageFormHandler
 {
-    /**
-     * @param WebPageInterface $page
-     *
-     * @return bool
-     */
-    public function isSatisfiedBy(WebPageInterface $page)
-    {
-        return (bool) $page->isPublished();
-    }
+
 }

@@ -59,11 +59,7 @@ class RemovePageController
      */
     public function removePageAction(WebPageDTO $page)
     {
-        $bus = $this->bus;
-
-        $bus->register($this->commandName, $this->handler);
-        $bus->handle(
-            new RemoveWebPageCommand($page->getId())
-        );
+        $this->bus->register($this->commandName, $this->handler);
+        $this->bus->handle(new RemoveWebPageCommand($page->getId()));
     }
 }
