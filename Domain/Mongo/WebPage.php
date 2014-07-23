@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-abstract class WebPage extends AbstractWebPage
+class WebPage extends AbstractWebPage
 {
     /**
      * {@inheritdoc}

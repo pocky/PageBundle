@@ -24,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class WebPageId extends AbstractWebPageId
+final class WebPageId extends AbstractWebPageId
 {
     /**
      * @ODM\String

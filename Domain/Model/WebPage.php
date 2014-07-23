@@ -22,7 +22,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-abstract class WebPage implements WebPageInterface
+class WebPage implements WebPageInterface
 {
     /**
      * @var mixed
