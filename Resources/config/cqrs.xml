@@ -5,10 +5,10 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.infrastructure.cqrs.handler.create_web_page.class">Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\CreateWebPageHandler</parameter>
-        <parameter key="black_page.infrastructure.cqrs.handler.write_web_page.class">Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\WriteWebPageHandler</parameter>
-        <parameter key="black_page.infrastructure.cqrs.handler.publish_web_page.class">Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\PublishWebPageHandler</parameter>
-        <parameter key="black_page.infrastructure.cqrs.handler.remove_web_page.class">Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\RemoveWebPageHandler</parameter>
+        <parameter key="black_page.infrastructure.cqrs.handler.create_web_page.class">%black_page.infrastructure.cqrs.handler.class.create_web_page%</parameter>
+        <parameter key="black_page.infrastructure.cqrs.handler.write_web_page.class">%black_page.infrastructure.cqrs.handler.class.write_web_page%</parameter>
+        <parameter key="black_page.infrastructure.cqrs.handler.publish_web_page.class">%black_page.infrastructure.cqrs.handler.class.publish_web_page%</parameter>
+        <parameter key="black_page.infrastructure.cqrs.handler.remove_web_page.class">%black_page.infrastructure.cqrs.handler.class.remove_web_page%r</parameter>
     </parameters>
 
     <services>

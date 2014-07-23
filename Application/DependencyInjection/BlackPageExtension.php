@@ -39,7 +39,7 @@ class BlackPageExtension extends Extension
             );
         }
 
-        foreach (['controller', 'cqrs', 'dto', 'event', 'form', 'service', 'specification'] as $basename) {
+        foreach (['cqrs', 'dto', 'event', 'form', 'service', 'specification'] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
@@ -50,6 +50,14 @@ class BlackPageExtension extends Extension
                     'page_manager' => 'black_page.webpage.manager.class',
                 ]
             ]);
+
+        if (!empty($config['application']['controller'])) {
+            $this->loadController($config['application']['controller'], $container, $loader);
+        }
+
+        if (!empty($config['infrastructure']['cqrs'])) {
+            $this->loadCQRS($config['infrastructure']['cqrs'], $container, $loader);
+        }
     }
 
     /**
@@ -60,6 +68,46 @@ class BlackPageExtension extends Extension
     public function getAlias()
     {
         return 'black_page';
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
+    private function loadController(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        foreach (array('controller') as $basename) {
+            $loader->load(sprintf('%s.xml', $basename));
+        }
+
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
+                'class' => 'black_page.application.controller.class.%s',
+            )
+        );
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
+    private function loadCQRS(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        foreach (array('cqrs') as $basename) {
+            $loader->load(sprintf('%s.xml', $basename));
+        }
+
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            array(
+                'class' => 'black_page.infrastructure.cqrs.handler.class.%s',
+            )
+        );
     }
 
     /**

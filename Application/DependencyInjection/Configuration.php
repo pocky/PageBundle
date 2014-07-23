@@ -50,6 +50,78 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('page_manager')->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\Doctrine\\WebPageManager')->end()
             ->end();
 
+        $this->addControllerSection($rootNode);
+        $this->addCQRSSection($rootNode);
+
         return $treeBuilder;
+    }
+
+    private function addControllerSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('application')
+                ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('controller')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->arrayNode('class')
+                            ->addDefaultsIfNotSet()
+                            ->canBeUnset()
+                            ->children()
+                                ->scalarNode('create_page')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Controller\\CreatePageController')
+                                ->end()
+                                ->scalarNode('write_page')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Controller\\WritePageController')
+                                ->end()
+                                ->scalarNode('read_page')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Controller\\ReadPageController')
+                                ->end()
+                                ->scalarNode('publish_page')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Controller\\PublishPageController')
+                                ->end()
+                                ->scalarNode('remove_page')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Controller\\RemovePageController')
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    private function addCQRSSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('infrastructure')
+                ->addDefaultsIfNotSet()
+                    ->children()
+                    ->arrayNode('cqrs')
+                    ->addDefaultsIfNotSet()
+                        ->children()
+                        ->arrayNode('class')
+                        ->addDefaultsIfNotSet()
+                        ->canBeUnset()
+                            ->children()
+                                ->scalarNode('create_web_page')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\CreateWebPageHandler')
+                                ->end()
+                                ->scalarNode('write_web_page')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\WriteeWebPageHandler')
+                                ->end()
+                                    ->scalarNode('publish_web_page')
+                                ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\PublishWebPageHandler')
+                                ->end()
+                                    ->scalarNode('remove_web_page')
+                                ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\RemoveWebPageHandler')
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
     }
 }
