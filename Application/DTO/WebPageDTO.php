@@ -107,8 +107,11 @@ class WebPageDTO implements DTOInterface
     public function serialize()
     {
         return serialize([
-            $this->id,
-            $this->name
+                $this->id,
+                $this->name,
+                $this->headline,
+                $this->about,
+                $this->text
         ]);
     }
 
@@ -117,9 +120,12 @@ class WebPageDTO implements DTOInterface
      */
     public function unserialize($serialized)
     {
-        list(
+       return list(
             $this->id,
             $this->name,
+            $this->headline,
+            $this->about,
+            $this->text
         ) = unserialize($serialized);
     }
 } 
