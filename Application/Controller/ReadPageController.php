@@ -11,7 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Application\Controller;
 
-use Black\Bundle\PageBundle\Infrastructure\Service\WebPageReadService;
+use Black\Bundle\PageBundle\Application\Service\WebPageReadService;
 
 /**
  * Class ReadPageController

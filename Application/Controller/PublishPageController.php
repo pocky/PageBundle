@@ -60,6 +60,6 @@ class PublishPageController
     public function publishPageAction(WebPageDTO $page)
     {
         $this->bus->register($this->commandName, $this->handler);
-        $this->bus->handle( new PublishWebPageCommand($page->getId()));
+        $this->bus->handle(new PublishWebPageCommand($page->getId()));
     }
 }

@@ -52,6 +52,7 @@ class WebPageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('id', 'hidden')
             ->add('name', 'text', [
                     'label' => 'black.bundle.page.type.webpage.name.label',
                     'required' => true,
@@ -90,7 +91,7 @@ class WebPageType extends AbstractType
                 'data_class' => $this->class,
                 'empty_data' => function(FormInterface $form) {
                         return new $this->class(
-                            null,
+                            $form->get('id')->getData(),
                             $form->get('name')->getData(),
                             $form->get('headline')->getData(),
                             $form->get('about')->getData(),

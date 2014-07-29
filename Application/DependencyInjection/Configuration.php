@@ -110,7 +110,7 @@ class Configuration implements ConfigurationInterface
                                     ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\CreateWebPageHandler')
                                 ->end()
                                 ->scalarNode('write_web_page')
-                                    ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\WriteeWebPageHandler')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\WriteWebPageHandler')
                                 ->end()
                                     ->scalarNode('publish_web_page')
                                 ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\PublishWebPageHandler')

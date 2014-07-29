@@ -10,14 +10,13 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\Service;
 
-
 use Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException;
 use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
-use Black\DDD\DDDinPHP\Infrastructure\Service\ServiceInterface;
+use Black\DDD\DDDinPHP\Infrastructure\Service\InfrastructureServiceInterface;
 use Rhumsaa\Uuid\Uuid;
 
-class WebPageWriteService implements ServiceInterface
+class WebPageWriteService implements InfrastructureServiceInterface
 {
     /**
      * @var \Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface

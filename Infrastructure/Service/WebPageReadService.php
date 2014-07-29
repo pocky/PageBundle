@@ -11,14 +11,13 @@
 namespace Black\Bundle\PageBundle\Infrastructure\Service;
 
 use Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException;
-use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
 use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
-use Black\DDD\DDDinPHP\Infrastructure\Service\ServiceInterface;
+use Black\DDD\DDDinPHP\Infrastructure\Service\InfrastructureServiceInterface;
 use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
 use Black\DDD\DDDinPHP\Application\Specification\SpecificationInterface;
 
-class WebPageReadService implements ServiceInterface
+class WebPageReadService implements InfrastructureServiceInterface
 {
     /**
      * @var \Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface
@@ -52,17 +51,6 @@ class WebPageReadService implements ServiceInterface
             throw new WebPageNotFoundException();
         }
 
-        if ($this->specification->isSatisfiedBy($page)) {
-
-            $dto = new WebPageDTO(
-                $page->getWebPageId()->getValue(),
-                $page->getName(),
-                $page->getHeadline(),
-                $page->getAbout(),
-                $page->getText()
-            );
-
-            return $dto;
-        }
+        return $page;
     }
 } 

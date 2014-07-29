@@ -41,7 +41,7 @@
 
         <!-- Read Controllers -->
         <service id="black_page.application.controller.read_page" class="%black_page.application.controller.read_page.class%">
-            <argument type="service" id="black_page.infrastructure.service.read" />
+            <argument type="service" id="black_page.application.service.read" />
         </service>
 
     </services>
