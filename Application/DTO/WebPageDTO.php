@@ -21,29 +21,39 @@ use Black\DDD\DDDinPHP\Application\DTO\DTOInterface;
 class WebPageDTO implements DTOInterface
 {
     /**
-     * @var
+     * @var int
      */
     protected $id;
 
     /**
-     * @var
+     * @var string
      */
     protected $name;
 
     /**
-     * @var
+     * @var string
      */
     protected $headline;
 
     /**
-     * @var
+     * @var string
      */
     protected $about;
 
     /**
-     * @var
+     * @var string
      */
     protected $text;
+
+    /**
+     * @var string
+     */
+    protected $context;
+
+    /**
+     * @var string
+     */
+    protected $type;
 
     /**
      * @param $id
@@ -59,6 +69,8 @@ class WebPageDTO implements DTOInterface
         $this->headline = $headline;
         $this->about    = $about;
         $this->text     = $text;
+        $this->context  = "http://schema.org";
+        $this->type     = "WebPage";
     }
 
     /**
@@ -104,6 +116,22 @@ class WebPageDTO implements DTOInterface
     /**
      * @return string
      */
+    public function getContext()
+    {
+        return $this->context;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return string
+     */
     public function serialize()
     {
         return serialize([
@@ -111,7 +139,9 @@ class WebPageDTO implements DTOInterface
                 $this->name,
                 $this->headline,
                 $this->about,
-                $this->text
+                $this->text,
+                $this->context,
+                $this->type
         ]);
     }
 
@@ -125,7 +155,9 @@ class WebPageDTO implements DTOInterface
             $this->name,
             $this->headline,
             $this->about,
-            $this->text
+            $this->text,
+            $this->context,
+            $this->type
         ) = unserialize($serialized);
     }
 } 
