@@ -10,7 +10,6 @@
 
 namespace Black\Bundle\PageBundle\Domain\Model;
 
-
 use Black\DDD\DDDinPHP\Domain\Model\ValueObjectInterface;
 
 /**
@@ -19,7 +18,7 @@ use Black\DDD\DDDinPHP\Domain\Model\ValueObjectInterface;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class WebPageId implements ValueObjectInterface
+abstract class WebPageId implements ValueObjectInterface
 {
     /**
      * @var

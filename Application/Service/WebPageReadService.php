@@ -50,9 +50,7 @@ class WebPageReadService implements ApplicationServiceInterface
 
     /**
      * @param $id
-     *
      * @return WebPageDTO
-     * @throws \Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException
      */
     public function read($id)
     {

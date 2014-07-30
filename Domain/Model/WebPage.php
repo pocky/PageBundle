@@ -22,13 +22,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class WebPage implements WebPageInterface
+abstract class WebPage implements WebPageInterface
 {
-    /**
-     * @var mixed
-     */
-    protected $id;
-
     /**
      * @var
      */
@@ -78,7 +73,6 @@ class WebPage implements WebPageInterface
      * The date on which the WebPage was created
      *
      * @Assert\DateTime()
-     * @Gedmo\Timestampable(on="create")
      */
     protected $dateCreated;
 
@@ -86,7 +80,6 @@ class WebPage implements WebPageInterface
      * The date on which the WebPage was most recently modified
      *
      * @Assert\DateTime()
-     * @Gedmo\Timestampable(on="update")
      */
     protected $dateModified;
 
@@ -94,7 +87,6 @@ class WebPage implements WebPageInterface
      * Date of first broadcast/publication
      *
      * @Assert\DateTime()
-     * @Gedmo\Timestampable(on="create")
      */
     protected $datePublished;
 
@@ -107,14 +99,6 @@ class WebPage implements WebPageInterface
         $this->name          = $name;
         $this->dateCreated   = new \DateTime();
         $this->dateModified  = new \DateTime();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**
@@ -216,6 +200,14 @@ class WebPage implements WebPageInterface
     public function publish(\DateTime $dateTime)
     {
         $this->datePublished = $dateTime;
+    }
+
+    /**
+     *
+     */
+    public function depublish()
+    {
+        $this->datePublished = null;
     }
 
     /**

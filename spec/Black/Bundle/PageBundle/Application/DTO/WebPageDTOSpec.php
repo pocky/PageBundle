@@ -51,6 +51,7 @@ class WebPageDTOSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Black\Bundle\PageBundle\Application\DTO\WebPageDTO');
+        $this->shouldImplement('Black\DDD\DDDinPHP\Application\DTO\DTOInterface');
     }
 
     /**
@@ -91,6 +92,22 @@ class WebPageDTOSpec extends ObjectBehavior
     function it_should_return_text()
     {
         $this->getText()->shouldReturn($this->text);
+    }
+
+    /**
+     *
+     */
+    function it_should_return_context()
+    {
+        $this->getContext()->shouldReturn("http://schema.org");
+    }
+
+    /**
+     *
+     */
+    function it_sould_return_type()
+    {
+        $this->getType()->shouldReturn("WebPage");
     }
 
     /**
