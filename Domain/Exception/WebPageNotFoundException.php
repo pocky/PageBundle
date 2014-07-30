@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class WebPageNotFoundException extends NotFoundHttpException
+final class WebPageNotFoundException extends NotFoundHttpException
 {
     /**
      * Constructor.
