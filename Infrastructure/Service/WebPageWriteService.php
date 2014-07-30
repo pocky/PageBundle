@@ -11,7 +11,7 @@
 namespace Black\Bundle\PageBundle\Infrastructure\Service;
 
 use Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException;
-use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\DDD\DDDinPHP\Infrastructure\Service\InfrastructureServiceInterface;
 use Rhumsaa\Uuid\Uuid;
@@ -34,10 +34,9 @@ class WebPageWriteService implements InfrastructureServiceInterface
     /**
      * return mixed
      */
-    public function create($name)
+    public function create(WebPageId $webPageId, $name)
     {
-        $pageId  = new WebPageId(Uuid::uuid4());
-        $webPage = $this->manager->createInstance($pageId, $name);
+        $webPage = $this->manager->createInstance($webPageId, $name);
 
         $this->manager->add($webPage);
 
@@ -53,10 +52,9 @@ class WebPageWriteService implements InfrastructureServiceInterface
      * @return mixed
      * @throws \Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException
      */
-    public function write($webPageId, $headline, $about, $text)
+    public function write(WebPageId $webPageId, $headline, $about, $text)
     {
-        $pageId  = new WebPageId($webPageId);
-        $webPage = $this->manager->find($pageId);
+        $webPage = $this->manager->find($webPageId);
 
         if (null === $webPage) {
             throw new WebPageNotFoundException();
@@ -75,10 +73,9 @@ class WebPageWriteService implements InfrastructureServiceInterface
      * @return mixed
      * @throws \Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException
      */
-    public function publish($webPageId, $dateTime = 'now')
+    public function publish(WebPageId $webPageId, $dateTime = 'now')
     {
-        $pageId  = new WebPageId($webPageId);
-        $webPage = $this->manager->find($pageId);
+        $webPage = $this->manager->find($webPageId);
 
         if (null === $webPage) {
             throw new WebPageNotFoundException();
@@ -100,10 +97,29 @@ class WebPageWriteService implements InfrastructureServiceInterface
      * @return mixed
      * @throws \Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException
      */
-    public function remove($webPageId)
+    public function depublish(WebPageId $webPageId)
     {
-        $pageId  = new WebPageId($webPageId);
-        $webPage = $this->manager->find($pageId);
+        $webPage = $this->manager->find($webPageId);
+
+        if (null === $webPage) {
+            throw new WebPageNotFoundException();
+        }
+
+        $webPage->depublish();
+        $this->manager->add($webPage);
+
+        return $webPage;
+    }
+
+    /**
+     * @param $webPageId
+     *
+     * @return mixed
+     * @throws \Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException
+     */
+    public function remove(WebPageId $webPageId)
+    {
+        $webPage = $this->manager->find($webPageId);
 
         if (null === $webPage) {
             throw new WebPageNotFoundException();

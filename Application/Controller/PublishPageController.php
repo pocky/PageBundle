@@ -11,7 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Application\Controller;
 
-use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Command\PublishWebPageCommand;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\PublishWebPageHandler;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;
@@ -55,11 +55,11 @@ class PublishPageController
     }
 
     /**
-     * @param WebPageDTO $page
+     * @param WebPageId $id
      */
-    public function publishPageAction(WebPageDTO $page)
+    public function publishPageAction(WebPageId $id)
     {
         $this->bus->register($this->commandName, $this->handler);
-        $this->bus->handle(new PublishWebPageCommand($page->getId()));
+        $this->bus->handle(new PublishWebPageCommand($id));
     }
 }

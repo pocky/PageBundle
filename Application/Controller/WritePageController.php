@@ -12,6 +12,7 @@
 namespace Black\Bundle\PageBundle\Application\Controller;
 
 use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
+use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Command\WriteWebPageCommand;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\WriteWebPageHandler;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;
@@ -61,7 +62,7 @@ class WritePageController
     {
         $this->bus->register($this->commandName, $this->handler);
         $this->bus->handle(new WriteWebPageCommand(
-                $page->getId(),
+                new WebPageId($page->getId()),
                 $page->getHeadline(),
                 $page->getAbout(),
                 $page->getText()

@@ -10,6 +10,7 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\CQRS\Command;
 
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
 
 /**
@@ -26,11 +27,23 @@ final class CreateWebPageCommand implements CommandInterface
     protected $name;
 
     /**
+     * @var \Black\Bundle\PageBundle\Domain\Model\WebPageId
+     */
+    protected $webPageId;
+
+    /**
+     * @param WebPageId $webPageId
      * @param $name
      */
-    public function __construct($name)
+    public function __construct(WebPageId $webPageId, $name)
     {
-        $this->name = $name;
+        $this->name      = $name;
+        $this->webPageId = $webPageId;
+    }
+
+    public function getWebPageId()
+    {
+        return $this->webPageId;
     }
 
     /**

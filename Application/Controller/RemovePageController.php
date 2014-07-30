@@ -12,6 +12,7 @@
 namespace Black\Bundle\PageBundle\Application\Controller;
 
 use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Command\RemoveWebPageCommand;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\RemoveWebPageHandler;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;
@@ -57,9 +58,9 @@ class RemovePageController
     /**
      * @param WebPageDTO $page
      */
-    public function removePageAction(WebPageDTO $page)
+    public function removePageAction(WebPageId $id)
     {
         $this->bus->register($this->commandName, $this->handler);
-        $this->bus->handle(new RemoveWebPageCommand($page->getId()));
+        $this->bus->handle(new RemoveWebPageCommand($id));
     }
 }

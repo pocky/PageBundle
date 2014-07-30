@@ -10,6 +10,7 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\CQRS\Command;
 
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
 
 /**
@@ -21,7 +22,7 @@ use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
 final class WriteWebPageCommand implements CommandInterface
 {
     /**
-     * @var
+     * @var \Black\Bundle\PageBundle\Domain\Model\WebPageId
      */
     protected $webPageId;
 
@@ -41,17 +42,17 @@ final class WriteWebPageCommand implements CommandInterface
     protected $text;
 
     /**
-     * @param $webPageId
+     * @param WebPageId $webPageId
      * @param $headline
      * @param $about
      * @param $text
      */
-    public function __construct($webPageId, $headline, $about, $text)
+    public function __construct(WebPageId $webPageId, $headline, $about, $text)
     {
-        $this->webPageId    = $webPageId;
-        $this->headline     = $headline;
-        $this->about        = $about;
-        $this->text         = $text;
+        $this->webPageId = $webPageId;
+        $this->headline  = $headline;
+        $this->about     = $about;
+        $this->text      = $text;
     }
 
     /**

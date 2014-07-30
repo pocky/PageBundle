@@ -10,6 +10,7 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\CQRS\Command;
 
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
 
 /**
@@ -21,16 +22,16 @@ use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
 final class PublishWebPageCommand implements CommandInterface
 {
     /**
-     * @var
+     * @var \Black\Bundle\PageBundle\Domain\Model\WebPageId
      */
     protected $webPageId;
 
     /**
-     * @param $webPageId
+     * @param WebPageId $webPageId
      */
-    public function __construct($webPageId)
+    public function __construct(WebPageId $webPageId)
     {
-        $this->webPageId    = $webPageId;
+        $this->webPageId = $webPageId;
     }
 
     /**

@@ -12,6 +12,7 @@
 namespace Black\Bundle\PageBundle\Application\Controller;
 
 use Black\Bundle\PageBundle\Application\Service\WebPageReadService;
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 
 /**
  * Class ReadPageController
@@ -35,10 +36,10 @@ class ReadPageController
     }
 
     /**
-     * @param $id
-     * @return mixed
+     * @param WebPageId $id
+     * @return \Black\Bundle\PageBundle\Application\DTO\WebPageDTO|mixed
      */
-    public function readPageAction($id)
+    public function readPageAction(WebPageId $id)
     {
         $page = $this->service->read($id);
 

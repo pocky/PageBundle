@@ -10,6 +10,7 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\CQRS\Command;
 
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
 
 /**
@@ -26,11 +27,11 @@ final class RemoveWebPageCommand implements CommandInterface
     protected $webPageId;
 
     /**
-     * @param $webPageId
+     * @param WebPageId $webPageId
      */
-    public function __construct($webPageId)
+    public function __construct(WebPageId $webPageId)
     {
-        $this->webPageId    = $webPageId;
+        $this->webPageId = $webPageId;
     }
 
     /**

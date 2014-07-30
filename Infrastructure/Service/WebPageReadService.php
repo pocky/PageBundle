@@ -11,7 +11,7 @@
 namespace Black\Bundle\PageBundle\Infrastructure\Service;
 
 use Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException;
-use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\DDD\DDDinPHP\Infrastructure\Service\InfrastructureServiceInterface;
 use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
@@ -37,15 +37,14 @@ class WebPageReadService implements InfrastructureServiceInterface
     }
 
     /**
-     * @param $id
+     * @param WebPageId $webPageId
      *
-     * @return WebPageDTO
+     * @return mixed
      * @throws \Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException
      */
-    public function read($id)
+    public function read(WebPageId $webPageId)
     {
-        $id = new WebPageId($id);
-        $page = $this->manager->find($id);
+        $page = $this->manager->find($webPageId);
 
         if (null === $page) {
             throw new WebPageNotFoundException();

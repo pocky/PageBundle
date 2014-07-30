@@ -50,6 +50,7 @@ class WebPageReadService implements ApplicationServiceInterface
 
     /**
      * @param $id
+     *
      * @return WebPageDTO
      */
     public function read($id)
