@@ -51,7 +51,17 @@ class Configuration implements ConfigurationInterface
             ->end();
 
         $this->addControllerSection($rootNode);
-        $this->addCQRSSection($rootNode);
+
+        $node = $rootNode
+            ->children()
+                ->arrayNode('infrastructure')
+                ->addDefaultsIfNotSet();
+
+                $this->addCQRSSection($node);
+                $this->addEventSection($node);
+
+        $rootNode
+            ->end();
 
         return $treeBuilder;
     }
@@ -96,29 +106,55 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('infrastructure')
+                ->arrayNode('cqrs')
                 ->addDefaultsIfNotSet()
-                    ->children()
-                    ->arrayNode('cqrs')
+                ->children()
+                    ->arrayNode('class')
                     ->addDefaultsIfNotSet()
-                        ->children()
-                        ->arrayNode('class')
-                        ->addDefaultsIfNotSet()
-                        ->canBeUnset()
-                            ->children()
-                                ->scalarNode('create_web_page')
-                                    ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\CreateWebPageHandler')
-                                ->end()
-                                ->scalarNode('write_web_page')
-                                    ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\WriteWebPageHandler')
-                                ->end()
-                                    ->scalarNode('publish_web_page')
-                                ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\PublishWebPageHandler')
-                                ->end()
-                                    ->scalarNode('remove_web_page')
-                                ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\RemoveWebPageHandler')
-                                ->end()
-                            ->end()
+                    ->canBeUnset()
+                    ->children()
+                        ->scalarNode('create_web_page')
+                            ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\CreateWebPageHandler')
+                        ->end()
+                        ->scalarNode('write_web_page')
+                            ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\WriteWebPageHandler')
+                        ->end()
+                            ->scalarNode('publish_web_page')
+                        ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\PublishWebPageHandler')
+                        ->end()
+                            ->scalarNode('remove_web_page')
+                        ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\CQRS\\Handler\\RemoveWebPageHandler')
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    private function addEventSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('domain_event_subscriber')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->arrayNode('class')
+                    ->addDefaultsIfNotSet()
+                    ->canBeUnset()
+                    ->children()
+                        ->scalarNode('created')
+                            ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\DomainEvent\\WebPageCreatedSubscriber')
+                        ->end()
+                        ->scalarNode('writed')
+                            ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\DomainEvent\\WebPageWritedSubscriber')
+                        ->end()
+                        ->scalarNode('published')
+                            ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\DomainEvent\\WebPagePublishedSubscriber')
+                        ->end()
+                        ->scalarNode('depublished')
+                            ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\DomainEvent\\WebPageDepublishedSubscriber')
+                        ->end()
+                        ->scalarNode('removed')
+                            ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\DomainEvent\\WebPageRemovedSubscriber')
                         ->end()
                     ->end()
                 ->end()

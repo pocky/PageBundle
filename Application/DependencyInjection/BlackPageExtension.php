@@ -39,7 +39,7 @@ class BlackPageExtension extends Extension
             );
         }
 
-        foreach (['cqrs', 'dto', 'event', 'form', 'service', 'specification'] as $basename) {
+        foreach (['dto', 'form', 'service', 'specification'] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
@@ -57,6 +57,10 @@ class BlackPageExtension extends Extension
 
         if (!empty($config['infrastructure']['cqrs'])) {
             $this->loadCQRS($config['infrastructure']['cqrs'], $container, $loader);
+        }
+
+        if (!empty($config['infrastructure']['domain_event_subscriber'])) {
+            $this->loadEvent($config['infrastructure']['domain_event_subscriber'], $container, $loader);
         }
     }
 
@@ -84,9 +88,9 @@ class BlackPageExtension extends Extension
         $this->remapParametersNamespaces(
             $config,
             $container,
-            array(
+            [
                 'class' => 'black_page.application.controller.class.%s',
-            )
+            ]
         );
     }
 
@@ -104,9 +108,29 @@ class BlackPageExtension extends Extension
         $this->remapParametersNamespaces(
             $config,
             $container,
-            array(
+            [
                 'class' => 'black_page.infrastructure.cqrs.handler.class.%s',
-            )
+            ]
+        );
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
+    private function loadEvent(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        foreach (array('event') as $basename) {
+            $loader->load(sprintf('%s.xml', $basename));
+        }
+
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            [
+                'class' => 'black_page.infrastructure.domain_event_subscriber.class.%s',
+            ]
         );
     }
 

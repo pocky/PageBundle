@@ -5,35 +5,14 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.infrastructure.domain_event.event.created.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageCreatedEvent</parameter>
-        <parameter key="black_page.infrastructure.domain_event.subscriber.created.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageCreatedSubscriber</parameter>
-
-        <parameter key="black_page.infrastructure.domain_event.event.writed.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageWritedEvent</parameter>
-        <parameter key="black_page.infrastructure.domain_event.subscriber.writed.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageWritedSubscriber</parameter>
-
-        <parameter key="black_page.infrastructure.domain_event.event.published.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPagePublishedEvent</parameter>
-        <parameter key="black_page.infrastructure.domain_event.subscriber.published.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPagePublishedSubscriber</parameter>
-
-        <parameter key="black_page.infrastructure.domain_event.event.removed.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageRemovedEvent</parameter>
-        <parameter key="black_page.infrastructure.domain_event.subscriber.removed.class">Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageRemovedSubscriber</parameter>
+        <parameter key="black_page.infrastructure.domain_event.subscriber.created.class">%black_page.infrastructure.domain_event_subscriber.class.created%</parameter>
+        <parameter key="black_page.infrastructure.domain_event.subscriber.writed.class">%black_page.infrastructure.domain_event_subscriber.class.writed%</parameter>
+        <parameter key="black_page.infrastructure.domain_event.subscriber.published.class">%black_page.infrastructure.domain_event_subscriber.class.published%</parameter>
+        <parameter key="black_page.infrastructure.domain_event.subscriber.depublished.class">%black_page.infrastructure.domain_event_subscriber.class.depublished%</parameter>
+        <parameter key="black_page.infrastructure.domain_event.subscriber.removed.class">%black_page.infrastructure.domain_event_subscriber.class.removed%</parameter>
     </parameters>
 
     <services>
-
-        <!-- Events -->
-        <service id="black_page.infrastructure.domain_event.event.created"
-                 class="%black_page.infrastructure.domain_event.event.created.class%" />
-
-        <service id="black_page.infrastructure.domain_event.event.writed"
-                 class="%black_page.infrastructure.domain_event.event.writed.class%" />
-
-        <service id="black_page.infrastructure.domain_event.event.published"
-                 class="%black_page.infrastructure.domain_event.event.published.class%" />
-
-        <service id="black_page.infrastructure.domain_event.event.removed"
-                 class="%black_page.infrastructure.domain_event.event.removed.class%" />
-
-        <!-- Subscribers -->
         <service id="black_page.infrastructure.domain_event.subscriber.created"
                  class="%black_page.infrastructure.domain_event.subscriber.created.class%">
             <argument type="service" id="logger" />
@@ -49,10 +28,14 @@
             <argument type="service" id="logger" />
         </service>
 
+        <service id="black_page.infrastructure.domain_event.subscriber.depublished"
+                 class="%black_page.infrastructure.domain_event.subscriber.depublished.class%">
+            <argument type="service" id="logger" />
+        </service>
+
         <service id="black_page.infrastructure.domain_event.subscriber.removed"
                  class="%black_page.infrastructure.domain_event.subscriber.removed.class%">
             <argument type="service" id="logger" />
         </service>
-
     </services>
 </container>
