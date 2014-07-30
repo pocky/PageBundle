@@ -31,7 +31,7 @@ class WebPage extends AbstractWebPage
     /**
      * {@inheritdoc}
      *
-     * @ODM\Embedded(class="Black\Bundle\PageBundle\Domain\Entity\WebPageId")
+     * @ORM\Embedded(class="Black\Bundle\PageBundle\Domain\Entity\WebPageId")
      */
     protected $webPageId;
 
