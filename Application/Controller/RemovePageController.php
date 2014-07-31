@@ -56,7 +56,7 @@ class RemovePageController
     }
 
     /**
-     * @param WebPageDTO $page
+     * @param WebPageId $id
      */
     public function removePageAction(WebPageId $id)
     {

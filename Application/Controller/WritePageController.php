@@ -12,7 +12,7 @@
 namespace Black\Bundle\PageBundle\Application\Controller;
 
 use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
-use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Command\WriteWebPageCommand;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\WriteWebPageHandler;
 use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;

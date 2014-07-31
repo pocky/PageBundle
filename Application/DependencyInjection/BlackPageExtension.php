@@ -41,6 +41,7 @@ class BlackPageExtension extends Extension
 
         foreach (['dto', 'form', 'service', 'specification'] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
+            $container->setParameter($this->getAlias() . '.backend_type_' . $config['db_driver'], true);
         }
 
         $this->remapParametersNamespaces($config, $container, [

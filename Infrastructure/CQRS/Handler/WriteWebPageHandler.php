@@ -70,6 +70,7 @@ final class WriteWebPageHandler implements CommandHandlerInterface
      */
     public function handle(WriteWebPageCommand $command)
     {
+
         $page = $this->service->write(
             $command->getWebPageId(),
             $command->getHeadline(),

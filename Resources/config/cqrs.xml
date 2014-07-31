@@ -8,6 +8,7 @@
         <parameter key="black_page.infrastructure.cqrs.handler.create_web_page.class">%black_page.infrastructure.cqrs.handler.class.create_web_page%</parameter>
         <parameter key="black_page.infrastructure.cqrs.handler.write_web_page.class">%black_page.infrastructure.cqrs.handler.class.write_web_page%</parameter>
         <parameter key="black_page.infrastructure.cqrs.handler.publish_web_page.class">%black_page.infrastructure.cqrs.handler.class.publish_web_page%</parameter>
+        <parameter key="black_page.infrastructure.cqrs.handler.depublish_web_page.class">%black_page.infrastructure.cqrs.handler.class.depublish_web_page%</parameter>
         <parameter key="black_page.infrastructure.cqrs.handler.remove_web_page.class">%black_page.infrastructure.cqrs.handler.class.remove_web_page%r</parameter>
     </parameters>
 
@@ -32,6 +33,13 @@
             <argument type="service" id="black_page.infrastructure.manager.webpage" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="black_page.infrastructure.domain_event.subscriber.published" />
+        </service>
+
+        <service id="black_page.infrastructure.cqrs.handler.depublish_web_page" class="%black_page.infrastructure.cqrs.handler.depublish_web_page.class%">
+            <argument type="service" id="black_page.infrastructure.service.write" />
+            <argument type="service" id="black_page.infrastructure.manager.webpage" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="black_page.infrastructure.domain_event.subscriber.depublished" />
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.remove_web_page" class="%black_page.infrastructure.cqrs.handler.remove_web_page.class%">

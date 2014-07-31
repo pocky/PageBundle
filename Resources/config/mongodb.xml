@@ -9,11 +9,14 @@
     </parameters>
 
     <services>
-        <service id="black_page.document.manager" alias="doctrine.odm.mongodb.document_manager" />
 
-        <service id="black_page.infrastructure.manager.webpage" class="%black_page.infrastructure.manager.webpage.class%">
+        <service id="black_page.infrastructure.manager.webpage" class="%black_page.infrastructure.manager.webpage.class%" public="false">
             <argument type="service" id="black_page.document.manager" />
             <argument>%black_page.webpage.model.class%</argument>
         </service>
+
+        <service id="black_page.document.manager" alias="doctrine.odm.mongodb.document_manager" />
+
+
     </services>
 </container>

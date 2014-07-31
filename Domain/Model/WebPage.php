@@ -12,7 +12,6 @@
 namespace Black\Bundle\PageBundle\Domain\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Class WebPage
@@ -43,7 +42,6 @@ abstract class WebPage implements WebPageInterface
      *
      * @Assert\Type(type="string")
      * @Assert\Length(max="255")
-     * @Gedmo\Slug(fields={"name"})
      */
     protected $slug;
 
@@ -51,6 +49,7 @@ abstract class WebPage implements WebPageInterface
      * Headline of the WebPage
      *
      * @Assert\Type(type="string")
+     * @Assert\Length(max="1")
      */
     protected $headline;
 

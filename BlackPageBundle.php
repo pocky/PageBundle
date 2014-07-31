@@ -12,6 +12,9 @@
 namespace Black\Bundle\PageBundle;
 
 use Black\Bundle\PageBundle\Application\DependencyInjection\BlackPageExtension;
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\Console\Application;
@@ -31,6 +34,37 @@ class BlackPageBundle extends Bundle
     public function getContainerExtension()
     {
         return new BlackPageExtension();
+    }
+
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $mappings = array(
+            realpath(__DIR__ . '/Resources/config/doctrine') => 'Black\Bundle\PageBundle\Domain\Model',
+        );
+
+        $ormCompilerClass = 'Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass';
+
+        if (class_exists($ormCompilerClass)) {
+            $container->addCompilerPass(
+                DoctrineOrmMappingsPass::createXmlMappingDriver(
+                    $mappings,
+                    [],
+                    'black_page.backend_type_orm'
+                ));
+        }
+
+        $mongoCompilerClass = 'Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass';
+
+        if (class_exists($mongoCompilerClass)) {
+            $container->addCompilerPass(
+                DoctrineMongoDBMappingsPass::createXmlMappingDriver(
+                    $mappings,
+                    [],
+                    'black_page.backend_type_mongodb'
+                ));
+        }
     }
 
     /**
