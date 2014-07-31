@@ -31,39 +31,30 @@ abstract class WebPage implements WebPageInterface
     /**
      * The name of the WebPage
      *
-     * @Assert\Type(type="string")
-     * @Assert\Length(max="255")
-     * @Assert\NotNull
      */
     protected $name;
 
     /**
      * The slug of the WebPage
      *
-     * @Assert\Type(type="string")
-     * @Assert\Length(max="255")
      */
     protected $slug;
 
     /**
      * Headline of the WebPage
      *
-     * @Assert\Type(type="string")
-     * @Assert\Length(max="1")
      */
     protected $headline;
 
     /**
      * The subject matter of the content.
      *
-     * @Assert\Type(type="string")
      */
     protected $about;
 
     /**
      * The textual content of the WebPage
      *
-     * @Assert\Type(type="string")
      */
     protected $text;
 
@@ -71,21 +62,18 @@ abstract class WebPage implements WebPageInterface
     /**
      * The date on which the WebPage was created
      *
-     * @Assert\DateTime()
      */
     protected $dateCreated;
 
     /**
      * The date on which the WebPage was most recently modified
      *
-     * @Assert\DateTime()
      */
     protected $dateModified;
 
     /**
      * Date of first broadcast/publication
      *
-     * @Assert\DateTime()
      */
     protected $datePublished;
 

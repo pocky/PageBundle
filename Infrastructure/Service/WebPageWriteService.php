@@ -14,7 +14,6 @@ use Black\Bundle\PageBundle\Domain\Exception\WebPageNotFoundException;
 use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\DDD\DDDinPHP\Infrastructure\Service\InfrastructureServiceInterface;
-use Rhumsaa\Uuid\Uuid;
 
 class WebPageWriteService implements InfrastructureServiceInterface
 {
