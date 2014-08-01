@@ -2,8 +2,8 @@
 
 namespace spec\Black\Bundle\PageBundle\Application\Specification;
 
-use Black\Bundle\PageBundle\Domain\Mongo\WebPage;
-use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
+use Black\Bundle\PageBundle\Domain\Model\WebPage;
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 

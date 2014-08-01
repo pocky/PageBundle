@@ -1,8 +1,8 @@
 <?php
 
-namespace spec\Black\Bundle\PageBundle\Domain\Mongo;
+namespace spec\Black\Bundle\PageBundle\Domain\Model;
 
-use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -21,6 +21,7 @@ class WebPageIdSpec extends ObjectBehavior
         $pageId = new WebPageId('12345');
 
         $this->id = $pageId;
+
         $this->beConstructedWith($pageId->getValue());
     }
 
@@ -29,8 +30,8 @@ class WebPageIdSpec extends ObjectBehavior
      */
     function it_is_initializable()
     {
-        $this->shouldHaveType('Black\Bundle\PageBundle\Domain\Mongo\WebPageId');
-        $this->shouldImplement('Black\Bundle\PageBundle\Domain\Model\WebPageid');
+        $this->shouldHaveType('Black\Bundle\PageBundle\Domain\Model\WebPageId');
+        $this->shouldImplement('Black\DDD\DDDinPHP\Domain\Model\ValueObjectInterface');
     }
 
     function it_should_have_a_value()
@@ -38,7 +39,7 @@ class WebPageIdSpec extends ObjectBehavior
         $this->getValue()->shouldBeEqualTo('12345');
     }
 
-    function it_sould_have_a_toString()
+    function it_sould_have_a_magic_toString()
     {
         $this->__toString()->shouldBeEqualTo('12345');
     }

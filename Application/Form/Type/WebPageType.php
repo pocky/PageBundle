@@ -54,25 +54,25 @@ class WebPageType extends AbstractType
         $builder
             ->add('id', 'hidden')
             ->add('name', 'text', [
-                    'label' => 'black.bundle.page.type.webpage.name.label',
+                    'label' => 'black.bundle.page.domain.form.type.webpage.name.label',
                     'required' => true,
                 ]
             )
 
             ->add('headline', 'textarea', [
-                    'label' => 'black.bundle.page.type.webpage.headline.label',
+                    'label' => 'black.bundle.page.domain.form.type.webpage.headline.label',
                     'required' => false,
                 ]
             )
 
             ->add('about', 'textarea', [
-                    'label' => 'black.bundle.page.type.webpage.about.label',
+                    'label' => 'black.bundle.page.domain.form.type.webpage.about.label',
                     'required' => false,
                 ]
             )
 
             ->add('text', 'textarea', [
-                    'label' => 'black.bundle.page.type.webpage.text.label',
+                    'label' => 'black.bundle.page.domain.form.type.webpage.text.label',
                     'attr' => [
                         'class' => 'tinymce',
                         'data-theme' => 'advanced',

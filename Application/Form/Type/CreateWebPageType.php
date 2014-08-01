@@ -52,7 +52,7 @@ class CreateWebPageType extends AbstractType
     {
         $builder
             ->add('name', 'text', [
-                    'label'  => 'black.bundle.page.type.webpage.name.label',
+                    'label'  => 'black.bundle.page.domain.form.type.webpage.name.label',
                     'required' => true,
                 ]
             );

@@ -1,0 +1,15 @@
+black:
+    bundle:
+        page:
+            domain:
+                form:
+                    type:
+                        webpage:
+                            name:
+                                label: Nom de la page
+                            headline:
+                                label: Titre
+                            about:
+                                label: A propos
+                            text:
+                                label: Contenu

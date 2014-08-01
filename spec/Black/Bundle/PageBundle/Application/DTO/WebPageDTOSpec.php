@@ -33,16 +33,15 @@ class WebPageDTOSpec extends ObjectBehavior
     protected $text;
 
 
-    function let($id = 1, $name = 'test', $headline = 'test', $about = 'test', $text = 'test')
+    function let()
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->headline = $headline;
-        $this->about = $about;
-        $this->text = $text;
+        $this->id       = 1;
+        $this->name     = 'test';
+        $this->headline = 'test';
+        $this->about    = 'test';
+        $this->text     = 'test';
 
         $this->beConstructedWith($this->id, $this->name, $this->headline, $this->about, $this->text);
-
     }
 
     /**

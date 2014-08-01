@@ -1,0 +1,29 @@
+black:
+    bundle:
+        page:
+            domain:
+                dto:
+                    webPageDto:
+                        name:
+                            validation:
+                                message:
+                                    type: This value should be of type "{{ type }}"
+                                    length: This value is too long. It should have {{ limit }} characters or less
+                                    notblank: This value should not be blank
+
+                        headline:
+                            validation:
+                                message:
+                                    type: This value should be of type "{{ type }}"
+                                    length: This value is too long. It should have {{ limit }} characters or less
+                                    notblank: This value should not be blank
+
+                        about:
+                            validation:
+                                message:
+                                    type: This value should be of type "{{ type }}"
+
+                        text:
+                            validation:
+                                message:
+                                    type: This value should be of type "{{ type }}"

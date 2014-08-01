@@ -1,9 +1,9 @@
 <?php
 
-namespace spec\Black\Bundle\PageBundle\Domain\Mongo;
+namespace spec\Black\Bundle\PageBundle\Domain\Model;
 
-use Black\Bundle\PageBundle\Domain\Mongo\WebPage;
-use Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
+use Black\Bundle\PageBundle\Domain\Model\WebPage;
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -73,8 +73,8 @@ class WebPageSpec extends ObjectBehavior
      */
     function it_is_initializable()
     {
-        $this->shouldHaveType('Black\Bundle\PageBundle\Domain\Mongo\WebPage');
-        $this->shouldImplement('Black\Bundle\PageBundle\Domain\Model\WebPage');
+        $this->shouldHaveType('Black\Bundle\PageBundle\Domain\Model\WebPage');
+        $this->shouldImplement('Black\Bundle\PageBundle\Domain\Model\WebPageInterface');
     }
 
     function it_should_have_a_dateCreated()
