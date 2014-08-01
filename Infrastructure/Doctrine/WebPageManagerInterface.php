@@ -29,5 +29,5 @@ interface WebPageManagerInterface
      *
      * @return mixed
      */
-    public function createInstance(WebPageId $id, $name);
+    public function createWebPage(WebPageId $id, $name);
 }

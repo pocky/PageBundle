@@ -35,7 +35,7 @@ class WebPageWriteService implements InfrastructureServiceInterface
      */
     public function create(WebPageId $webPageId, $name)
     {
-        $webPage = $this->manager->createInstance($webPageId, $name);
+        $webPage = $this->manager->createWebPage($webPageId, $name);
 
         $this->manager->add($webPage);
 
