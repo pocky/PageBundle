@@ -10,7 +10,6 @@
 
 namespace Black\Bundle\PageBundle\Application\Service;
 
-use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\DDD\DDDinPHP\Application\Service\ApplicationServiceInterface;
 use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
 use Black\DDD\DDDinPHP\Application\Specification\SpecificationInterface;
@@ -34,16 +33,13 @@ class WebPageReadService implements ApplicationServiceInterface
     protected $service;
 
     /**
-     * @param WebPageManagerInterface $manager
      * @param SpecificationInterface $specification
      * @param InfrastructureServiceInterface $service
      */
     public function __construct(
-        WebPageManagerInterface $manager,
         SpecificationInterface $specification,
         InfrastructureServiceInterface $service
     ) {
-        $this->manager       = $manager;
         $this->specification = $specification;
         $this->service       = $service;
     }
