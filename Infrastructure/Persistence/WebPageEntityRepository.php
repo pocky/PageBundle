@@ -11,7 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\Persistence;
 
-use Black\Bundle\PageBundle\Domain\Entity\WebPageId;
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Doctrine\ORM\EntityRepository;
 
 /**

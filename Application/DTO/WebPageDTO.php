@@ -134,7 +134,7 @@ class WebPageDTO implements DTOInterface
      */
     public function serialize()
     {
-        return serialize([
+        return json_encode([
                 $this->id,
                 $this->name,
                 $this->headline,
@@ -158,6 +158,6 @@ class WebPageDTO implements DTOInterface
             $this->text,
             $this->context,
             $this->type
-        ) = unserialize($serialized);
+        ) = json_decode($serialized);
     }
 } 

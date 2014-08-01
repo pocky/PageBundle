@@ -11,8 +11,8 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\Persistence;
 
+use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Doctrine\ODM\MongoDB\DocumentRepository;
-use MongoDBODMProxies\__CG__\Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
 
 /**
  * Class WebPageRepository
@@ -22,7 +22,7 @@ use MongoDBODMProxies\__CG__\Black\Bundle\PageBundle\Domain\Mongo\WebPageId;
  */
 class WebPageMongoRepository extends DocumentRepository implements WebPageRepositoryInferface
 {
-    public function findWebPageByWebPageId($id)
+    public function findWebPageByWebPageId(WebPageId $id)
     {
         $query = $this->getQueryBuilder()
             ->field('webPageId.value')->equals($id->getValue())

@@ -17,6 +17,5 @@
 
         <service id="black_page.document.manager" alias="doctrine.odm.mongodb.document_manager" />
 
-
     </services>
 </container>

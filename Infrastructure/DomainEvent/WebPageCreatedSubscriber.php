@@ -12,8 +12,6 @@ namespace Black\Bundle\PageBundle\Infrastructure\DomainEvent;
 
 use Monolog\Logger;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class WebPageCreatedSubscriber

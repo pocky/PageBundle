@@ -11,7 +11,6 @@
 namespace Black\Bundle\PageBundle\Infrastructure\DomainEvent;
 
 use Black\DDD\DDDinPHP\Infrastructure\DomainEvent\DomainEventInterface;
-use GuzzleHttp\Message\Response;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
