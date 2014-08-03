@@ -57,6 +57,7 @@ class WebPageReadService implements ApplicationServiceInterface
 
             $dto = new WebPageDTO(
                 $page->getWebPageId()->getValue(),
+                $page->getAuthor(),
                 $page->getName(),
                 $page->getHeadline(),
                 $page->getAbout(),

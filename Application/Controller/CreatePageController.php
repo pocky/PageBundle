@@ -56,11 +56,12 @@ class CreatePageController
 
     /**
      * @param WebPageId $id
+     * @param $author
      * @param $name
      */
-    public function createPageAction(WebPageId $id, $name)
+    public function createPageAction(WebPageId $id, $author, $name)
     {
-        $this->bus->register($this->commandName,$this->handler);
-        $this->bus->handle(new CreateWebPageCommand($id, $name));
+        $this->bus->register($this->commandName, $this->handler);
+        $this->bus->handle(new CreateWebPageCommand($id, $author, $name));
     }
 }

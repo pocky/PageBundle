@@ -55,6 +55,11 @@ class CreateWebPageType extends AbstractType
                     'label'  => 'black.bundle.page.domain.form.type.webpage.name.label',
                     'required' => true,
                 ]
+            )
+            ->add('author', 'text', [
+                    'label'  => 'black.bundle.page.domain.form.type.webpage.author.label',
+                    'required' => true,
+                ]
             );
     }
 
@@ -69,6 +74,7 @@ class CreateWebPageType extends AbstractType
                 'empty_data' => function(FormInterface $form) {
                         return new $this->class(
                             null,
+                            $form->get('author')->getData(),
                             $form->get('name')->getData()
                         );
                     },

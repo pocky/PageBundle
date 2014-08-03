@@ -4,6 +4,13 @@ black:
             domain:
                 dto:
                     webPageDto:
+                        author:
+                            validation:
+                                message:
+                                    type: Cette valeur doit être de type "{{ type }}"
+                                    length: Le texte ne doit pas exceder {{ limit }} caractères
+                                    notblank: La valeur ne doit pas être vide ou null
+
                         name:
                             validation:
                                 message:

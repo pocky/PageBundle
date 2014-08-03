@@ -9,6 +9,8 @@
             name="Black\Bundle\PageBundle\Domain\Model\WebPage"
             repository-class="Black\Bundle\PageBundle\Infrastructure\Persistence\WebPageMongoRepository">
 
+        <field name="author" fieldName="author" type="string" />
+
         <field name="name" fieldName="name" type="string" unique="true" />
 
         <field name="slug" fieldName="slug" type="string" unique="true" />

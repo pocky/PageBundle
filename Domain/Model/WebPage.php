@@ -29,6 +29,11 @@ class WebPage implements WebPageInterface
     protected $webPageId;
 
     /**
+     * The author of this content
+     */
+    protected $author;
+
+    /**
      * The name of the WebPage
      *
      */
@@ -80,12 +85,13 @@ class WebPage implements WebPageInterface
     /**
      * Construct the WebPage
      */
-    public function __construct(WebPageId $id, $name)
+    public function __construct(WebPageId $id, $name, $author)
     {
-        $this->webPageId     = $id;
-        $this->name          = $name;
-        $this->dateCreated   = new \DateTime();
-        $this->dateModified  = new \DateTime();
+        $this->webPageId    = $id;
+        $this->name         = $name;
+        $this->author       = $author;
+        $this->dateCreated  = new \DateTime();
+        $this->dateModified = new \DateTime();
     }
 
     /**
@@ -94,6 +100,14 @@ class WebPage implements WebPageInterface
     public function getWebPageId()
     {
         return $this->webPageId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 
     /**

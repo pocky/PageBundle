@@ -22,28 +22,46 @@ use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
 final class CreateWebPageCommand implements CommandInterface
 {
     /**
-     * @var
-     */
-    protected $name;
-
-    /**
      * @var \Black\Bundle\PageBundle\Domain\Model\WebPageId
      */
     protected $webPageId;
 
     /**
+     * @var
+     */
+    protected $author;
+
+    /**
+     * @var
+     */
+    protected $name;
+
+    /**
      * @param WebPageId $webPageId
+     * @param $author
      * @param $name
      */
-    public function __construct(WebPageId $webPageId, $name)
+    public function __construct(WebPageId $webPageId, $author, $name)
     {
-        $this->name      = $name;
         $this->webPageId = $webPageId;
+        $this->author    = $author;
+        $this->name      = $name;
     }
 
+    /**
+     *
+     */
     public function getWebPageId()
     {
         return $this->webPageId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 
     /**

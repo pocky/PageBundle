@@ -4,6 +4,14 @@ black:
             domain:
                 dto:
                     webPageDto:
+
+                        author:
+                            validation:
+                                message:
+                                    type: This value should be of type "{{ type }}"
+                                    length: This value is too long. It should have {{ limit }} characters or less
+                                    notblank: This value should not be blank
+
                         name:
                             validation:
                                 message:

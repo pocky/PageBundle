@@ -74,7 +74,7 @@ final class CreateWebPageHandler implements CommandHandlerInterface
      */
     public function handle(CreateWebPageCommand $command)
     {
-        $page = $this->service->create($command->getWebPageId(), $command->getName());
+        $page = $this->service->create($command->getWebPageId(), $command->getAuthor(), $command->getName());
         $this->manager->flush();
 
         $event = new WebPageCreatedEvent($page->getWebPageId()->getValue(), $page->getName(),$page->getDateCreated());

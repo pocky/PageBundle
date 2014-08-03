@@ -5,6 +5,8 @@ black:
                 form:
                     type:
                         webpage:
+                            author:
+                                label: Auteur
                             name:
                                 label: Nom de la page
                             headline:

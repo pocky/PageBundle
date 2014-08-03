@@ -60,6 +60,7 @@ class Configuration implements ConfigurationInterface
                 $this->addControllerSection($applicationNode);
                 $this->addFormSection($applicationNode);
 
+
         $rootNode
             ->end();
 

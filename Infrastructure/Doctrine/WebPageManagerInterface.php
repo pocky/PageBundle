@@ -25,9 +25,10 @@ interface WebPageManagerInterface
      * Create an object
      *
      * @param WebPageId $id
+     * @param $author
      * @param $name
      *
      * @return mixed
      */
-    public function createWebPage(WebPageId $id, $name);
+    public function createWebPage(WebPageId $id, $author, $name);
 }
