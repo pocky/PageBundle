@@ -39,7 +39,7 @@ class BlackPageExtension extends Extension
             );
         }
 
-        foreach (['dto', 'form', 'service', 'specification'] as $basename) {
+        foreach (['dto', 'service', 'specification'] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
             $container->setParameter($this->getAlias() . '.backend_type_' . $config['db_driver'], true);
         }
@@ -54,6 +54,10 @@ class BlackPageExtension extends Extension
 
         if (!empty($config['application']['controller'])) {
             $this->loadController($config['application']['controller'], $container, $loader);
+        }
+
+        if (!empty($config['application']['form'])) {
+            $this->loadForm($config['application']['form'], $container, $loader);
         }
 
         if (!empty($config['infrastructure']['cqrs'])) {
@@ -91,6 +95,27 @@ class BlackPageExtension extends Extension
             $container,
             [
                 'class' => 'black_page.application.controller.class.%s',
+            ]
+        );
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
+    private function loadForm(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        foreach (array('form') as $basename) {
+            $loader->load(sprintf('%s.xml', $basename));
+        }
+
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            [
+                'create_web_page' => 'black_page.application.form.create_web_page.%s',
+                'web_page' => 'black_page.application.form.web_page.%s',
             ]
         );
     }
@@ -161,7 +186,6 @@ class BlackPageExtension extends Extension
                 if (!array_key_exists($ns, $config)) {
                     continue;
                 }
-
                 $namespaceConfig = $config[$ns];
             } else {
                 $namespaceConfig = $config;

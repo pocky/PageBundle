@@ -52,15 +52,24 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('page_manager')->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\Doctrine\\WebPageManager')->end()
             ->end();
 
-        $this->addControllerSection($rootNode);
+        $applicationNode = $rootNode
+            ->children()
+                ->arrayNode('application')
+                ->addDefaultsIfNotSet();
 
-        $node = $rootNode
+                $this->addControllerSection($applicationNode);
+                $this->addFormSection($applicationNode);
+
+        $rootNode
+            ->end();
+
+        $infrastructureNode = $rootNode
             ->children()
                 ->arrayNode('infrastructure')
                 ->addDefaultsIfNotSet();
 
-                $this->addCQRSSection($node);
-                $this->addEventSection($node);
+                $this->addCQRSSection($infrastructureNode);
+                $this->addEventSection($infrastructureNode);
 
         $rootNode
             ->end();
@@ -72,13 +81,10 @@ class Configuration implements ConfigurationInterface
     {
         $node
             ->children()
-                ->arrayNode('application')
-                ->addDefaultsIfNotSet()
+                ->arrayNode('controller')
+                    ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('controller')
-                        ->addDefaultsIfNotSet()
-                        ->children()
-                            ->arrayNode('class')
+                        ->arrayNode('class')
                             ->addDefaultsIfNotSet()
                             ->canBeUnset()
                             ->children()
@@ -99,6 +105,51 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    private function addFormSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('create_web_page')
+                            ->addDefaultsIfNotSet()
+                            ->canBeUnset()
+                            ->children()
+                                ->scalarNode('type')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Form\\Type\\CreateWebPageType')
+                                ->end()
+                                ->scalarNode('handler')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Form\\Handler\\CreateWebPageFormHandler')
+                                ->end()
+                                ->scalarNode('name')
+                                    ->defaultValue('black_page_create_web_page')
+                                ->end()
+                            ->end()
+                        ->end()
+
+                        ->arrayNode('web_page')
+                            ->addDefaultsIfNotSet()
+                            ->canBeUnset()
+                                ->children()
+                                    ->scalarNode('type')
+                                        ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Form\\Type\\WebPageType')
+                                    ->end()
+                                    ->scalarNode('handler')
+                                        ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Form\\Handler\\WebPageFormHandler')
+                                    ->end()
+                                    ->scalarNode('name')
+                                        ->defaultValue('black_page_web_page')
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+
                     ->end()
                 ->end()
             ->end();

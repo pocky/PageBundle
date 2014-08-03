@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.application.form.type.create_web_page.class">Black\Bundle\PageBundle\Application\Form\Type\CreateWebPageType</parameter>
-        <parameter key="black_page.application.form.type.web_page.class">Black\Bundle\PageBundle\Application\Form\Type\WebPageType</parameter>
+        <parameter key="black_page.application.form.type.create_web_page.class">%black_page.application.form.create_web_page.type%</parameter>
+        <parameter key="black_page.application.form.type.web_page.class">%black_page.application.form.web_page.type%</parameter>
 
-        <parameter key="black_page.application.form.handler.create_web_page.class">Black\Bundle\PageBundle\Application\Form\Handler\CreateWebPageFormHandler</parameter>
-        <parameter key="black_page.application.form.handler.web_page.class">Black\Bundle\PageBundle\Application\Form\Handler\WebPageFormHandler</parameter>
+        <parameter key="black_page.application.form.handler.create_web_page.class">%black_page.application.form.create_web_page.handler%</parameter>
+        <parameter key="black_page.application.form.handler.web_page.class">%black_page.application.form.web_page.handler%</parameter>
     </parameters>
 
     <services>
@@ -17,15 +17,15 @@
         <service id="black_page.application.form.type.create_web_page"
                  class="%black_page.application.form.type.create_web_page.class%">
             <argument>%black_page.webpage.dto.class%</argument>
-            <argument>black_page_create_web_page</argument>
-            <tag name="form.type" alias="black_page_create_web_page" />
+            <argument>%black_page.application.form.create_web_page.name%</argument>
+            <tag name="form.type" alias="%black_page.application.form.create_web_page.name%" />
         </service>
 
         <service id="black_page.application.form.type.web_page"
                  class="%black_page.application.form.type.web_page.class%">
             <argument>%black_page.webpage.dto.class%</argument>
-            <argument>black_page_web_page</argument>
-            <tag name="form.type" alias="black_page_web_page" />
+            <argument>%black_page.application.form.web_page.name%</argument>
+            <tag name="form.type" alias="%black_page.application.form.web_page.name%" />
         </service>
 
         <!-- Forms -->
@@ -33,7 +33,7 @@
                  factory-method="createNamed"
                  factory-service="form.factory"
                  class="Symfony\Component\Form\Form">
-            <argument>black_page_create_web_page</argument>
+            <argument>%black_page.application.form.create_web_page.name%</argument>
             <argument type="service" id="black_page.application.form.type.create_web_page" />
             <argument>null</argument>
         </service>
@@ -42,7 +42,7 @@
                  factory-method="createNamed"
                  factory-service="form.factory"
                  class="Symfony\Component\Form\Form">
-            <argument>black_page_web_page</argument>
+            <argument>%black_page.application.form.web_page.name%</argument>
             <argument type="service" id="black_page.application.form.type.web_page" />
             <argument>null</argument>
         </service>
