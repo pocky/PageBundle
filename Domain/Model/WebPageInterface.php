@@ -20,6 +20,8 @@ use Black\DDD\DDDinPHP\Domain\Model\EntityInterface;
  */
 interface WebPageInterface extends EntityInterface
 {
+    public function getAuthor();
+
     public function getName();
 
     public function getSlug();
@@ -39,4 +41,8 @@ interface WebPageInterface extends EntityInterface
     public function write($headline, $about, $text);
 
     public function publish(\DateTime $dateTime);
+
+    public function depublish();
+
+    public function edit($name, $headline, $about, $text);
 }

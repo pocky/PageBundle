@@ -29,7 +29,7 @@ class PageIsPublishedSpecificationSpec extends ObjectBehavior
     function let()
     {
         $pageId = new WebPageId('12345');
-        $page   = new WebPage($pageId, 'test');
+        $page   = new WebPage($pageId, 'test', 'test');
 
         $this->page = $page;
     }

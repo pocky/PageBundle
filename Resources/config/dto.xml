@@ -6,9 +6,16 @@
 
     <parameters>
         <parameter key="black_page.application.dto.webpage.class">%black_page.webpage.dto.class%</parameter>
+        <parameter key="black_page.application.dto.web_page_transformer.class">Black\Bundle\PageBundle\Application\DTO\WebPageTransformer</parameter>
     </parameters>
 
     <services>
         <service id="black_page.application.dto.webpage" class="%black_page.application.dto.webpage.class%" />
+
+        <service id="black_page.application.dto.web_page_transformer" class="%black_page.application.dto.web_page_transformer.class%">
+            <argument>%black_page.webpage.model.class%</argument>
+            <argument>%black_page.webpage.dto.class%</argument>
+        </service>
+
     </services>
 </container>

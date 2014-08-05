@@ -10,6 +10,7 @@
 
 namespace Black\Bundle\PageBundle\Application\Service;
 
+use Black\Bundle\PageBundle\Application\DTO\WebPageTransformer;
 use Black\DDD\DDDinPHP\Application\Service\ApplicationServiceInterface;
 use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
 use Black\DDD\DDDinPHP\Application\Specification\SpecificationInterface;
@@ -33,15 +34,23 @@ class WebPageReadService implements ApplicationServiceInterface
     protected $service;
 
     /**
+     * @var \Black\Bundle\PageBundle\Application\DTO\WebPageTranformer
+     */
+    protected $transformer;
+
+    /**
      * @param SpecificationInterface $specification
      * @param InfrastructureServiceInterface $service
+     * @param WebPageTranformer $transformer
      */
     public function __construct(
         SpecificationInterface $specification,
-        InfrastructureServiceInterface $service
+        InfrastructureServiceInterface $service,
+        WebPageTransformer $transformer
     ) {
         $this->specification = $specification;
         $this->service       = $service;
+        $this->transformer   = $transformer;
     }
 
     /**
@@ -55,14 +64,7 @@ class WebPageReadService implements ApplicationServiceInterface
 
         if ($this->specification->isSatisfiedBy($page)) {
 
-            $dto = new WebPageDTO(
-                $page->getWebPageId()->getValue(),
-                $page->getAuthor(),
-                $page->getName(),
-                $page->getHeadline(),
-                $page->getAbout(),
-                $page->getText()
-            );
+            $dto = $this->transformer->transform($page);
 
             return $dto;
         }

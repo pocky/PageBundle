@@ -15,6 +15,7 @@
         <service id="black_page.application.service.read" class="%black_page.application.service.read.class%">
             <argument type="service" id="black_page.application.speficication.page_published" />
             <argument type="service" id="black_page.infrastructure.service.read" />
+            <argument type="service" id="black_page.application.dto.web_page_transformer" />
         </service>
 
         <service id="black_page.infrastructure.service.read" class="%black_page.infrastructure.service.read.class%">

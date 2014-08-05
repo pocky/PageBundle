@@ -22,6 +22,11 @@ class WebPageSpec extends ObjectBehavior
     /**
      * @var
      */
+    protected $author;
+
+    /**
+     * @var
+     */
     protected $slug;
 
     /**
@@ -60,12 +65,13 @@ class WebPageSpec extends ObjectBehavior
     function let()
     {
         $pageId = new WebPageId('12345');
-        $page   = new WebPage($pageId, 'test');
+        $page   = new WebPage($pageId, 'test', 'test');
 
         $this->webPageId = $page->getWebPageId();
         $this->name      = $page->getName();
+        $this->author    = $page->getAUthor();
 
-        $this->beConstructedWith($this->webPageId, $this->name);
+        $this->beConstructedWith($this->webPageId, $this->name, $this->author);
     }
 
     /**

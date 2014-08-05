@@ -85,11 +85,14 @@ class WebPage implements WebPageInterface
     /**
      * Construct the WebPage
      */
-    public function __construct(WebPageId $id, $name, $author)
+    public function __construct(WebPageId $id, $name, $author, $headline = null, $about = null, $text = null)
     {
         $this->webPageId    = $id;
         $this->name         = $name;
         $this->author       = $author;
+        $this->headline     = $headline;
+        $this->about        = $about;
+        $this->text         = $text;
         $this->dateCreated  = new \DateTime();
         $this->dateModified = new \DateTime();
     }
