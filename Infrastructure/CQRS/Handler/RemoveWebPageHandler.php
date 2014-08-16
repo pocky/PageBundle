@@ -15,7 +15,7 @@ use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageRemovedEvent;
 use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageRemovedSubscriber;
 use Black\Bundle\PageBundle\Infrastructure\Service\WebPageWriteService;
-use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandHandlerInterface;
+use Black\DDD\CQRSinPHP\Infrastructure\CQRS\CommandHandlerInterface;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
 
 /**

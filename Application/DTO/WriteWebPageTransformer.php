@@ -13,7 +13,7 @@ namespace Black\Bundle\PageBundle\Application\DTO;
 use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
 
-class WebPageTransformer
+class WriteWebPageTransformer
 {
     /**
      * @var
@@ -45,23 +45,19 @@ class WebPageTransformer
 
         $dto = new $this->dtoClass(
             $webPage->getWebPageId()->getValue(),
-            $webPage->getAuthor(),
-            $webPage->getName(),
             $webPage->getHeadline(),
             $webPage->getAbout(),
-            $webPage->getText(),
-            $webPage->getAuthor(),
-            $webPage->getAuthor()
+            $webPage->getText()
         );
 
         return $dto;
     }
 
     /**
-     * @param WebPageDTO $webPageDTO
+     * @param WriteWebPageDTO $webPageDTO
      * @return mixed
      */
-    public function reverseransform(WebPageDTO $webPageDTO)
+    public function reverseTransform(WriteWebPageDTO $webPageDTO)
     {
         $this->verify($webPageDTO, $this->dtoClass);
 
@@ -70,7 +66,6 @@ class WebPageTransformer
         $entity = new $this->entityClass(
             $webPageId,
             $webPageDTO->getName(),
-            $webPageDTO->getAuthor(),
             $webPageDTO->getHeadline(),
             $webPageDTO->getAbout(),
             $webPageDTO->getText()

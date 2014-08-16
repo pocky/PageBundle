@@ -1,19 +1,11 @@
 <?php
-/*
- * This file is part of the Black package.
- *
- * (c) Alexandre Balmes <alexandre@lablackroom.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
 
 namespace Black\Bundle\PageBundle\Application\DTO;
 
 use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
 
-class WebPageTransformer
+class CreateWebPageTransformer
 {
     /**
      * @var
@@ -46,37 +38,29 @@ class WebPageTransformer
         $dto = new $this->dtoClass(
             $webPage->getWebPageId()->getValue(),
             $webPage->getAuthor(),
-            $webPage->getName(),
-            $webPage->getHeadline(),
-            $webPage->getAbout(),
-            $webPage->getText(),
-            $webPage->getAuthor(),
-            $webPage->getAuthor()
+            $webPage->getName()
         );
 
         return $dto;
     }
 
     /**
-     * @param WebPageDTO $webPageDTO
+     * @param CreateWebPageDTO $webPageDTO
      * @return mixed
      */
-    public function reverseransform(WebPageDTO $webPageDTO)
+    public function reverseTransform(CreateWebPageDTO $webPageDTO)
     {
         $this->verify($webPageDTO, $this->dtoClass);
 
         $webPageId = new WebPageId($webPageDTO->getId());
 
-        $entity = new $this->entityClass(
+        $webPage = new $this->entityClass(
             $webPageId,
             $webPageDTO->getName(),
-            $webPageDTO->getAuthor(),
-            $webPageDTO->getHeadline(),
-            $webPageDTO->getAbout(),
-            $webPageDTO->getText()
+            $webPageDTO->getAuthor()
         );
 
-        return $entity;
+        return $webPage;
     }
 
     /**
@@ -91,4 +75,4 @@ class WebPageTransformer
             throw new \Exception();
         }
     }
-} 
+}

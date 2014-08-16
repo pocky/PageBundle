@@ -15,12 +15,8 @@ use Black\Bundle\PageBundle\Infrastructure\Doctrine\WebPageManagerInterface;
 use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageCreatedEvent;
 use Black\Bundle\PageBundle\Infrastructure\DomainEvent\WebPageCreatedSubscriber;
 use Black\Bundle\PageBundle\Infrastructure\Service\WebPageWriteService;
-use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandHandlerInterface;
-use Symfony\Component\BrowserKit\Response;
-use Symfony\Component\Config\Definition\Exception\Exception;
+use Black\DDD\CQRSinPHP\Infrastructure\CQRS\CommandHandlerInterface;
 use Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Class CreateWebPageHandler

@@ -5,17 +5,12 @@ namespace spec\Black\Bundle\PageBundle\Application\DTO;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class WebPageDTOSpec extends ObjectBehavior
+class WriteWebPageDTOSpec extends ObjectBehavior
 {
     /**
      * @var
      */
     protected $id;
-
-    /**
-     * @var
-     */
-    protected $author;
 
     /**
      * @var
@@ -41,13 +36,12 @@ class WebPageDTOSpec extends ObjectBehavior
     function let()
     {
         $this->id       = 1;
-        $this->author   = 'test';
         $this->name     = 'test';
         $this->headline = 'test';
         $this->about    = 'test';
         $this->text     = 'test';
 
-        $this->beConstructedWith($this->id, $this->author, $this->name, $this->headline, $this->about, $this->text);
+        $this->beConstructedWith($this->id, $this->name, $this->headline, $this->about, $this->text);
     }
 
     /**
@@ -55,7 +49,7 @@ class WebPageDTOSpec extends ObjectBehavior
      */
     function it_is_initializable()
     {
-        $this->shouldHaveType('Black\Bundle\PageBundle\Application\DTO\WebPageDTO');
+        $this->shouldHaveType('Black\Bundle\PageBundle\Application\DTO\WriteWebPageDTO');
         $this->shouldImplement('Black\DDD\DDDinPHP\Application\DTO\DTOInterface');
     }
 
@@ -65,14 +59,6 @@ class WebPageDTOSpec extends ObjectBehavior
     function it_should_return_id()
     {
         $this->getId()->shouldReturn($this->id);
-    }
-
-    /**
-     *
-     */
-    function it_should_return_author()
-    {
-        $this->getAuthor()->shouldReturn($this->author);
     }
 
     /**

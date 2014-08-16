@@ -13,27 +13,17 @@ namespace Black\Bundle\PageBundle\Application\DTO;
 use Black\DDD\DDDinPHP\Application\DTO\DTOInterface;
 
 /**
- * Class WebPage
+ * Class WriteWebPage
  *
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class WebPageDTO implements DTOInterface
+class WriteWebPageDTO implements DTOInterface
 {
     /**
      * @var int
      */
     protected $id;
-
-    /**
-     * @var null
-     */
-    protected $author;
-
-    /**
-     * @var string
-     */
-    protected $name;
 
     /**
      * @var string
@@ -51,16 +41,6 @@ class WebPageDTO implements DTOInterface
     protected $text;
 
     /**
-     * @var
-     */
-    protected $creator;
-
-    /**
-     * @var
-     */
-    protected $editor;
-
-    /**
      * @var string
      */
     protected $context;
@@ -72,22 +52,16 @@ class WebPageDTO implements DTOInterface
 
     /**
      * @param $id
-     * @param $author
-     * @param $name
-     * @param $headline
-     * @param $about
-     * @param $text
+     * @param null $headline
+     * @param null $about
+     * @param null $text
      */
-    public function __construct($id, $author, $name, $headline, $about, $text)
+    public function __construct($id, $headline, $about, $text)
     {
         $this->id        = $id;
-        $this->author    = $author;
-        $this->name      = $name;
         $this->headline  = $headline;
         $this->about     = $about;
         $this->text      = $text;
-        $this->creator   = $author;
-        $this->editor    = $author;
         $this->context   = "http://schema.org";
         $this->type      = "WebPage";
     }
@@ -98,22 +72,6 @@ class WebPageDTO implements DTOInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return null
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**
@@ -141,22 +99,6 @@ class WebPageDTO implements DTOInterface
     }
 
     /**
-     * @return mixed
-     */
-    public function getCreator()
-    {
-        return $this->creator;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEditor()
-    {
-        return $this->editor;
-    }
-
-    /**
      * @return string
      */
     public function getContext()
@@ -179,13 +121,9 @@ class WebPageDTO implements DTOInterface
     {
         return json_encode([
                 $this->id,
-                $this->author,
-                $this->name,
                 $this->headline,
                 $this->about,
                 $this->text,
-                $this->creator,
-                $this->editor,
                 $this->context,
                 $this->type,
         ]);
@@ -198,8 +136,6 @@ class WebPageDTO implements DTOInterface
     {
        return list(
            $this->id,
-           $this->author,
-           $this->name,
            $this->headline,
            $this->about,
            $this->text,

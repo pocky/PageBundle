@@ -11,11 +11,11 @@
 
 namespace Black\Bundle\PageBundle\Application\Controller;
 
-use Black\Bundle\PageBundle\Application\DTO\WebPageDTO;
+use Black\Bundle\PageBundle\Application\DTO\WriteWebPageDTO;
 use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Command\WriteWebPageCommand;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\WriteWebPageHandler;
-use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;
+use Black\DDD\CQRSinPHP\Infrastructure\CQRS\CommandBusInterface;
 
 /**
  * Class WritePageController
@@ -26,7 +26,7 @@ use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;
 class WritePageController
 {
     /**
-     * @var \Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface
+     * @var \Black\DDD\CQRSinPHP\Infrastructure\CQRS\CommandBusInterface
      */
     protected $bus;
 
@@ -58,7 +58,7 @@ class WritePageController
     /**
      * @param WebPageDTO $page
      */
-    public function writePageAction(WebPageDTO $page)
+    public function writePageAction(WriteWebPageDTO $page)
     {
         $this->bus->register($this->commandName, $this->handler);
         $this->bus->handle(new WriteWebPageCommand(

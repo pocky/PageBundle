@@ -14,7 +14,7 @@ namespace Black\Bundle\PageBundle\Application\Controller;
 use Black\Bundle\PageBundle\Domain\Model\WebPageId;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Command\PublishWebPageCommand;
 use Black\Bundle\PageBundle\Infrastructure\CQRS\Handler\PublishWebPageHandler;
-use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;
+use Black\DDD\CQRSinPHP\Infrastructure\CQRS\CommandBusInterface;
 
 /**
  * Class PublishPageController
@@ -25,7 +25,7 @@ use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface;
 class PublishPageController
 {
     /**
-     * @var \Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandBusInterface
+     * @var \Black\DDD\CQRSinPHP\Infrastructure\CQRS\CommandBusInterface
      */
     protected $bus;
 

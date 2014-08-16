@@ -47,6 +47,8 @@ class BlackPageExtension extends Extension
         $this->remapParametersNamespaces($config, $container, [
                 '' => [
                     'page_dto' => 'black_page.webpage.dto.class',
+                    'create_page_dto' => 'black_page.webpage.create_dto.class',
+                    'write_page_dto' => 'black_page.webpage.write_dto.class',
                     'page_class' => 'black_page.webpage.model.class',
                     'page_manager' => 'black_page.webpage.manager.class',
                 ]

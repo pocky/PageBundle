@@ -48,6 +48,8 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
                 ->scalarNode('page_dto')->defaultValue('Black\\Bundle\\PageBundle\\Application\\DTO\\WebPageDTO')->end()
+                ->scalarNode('create_page_dto')->defaultValue('Black\\Bundle\\PageBundle\\Application\\DTO\\CreateWebPageDTO')->end()
+                ->scalarNode('write_page_dto')->defaultValue('Black\\Bundle\\PageBundle\\Application\\DTO\\WriteWebPageDTO')->end()
                 ->scalarNode('page_class')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('page_manager')->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\Doctrine\\WebPageManager')->end()
             ->end();
@@ -139,10 +141,10 @@ class Configuration implements ConfigurationInterface
                             ->canBeUnset()
                                 ->children()
                                     ->scalarNode('type')
-                                        ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Form\\Type\\WebPageType')
+                                        ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Form\\Type\\WriteWebPageType')
                                     ->end()
                                     ->scalarNode('handler')
-                                        ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Form\\Handler\\WebPageFormHandler')
+                                        ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Form\\Handler\\WriteWebPageFormHandler')
                                     ->end()
                                     ->scalarNode('name')
                                         ->defaultValue('black_page_web_page')

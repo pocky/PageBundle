@@ -11,7 +11,7 @@
 namespace Black\Bundle\PageBundle\Infrastructure\CQRS\Command;
 
 use Black\Bundle\PageBundle\Domain\Model\WebPageId;
-use Black\DDD\DDDinPHP\Infrastructure\CQRS\CommandInterface;
+use Black\DDD\CQRSinPHP\Infrastructure\CQRS\CommandInterface;
 
 /**
  * Class RemoveWebPageCommand

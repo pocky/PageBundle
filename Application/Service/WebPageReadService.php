@@ -41,7 +41,7 @@ class WebPageReadService implements ApplicationServiceInterface
     /**
      * @param SpecificationInterface $specification
      * @param InfrastructureServiceInterface $service
-     * @param WebPageTranformer $transformer
+     * @param WebPageTransformer $transformer
      */
     public function __construct(
         SpecificationInterface $specification,
