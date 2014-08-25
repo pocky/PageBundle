@@ -65,7 +65,6 @@ class WriteWebPageTransformer
 
         $entity = new $this->entityClass(
             $webPageId,
-            $webPageDTO->getName(),
             $webPageDTO->getHeadline(),
             $webPageDTO->getAbout(),
             $webPageDTO->getText()

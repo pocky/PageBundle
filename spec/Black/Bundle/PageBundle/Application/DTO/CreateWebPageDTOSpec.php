@@ -24,9 +24,9 @@ class CreateWebPageDTOSpec extends ObjectBehavior
 
     function let()
     {
-        $this->id       = 1;
-        $this->author   = 'test';
-        $this->name     = 'test';
+        $this->id     = 1;
+        $this->author = 'test';
+        $this->name   = 'test';
 
         $this->beConstructedWith($this->id, $this->author, $this->name);
     }

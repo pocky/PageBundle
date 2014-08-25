@@ -73,12 +73,12 @@ class WebPageDTO implements DTOInterface
     /**
      * @param $id
      * @param $author
-     * @param $name
-     * @param $headline
-     * @param $about
-     * @param $text
+     * @param string $name
+     * @param null $headline
+     * @param null $about
+     * @param null $text
      */
-    public function __construct($id, $author, $name, $headline, $about, $text)
+    public function __construct($id, $author, $name = 'New WebPage!', $headline = null, $about = null, $text = null)
     {
         $this->id        = $id;
         $this->author    = $author;

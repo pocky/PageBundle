@@ -27,13 +27,13 @@ class WriteWebPageTransformerSpec extends ObjectBehavior
 
     function it_should_transform()
     {
-        $entity = new $this->entityClass(new WebPageId(1), 'test', 'test');
+        $entity = new $this->entityClass(new WebPageId(1), 'test', 'test', 'test');
         $this->transform($entity)->shouldReturnAnInstanceOf($this->dtoClass);
     }
 
     function it_should_reverseTransform()
     {
-        $dto = new $this->dtoClass(1, 'test', 'test');
+        $dto = new $this->dtoClass(1, 'test', 'test', 'test');
         $this->reverseTransform($dto)->shouldReturnAnInstanceOf($this->entityClass);
     }
 }
