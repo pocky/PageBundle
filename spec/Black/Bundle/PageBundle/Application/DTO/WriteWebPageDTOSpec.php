@@ -15,11 +15,6 @@ class WriteWebPageDTOSpec extends ObjectBehavior
     /**
      * @var
      */
-    protected $name;
-
-    /**
-     * @var
-     */
     protected $headline;
 
     /**
@@ -36,12 +31,11 @@ class WriteWebPageDTOSpec extends ObjectBehavior
     function let()
     {
         $this->id       = 1;
-        $this->name     = 'test';
         $this->headline = 'test';
         $this->about    = 'test';
         $this->text     = 'test';
 
-        $this->beConstructedWith($this->id, $this->name, $this->headline, $this->about, $this->text);
+        $this->beConstructedWith($this->id, $this->headline, $this->about, $this->text);
     }
 
     /**
@@ -59,14 +53,6 @@ class WriteWebPageDTOSpec extends ObjectBehavior
     function it_should_return_id()
     {
         $this->getId()->shouldReturn($this->id);
-    }
-
-    /**
-     *
-     */
-    function it_should_return_name()
-    {
-        $this->getName()->shouldReturn($this->name);
     }
 
     /**

@@ -11,11 +11,7 @@
 
 namespace Black\Bundle\PageBundle\Application\Form\Handler;
 
-use Black\Bundle\PageBundle\Application\Command\Bus\CreateWebPageBus;
-use Black\Bundle\PageBundle\Domain\Model\WebPageInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Black\Bundle\CommonBundle\Application\Form\Handler\HandlerInterface;
+use Black\Bundle\CommonBundle\Application\Form\Handler\AbstractFormHandler;
 
 /**
  * Class CreateWebPageFormHandler
@@ -23,7 +19,7 @@ use Black\Bundle\CommonBundle\Application\Form\Handler\HandlerInterface;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class CreateWebPageFormHandler extends WebPageFormHandler
+class CreateWebPageFormHandler extends AbstractFormHandler
 {
 
 }

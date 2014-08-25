@@ -61,7 +61,7 @@ class WebPageTransformer
      * @param WebPageDTO $webPageDTO
      * @return mixed
      */
-    public function reverseransform(WebPageDTO $webPageDTO)
+    public function reverseTransform(WebPageDTO $webPageDTO)
     {
         $this->verify($webPageDTO, $this->dtoClass);
 
