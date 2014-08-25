@@ -63,7 +63,7 @@ class BlackPageExtension extends Extension
         }
 
         if (!empty($config['application']['service'])) {
-            $this->loadApplicationService($config['application']['form'], $container, $loader);
+            $this->loadApplicationService($config['application']['service'], $container, $loader);
         }
 
         if (!empty($config['application']['specification'])) {
@@ -79,7 +79,7 @@ class BlackPageExtension extends Extension
         }
 
         if (!empty($config['infrastructure']['service'])) {
-            $this->loadInfrastructureService($config['infrastructure']['form'], $container, $loader);
+            $this->loadInfrastructureService($config['infrastructure']['service'], $container, $loader);
         }
     }
 
@@ -201,7 +201,7 @@ class BlackPageExtension extends Extension
      */
     private function loadEvent(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {
-        foreach (array('event') as $basename) {
+        foreach (array('domain_event') as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
         }
 
