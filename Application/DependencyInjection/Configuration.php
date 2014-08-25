@@ -61,6 +61,7 @@ class Configuration implements ConfigurationInterface
 
                 $this->addControllerSection($applicationNode);
                 $this->addFormSection($applicationNode);
+                $this->addSpecificationSection($applicationNode);
 
 
         $rootNode
@@ -153,6 +154,27 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
 
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    private function addSpecificationSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('specification')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('class')
+                            ->addDefaultsIfNotSet()
+                            ->canBeUnset()
+                            ->children()
+                                ->scalarNode('page_published')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Specification\\PageIsPublishedSpecification')
+                                ->end()
+                            ->end()
+                        ->end()
                     ->end()
                 ->end()
             ->end();
