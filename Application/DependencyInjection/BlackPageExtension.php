@@ -39,7 +39,7 @@ class BlackPageExtension extends Extension
             );
         }
 
-        foreach (['dto', 'service'] as $basename) {
+        foreach (['dto'] as $basename) {
             $loader->load(sprintf('%s.xml', $basename));
             $container->setParameter($this->getAlias() . '.backend_type_' . $config['db_driver'], true);
         }
@@ -62,6 +62,10 @@ class BlackPageExtension extends Extension
             $this->loadForm($config['application']['form'], $container, $loader);
         }
 
+        if (!empty($config['application']['service'])) {
+            $this->loadApplicationService($config['application']['form'], $container, $loader);
+        }
+
         if (!empty($config['application']['specification'])) {
             $this->loadSpecification($config['application']['specification'], $container, $loader);
         }
@@ -72,6 +76,10 @@ class BlackPageExtension extends Extension
 
         if (!empty($config['infrastructure']['domain_event_subscriber'])) {
             $this->loadEvent($config['infrastructure']['domain_event_subscriber'], $container, $loader);
+        }
+
+        if (!empty($config['infrastructure']['service'])) {
+            $this->loadInfrastructureService($config['infrastructure']['form'], $container, $loader);
         }
     }
 
@@ -122,6 +130,26 @@ class BlackPageExtension extends Extension
             [
                 'create_web_page' => 'black_page.application.form.create_web_page.%s',
                 'web_page' => 'black_page.application.form.web_page.%s',
+            ]
+        );
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
+    private function loadApplicationService(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        foreach (array('application_service') as $basename) {
+            $loader->load(sprintf('%s.xml', $basename));
+        }
+
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            [
+                'class' => 'black_page.application.service.class.%s',
             ]
         );
     }
@@ -182,6 +210,26 @@ class BlackPageExtension extends Extension
             $container,
             [
                 'class' => 'black_page.infrastructure.domain_event_subscriber.class.%s',
+            ]
+        );
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     * @param XmlFileLoader    $loader
+     */
+    private function loadInfrastructureService(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        foreach (array('infrastructure_service') as $basename) {
+            $loader->load(sprintf('%s.xml', $basename));
+        }
+
+        $this->remapParametersNamespaces(
+            $config,
+            $container,
+            [
+                'class' => 'black_page.infrastructure.service.class.%s',
             ]
         );
     }

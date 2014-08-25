@@ -5,18 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.application.service.read.class">Black\Bundle\PageBundle\Application\Service\WebPageReadService</parameter>
-        <parameter key="black_page.infrastructure.service.read.class">Black\Bundle\PageBundle\Infrastructure\Service\WebPageReadService</parameter>
-        <parameter key="black_page.infrastructure.service.write.class">Black\Bundle\PageBundle\Infrastructure\Service\WebPageWriteService</parameter>
+        <parameter key="black_page.infrastructure.service.read.class">%black_page.infrastructure.service.class.read%</parameter>
+        <parameter key="black_page.infrastructure.service.write.class">%black_page.infrastructure.service.class.write%</parameter>
     </parameters>
 
     <services>
-
-        <service id="black_page.application.service.read" class="%black_page.application.service.read.class%">
-            <argument type="service" id="black_page.application.speficication.page_published" />
-            <argument type="service" id="black_page.infrastructure.service.read" />
-            <argument type="service" id="black_page.application.dto.web_page_transformer" />
-        </service>
 
         <service id="black_page.infrastructure.service.read" class="%black_page.infrastructure.service.read.class%">
             <argument type="service" id="black_page.infrastructure.manager.webpage" />

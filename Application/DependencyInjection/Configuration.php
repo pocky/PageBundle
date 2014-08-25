@@ -61,6 +61,7 @@ class Configuration implements ConfigurationInterface
 
                 $this->addControllerSection($applicationNode);
                 $this->addFormSection($applicationNode);
+                $this->addApplicationServiceSection($applicationNode);
                 $this->addSpecificationSection($applicationNode);
 
 
@@ -74,6 +75,8 @@ class Configuration implements ConfigurationInterface
 
                 $this->addCQRSSection($infrastructureNode);
                 $this->addEventSection($infrastructureNode);
+                $this->addInfrastructureServiceSection($infrastructureNode);
+
 
         $rootNode
             ->end();
@@ -180,6 +183,27 @@ class Configuration implements ConfigurationInterface
             ->end();
     }
 
+    private function addApplicationServiceSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('service')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('class')
+                            ->addDefaultsIfNotSet()
+                            ->canBeUnset()
+                            ->children()
+                                ->scalarNode('read')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Application\\Service\\WebPageReadService')
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
     private function addCQRSSection(ArrayNodeDefinition $node)
     {
         $node
@@ -236,6 +260,30 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->scalarNode('removed')
                             ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\DomainEvent\\WebPageRemovedSubscriber')
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+    }
+
+    private function addInfrastructureServiceSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('service')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->arrayNode('class')
+                            ->addDefaultsIfNotSet()
+                            ->canBeUnset()
+                            ->children()
+                                ->scalarNode('read')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\Service\\WebPageReadService')
+                                ->end()
+                                ->scalarNode('write')
+                                    ->defaultValue('Black\\Bundle\\PageBundle\\Infrastructure\\Service\\WebPageWriteService')
+                                ->end()
+                            ->end()
                         ->end()
                     ->end()
                 ->end()
