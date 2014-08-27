@@ -41,7 +41,7 @@ class BlackPageBundle extends Bundle
         parent::build($container);
 
         $mappings = array(
-            realpath(__DIR__ . '/Resources/config/doctrine') => 'Black\Bundle\PageBundle\Domain\Model',
+            realpath(__DIR__ . '/Resources/config/doctrine') => 'Black\Component\Page\Domain\Model',
         );
 
         $ormCompilerClass = 'Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass';

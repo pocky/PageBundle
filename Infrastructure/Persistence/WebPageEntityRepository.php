@@ -11,7 +11,8 @@
 
 namespace Black\Bundle\PageBundle\Infrastructure\Persistence;
 
-use Black\Bundle\PageBundle\Domain\Model\WebPageId;
+use Black\Component\Page\Domain\Model\WebPageId;
+use Black\Component\Page\Infrastructure\Persistence\WebPageRepository as WebPageRepositoryInferface;
 use Doctrine\ORM\EntityRepository;
 
 /**

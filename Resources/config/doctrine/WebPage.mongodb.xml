@@ -6,7 +6,7 @@
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
     <mapped-superclass
-            name="Black\Bundle\PageBundle\Domain\Model\WebPage"
+            name="Black\Component\Page\Domain\Model\WebPage"
             repository-class="Black\Bundle\PageBundle\Infrastructure\Persistence\WebPageMongoRepository">
 
         <field name="author" fieldName="author" type="string" />
@@ -27,7 +27,7 @@
 
         <field name="datePublished" fieldName="datePublished" type="date" />
 
-        <embed-one target-document="Black\Bundle\PageBundle\Domain\Model\WebPageId" field="webPageId" />
+        <embed-one target-document="Black\Component\Page\Domain\Model\WebPageId" field="webPageId" />
 
     </mapped-superclass>
 

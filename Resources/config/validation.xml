@@ -4,7 +4,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                     http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
 
-    <class name="Black\Bundle\PageBundle\Application\DTO\WebPageDTO">
+    <class name="Black\Component\Page\Application\DTO\WebPageDTO">
 
         <property name="author">
             <constraint name="Type">
@@ -66,7 +66,7 @@
 
     </class>
 
-    <class name="Black\Bundle\PageBundle\Domain\Model\WebPage">
+    <class name="Black\Component\Page\Domain\Model\WebPage">
 
         <property name="name">
             <constraint name="Type">
@@ -128,7 +128,7 @@
 
     </class>
 
-    <class name="Black\Bundle\PageBundle\Domain\Model\WebPageId">
+    <class name="Black\Component\Page\Domain\Model\WebPageId">
 
         <property name="value">
             <constraint name="Type">

@@ -8,9 +8,9 @@
         <parameter key="black_page.application.dto.webpage.class">%black_page.webpage.dto.class%</parameter>
         <parameter key="black_page.application.dto.create_webpage.class">%black_page.webpage.create_dto.class%</parameter>
         <parameter key="black_page.application.dto.write_webpage.class">%black_page.webpage.write_dto.class%</parameter>
-        <parameter key="black_page.application.dto.web_page_transformer.class">Black\Bundle\PageBundle\Application\DTO\WebPageTransformer</parameter>
-        <parameter key="black_page.application.dto.create_web_page_transformer.class">Black\Bundle\PageBundle\Application\DTO\CreateWebPageTransformer</parameter>
-        <parameter key="black_page.application.dto.write_web_page_transformer.class">Black\Bundle\PageBundle\Application\DTO\WriteWebPageTransformer</parameter>
+        <parameter key="black_page.application.dto.web_page_transformer.class">Black\Component\Page\Application\DTO\WebPageTransformer</parameter>
+        <parameter key="black_page.application.dto.create_web_page_transformer.class">Black\Component\Page\Application\DTO\CreateWebPageTransformer</parameter>
+        <parameter key="black_page.application.dto.write_web_page_transformer.class">Black\Component\Page\Application\DTO\WriteWebPageTransformer</parameter>
     </parameters>
 
     <services>

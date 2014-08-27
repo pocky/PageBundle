@@ -11,7 +11,6 @@
 
 namespace Black\Bundle\PageBundle\Application\Form\Type;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;

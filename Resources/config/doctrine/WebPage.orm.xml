@@ -6,7 +6,7 @@
                   http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass
-            name="Black\Bundle\PageBundle\Domain\Model\WebPage"
+            name="Black\Component\Page\Domain\Model\WebPage"
             repository-class="Black\Bundle\PageBundle\Infrastructure\Persistence\WebPageEntityRepository">
 
         <field name="author" column="name" type="string" />
@@ -27,7 +27,7 @@
 
         <field name="datePublished" column="datePublished" type="date" />
 
-        <embedded  class="Black\Bundle\PageBundle\Domain\Model\WebPageId" name="webPageId" />
+        <embedded  class="Black\Component\Page\Domain\Model\WebPageId" name="webPageId" />
 
     </mapped-superclass>
 

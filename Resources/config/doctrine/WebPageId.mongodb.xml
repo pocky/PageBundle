@@ -5,7 +5,7 @@
                         xsi:schemaLocation="http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping
                         http://doctrine-project.org/schemas/odm/doctrine-mongo-mapping.xsd">
 
-    <embedded-document name="Black\Bundle\PageBundle\Domain\Model\WebPageId">
+    <embedded-document name="Black\Component\Page\Domain\Model\WebPageId">
         <field fieldName="value" type="string" unique="true" />
     </embedded-document>
 
