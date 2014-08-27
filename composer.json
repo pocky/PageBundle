@@ -14,12 +14,12 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
-        "black/common-bundle": "0.3.*"
+        "black/common-bundle": "0.3.*",
+        "black/page": "1.*"
     },
     "autoload": {
         "psr-4": {
             "Black\\Bundle\\PageBundle\\": ""
         }
-    },
-    "target-dir": "Black/Bundle/PageBundle"
+    }
 }
