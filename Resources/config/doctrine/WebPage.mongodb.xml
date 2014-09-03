@@ -7,7 +7,7 @@
 
     <mapped-superclass
             name="Black\Component\Page\Domain\Model\WebPage"
-            repository-class="Black\Bundle\PageBundle\Infrastructure\Persistence\WebPageMongoRepository">
+            repository-class="Black\Bundle\PageBundle\Infrastructure\Persistence\WebPageMongoDBRepository">
 
         <field name="author" fieldName="author" type="string" />
 
