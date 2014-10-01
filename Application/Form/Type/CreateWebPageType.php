@@ -25,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class CreateWebPageType extends AbstractType
 {
     /**
-     * @var type 
+     * @var type
      */
     protected $class;
 
@@ -71,7 +71,7 @@ class CreateWebPageType extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => $this->class,
-                'empty_data' => function(FormInterface $form) {
+                'empty_data' => function (FormInterface $form) {
                         return new $this->class(
                             null,
                             $form->get('author')->getData(),

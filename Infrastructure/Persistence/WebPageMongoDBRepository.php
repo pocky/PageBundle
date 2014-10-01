@@ -21,7 +21,7 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  * @author  Alexandre 'pocky' Balmes <alexandre@lablackroom.com>
  * @license http://opensource.org/licenses/mit-license.php MIT
  */
-class WebPageMongoRepository extends DocumentRepository implements WebPageRepositoryInferface
+class WebPageMongoDBRepository extends DocumentRepository implements WebPageRepositoryInferface
 {
     public function findWebPageByWebPageId(WebPageId $id)
     {

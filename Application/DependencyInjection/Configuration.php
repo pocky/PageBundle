@@ -64,7 +64,6 @@ class Configuration implements ConfigurationInterface
                 $this->addApplicationServiceSection($applicationNode);
                 $this->addSpecificationSection($applicationNode);
 
-
         $rootNode
             ->end();
 
@@ -76,7 +75,6 @@ class Configuration implements ConfigurationInterface
                 $this->addCQRSSection($infrastructureNode);
                 $this->addEventSection($infrastructureNode);
                 $this->addInfrastructureServiceSection($infrastructureNode);
-
 
         $rootNode
             ->end();

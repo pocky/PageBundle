@@ -83,7 +83,7 @@ class WriteWebPageType extends AbstractType
         $resolver->setDefaults(
             [
                 'data_class' => $this->class,
-                'empty_data' => function(FormInterface $form) {
+                'empty_data' => function (FormInterface $form) {
                         return new $this->class(
                             $form->get('id')->getData(),
                             $form->get('headline')->getData(),
