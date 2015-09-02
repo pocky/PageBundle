@@ -84,14 +84,13 @@ class WriteWebPageType extends AbstractType
             [
                 'data_class' => $this->class,
                 'empty_data' => function (FormInterface $form) {
-                        return new $this->class(
-                            $form->get('id')->getData(),
-                            $form->get('headline')->getData(),
-                            $form->get('about')->getData(),
-                            $form->get('text')->getData()
-                        );
-                    },
-                'intention' => 'write_webpage_form',
+                    return new $this->class(
+                        $form->get('id')->getData(),
+                        $form->get('headline')->getData(),
+                        $form->get('about')->getData(),
+                        $form->get('text')->getData()
+                    );
+                },
                 'translation_domain' => 'form'
             ]
         );

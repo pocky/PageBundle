@@ -72,13 +72,12 @@ class CreateWebPageType extends AbstractType
             [
                 'data_class' => $this->class,
                 'empty_data' => function (FormInterface $form) {
-                        return new $this->class(
-                            null,
-                            $form->get('author')->getData(),
-                            $form->get('name')->getData()
-                        );
-                    },
-                'intention' => 'create_webpage_form',
+                    return new $this->class(
+                        null,
+                        $form->get('author')->getData(),
+                        $form->get('name')->getData()
+                    );
+                },
                 'translation_domain' => 'form',
             ]
         );

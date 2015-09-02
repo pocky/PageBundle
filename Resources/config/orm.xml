@@ -15,7 +15,7 @@
             <argument>%black_page.webpage.model.class%</argument>
         </service>
 
-        <service id="black_page.entity.manager" alias="doctrine.orm.entity_manager " />
+        <service id="black_page.entity.manager" alias="doctrine.orm.entity_manager" />
 
     </services>
 </container>
