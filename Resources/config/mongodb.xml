@@ -5,17 +5,32 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.infrastructure.manager.webpage.class">%black_page.webpage.manager.class%</parameter>
+        <parameter key="black_page.infrastructure.persistence.page_read.class">Black\Component\Page\Infrastructure\Persistence\MongoDB\ReadRepository</parameter>
+        <parameter key="black_page.infrastructure.persistence.page_write.class">Black\Component\Page\Infrastructure\Persistence\MongoDB\WriteRepository</parameter>
     </parameters>
 
     <services>
 
-        <service id="black_page.infrastructure.manager.webpage" class="%black_page.infrastructure.manager.webpage.class%" public="false">
+        <service
+                id="black_page.infrastructure.persistence.page_read"
+                class="%black_page.infrastructure.persistence.page_read.class%"
+                public="false">
+            <argument type="service" id="black_page.document.manager" />
+            <argument>%black_page.webpage.model.class%</argument>
+        </service>
+
+        <service
+                id="black_page.infrastructure.persistence.page_write"
+                class="%black_page.infrastructure.persistence.page_write.class%"
+                public="false">
             <argument type="service" id="black_page.document.manager" />
             <argument>%black_page.webpage.model.class%</argument>
         </service>
 
         <service id="black_page.document.manager" alias="doctrine.odm.mongodb.document_manager" />
+
+        <service id="black_page.persistence.page_read" alias="black_page.infrastructure.persistence.page_read" />
+        <service id="black_page.persistence.page_write" alias="black_page.infrastructure.persistence.page_write" />
 
     </services>
 </container>

@@ -39,47 +39,27 @@ class BlackPageExtension extends Extension
             );
         }
 
-        foreach (['dto'] as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-            $container->setParameter($this->getAlias() . '.backend_type_' . $config['db_driver'], true);
-        }
+        $container->setParameter($this->getAlias() . '.backend_type_' . $config['db_driver'], true);
 
         $this->remapParametersNamespaces($config, $container, [
-                '' => [
-                    'page_dto' => 'black_page.webpage.dto.class',
-                    'create_page_dto' => 'black_page.webpage.create_dto.class',
-                    'write_page_dto' => 'black_page.webpage.write_dto.class',
-                    'page_class' => 'black_page.webpage.model.class',
-                    'page_manager' => 'black_page.webpage.manager.class',
-                ]
-            ]);
+            '' => [
+                'page_class' => 'black_page.webpage.model.class',
+            ]
+        ]);
 
-        if (!empty($config['application']['controller'])) {
-            $this->loadController($config['application']['controller'], $container, $loader);
-        }
-
-        if (!empty($config['application']['form'])) {
-            $this->loadForm($config['application']['form'], $container, $loader);
-        }
-
-        if (!empty($config['application']['service'])) {
-            $this->loadApplicationService($config['application']['service'], $container, $loader);
-        }
-
-        if (!empty($config['application']['specification'])) {
-            $this->loadSpecification($config['application']['specification'], $container, $loader);
-        }
-
-        if (!empty($config['infrastructure']['cqrs'])) {
-            $this->loadCQRS($config['infrastructure']['cqrs'], $container, $loader);
-        }
-
-        if (!empty($config['infrastructure']['domain_event_subscriber'])) {
-            $this->loadEvent($config['infrastructure']['domain_event_subscriber'], $container, $loader);
-        }
-
-        if (!empty($config['infrastructure']['service'])) {
-            $this->loadInfrastructureService($config['infrastructure']['service'], $container, $loader);
+        foreach (
+            [
+                'application_service',
+                'controller',
+                'cqrs',
+                'domain_event',
+                'dto',
+                'form',
+                'infrastructure_service',
+                'specification',
+            ] as $basename
+        ) {
+            $loader->load(sprintf('%s.xml', $basename));
         }
     }
 
@@ -91,147 +71,6 @@ class BlackPageExtension extends Extension
     public function getAlias()
     {
         return 'black_page';
-    }
-
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
-     */
-    private function loadController(array $config, ContainerBuilder $container, XmlFileLoader $loader)
-    {
-        foreach (array('controller') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            [
-                'class' => 'black_page.application.controller.class.%s',
-            ]
-        );
-    }
-
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
-     */
-    private function loadForm(array $config, ContainerBuilder $container, XmlFileLoader $loader)
-    {
-        foreach (array('form') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            [
-                'create_web_page' => 'black_page.application.form.create_web_page.%s',
-                'web_page' => 'black_page.application.form.web_page.%s',
-            ]
-        );
-    }
-
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
-     */
-    private function loadApplicationService(array $config, ContainerBuilder $container, XmlFileLoader $loader)
-    {
-        foreach (array('application_service') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            [
-                'class' => 'black_page.application.service.class.%s',
-            ]
-        );
-    }
-
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
-     */
-    private function loadSpecification(array $config, ContainerBuilder $container, XmlFileLoader $loader)
-    {
-        foreach (array('specification') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            [
-                'class' => 'black_page.application.specification.class.%s',
-            ]
-        );
-    }
-
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
-     */
-    private function loadCQRS(array $config, ContainerBuilder $container, XmlFileLoader $loader)
-    {
-        foreach (array('cqrs') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            [
-                'class' => 'black_page.infrastructure.cqrs.handler.class.%s',
-            ]
-        );
-    }
-
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
-     */
-    private function loadEvent(array $config, ContainerBuilder $container, XmlFileLoader $loader)
-    {
-        foreach (array('domain_event') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            [
-                'class' => 'black_page.infrastructure.domain_event_subscriber.class.%s',
-            ]
-        );
-    }
-
-    /**
-     * @param array            $config
-     * @param ContainerBuilder $container
-     * @param XmlFileLoader    $loader
-     */
-    private function loadInfrastructureService(array $config, ContainerBuilder $container, XmlFileLoader $loader)
-    {
-        foreach (array('infrastructure_service') as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
-        }
-
-        $this->remapParametersNamespaces(
-            $config,
-            $container,
-            [
-                'class' => 'black_page.infrastructure.service.class.%s',
-            ]
-        );
     }
 
     /**

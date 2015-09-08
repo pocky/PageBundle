@@ -12,7 +12,7 @@
 namespace Black\Bundle\PageBundle\Infrastructure\Persistence;
 
 use Black\Component\Page\Domain\Model\WebPageId;
-use Black\Component\Page\Infrastructure\Persistence\WebPageRepository as WebPageRepositoryInferface;
+use Black\Component\Page\Domain\Model\WebPageReadRepository as WebPageRepositoryInferface;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
 /**
@@ -23,13 +23,18 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  */
 class WebPageMongoDBRepository extends DocumentRepository implements WebPageRepositoryInferface
 {
-    public function findWebPageByWebPageId(WebPageId $id)
+    public function find(WebPageId $id)
     {
         $query = $this->getQueryBuilder()
             ->field('webPageId.value')->equals($id->getValue())
             ->getQuery();
 
         return $query->getSingleResult();
+    }
+
+    public function findAll()
+    {
+        return $this->findBy([]);
     }
 
     /**

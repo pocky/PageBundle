@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.application.controller.create_page.class">%black_page.application.controller.class.create_page%</parameter>
-        <parameter key="black_page.application.controller.write_page.class">%black_page.application.controller.class.write_page%</parameter>
-        <parameter key="black_page.application.controller.read_page.class">%black_page.application.controller.class.read_page%</parameter>
-        <parameter key="black_page.application.controller.publish_page.class">%black_page.application.controller.class.publish_page%</parameter>
-        <parameter key="black_page.application.controller.remove_page.class">%black_page.application.controller.class.remove_page%</parameter>
+        <parameter key="black_page.application.controller.create_page.class">Black\Component\Page\Application\Controller\CreatePageController</parameter>
+        <parameter key="black_page.application.controller.write_page.class">Black\Component\Page\Application\Controller\WritePageController</parameter>
+        <parameter key="black_page.application.controller.read_page.class">Black\Component\Page\Application\Controller\ReadPageController</parameter>
+        <parameter key="black_page.application.controller.publish_page.class">Black\Component\Page\Application\Controller\PublishPageController</parameter>
+        <parameter key="black_page.application.controller.remove_page.class">Black\Component\Page\Application\Controller\RemovePageController</parameter>
     </parameters>
 
     <services>
@@ -18,25 +18,25 @@
         <service id="black_page.application.controller.create_page" class="%black_page.application.controller.create_page.class%">
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_page.infrastructure.cqrs.handler.create_web_page" />
-            <argument>Black\Component\Page\Infrastructure\CQRS\Command\CreateWebPageCommand</argument>
+            <argument>black_page.infrastructure.cqrs.command.create_web_page.class</argument>
         </service>
 
         <service id="black_page.application.controller.write_page" class="%black_page.application.controller.write_page.class%">
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_page.infrastructure.cqrs.handler.write_web_page" />
-            <argument>Black\Component\Page\Infrastructure\CQRS\Command\WriteWebPageCommand</argument>
+            <argument>black_page.infrastructure.cqrs.command.write_web_page.class</argument>
         </service>
 
         <service id="black_page.application.controller.publish_page" class="%black_page.application.controller.publish_page.class%">
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_page.infrastructure.cqrs.handler.publish_web_page" />
-            <argument>BlackComponent\Page\Infrastructure\CQRS\Command\PublishWebPageCommand</argument>
+            <argument>black_page.infrastructure.cqrs.command.publish_web_page.class</argument>
         </service>
 
         <service id="black_page.application.controller.remove_page" class="%black_page.application.controller.remove_page.class%">
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_page.infrastructure.cqrs.handler.remove_web_page" />
-            <argument>Black\Component\Page\Infrastructure\CQRS\Command\RemoveWebPageCommand</argument>
+            <argument>black_page.infrastructure.cqrs.command.remove_web_page.class</argument>
         </service>
 
         <!-- Read Controllers -->

@@ -5,48 +5,49 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.infrastructure.cqrs.handler.create_web_page.class">%black_page.infrastructure.cqrs.handler.class.create_web_page%</parameter>
-        <parameter key="black_page.infrastructure.cqrs.handler.write_web_page.class">%black_page.infrastructure.cqrs.handler.class.write_web_page%</parameter>
-        <parameter key="black_page.infrastructure.cqrs.handler.publish_web_page.class">%black_page.infrastructure.cqrs.handler.class.publish_web_page%</parameter>
-        <parameter key="black_page.infrastructure.cqrs.handler.depublish_web_page.class">%black_page.infrastructure.cqrs.handler.class.depublish_web_page%</parameter>
-        <parameter key="black_page.infrastructure.cqrs.handler.remove_web_page.class">%black_page.infrastructure.cqrs.handler.class.remove_web_page%r</parameter>
+        <parameter key="black_page.infrastructure.cqrs.command.create_web_page.class">Black\Component\Page\Infrastructure\CQRS\Command\CreateWebPageCommand</parameter>
+        <parameter key="black_page.infrastructure.cqrs.command.write_web_page.class">Black\Component\Page\Infrastructure\CQRS\Command\WriteWebPageCommand</parameter>
+        <parameter key="black_page.infrastructure.cqrs.command.publish_web_page.class">Black\Component\Page\Infrastructure\CQRS\Command\PublishWebPageCommand</parameter>
+        <parameter key="black_page.infrastructure.cqrs.command.depublish_web_page.class">Black\Component\Page\Infrastructure\CQRS\Command\DepublishWebPageCommand</parameter>
+        <parameter key="black_page.infrastructure.cqrs.command.remove_web_page.class">Black\Component\Page\Infrastructure\CQRS\Command\RemoveWebPageCommand</parameter>
+
+        <parameter key="black_page.infrastructure.cqrs.handler.create_web_page.class">Black\Component\Page\Infrastructure\CQRS\Handler\CreateWebPageHandler</parameter>
+        <parameter key="black_page.infrastructure.cqrs.handler.write_web_page.class">Black\Component\Page\Infrastructure\CQRS\Handler\WriteWebPageHandler</parameter>
+        <parameter key="black_page.infrastructure.cqrs.handler.publish_web_page.class">Black\Component\Page\Infrastructure\CQRS\HandlerPublishWebPageHandler</parameter>
+        <parameter key="black_page.infrastructure.cqrs.handler.depublish_web_page.class">Black\Component\Page\Infrastructure\CQRS\Handler\DepublishWebPageHandler</parameter>
+        <parameter key="black_page.infrastructure.cqrs.handler.remove_web_page.class">Black\Component\Page\Infrastructure\CQRS\Handler\RemoveWebPageHandler</parameter>
     </parameters>
 
     <services>
 
         <service id="black_page.infrastructure.cqrs.handler.create_web_page" class="%black_page.infrastructure.cqrs.handler.create_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.infrastructure.manager.webpage" />
+            <argument type="service" id="black_page.persistence.page_write" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="black_page.infrastructure.domain_event.subscriber.created" />
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.write_web_page" class="%black_page.infrastructure.cqrs.handler.write_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.infrastructure.manager.webpage" />
+            <argument type="service" id="black_page.persistence.page_write" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="black_page.infrastructure.domain_event.subscriber.writed" />
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.publish_web_page" class="%black_page.infrastructure.cqrs.handler.publish_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.infrastructure.manager.webpage" />
+            <argument type="service" id="black_page.persistence.page_write" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="black_page.infrastructure.domain_event.subscriber.published" />
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.depublish_web_page" class="%black_page.infrastructure.cqrs.handler.depublish_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.infrastructure.manager.webpage" />
+            <argument type="service" id="black_page.persistence.page_write" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="black_page.infrastructure.domain_event.subscriber.depublished" />
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.remove_web_page" class="%black_page.infrastructure.cqrs.handler.remove_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.infrastructure.manager.webpage" />
+            <argument type="service" id="black_page.persistence.page_write" />
             <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="black_page.infrastructure.domain_event.subscriber.removed" />
         </service>
     </services>
 </container>

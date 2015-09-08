@@ -5,19 +5,18 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.infrastructure.service.read.class">%black_page.infrastructure.service.class.read%</parameter>
-        <parameter key="black_page.infrastructure.service.write.class">%black_page.infrastructure.service.class.write%</parameter>
+        <parameter key="black_page.infrastructure.service.read.class">Black\Component\Page\Infrastructure\Service\WebPageReadService</parameter>
+        <parameter key="black_page.infrastructure.service.write.class">Black\Component\Page\Infrastructure\Service\WebPageWriteService</parameter>
     </parameters>
 
     <services>
 
         <service id="black_page.infrastructure.service.read" class="%black_page.infrastructure.service.read.class%">
-            <argument type="service" id="black_page.infrastructure.manager.webpage" />
-            <argument type="service" id="black_page.application.speficication.page_published" />
+            <argument type="service" id="black_page.persistence.page_read" />
         </service>
 
         <service id="black_page.infrastructure.service.write" class="%black_page.infrastructure.service.write.class%">
-            <argument type="service" id="black_page.infrastructure.manager.webpage" />
+            <argument type="service" id="black_page.persistence.page_write" />
         </service>
 
     </services>

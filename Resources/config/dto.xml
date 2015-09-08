@@ -5,12 +5,12 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.application.dto.webpage.class">%black_page.webpage.dto.class%</parameter>
-        <parameter key="black_page.application.dto.create_webpage.class">%black_page.webpage.create_dto.class%</parameter>
-        <parameter key="black_page.application.dto.write_webpage.class">%black_page.webpage.write_dto.class%</parameter>
-        <parameter key="black_page.application.dto.web_page_transformer.class">Black\Component\Page\Application\DTO\WebPageTransformer</parameter>
-        <parameter key="black_page.application.dto.create_web_page_transformer.class">Black\Component\Page\Application\DTO\CreateWebPageTransformer</parameter>
-        <parameter key="black_page.application.dto.write_web_page_transformer.class">Black\Component\Page\Application\DTO\WriteWebPageTransformer</parameter>
+        <parameter key="black_page.application.dto.webpage.class">Black\Component\Page\Application\DTO\WebPageDTO</parameter>
+        <parameter key="black_page.application.dto.create_webpage.class">Black\Component\Page\Application\DTO\CreateWebPageDTO</parameter>
+        <parameter key="black_page.application.dto.write_webpage.class">Black\Component\Page\Application\DTO\WriteWebPageDTO</parameter>
+        <parameter key="black_page.application.dto.web_page_assembler.class">Black\Component\Page\Application\DTO\WebPageAssembler</parameter>
+        <parameter key="black_page.application.dto.create_web_page_assembler.class">Black\Component\Page\Application\DTO\CreateWebPageAssembler</parameter>
+        <parameter key="black_page.application.dto.write_web_page_assembler.class">Black\Component\Page\Application\DTO\WriteWebPageAssembler</parameter>
     </parameters>
 
     <services>
@@ -18,19 +18,19 @@
         <service id="black_page.application.dto.create_webpage" class="%black_page.application.dto.create_webpage.class%" />
         <service id="black_page.application.dto.write_webpage" class="%black_page.application.dto.write_webpage.class%" />
 
-        <service id="black_page.application.dto.web_page_transformer" class="%black_page.application.dto.web_page_transformer.class%">
+        <service id="black_page.application.dto.web_page_assembler" class="%black_page.application.dto.web_page_assembler.class%">
             <argument>%black_page.webpage.model.class%</argument>
-            <argument>%black_page.webpage.dto.class%</argument>
+            <argument>%black_page.application.dto.webpage.class%</argument>
         </service>
 
-        <service id="black_page.application.dto.create_web_page_transformer" class="%black_page.application.dto.create_web_page_transformer.class%">
+        <service id="black_page.application.dto.create_web_page_assembler" class="%black_page.application.dto.create_web_page_assembler.class%">
             <argument>%black_page.webpage.model.class%</argument>
-            <argument>%black_page.webpage.create_dto.class%</argument>
+            <argument>%black_page.application.dto.create_webpage.class%</argument>
         </service>
 
-        <service id="black_page.application.dto.write_web_page_transformer" class="%black_page.application.dto.write_web_page_transformer.class%">
+        <service id="black_page.application.dto.write_web_page_assembler" class="%black_page.application.dto.write_web_page_assembler.class%">
             <argument>%black_page.webpage.model.class%</argument>
-            <argument>%black_page.webpage.write_dto.class%</argument>
+            <argument>%black_page.application.dto.write_webpage.class%</argument>
         </service>
 
     </services>

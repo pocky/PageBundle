@@ -1,11 +1,12 @@
-<?xml version="1.0" ?>
-<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
-                    http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<constraint-mapping
+        xmlns="http://symfony.com/schema/dic/constraint-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
+        http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Black\Component\Page\Application\DTO\WebPageDTO">
-
         <property name="author">
             <constraint name="Type">
                 <option name="type">string</option>
@@ -63,11 +64,9 @@
                 <option name="message">black.bundle.page.domain.dto.webPageDto.text.validation.message.type</option>
             </constraint>
         </property>
-
     </class>
 
     <class name="Black\Component\Page\Domain\Model\WebPage">
-
         <property name="name">
             <constraint name="Type">
                 <option name="type">string</option>
@@ -125,11 +124,9 @@
         <property name="datePublished">
             <constraint name="DateTime" />
         </property>
-
     </class>
 
     <class name="Black\Component\Page\Domain\Model\WebPageId">
-
         <property name="value">
             <constraint name="Type">
                 <option name="type">string</option>
@@ -141,7 +138,6 @@
 
             <constraint name="NotBlank" />
         </property>
-
     </class>
 
 </constraint-mapping>

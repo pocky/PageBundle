@@ -1,41 +1,28 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.infrastructure.domain_event.subscriber.created.class">%black_page.infrastructure.domain_event_subscriber.class.created%</parameter>
-        <parameter key="black_page.infrastructure.domain_event.subscriber.writed.class">%black_page.infrastructure.domain_event_subscriber.class.writed%</parameter>
-        <parameter key="black_page.infrastructure.domain_event.subscriber.published.class">%black_page.infrastructure.domain_event_subscriber.class.published%</parameter>
-        <parameter key="black_page.infrastructure.domain_event.subscriber.depublished.class">%black_page.infrastructure.domain_event_subscriber.class.depublished%</parameter>
-        <parameter key="black_page.infrastructure.domain_event.subscriber.removed.class">%black_page.infrastructure.domain_event_subscriber.class.removed%</parameter>
+        <parameter key="black_page.domain.listener.logger.class">Black\Component\Page\Domain\Listener\LoggerListener</parameter>
+        <parameter key="black_page.infrastructure.listener.flash.class">Black\Bundle\PageBundle\Infrastructure\Listener\FlashNoticeListener</parameter>
     </parameters>
 
     <services>
-        <service id="black_page.infrastructure.domain_event.subscriber.created"
-                 class="%black_page.infrastructure.domain_event.subscriber.created.class%">
+
+        <service id="black_page.domain.listener.logger"
+                 class="%black_page.domain.listener.logger.class%">
+            <tag name="kernel.event_subscriber" />
             <argument type="service" id="logger" />
         </service>
 
-        <service id="black_page.infrastructure.domain_event.subscriber.writed"
-                 class="%black_page.infrastructure.domain_event.subscriber.writed.class%">
-            <argument type="service" id="logger" />
+        <service id="black_page.infrastructure.listener.flash"
+                 class="%black_page.infrastructure.listener.flash.class%">
+            <tag name="kernel.event_subscriber" />
+            <argument type="service" id="session" />
+            <argument type="service" id="translator.default" />
         </service>
 
-        <service id="black_page.infrastructure.domain_event.subscriber.published"
-                 class="%black_page.infrastructure.domain_event.subscriber.published.class%">
-            <argument type="service" id="logger" />
-        </service>
-
-        <service id="black_page.infrastructure.domain_event.subscriber.depublished"
-                 class="%black_page.infrastructure.domain_event.subscriber.depublished.class%">
-            <argument type="service" id="logger" />
-        </service>
-
-        <service id="black_page.infrastructure.domain_event.subscriber.removed"
-                 class="%black_page.infrastructure.domain_event.subscriber.removed.class%">
-            <argument type="service" id="logger" />
-        </service>
     </services>
 </container>

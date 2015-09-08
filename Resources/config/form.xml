@@ -5,25 +5,28 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.application.form.type.create_web_page.class">%black_page.application.form.create_web_page.type%</parameter>
-        <parameter key="black_page.application.form.type.web_page.class">%black_page.application.form.web_page.type%</parameter>
+        <parameter key="black_page.application.form.type.create_web_page.class">Black\Component\Page\Form\Type\CreateWebPageType</parameter>
+        <parameter key="black_page.application.form.type.web_page.class">Black\Component\Page\Form\Type\WriteWebPageType</parameter>
 
-        <parameter key="black_page.application.form.handler.create_web_page.class">%black_page.application.form.create_web_page.handler%</parameter>
-        <parameter key="black_page.application.form.handler.web_page.class">%black_page.application.form.web_page.handler%</parameter>
+        <parameter key="black_page.application.form.handler.create_web_page.class">>Black\Component\Page\Form\Handler\CreateWebPageFormHandler</parameter>
+        <parameter key="black_page.application.form.handler.web_page.class">Black\Component\Page\Form\Handler\WriteWebPageFormHandler</parameter>
+
+        <parameter key="black_page.application.form.create_web_page.name">black_page_create</parameter>
+        <parameter key="black_page.application.form.web_page.name">black_page_page</parameter>
     </parameters>
 
     <services>
         <!-- Form Types -->
         <service id="black_page.application.form.type.create_web_page"
                  class="%black_page.application.form.type.create_web_page.class%">
-            <argument>%black_page.webpage.create_dto.class%</argument>
+            <argument>%black_page.application.dto.create_webpage.class%</argument>
             <argument>%black_page.application.form.create_web_page.name%</argument>
             <tag name="form.type" alias="%black_page.application.form.create_web_page.name%" />
         </service>
 
         <service id="black_page.application.form.type.web_page"
                  class="%black_page.application.form.type.web_page.class%">
-            <argument>%black_page.webpage.write_dto.class%</argument>
+            <argument>%black_page.application.dto.write_webpage.class%</argument>
             <argument>%black_page.application.form.web_page.name%</argument>
             <tag name="form.type" alias="%black_page.application.form.web_page.name%" />
         </service>

@@ -21,5 +21,4 @@ use Black\Bundle\CommonBundle\Application\Form\Handler\AbstractFormHandler;
  */
 class CreateWebPageFormHandler extends AbstractFormHandler
 {
-
 }

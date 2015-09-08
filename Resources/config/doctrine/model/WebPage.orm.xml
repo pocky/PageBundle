@@ -9,7 +9,7 @@
             name="Black\Component\Page\Domain\Model\WebPage"
             repository-class="Black\Bundle\PageBundle\Infrastructure\Persistence\WebPageEntityRepository">
 
-        <field name="author" column="name" type="string" />
+        <field name="author" column="author" type="string" />
 
         <field name="name" column="name" type="string" unique="true" />
 
