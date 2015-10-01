@@ -49,6 +49,7 @@ class BlackPageExtension extends Extension
 
         foreach (
             [
+                'command',
                 'application_service',
                 'controller',
                 'cqrs',
