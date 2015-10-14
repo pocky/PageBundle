@@ -62,7 +62,7 @@ class RemoveWebPageCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('black:page:publish')
+            ->setName('black:page:remove')
             ->setDescription('Remove a new page')
             ->addArgument('id', InputArgument::OPTIONAL, 'The page identifier')
         ;
@@ -79,7 +79,7 @@ class RemoveWebPageCommand extends ContainerAwareCommand
         if (!$input->getArgument('id')) {
             $id = $dialog->askAndValidate(
                 $output,
-                'Please give an id name:',
+                'Please give an id:',
                 function ($id) {
                     if (empty($id)) {
                         throw new \InvalidArgumentException('Id cannot be empty!');
@@ -101,7 +101,7 @@ class RemoveWebPageCommand extends ContainerAwareCommand
         if ($page) {
             $this->bus->register($this->commandName, $this->handler);
             $this->bus->handle(new $this->commandName(
-                $pageId
+                $page
             ));
         }
     }

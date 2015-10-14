@@ -28,25 +28,25 @@
 
         <service id="black_page.infrastructure.cqrs.handler.write_web_page" class="%black_page.infrastructure.cqrs.handler.write_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.persistence.page_read" />
+            <argument type="service" id="black_page.persistence.page_write" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.publish_web_page" class="%black_page.infrastructure.cqrs.handler.publish_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.persistence.page_read" />
+            <argument type="service" id="black_page.persistence.page_write" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.depublish_web_page" class="%black_page.infrastructure.cqrs.handler.depublish_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.persistence.page_read" />
+            <argument type="service" id="black_page.persistence.page_write" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.remove_web_page" class="%black_page.infrastructure.cqrs.handler.remove_web_page.class%">
             <argument type="service" id="black_page.infrastructure.service.write" />
-            <argument type="service" id="black_page.persistence.page_read" />
+            <argument type="service" id="black_page.persistence.page_write" />
             <argument type="service" id="event_dispatcher" />
         </service>
     </services>

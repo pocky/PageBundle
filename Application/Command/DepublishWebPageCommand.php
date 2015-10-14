@@ -3,7 +3,7 @@
 namespace Black\Bundle\PageBundle\Application\Command;
 
 use Black\Component\Page\Domain\Model\WebPageId;
-use Black\Component\Page\Infrastructure\CQRS\Handler\WriteWebPageHandler;
+use Black\Component\Page\Infrastructure\CQRS\Handler\DepublishWebPageHandler;
 use Black\Component\Page\Infrastructure\Service\WebPageReadService;
 use Black\DDD\CQRSinPHP\Infrastructure\CQRS\Bus;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -12,9 +12,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Class WriteWebPageCommand
+ * Class DepublishWebPageCommand
  */
-class WriteWebPageCommand extends ContainerAwareCommand
+class DepublishWebPageCommand extends ContainerAwareCommand
 {
     /**
      * @var Bus
@@ -22,7 +22,7 @@ class WriteWebPageCommand extends ContainerAwareCommand
     protected $bus;
 
     /**
-     * @var WriteWebPageHandler
+     * @var DepublishWebPageHandler
      */
     protected $handler;
 
@@ -38,13 +38,13 @@ class WriteWebPageCommand extends ContainerAwareCommand
 
     /**
      * @param Bus $bus
-     * @param WriteWebPageHandler $handler
+     * @param DepublishWebPageHandler $handler
      * @param WebPageReadService $service
      * @param $commandName
      */
     public function __construct(
         Bus $bus,
-        WriteWebPageHandler $handler,
+        DepublishWebPageHandler $handler,
         WebPageReadService $service,
         $commandName
     ) {
@@ -62,12 +62,9 @@ class WriteWebPageCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('black:page:write')
-            ->setDescription('Write a new page')
+            ->setName('black:page:depublish')
+            ->setDescription('Publish a new page')
             ->addArgument('id', InputArgument::OPTIONAL, 'The page identifier')
-            ->addArgument('headline', InputArgument::OPTIONAL, 'The headline')
-            ->addArgument('about', InputArgument::OPTIONAL, 'The about ')
-            ->addArgument('text', InputArgument::OPTIONAL, 'The text')
         ;
     }
 
@@ -94,54 +91,6 @@ class WriteWebPageCommand extends ContainerAwareCommand
 
             $input->setArgument('id', $id);
         }
-        
-        if (!$input->getArgument('headline')) {
-            $headline = $dialog->askAndValidate(
-                $output,
-                'Please give an headline:',
-                function ($headline) {
-                    if (empty($headline)) {
-                        throw new \InvalidArgumentException('Headline cannot be empty!');
-                    }
-
-                    return $headline;
-                }
-            );
-
-            $input->setArgument('headline', $headline);
-        }
-
-        if (!$input->getArgument('about')) {
-            $about = $dialog->askAndValidate(
-                $output,
-                'Please give an about:',
-                function ($about) {
-                    if (empty($about)) {
-                        throw new \InvalidArgumentException('About cannot be empty!');
-                    }
-
-                    return $about;
-                }
-            );
-
-            $input->setArgument('about', $about);
-        }
-
-        if (!$input->getArgument('text')) {
-            $text = $dialog->askAndValidate(
-                $output,
-                'Please give an text:',
-                function ($text) {
-                    if (empty($text)) {
-                        throw new \InvalidArgumentException('Text cannot be empty!');
-                    }
-
-                    return $text;
-                }
-            );
-
-            $input->setArgument('text', $text);
-        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -152,10 +101,7 @@ class WriteWebPageCommand extends ContainerAwareCommand
         if ($page) {
             $this->bus->register($this->commandName, $this->handler);
             $this->bus->handle(new $this->commandName(
-                $page,
-                $input->getArgument('headline'),
-                $input->getArgument('about'),
-                $input->getArgument('text')
+                $page
             ));
         }
     }

@@ -21,11 +21,11 @@
 
         <field name="text" column="text" type="string" nullable="true" />
 
-        <field name="dateCreated" column="dateCreated" type="date" />
+        <field name="dateCreated" column="date_created" type="date" />
 
-        <field name="dateModified" column="dateModified" type="date" />
+        <field name="dateModified" column="date_modified" type="date" />
 
-        <field name="datePublished" column="datePublished" type="date" nullable="true" />
+        <field name="datePublished" column="date_published" type="date" nullable="true" />
 
         <embedded  class="Black\Component\Page\Domain\Model\WebPageId" name="webPageId" />
 
