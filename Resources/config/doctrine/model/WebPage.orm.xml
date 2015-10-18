@@ -19,7 +19,7 @@
 
         <field name="about" column="about" type="string" nullable="true" />
 
-        <field name="text" column="text" type="string" nullable="true" />
+        <field name="text" column="text" type="string" nullable="true" length="65535" />
 
         <field name="dateCreated" column="date_created" type="date" />
 
