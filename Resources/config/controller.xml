@@ -18,25 +18,25 @@
         <service id="black_page.application.controller.create_page" class="%black_page.application.controller.create_page.class%">
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_page.infrastructure.cqrs.handler.create_web_page" />
-            <argument>black_page.infrastructure.cqrs.command.create_web_page.class</argument>
+            <argument>%black_page.infrastructure.cqrs.command.create_web_page.class%</argument>
         </service>
 
         <service id="black_page.application.controller.write_page" class="%black_page.application.controller.write_page.class%">
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_page.infrastructure.cqrs.handler.write_web_page" />
-            <argument>black_page.infrastructure.cqrs.command.write_web_page.class</argument>
+            <argument>%black_page.infrastructure.cqrs.command.write_web_page.class%</argument>
         </service>
 
         <service id="black_page.application.controller.publish_page" class="%black_page.application.controller.publish_page.class%">
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_page.infrastructure.cqrs.handler.publish_web_page" />
-            <argument>black_page.infrastructure.cqrs.command.publish_web_page.class</argument>
+            <argument>%black_page.infrastructure.cqrs.command.publish_web_page.class%</argument>
         </service>
 
         <service id="black_page.application.controller.remove_page" class="%black_page.application.controller.remove_page.class%">
             <argument type="service" id="black_common.infrastructure.command.bus" />
             <argument type="service" id="black_page.infrastructure.cqrs.handler.remove_web_page" />
-            <argument>black_page.infrastructure.cqrs.command.remove_web_page.class</argument>
+            <argument>%black_page.infrastructure.cqrs.command.remove_web_page.class%</argument>
         </service>
 
         <!-- Read Controllers -->

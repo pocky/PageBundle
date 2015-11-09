@@ -53,7 +53,7 @@ class WriteWebPageType extends AbstractType
         $builder
             ->add('id', 'hidden')
 
-            ->add('headline', 'textarea', [
+            ->add('headline', 'text', [
                     'label' => 'black.bundle.page.domain.form.type.webpage.headline.label',
                     'required' => false,
                 ]
@@ -67,10 +67,6 @@ class WriteWebPageType extends AbstractType
 
             ->add('text', 'textarea', [
                     'label' => 'black.bundle.page.domain.form.type.webpage.text.label',
-                    'attr' => [
-                        'class' => 'tinymce',
-                        'data-theme' => 'advanced',
-                    ],
                 ]
             );
     }

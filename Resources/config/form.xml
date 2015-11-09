@@ -5,11 +5,11 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="black_page.application.form.type.create_web_page.class">Black\Component\Page\Form\Type\CreateWebPageType</parameter>
-        <parameter key="black_page.application.form.type.web_page.class">Black\Component\Page\Form\Type\WriteWebPageType</parameter>
+        <parameter key="black_page.application.form.type.create_web_page.class">Black\Bundle\PageBundle\Application\Form\Type\CreateWebPageType</parameter>
+        <parameter key="black_page.application.form.type.web_page.class">Black\Bundle\PageBundle\Application\Form\Type\WriteWebPageType</parameter>
 
-        <parameter key="black_page.application.form.handler.create_web_page.class">>Black\Component\Page\Form\Handler\CreateWebPageFormHandler</parameter>
-        <parameter key="black_page.application.form.handler.web_page.class">Black\Component\Page\Form\Handler\WriteWebPageFormHandler</parameter>
+        <parameter key="black_page.application.form.handler.create_web_page.class">Black\Bundle\PageBundle\Application\Form\Handler\CreateWebPageFormHandler</parameter>
+        <parameter key="black_page.application.form.handler.web_page.class">Black\Bundle\PageBundle\Application\Form\Handler\WriteWebPageFormHandler</parameter>
 
         <parameter key="black_page.application.form.create_web_page.name">black_page_create</parameter>
         <parameter key="black_page.application.form.web_page.name">black_page_page</parameter>
@@ -52,7 +52,7 @@
 
         <!-- Form Handlers -->
         <service id="black_page.application.form.handler.create_web_page"
-                 class="%black_page.application.form.handler.web_page.class%"
+                 class="%black_page.application.form.handler.create_web_page.class%"
                  scope="request">
             <argument type="service" id="black_page.application.form.create_web_page" />
             <argument type="service" id="request_stack" />

@@ -27,6 +27,7 @@
         </service>
 
         <service id="black_page.infrastructure.cqrs.handler.write_web_page" class="%black_page.infrastructure.cqrs.handler.write_web_page.class%">
+            <argument type="service" id="black_page.infrastructure.service.read" />
             <argument type="service" id="black_page.infrastructure.service.write" />
             <argument type="service" id="black_page.persistence.page_write" />
             <argument type="service" id="event_dispatcher" />
